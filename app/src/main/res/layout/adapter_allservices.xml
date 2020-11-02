@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardElevation="@dimen/_5sdp">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_40sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardElevation="@dimen/_5sdp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImage"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/welcome1"/>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/title"
+        app:layout_constraintLeft_toRightOf="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:text="Laundary Shop"
+        android:textSize="@dimen/_18sdp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"/>
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

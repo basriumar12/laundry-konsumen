@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.Schedule_PickupDate">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardRely"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_width="match_parent"
+        app:cardElevation="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/relayBackground"
+
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/white">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_left_arrow"/>
+
+                <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+                    android:layout_centerVertical="true"
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@string/SchedulePikcup"/>
+
+
+
+
+
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_below="@+id/relayBackground"
+                android:layout_margin="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:weightSum="5">
+
+                <RelativeLayout
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/ic_step1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+
+                        android:src="@drawable/ic_loc_white" />
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+
+                    android:background="@drawable/linestep"/>
+                <RelativeLayout
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/ic_step1"
+                    android:layout_gravity="center_horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/_5sdp"
+
+                        android:src="@drawable/ic_datetab"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_weight="1"
+
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/linestep"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/ic_step2"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/_5sdp"
+
+
+                        android:src="@drawable/ic_paymenttab" />
+
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_weight="1"
+
+                    android:layout_gravity="center_vertical"
+
+                    android:background="@drawable/linestep"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/ic_step2"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/_5sdp"
+
+                        android:src="@drawable/ic_completetab"/>
+
+
+
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <com.samyotech.laundry.utils.CustomTextViewMuliBold
+        android:id="@+id/titleenw"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardRely"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_16sdp"
+        android:textColor="@color/black"
+        android:text="@string/pickupdate"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvHome"
+        app:layout_constraintTop_toBottomOf="@id/titleenw"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_5sdp">
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="wrap_content">
+
+
+
+           <com.samyotech.laundry.utils.CustomEditText
+               app:layout_constraintTop_toTopOf="parent"
+               android:layout_width="match_parent"
+               android:id="@+id/ctvPickupDate"
+               android:clickable="true"
+                android:editable="false"
+               android:focusable="false"
+               android:drawableRight="@drawable/calendar"
+               android:layout_height="@dimen/_30sdp"
+               android:padding="@dimen/_5sdp"
+               android:hint="@string/enterpickupdate"
+               android:background="@drawable/edittext_background"/>
+
+           <com.samyotech.laundry.utils.CustomEditText
+               app:layout_constraintTop_toBottomOf="@id/ctvPickupDate"
+               android:layout_marginTop="@dimen/_10sdp"
+               android:layout_width="match_parent"
+               android:id="@+id/ctvPickupTime"
+               android:focusable="false"
+               android:drawableRight="@drawable/down_arrow"
+               android:hint="@string/enterpickuptime"
+               android:clickable="true"
+               android:editable="false"
+               android:padding="@dimen/_5sdp"
+               android:background="@drawable/edittext_background"
+               android:layout_height="@dimen/_30sdp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <com.samyotech.laundry.utils.CustomTextViewMuliBold
+        android:id="@+id/title2"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_16sdp"
+        android:textColor="@color/black"
+        android:text="@string/deliverydate"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvDeliver"
+        app:layout_constraintTop_toBottomOf="@id/title2"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_5sdp">
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="wrap_content">
+
+
+
+           <com.samyotech.laundry.utils.CustomEditText
+               app:layout_constraintTop_toTopOf="parent"
+               android:layout_width="match_parent"
+               android:id="@+id/ctvDeliveryDate"
+               android:hint="@string/enterdeliverydate"
+               android:editable="false"
+               android:focusable="false"
+               android:drawableRight="@drawable/calendar"
+               android:clickable="true"
+               android:layout_height="@dimen/_30sdp"
+               android:padding="@dimen/_5sdp"
+               android:background="@drawable/edittext_background"/>
+           <com.samyotech.laundry.utils.CustomEditText
+               app:layout_constraintTop_toBottomOf="@id/ctvDeliveryDate"
+               android:layout_marginTop="@dimen/_10sdp"
+               android:layout_width="match_parent"
+               android:id="@+id/ctvDeliveryTime"
+               android:hint="@string/enterdeliverytime"
+               android:editable="false"
+               android:focusable="false"
+               android:padding="@dimen/_5sdp"
+               android:clickable="true"
+               android:drawableRight="@drawable/down_arrow"
+               android:background="@drawable/edittext_background"
+               android:layout_height="@dimen/_30sdp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/rlAdddate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvDeliver"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/ic_longbtn">
+
+        <com.samyotech.laundry.utils.CustomTextViewBold
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:text="@string/addDate"
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/RRsncbar"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_alignParentBottom="true"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_5sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivImage"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_margin="@dimen/_7sdp"
+                android:src="@drawable/ic_confirmed"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+                android:id="@+id/title"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:text="Laundary Shop"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintLeft_toRightOf="@+id/ivImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.samyotech.laundry.utils.CustomTextView
+                android:id="@+id/ctvMessage"
+                android:layout_width="@dimen/_210sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:maxLines="2"
+                android:text="Vijay Nagar"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toRightOf="@+id/ivImage"
+                app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
+            <com.samyotech.laundry.utils.CustomTextViewMuliBold
+                android:id="@+id/ctvtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:drawablePadding="@dimen/_5sdp"
+                android:text="10:00 AM"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

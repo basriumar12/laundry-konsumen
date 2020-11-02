@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_45sdp"
+        android:id="@+id/container"
+        >
+
+        <!-- Main content -->
+
+     <!--   <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorAccent"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/bottom_navigation_menu"
+            />-->
+
+
+
+
+    </FrameLayout>
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:gravity="start"
+        android:backgroundTint="@color/white"
+        app:hideOnScroll="false"
+        android:elevation="@dimen/_5sdp"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:fabCradleMargin="8dp"
+        app:fabCradleRoundedCornerRadius="25dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvHome"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/ic_home"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:text="@string/home"
+                android:textAllCaps="false"
+                android:textColor="@color/gray">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvnearby"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/ic_loc"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:text="@string/nearby"
+                android:textAllCaps="false"
+                android:textColor="@color/gray">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvbooking"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_commerce_and_shopping"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:text="@string/booking"
+                android:textAllCaps="false"
+                android:textColor="@color/gray">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvOffer"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/ic_offers"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:text="@string/offer"
+                android:textAllCaps="false"
+                android:textColor="@color/gray">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvProfile"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/ic_profile"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:text="@string/profile"
+                android:textAllCaps="false"
+                android:textColor="@color/gray">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/offwhite"
+        tools:context=".ui.activity.PreViewActivity">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ctvHeading"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_280sdp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <ImageView
+                            android:id="@+id/ivBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_7sdp"
+                            android:src="@drawable/ic_left_arrow"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            />
+
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:id="@+id/customTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_7sdp"
+                            android:text="@string/preview"
+                            android:textSize="18sp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:id="@+id/ctvUrCloth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_7sdp"
+                            android:textSize="16sp"
+                            android:text="@string/yourcloth"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ivBack" />
+
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:id="@+id/ctvEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_7sdp"
+                            android:text="@string/edit"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="16sp"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ivBack" />
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvReview"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_150sdp"
+                            android:layout_margin="@dimen/_7sdp"
+                            app:layout_constraintTop_toBottomOf="@id/ctvEdit" />
+
+
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:id="@+id/ctvAddmore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_7sdp"
+                            android:text="@string/addmore"
+                            android:textColor="@color/colorPrimary"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rvReview" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_210sdp"
+                    android:layout_marginTop="@dimen/_80sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/ctvHeading">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:id="@+id/ll_header"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/llSave"
+                            android:layout_width="match_parent"
+                            android:layout_height="?actionBarSize">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.1"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/procode" />
+
+                            <com.samyotech.laundry.utils.CustomTextView
+                                android:id="@+id/ctvHaveProcode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.6"
+                                android:gravity="center_vertical"
+                                android:text="@string/have_a_promo"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/llEnterCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="?actionBarSize"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.1"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/procode" />
+
+                            <com.samyotech.laundry.utils.CustomEditText
+                                android:id="@+id/cetEnterProcode"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.6"
+                                android:hint="@string/enter_a_promo"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="18sp" />
+
+                            <LinearLayout
+                                android:id="@+id/llSubmit"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:layout_weight="0.3"
+                                android:background="@drawable/shape_for_gradient">
+
+                                <com.samyotech.laundry.utils.CustomTextView
+                                    android:id="@+id/ctvApply"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="@string/apply"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/gray"
+                            android:id="@+id/view"
+                            app:layout_constraintTop_toBottomOf="@+id/ll_header"/>
+
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/view"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:id="@+id/ctvSub_Total"
+                            android:text="@string/subtotal"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_7sdp"
+                            android:textSize="16sp"
+                            />
+
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/ctvSub_Total"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:id="@+id/ctvTax"
+                            android:text="@string/tax"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_7sdp"
+                            android:textSize="16sp"
+                            />
+
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/ctvTax"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:id="@+id/ctvDiscount"
+                            android:text="@string/discount"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_7sdp"
+                            android:textSize="16sp"
+                            />
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/view"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:id="@+id/ctvSub_TotalValue"
+                            android:text="0"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_7sdp"
+                            android:textSize="16sp"
+                            />
+
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/ctvSub_Total"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:id="@+id/ctvTaxValue"
+                            android:text="0"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_7sdp"
+                            android:textSize="16sp"
+                            />
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/ctvTaxValue"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:id="@+id/ctvDiscountValue"
+                            android:text="0"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_7sdp"
+                            android:textSize="16sp"
+                            />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/gray"
+                            android:id="@+id/view1"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            app:layout_constraintTop_toBottomOf="@+id/ctvDiscountValue"/>
+
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/view1"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            android:id="@+id/ctvPayAble"
+                            android:text="@string/payable"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_7sdp"
+                            android:textSize="16sp"
+                            />
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/view1"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:id="@+id/ctvPayAbleAmount"
+                            android:text="0"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginLeft="@dimen/_7sdp"
+                            android:layout_marginRight="@dimen/_7sdp"
+                            android:textSize="16sp"
+                            />
+                        <com.samyotech.laundry.utils.CustomTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:background="@color/colorPrimary"
+                            android:layout_marginTop="@dimen/_11sdp"
+                            android:text="@string/schedule_pickup"
+                            android:gravity="center"
+                            android:id="@+id/ctvSchedule"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            app:layout_constraintTop_toBottomOf="@+id/ctvPayAble"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0084DF</color>
+    <color name="colorPrimaryDark">#006edd</color>
+    <color name="colorAccent">#0084DF</color>
+
+
+
+
+
+    <color name="white">#FFFFFF</color>
+    <color name="offwhite">#EDE8E8</color>
+    <color name="black">#000000</color>
+    <color name="blacktrans">#66000000</color>
+    <color name="transaparent_black">#3E000000</color>
+    <color name="transaparent_gray">#3E969696</color>
+    <color name="slow_black">#323232</color>
+    <color name="slow_second_black">#494343</color>
+    <color name="more_slow_black">#554E4E</color>
+    <color name="more_slow_black_des">#3D4252</color>
+    <color name="more_slow_black_wallet">#4D4D4D</color>
+    <color name="rating_color">#BBB9B9</color>
+    <color name="gray">#969696</color>
+    <color name="main_black">#5B6D78</color>
+    <color name="menu_black">#222222</color>
+    <color name="light_grey">#bebebe</color>
+    <color name="chat_text_color">#BBC8D2</color>
+    <color name="banner_text_color">#D3D5D2</color>
+    <color name="banner_text_color_high">#CACCC9</color>
+    <color name="image_uplode_card_background">#D2D8CF</color>
+    <color name="edit_bg_color">#F1F1F1</color>
+    <color name="orange">#FF6035</color>
+    <color name="red">#B82E09</color>
+    <color name="bg_theam_color">#F5F5F5</color>
+    <color name="windowBackground">#1C1C1C</color>
+    <color name="overlay">#AA1C1C1C</color>
+    <color name="divider">#333333</color>
+    <color name="yellow">#CDC000</color>
+    <color name="yellow_rating">#FFBF08</color>
+    <color name="chat_out">#c4ccf8</color>
+    <color name="chat_in">#e0e3e6</color>
+    <color name="green">#4CAF50</color>
+    <color name="light_gray">#DFDFDF</color>
+    <color name="status_bar_color">#FFFFFF</color>
+    <color name="darkgray">#A8A6A6</color>
+    <color name="editback">#f1f1f1</color>
+</resources>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.TicketsActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/ll_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:cardElevation="@dimen/_5sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/white">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="@dimen/_10sdp"
+                android:src="@drawable/ic_left_arrow"/>
+
+            <com.samyotech.laundry.utils.CustomTextViewBold
+                android:id="@+id/tvHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/support"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/_10sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sdp"
+                android:visibility="visible" />
+
+
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_55sdp"
+        android:id="@+id/RVhistorylist"
+        app:layout_constraintTop_toBottomOf="@id/ll_header"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent"/>
+    <com.samyotech.laundry.utils.CustomTextViewBold
+        android:id="@+id/tvNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/no_ticket_found"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+
+    <ImageView
+        android:id="@+id/ivPost"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/ic_plus" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

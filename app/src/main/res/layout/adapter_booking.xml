@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_margin="@dimen/_5sdp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_190sdp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="@dimen/_5sdp"
+            android:layout_height="match_parent">
+
+<LinearLayout
+    android:id="@+id/llName"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_25sdp"
+    android:orientation="horizontal">
+    <com.samyotech.laundry.utils.CustomTextView
+        android:layout_width="0dp"
+        android:id="@+id/ctvName"
+        android:layout_weight="0.7"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/_16sdp"
+        android:text="@string/Laundary_care_service"
+        android:layout_height="match_parent"
+        />
+<com.samyotech.laundry.utils.CustomTextView
+    android:layout_width="0dp"
+    android:id="@+id/ctvPrice"
+    android:layout_weight="0.3"
+    android:textAlignment="textEnd"
+    android:gravity="center"
+    android:textSize="@dimen/_16sdp"
+    android:text="@string/price250"
+    android:layout_height="match_parent"/>
+</LinearLayout>
+<LinearLayout
+    android:id="@+id/llOrder"
+    app:layout_constraintTop_toBottomOf="@id/llName"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_25sdp"
+    android:orientation="horizontal">
+    <com.samyotech.laundry.utils.CustomTextView
+        android:layout_width="0dp"
+        android:id="@+id/ctvOrder"
+        android:layout_weight="0.7"
+        android:gravity="center_vertical"
+        android:text="@string/orderno"
+        android:layout_height="match_parent"
+        />
+<com.samyotech.laundry.utils.CustomTextView
+    android:layout_width="0dp"
+    android:id="@+id/ctvStatus"
+    android:layout_weight="0.3"
+    android:textAlignment="textEnd"
+    android:gravity="center"
+    android:textColor="@color/colorPrimaryDark"
+    android:text="@string/confirmed"
+    android:layout_height="match_parent"/>
+</LinearLayout>
+
+<View
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="@color/gray"
+    app:layout_constraintTop_toBottomOf="@id/llOrder"
+    android:id="@+id/view"
+    />
+
+<LinearLayout
+    android:id="@+id/llStatus"
+    app:layout_constraintTop_toBottomOf="@id/view"
+    android:layout_width="match_parent"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_height="@dimen/_55sdp"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:id="@+id/llConfirm"
+        android:layout_width="0dp"
+        android:background="@color/transaparent_gray"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:src="@drawable/ic_confirmed"
+            android:padding="@dimen/_5sdp"
+            android:id="@+id/ivConfirm"
+            />
+        <com.samyotech.laundry.utils.CustomTextView
+            android:id="@+id/ctvconfirmed"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/confirmed"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llpickUp"
+        android:background="@color/transaparent_gray"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:src="@drawable/ic_delivery"
+            android:padding="@dimen/_5sdp"
+            android:id="@+id/ivPicked"
+            />
+        <com.samyotech.laundry.utils.CustomTextView
+            android:id="@+id/ctvPicked"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pickedup"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llProcess"
+        android:background="@color/transaparent_gray"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:src="@drawable/ic_progress"
+            android:padding="@dimen/_5sdp"
+            android:id="@+id/ivInProcess"
+            />
+        <com.samyotech.laundry.utils.CustomTextView
+            android:id="@+id/ctvInProcess"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inprocess"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llShiped"
+        android:background="@color/transaparent_gray"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:src="@drawable/ic_shipped"
+            android:padding="@dimen/_5sdp"
+            android:id="@+id/ivShipped"
+            />
+        <com.samyotech.laundry.utils.CustomTextView
+            android:id="@+id/ctvShipped"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/shipped"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llDeliver"
+        android:background="@color/transaparent_gray"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.2"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:src="@drawable/ic_delivered"
+            android:padding="@dimen/_5sdp"
+            android:id="@+id/ivDeliverd"
+            />
+        <com.samyotech.laundry.utils.CustomTextView
+            android:id="@+id/ctvDelivered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/delivered"/>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@id/llStatus"
+                android:id="@+id/view2"
+                />
+
+            <androidx.cardview.widget.CardView
+    android:id="@+id/cvCancel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_20sdp"
+    android:elevation="@dimen/_2sdp"
+    app:layout_constraintTop_toBottomOf="@+id/view2"
+    app:layout_constraintLeft_toLeftOf="parent">
+   <com.samyotech.laundry.utils.CustomTextView
+       android:layout_width="@dimen/_90sdp"
+       android:layout_height="@dimen/_20sdp"
+       android:id="@+id/ctvOrderCancel"
+       android:gravity="center"
+       android:text="@string/cancelorder"
+       />
+</androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/_2sdp"
+        android:layout_margin="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:layout_constraintRight_toRightOf="parent">
+   <com.samyotech.laundry.utils.CustomTextView
+       android:layout_width="@dimen/_90sdp"
+       android:layout_height="@dimen/_20sdp"
+       android:id="@+id/ctvViewDetails"
+       android:gravity="center"
+       android:text="@string/Viewdetails"
+       />
+    </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

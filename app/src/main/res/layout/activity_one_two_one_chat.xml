@@ -1,0 +1,155 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/offwhite">
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp">
+
+        <ImageView
+            android:id="@+id/IVback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="8dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_left_arrow" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civProfilepic"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_user_dummy"
+            />
+        <com.samyotech.laundry.utils.CustomTextView
+            android:id="@+id/ctvName"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_below="@+id/civProfilepic"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_above="@+id/linearLayoutFooter"
+        android:layout_below="@+id/header">
+
+        <ListView
+            android:id="@+id/lvComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:fastScrollEnabled="false" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <LinearLayout
+
+        android:background="@color/white"
+        android:id="@+id/linearLayoutFooter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/container_actions"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/container_actions_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/emojiButton"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="6dp"
+                    android:src="@drawable/my_emoji" />
+            </LinearLayout>
+
+            <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+                android:id="@+id/edittextMessage"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_for_gradient"
+                android:fadeScrollbars="false"
+                android:hint="@string/write_your_message"
+                android:inputType="textMultiLine|textCapSentences"
+                android:maxLines="4"
+                android:minLines="1"
+                android:padding="5dp"
+                android:scrollbars="vertical"
+                android:singleLine="false"
+                android:textAppearance="?android:textAppearanceMedium"
+                emojicon:emojiconSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/buttonSendMessage"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="6dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_send_button" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
