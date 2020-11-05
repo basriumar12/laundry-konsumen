@@ -1,17 +1,16 @@
 package com.samyotech.laundry.ui.activity;
 
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.view.View;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samyotech.laundry.ModelClass.PopLaundryDTO;
 import com.samyotech.laundry.ModelClass.ServicesDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityAllServicesBinding;
@@ -54,10 +53,10 @@ public class AllServices extends AppCompatActivity {
     }
 
     private void getAllServices() {
-        new HttpsRequest(Consts.GETALLSERVICE,mContext).stringGet(TAG, new Helper() {
+        new HttpsRequest(Consts.GETALLSERVICE, mContext).stringGet(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
-                if(flag){
+                if (flag) {
 
                     try {
                         getServic = new ArrayList<>();
@@ -66,13 +65,13 @@ public class AllServices extends AppCompatActivity {
                         getServic = (ArrayList<ServicesDTO>) new Gson().fromJson(response.getJSONArray("data").toString(), getPetDTO);
 
                         setData();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 
 
-                }else {
-                    ProjectUtils.showToast(mContext,msg);
+                } else {
+                    ProjectUtils.showToast(mContext, msg);
                 }
             }
         });

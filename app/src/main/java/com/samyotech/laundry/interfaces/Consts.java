@@ -3,7 +3,9 @@ package com.samyotech.laundry.interfaces;
 public interface Consts {
 
     String APP_NAME = "laundry";
-    String BASE_URL = "http://phpstack-390430-1228229.cloudwaysapps.com/admin/api/";
+    String DEV_URL = "http://10.0.2.2:8000/api/";
+    String PROD_URL = "http://phpstack-390430-1228229.cloudwaysapps.com/admin/api/";
+    String BASE_URL = DEV_URL;
 
 
 

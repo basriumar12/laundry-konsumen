@@ -32,14 +32,14 @@
 
 
     </FrameLayout>
-    <com.google.android.material.bottomappbar.BottomAppBar
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
         android:gravity="start"
-        android:backgroundTint="@color/white"
         app:hideOnScroll="false"
+        android:background="@color/white"
         android:elevation="@dimen/_5sdp"
         app:layout_scrollFlags="scroll|enterAlways"
         app:fabCradleMargin="8dp"
@@ -136,7 +136,7 @@
 
         </LinearLayout>
 
-    </com.google.android.material.bottomappbar.BottomAppBar>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
