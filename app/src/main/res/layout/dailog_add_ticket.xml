@@ -25,7 +25,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:src="@mipmap/ic_launcher_foreground"/>
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:id="@+id/ctvbTitle"
@@ -58,7 +58,7 @@
             android:layout_marginTop="5dp"
             android:orientation="vertical">
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -70,16 +70,17 @@
                 app:counterEnabled="true"
                 app:counterMaxLength="50">
 
-            <com.samyotech.laundry.utils.CustomEditText
-                android:id="@+id/etReason"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLength="50"
-                android:hint="@string/title"
-                android:singleLine="true" />
+                <EditText
+                    android:id="@+id/etReason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:hint="@string/title"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
-            <com.samyotech.laundry.utils.CustomTextView
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -92,14 +93,14 @@
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
                 app:counterMaxLength="200">
-            <com.samyotech.laundry.utils.CustomEditText
-                android:id="@+id/etDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/discription"
-                android:maxLength="200"
-               />
+
+                <EditText
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:hint="@string/discription"
+                    android:maxLength="200" />
 
             </com.google.android.material.textfield.TextInputLayout>
             <View
@@ -126,7 +127,7 @@
             android:background="@drawable/shape_for_rectangleblue"
             android:orientation="horizontal">
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:id="@+id/ctvSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

@@ -1,7 +1,5 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:emojicon="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +18,7 @@
             android:layout_margin="8dp"
             android:padding="10dp"
             android:src="@drawable/ic_left_arrow" />
-        <com.samyotech.laundry.utils.CustomTextViewBold
+        <TextView
             android:id="@+id/tvNameHedar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,7 +106,7 @@
                     android:textAppearance="?android:textAppearanceMedium"
                     emojicon:emojiconSize="20sp" />
 
-                <com.samyotech.laundry.utils.CustomEditText
+                <EditText
                     android:id="@+id/etMessage"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -122,9 +120,7 @@
                     android:padding="5dp"
                     android:scrollbars="vertical"
                     android:textColorHint="#d3d3d3"
-                    android:visibility="gone">
-
-                </com.samyotech.laundry.utils.CustomEditText>
+                    android:visibility="gone" />
             </LinearLayout>
 
             <ImageView

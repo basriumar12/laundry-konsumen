@@ -24,24 +24,24 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/_25sdp"
     android:orientation="horizontal">
-    <com.samyotech.laundry.utils.CustomTextView
+    <TextView
         android:layout_width="0dp"
         android:id="@+id/ctvName"
         android:layout_weight="0.7"
         android:gravity="center_vertical"
         android:textSize="@dimen/_16sdp"
         android:text="@string/Laundary_care_service"
-        android:layout_height="match_parent"
-        />
-<com.samyotech.laundry.utils.CustomTextView
-    android:layout_width="0dp"
-    android:id="@+id/ctvPrice"
-    android:layout_weight="0.3"
-    android:textAlignment="textEnd"
-    android:gravity="center"
-    android:textSize="@dimen/_16sdp"
-    android:text="@string/price250"
-    android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:id="@+id/ctvPrice"
+        android:layout_weight="0.3"
+        android:textAlignment="textEnd"
+        android:gravity="center"
+        android:textSize="@dimen/_16sdp"
+        android:text="@string/price250"
+        android:layout_height="match_parent" />
 </LinearLayout>
 <LinearLayout
     android:id="@+id/llOrder"
@@ -49,23 +49,24 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/_25sdp"
     android:orientation="horizontal">
-    <com.samyotech.laundry.utils.CustomTextView
+
+    <TextView
         android:layout_width="0dp"
         android:id="@+id/ctvOrder"
         android:layout_weight="0.7"
         android:gravity="center_vertical"
         android:text="@string/orderno"
-        android:layout_height="match_parent"
-        />
-<com.samyotech.laundry.utils.CustomTextView
-    android:layout_width="0dp"
-    android:id="@+id/ctvStatus"
-    android:layout_weight="0.3"
-    android:textAlignment="textEnd"
-    android:gravity="center"
-    android:textColor="@color/colorPrimaryDark"
-    android:text="@string/confirmed"
-    android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:id="@+id/ctvStatus"
+        android:layout_weight="0.3"
+        android:textAlignment="textEnd"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/confirmed"
+        android:layout_height="match_parent" />
 </LinearLayout>
 
 <View
@@ -103,12 +104,13 @@
             android:padding="@dimen/_5sdp"
             android:id="@+id/ivConfirm"
             />
-        <com.samyotech.laundry.utils.CustomTextView
+
+        <TextView
             android:id="@+id/ctvconfirmed"
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/confirmed"/>
+            android:text="@string/confirmed" />
 
     </LinearLayout>
 
@@ -129,12 +131,13 @@
             android:padding="@dimen/_5sdp"
             android:id="@+id/ivPicked"
             />
-        <com.samyotech.laundry.utils.CustomTextView
+
+        <TextView
             android:id="@+id/ctvPicked"
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/pickedup"/>
+            android:text="@string/pickedup" />
 
     </LinearLayout>
 
@@ -155,12 +158,13 @@
             android:padding="@dimen/_5sdp"
             android:id="@+id/ivInProcess"
             />
-        <com.samyotech.laundry.utils.CustomTextView
+
+        <TextView
             android:id="@+id/ctvInProcess"
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/inprocess"/>
+            android:text="@string/inprocess" />
 
     </LinearLayout>
 
@@ -181,12 +185,13 @@
             android:padding="@dimen/_5sdp"
             android:id="@+id/ivShipped"
             />
-        <com.samyotech.laundry.utils.CustomTextView
+
+        <TextView
             android:id="@+id/ctvShipped"
             android:layout_width="match_parent"
             android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="@string/shipped"/>
+            android:text="@string/shipped" />
 
     </LinearLayout>
 
@@ -207,12 +212,13 @@
             android:padding="@dimen/_5sdp"
             android:id="@+id/ivDeliverd"
             />
-        <com.samyotech.laundry.utils.CustomTextView
+
+        <TextView
             android:id="@+id/ctvDelivered"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="@string/delivered"/>
+            android:text="@string/delivered" />
 
     </LinearLayout>
 
@@ -240,13 +246,13 @@
     android:elevation="@dimen/_2sdp"
     app:layout_constraintTop_toBottomOf="@+id/view2"
     app:layout_constraintLeft_toLeftOf="parent">
-   <com.samyotech.laundry.utils.CustomTextView
-       android:layout_width="@dimen/_90sdp"
-       android:layout_height="@dimen/_20sdp"
-       android:id="@+id/ctvOrderCancel"
-       android:gravity="center"
-       android:text="@string/cancelorder"
-       />
+
+                <TextView
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:id="@+id/ctvOrderCancel"
+                    android:gravity="center"
+                    android:text="@string/cancelorder" />
 </androidx.cardview.widget.CardView>
 
 
@@ -258,13 +264,13 @@
         android:layout_margin="@dimen/_20sdp"
         app:layout_constraintTop_toBottomOf="@+id/view2"
         app:layout_constraintRight_toRightOf="parent">
-   <com.samyotech.laundry.utils.CustomTextView
-       android:layout_width="@dimen/_90sdp"
-       android:layout_height="@dimen/_20sdp"
-       android:id="@+id/ctvViewDetails"
-       android:gravity="center"
-       android:text="@string/Viewdetails"
-       />
+
+        <TextView
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:id="@+id/ctvViewDetails"
+            android:gravity="center"
+            android:text="@string/Viewdetails" />
     </androidx.cardview.widget.CardView>
 
 

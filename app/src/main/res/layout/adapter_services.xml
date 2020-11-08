@@ -27,7 +27,7 @@
         android:layout_height="@dimen/_70sdp"
         android:src="@drawable/intro_4"/>
 
-    <com.samyotech.laundry.utils.CustomTextViewMuliBold
+    <TextView
         android:id="@+id/servName"
         app:layout_constraintTop_toBottomOf="@+id/servImage"
         app:layout_constraintRight_toRightOf="parent"

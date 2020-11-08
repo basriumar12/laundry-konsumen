@@ -24,7 +24,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.samyotech.laundry.utils.CustomTextView
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="0"
@@ -37,7 +37,7 @@
                         android:textSize="@dimen/_16sdp"
                         />
 
-                    <com.samyotech.laundry.utils.CustomTextView
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
@@ -46,10 +46,9 @@
                         android:singleLine="true"
                         android:id="@+id/ctvName"
                         android:textColor="@color/black"
-                        android:layout_weight="0.4"
-                        />
+                        android:layout_weight="0.4" />
 
-                    <com.samyotech.laundry.utils.CustomTextView
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="@string/onlywash"
@@ -57,10 +56,9 @@
                         android:gravity="center_vertical"
                         android:singleLine="true"
                         android:visibility="invisible"
-                        android:layout_weight="0.3"
-                        />
+                        android:layout_weight="0.3" />
 
-                    <com.samyotech.laundry.utils.CustomTextView
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:text="$0"
@@ -69,12 +67,11 @@
                         android:singleLine="true"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16sdp"
-                        android:layout_weight="0.2"
-                        />
+                        android:layout_weight="0.2" />
 
                 </LinearLayout>
-                
-                <com.samyotech.laundry.utils.CustomTextView
+
+                <TextView
                     android:id="@+id/ctvCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -82,8 +79,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
-                    android:text="@string/onlywash"
-                    />
+                    android:text="@string/onlywash" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

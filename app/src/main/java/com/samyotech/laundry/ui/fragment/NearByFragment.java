@@ -3,11 +3,16 @@ package com.samyotech.laundry.ui.fragment;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -15,23 +20,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.os.Handler;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -39,11 +31,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-import com.samyotech.laundry.ModelClass.NearBYDTO;
 import com.samyotech.laundry.ModelClass.PopLaundryDTO;
 import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
@@ -55,9 +42,6 @@ import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.Dashboard;
 import com.samyotech.laundry.ui.adapter.PopularLaundriesAdapter;
-import com.samyotech.laundry.ui.adapter.SpecialOffersAdapter;
-import com.samyotech.laundry.utils.CustomTextView;
-import com.samyotech.laundry.utils.CustomTextViewBold;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONObject;
@@ -68,13 +52,11 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class NearByFragment extends Fragment {
-    private String TAG = NearByFragment.class.getSimpleName();
+    private final String TAG = NearByFragment.class.getSimpleName();
     private NearByFragment nearByFragment;
     private GoogleMap googleMap;
-    private ArrayList<MarkerOptions> optionsList = new ArrayList<>();
+    private final ArrayList<MarkerOptions> optionsList = new ArrayList<>();
     private UserDTO userDTO;
     private SharedPrefrence prefrence;
     HashMap<String, String> parms = new HashMap<>();
@@ -82,7 +64,7 @@ public class NearByFragment extends Fragment {
     private Hashtable<String, PopLaundryDTO> markers;
     private Marker marker;
     private Dashboard dashboard;
-    private HashMap<String, String> parmsCategory = new HashMap<>();
+    private final HashMap<String, String> parmsCategory = new HashMap<>();
     FragmentNearByBinding binding;
 
     LinearLayoutManager linearLayoutManager;
@@ -202,7 +184,7 @@ public class NearByFragment extends Fragment {
                         allAtristListDTOList = new ArrayList<>();
                         Type getpetDTO = new TypeToken<List<PopLaundryDTO>>() {
                         }.getType();
-                        allAtristListDTOList = (ArrayList<PopLaundryDTO>) new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
+                        allAtristListDTOList = new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
 
                         for (int i = 0; i < allAtristListDTOList.size(); i++) {
 

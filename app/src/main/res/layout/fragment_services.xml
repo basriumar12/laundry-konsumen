@@ -18,7 +18,7 @@
         android:id="@+id/rvServices"/>
 
 
-    <com.samyotech.laundry.utils.CustomTextView
+    <TextView
         android:id="@+id/ctvnodata"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="@string/services_not"
         android:textSize="@dimen/_16sdp"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
 
 
@@ -41,14 +41,14 @@
         app:cardBackgroundColor="@color/colorPrimary"
         >
 
-        <com.samyotech.laundry.utils.CustomTextView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/schedule_pickup"
             android:textAlignment="center"
             android:textSize="@dimen/_16sdp"
             android:padding="@dimen/_8sdp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

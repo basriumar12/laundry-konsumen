@@ -40,7 +40,7 @@
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_left_arrow"/>
 
-                <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+                <TextView
                     android:layout_centerVertical="true"
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp"
                     android:layout_margin="@dimen/_10sdp"
-                    android:text="@string/SchedulePikcup"/>
+                    android:text="@string/SchedulePikcup" />
 
 
 
@@ -188,8 +188,7 @@
     </androidx.cardview.widget.CardView>
 
 
-
-    <com.samyotech.laundry.utils.CustomTextViewMuliBold
+    <TextView
         android:id="@+id/titleenw"
         android:layout_margin="@dimen/_10sdp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -198,7 +197,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/_16sdp"
         android:textColor="@color/black"
-        android:text="@string/pickupdate"/>
+        android:text="@string/pickupdate" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvHome"
@@ -218,31 +217,30 @@
             android:layout_height="wrap_content">
 
 
-
-           <com.samyotech.laundry.utils.CustomEditText
-               app:layout_constraintTop_toTopOf="parent"
-               android:layout_width="match_parent"
-               android:id="@+id/ctvPickupDate"
-               android:clickable="true"
+            <EditText
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:id="@+id/ctvPickupDate"
+                android:clickable="true"
                 android:editable="false"
-               android:focusable="false"
-               android:drawableRight="@drawable/calendar"
-               android:layout_height="@dimen/_30sdp"
-               android:padding="@dimen/_5sdp"
-               android:hint="@string/enterpickupdate"
+                android:focusable="false"
+                android:drawableRight="@drawable/calendar"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_5sdp"
+                android:hint="@string/enterpickupdate"
                android:background="@drawable/edittext_background"/>
 
-           <com.samyotech.laundry.utils.CustomEditText
-               app:layout_constraintTop_toBottomOf="@id/ctvPickupDate"
-               android:layout_marginTop="@dimen/_10sdp"
-               android:layout_width="match_parent"
-               android:id="@+id/ctvPickupTime"
-               android:focusable="false"
-               android:drawableRight="@drawable/down_arrow"
-               android:hint="@string/enterpickuptime"
-               android:clickable="true"
-               android:editable="false"
-               android:padding="@dimen/_5sdp"
+            <EditText
+                app:layout_constraintTop_toBottomOf="@id/ctvPickupDate"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:id="@+id/ctvPickupTime"
+                android:focusable="false"
+                android:drawableRight="@drawable/down_arrow"
+                android:hint="@string/enterpickuptime"
+                android:clickable="true"
+                android:editable="false"
+                android:padding="@dimen/_5sdp"
                android:background="@drawable/edittext_background"
                android:layout_height="@dimen/_30sdp"/>
 
@@ -250,7 +248,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <com.samyotech.laundry.utils.CustomTextViewMuliBold
+    <TextView
         android:id="@+id/title2"
         android:layout_margin="@dimen/_10sdp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -259,7 +257,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/_16sdp"
         android:textColor="@color/black"
-        android:text="@string/deliverydate"/>
+        android:text="@string/deliverydate" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvDeliver"
@@ -279,30 +277,30 @@
             android:layout_height="wrap_content">
 
 
-
-           <com.samyotech.laundry.utils.CustomEditText
-               app:layout_constraintTop_toTopOf="parent"
-               android:layout_width="match_parent"
-               android:id="@+id/ctvDeliveryDate"
-               android:hint="@string/enterdeliverydate"
-               android:editable="false"
-               android:focusable="false"
-               android:drawableRight="@drawable/calendar"
-               android:clickable="true"
-               android:layout_height="@dimen/_30sdp"
-               android:padding="@dimen/_5sdp"
+            <EditText
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:id="@+id/ctvDeliveryDate"
+                android:hint="@string/enterdeliverydate"
+                android:editable="false"
+                android:focusable="false"
+                android:drawableRight="@drawable/calendar"
+                android:clickable="true"
+                android:layout_height="@dimen/_30sdp"
+                android:padding="@dimen/_5sdp"
                android:background="@drawable/edittext_background"/>
-           <com.samyotech.laundry.utils.CustomEditText
-               app:layout_constraintTop_toBottomOf="@id/ctvDeliveryDate"
-               android:layout_marginTop="@dimen/_10sdp"
-               android:layout_width="match_parent"
-               android:id="@+id/ctvDeliveryTime"
-               android:hint="@string/enterdeliverytime"
-               android:editable="false"
-               android:focusable="false"
-               android:padding="@dimen/_5sdp"
-               android:clickable="true"
-               android:drawableRight="@drawable/down_arrow"
+
+            <EditText
+                app:layout_constraintTop_toBottomOf="@id/ctvDeliveryDate"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:id="@+id/ctvDeliveryTime"
+                android:hint="@string/enterdeliverytime"
+                android:editable="false"
+                android:focusable="false"
+                android:padding="@dimen/_5sdp"
+                android:clickable="true"
+                android:drawableRight="@drawable/down_arrow"
                android:background="@drawable/edittext_background"
                android:layout_height="@dimen/_30sdp"/>
 
@@ -319,7 +317,7 @@
         android:layout_margin="@dimen/_10sdp"
         android:background="@drawable/ic_longbtn">
 
-        <com.samyotech.laundry.utils.CustomTextViewBold
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"

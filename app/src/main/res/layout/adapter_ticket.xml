@@ -22,14 +22,14 @@
             android:padding="10dp">
 
 
-            <com.samyotech.laundry.utils.CustomTextViewBold
+            <TextView
                 android:id="@+id/tvTicketHeading"
                 android:layout_width="@dimen/_180sdp"
                 android:layout_height="wrap_content"
                 android:text="@string/laundryticket"
-                android:textSize="@dimen/_14sdp"/>
+                android:textSize="@dimen/_14sdp" />
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:id="@+id/ctvDiscription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:maxLines="4"
                 android:text="@string/msgadmin" />
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:id="@+id/tvDate"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/rectangle_round_corner_orange">
 
-                <com.samyotech.laundry.utils.CustomTextView
+                <TextView
                     android:id="@+id/tvStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -61,7 +61,7 @@
                 </LinearLayout>
 
 
-                <com.samyotech.laundry.utils.CustomTextViewBold
+                <TextView
                     android:id="@+id/forgot_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

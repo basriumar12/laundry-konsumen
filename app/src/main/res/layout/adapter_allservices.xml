@@ -35,7 +35,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+    <TextView
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/title"

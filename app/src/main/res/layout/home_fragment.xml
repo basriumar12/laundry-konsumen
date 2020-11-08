@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <ScrollView
@@ -41,7 +40,7 @@
                         app:cardElevation="@dimen/_5sdp">
 
 
-                    <com.samyotech.laundry.utils.CustomTextView
+                    <TextView
                         android:id="@+id/svLaundry"
                         android:layout_width="@dimen/_250sdp"
                         android:layout_height="@dimen/_40sdp"
@@ -51,7 +50,7 @@
                         android:padding="@dimen/_10sdp"
                         android:drawablePadding="@dimen/_5sdp"
                         android:drawableLeft="@drawable/ic_search"
-                        android:background="@color/white"/>
+                        android:background="@color/white" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -125,8 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5sdp">
-            
-            <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+
+            <TextView
                 android:id="@+id/tv_service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,16 +133,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:textColor="@color/black"
                 android:text="@string/TopServices"
-                android:textSize="@dimen/_14sdp"/>
-      <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
-          android:id="@+id/ctvbTopService"
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
+                android:id="@+id/ctvbTopService"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-          app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textColor="@color/colorAccent"
                 android:text="@string/ViewAll"
-                android:textSize="@dimen/_14sdp"/>
+                android:textSize="@dimen/_14sdp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layout_constraintTop_toBottomOf="@+id/tv_service"
@@ -152,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"/>
 
-            <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+            <TextView
                 android:id="@+id/tv_popLaundr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -161,9 +161,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/recyleService"
                 android:textColor="@color/black"
                 android:text="@string/PopularLaundries"
-                android:textSize="@dimen/_14sdp"/>
-      <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
-          android:id="@+id/ctvbPopularLaundries"
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
+                android:id="@+id/ctvbPopularLaundries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
@@ -171,8 +172,7 @@
                 android:textColor="@color/colorAccent"
                 android:text="@string/ViewAll"
                 android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-          />
+                android:layout_marginTop="@dimen/_10sdp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layout_constraintTop_toBottomOf="@+id/tv_popLaundr"
@@ -182,8 +182,7 @@
                 android:layout_marginTop="@dimen/_5sdp"/>
 
 
-
-  <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+            <TextView
                 android:id="@+id/tv_offers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -192,18 +191,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/recyleLaundriesPop"
                 android:textColor="@color/black"
                 android:text="@string/SpecialOffer"
-                android:textSize="@dimen/_14sdp"/>
-      <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyleLaundriesPop"
                 android:textColor="@color/colorAccent"
                 android:text="@string/ViewAll"
-          android:visibility="gone"
+                android:visibility="gone"
                 android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-          />
+                android:layout_marginTop="@dimen/_10sdp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layout_constraintTop_toBottomOf="@+id/tv_offers"
@@ -213,7 +212,7 @@
                 android:layout_marginTop="@dimen/_5sdp"/>
 
 
-            <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+            <TextView
                 android:id="@+id/tv_near"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -222,18 +221,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/recyleOffers"
                 android:textColor="@color/black"
                 android:text="@string/Laundary_near"
-                android:textSize="@dimen/_14sdp"/>
-      <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+                android:textSize="@dimen/_14sdp" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyleOffers"
                 android:textColor="@color/colorAccent"
                 android:text="@string/ViewAll"
-          android:visibility="gone"
+                android:visibility="gone"
                 android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-          />
+                android:layout_marginTop="@dimen/_10sdp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 app:layout_constraintTop_toBottomOf="@+id/tv_near"
@@ -251,14 +250,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
-
-        <com.samyotech.laundry.utils.CustomTextView
+        <TextView
             android:layout_below="@+id/constLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"/>
+            android:layout_height="@dimen/_50sdp" />
 
 
     </RelativeLayout>

@@ -39,7 +39,7 @@
 
 
 
-                <com.samyotech.laundry.utils.CustomTextViewBold
+                <TextView
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:id="@+id/title"
@@ -48,9 +48,9 @@
                     android:textSize="@dimen/_14sdp"
                     android:layout_margin="@dimen/_5sdp"
                     android:text="Home"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
 
-                <com.samyotech.laundry.utils.CustomTextView
+                <TextView
                     android:id="@+id/address"
                     app:layout_constraintTop_toBottomOf="@+id/title"
                     app:layout_constraintLeft_toLeftOf="parent"

@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -27,8 +29,6 @@ import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.AdapterViewCommentTicket;
-import com.samyotech.laundry.utils.CustomEditText;
-import com.samyotech.laundry.utils.CustomTextViewBold;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONObject;
@@ -42,12 +42,12 @@ import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
 public class CommentOneByOne extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
-    private String TAG = CommentOneByOne.class.getSimpleName();
+    private final String TAG = CommentOneByOne.class.getSimpleName();
     private ListView lvComment;
-    private CustomEditText etMessage;
+    private final String id = "";
     private ImageView buttonSendMessage, IVback, emojiButton;
     private AdapterViewCommentTicket adapterViewCommentTicket;
-    private String id = "";
+    private final HashMap<String, String> parmsGet = new HashMap<>();
     private ArrayList<TicketCommentDTO> ticketCommentDTOSList;
     IntentFilter intentFilter = new IntentFilter();
     private InputMethodManager inputManager;
@@ -56,8 +56,8 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
     private EmojIconActions emojIcon;
     private RelativeLayout relative;
     private Context mContext;
-    private HashMap<String, String> parmsGet = new HashMap<>();
-    private CustomTextViewBold tvNameHedar;
+    private EditText etMessage;
+    private TextView tvNameHedar;
     private SharedPrefrence prefrence;
     private UserDTO userDTO;
     private String ticket_id;
@@ -92,25 +92,25 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
 
 
     public void setUiAction() {
-        tvNameHedar = (CustomTextViewBold) findViewById(R.id.tvNameHedar);
-        relative = (RelativeLayout) findViewById(R.id.relative);
-        edittextMessage = (EmojiconEditText) findViewById(R.id.edittextMessage);
-        emojiButton = (ImageView) findViewById(R.id.emojiButton);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        lvComment = (ListView) findViewById(R.id.lvComment);
-        etMessage = (CustomEditText) findViewById(R.id.etMessage);
-        buttonSendMessage = (ImageView) findViewById(R.id.buttonSendMessage);
-        IVback = (ImageView) findViewById(R.id.IVback);
+        tvNameHedar = findViewById(R.id.tvNameHedar);
+        relative = findViewById(R.id.relative);
+        edittextMessage = findViewById(R.id.edittextMessage);
+        emojiButton = findViewById(R.id.emojiButton);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        lvComment = findViewById(R.id.lvComment);
+        etMessage = findViewById(R.id.etMessage);
+        buttonSendMessage = findViewById(R.id.buttonSendMessage);
+        IVback = findViewById(R.id.IVback);
         buttonSendMessage.setOnClickListener(this);
         IVback.setOnClickListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable() {
-                                    @Override
-                                    public void run() {
+            @Override
+            public void run() {
 
-                                        Log.e("Runnable", "FIRST");
-                                        if (NetworkManager.isConnectToInternet(mContext)) {
-                                            swipeRefreshLayout.setRefreshing(true);
+                Log.e("Runnable", "FIRST");
+                if (NetworkManager.isConnectToInternet(mContext)) {
+                    swipeRefreshLayout.setRefreshing(true);
                                             getComment();
 
                                         } else {
@@ -203,7 +203,7 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
                         ticketCommentDTOSList = new ArrayList<>();
                         Type getpetDTO = new TypeToken<List<TicketCommentDTO>>() {
                         }.getType();
-                        ticketCommentDTOSList = (ArrayList<TicketCommentDTO>) new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
+                        ticketCommentDTOSList = new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
                         showData();
 
                     } catch (Exception e) {

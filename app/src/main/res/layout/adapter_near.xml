@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp">
 
-                <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+                <TextView
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                     android:textSize="@dimen/_14sdp" />
 
 
-                <com.samyotech.laundry.utils.CustomTextView
+                <TextView
                     android:id="@+id/long_description"
                     android:layout_width="@dimen/_140sdp"
                     android:layout_height="wrap_content"

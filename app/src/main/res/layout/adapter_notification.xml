@@ -28,7 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+            <TextView
                 android:id="@+id/title"
                 android:layout_width="@dimen/_200sdp"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                 app:layout_constraintLeft_toRightOf="@+id/ivImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:id="@+id/ctvMessage"
                 android:layout_width="@dimen/_210sdp"
                 android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/title" />
 
 
-            <com.samyotech.laundry.utils.CustomTextViewMuliBold
+            <TextView
                 android:id="@+id/ctvtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

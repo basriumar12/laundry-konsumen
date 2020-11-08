@@ -6,12 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.samyotech.laundry.ModelClass.TicketCommentDTO;
 import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.utils.CustomTextView;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import java.util.ArrayList;
@@ -21,9 +21,9 @@ import java.util.ArrayList;
  */
 
 public class AdapterViewCommentTicket extends BaseAdapter {
-    private Context mContext;
-    private ArrayList<TicketCommentDTO> ticketCommentDTOSList;
-    private UserDTO userDTO;
+    private final Context mContext;
+    private final ArrayList<TicketCommentDTO> ticketCommentDTOSList;
+    private final UserDTO userDTO;
 
     public AdapterViewCommentTicket(Context mContext, ArrayList<TicketCommentDTO> ticketCommentDTOSList, UserDTO userDTO) {
         this.mContext = mContext;
@@ -61,15 +61,15 @@ public class AdapterViewCommentTicket extends BaseAdapter {
 
         }
 
-        CustomTextView textViewMessage = (CustomTextView) view.findViewById(R.id.textViewMessage);
-        CustomTextView textViewTime = (CustomTextView) view.findViewById(R.id.textViewTime);
-        CustomTextView tvName = (CustomTextView) view.findViewById(R.id.tvName);
+        TextView textViewMessage = view.findViewById(R.id.textViewMessage);
+        TextView textViewTime = view.findViewById(R.id.textViewTime);
+        TextView tvName = view.findViewById(R.id.tvName);
 
-        ImageView ivView = (ImageView) view.findViewById(R.id.ivView);
+        ImageView ivView = view.findViewById(R.id.ivView);
         textViewMessage.setText(ticketCommentDTOSList.get(position).getMessage());
 //        tvName.setText(ticketCommentDTOSList.get(position).get());
 
-        try{
+        try {
             Glide.with(mContext)
                     .load(R.color.white)
                     .into(ivView);

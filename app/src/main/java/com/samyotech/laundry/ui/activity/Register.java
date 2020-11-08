@@ -35,7 +35,7 @@ import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 import io.michaelrocks.libphonenumber.android.Phonenumber;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
-    private String TAG = Register.class.getSimpleName();
+    private final String TAG = Register.class.getSimpleName();
 
     Context mContext;
     ActivityRegisterBinding binding;
@@ -80,20 +80,15 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length()>9){
-                    if(isValidPhoneNumber(String.valueOf(s))){
+                    if(isValidPhoneNumber(String.valueOf(s))) {
                         boolean status = validateUsing_libphonenumber(String.valueOf(s));
-                        if(status){
-                            // Toast.makeText(mContext, "Valid Phone Number (libphonenumber)", Toast.LENGTH_SHORT).show();
-                            //  tvIsValidPhone.setText("Valid Phone Number (libphonenumber)");
-
-                            numCheck=true;
-                        } else {
-/*
+                        // Toast.makeText(mContext, "Valid Phone Number (libphonenumber)", Toast.LENGTH_SHORT).show();
+                        //  tvIsValidPhone.setText("Valid Phone Number (libphonenumber)");
+                        /*
                             binding.cetNumber.setError(getResources().getString(R.string.entValNumber));
                             binding.cetNumber.requestFocus();*/
-                            numCheck=false;
-                            //   tvIsValidPhone.setText("Invalid Phone Number (libphonenumber)");
-                        }
+                        //   tvIsValidPhone.setText("Invalid Phone Number (libphonenumber)");
+                        numCheck = status;
                     }
                     else {
 
@@ -238,7 +233,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     private boolean validateUsing_libphonenumber(String phNumber) {
         PhoneNumberUtil phoneNumberUtil = PhoneNumberUtil.createInstance(mContext);
-        String isoCode = phoneNumberUtil.getRegionCodeForCountryCode(Integer.parseInt("+91"));
+        String isoCode = phoneNumberUtil.getRegionCodeForCountryCode(Integer.parseInt("+62"));
         Phonenumber.PhoneNumber phoneNumber = null;
         try {
             //phoneNumber = phoneNumberUtil.parse(phNumber, "IN");  //if you want to pass region code

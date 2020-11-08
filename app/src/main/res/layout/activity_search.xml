@@ -22,7 +22,7 @@
             android:src="@drawable/ic_left_arrow"
             android:padding="@dimen/_5sdp"
             android:layout_weight="0.1"/>
-        <com.samyotech.laundry.utils.CustomEditText
+        <EditText
             android:id="@+id/cetSearch"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -30,8 +30,7 @@
             android:layout_margin="@dimen/_8sdp"
             android:hint="@string/search_hint"
             android:padding="@dimen/_5sdp"
-            android:background="@drawable/shape_for_gradient"
-            />
+            android:background="@drawable/shape_for_gradient" />
 
 
     </LinearLayout>

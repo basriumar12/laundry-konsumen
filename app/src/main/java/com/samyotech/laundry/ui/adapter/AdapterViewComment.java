@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.samyotech.laundry.ModelClass.GetCommentDTO;
 import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.utils.CustomTextView;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import java.util.ArrayList;
@@ -25,16 +25,16 @@ import java.util.ArrayList;
  * Created by VARUN on 01/01/19.
  */
 public class AdapterViewComment extends BaseAdapter {
-    private Context mContext;
-    private ArrayList<GetCommentDTO> getCommentDTOList;
-    private UserDTO userDTO;
+    private final Context mContext;
+    private final ArrayList<GetCommentDTO> getCommentDTOList;
+    private final UserDTO userDTO;
 
     private ImageView ivImageD;
-    private CustomTextView tvCloseD, tvNameD;
+    private TextView tvCloseD, tvNameD;
     private Dialog dialogImg;
-    String mypic="",otherpic="";
+    String mypic = "", otherpic = "";
 
-    public AdapterViewComment(Context mContext, ArrayList<GetCommentDTO> getCommentDTOList, UserDTO userDTO,String mypic,String otherpic) {
+    public AdapterViewComment(Context mContext, ArrayList<GetCommentDTO> getCommentDTOList, UserDTO userDTO, String mypic, String otherpic) {
         this.mContext = mContext;
         this.getCommentDTOList = getCommentDTOList;
         this.userDTO = userDTO;
@@ -72,11 +72,11 @@ public class AdapterViewComment extends BaseAdapter {
 
         }
 
-        CustomTextView textViewMessage = (CustomTextView) view.findViewById(R.id.textViewMessage);
-        CustomTextView textViewTime = (CustomTextView) view.findViewById(R.id.textViewTime);
-        CustomTextView tvName = (CustomTextView) view.findViewById(R.id.tvName);
-        ImageView ivView = (ImageView) view.findViewById(R.id.ivView);
-        ImageView imageViewmessageTicks = (ImageView) view.findViewById(R.id.imageViewmessageTicks);
+        TextView textViewMessage = view.findViewById(R.id.textViewMessage);
+        TextView textViewTime = view.findViewById(R.id.textViewTime);
+        TextView tvName = view.findViewById(R.id.tvName);
+        ImageView ivView = view.findViewById(R.id.ivView);
+        ImageView imageViewmessageTicks = view.findViewById(R.id.imageViewmessageTicks);
 /*
         if (getCommentDTOList.get(position).getChat_type().equalsIgnoreCase("2")) {
             ivView.setVisibility(View.VISIBLE);
@@ -124,8 +124,8 @@ public class AdapterViewComment extends BaseAdapter {
 //        dialogImg.setContentView(R.layout.dailog_image_view);
 
 /*
-        tvCloseD = (CustomTextView) dialogImg.findViewById(R.id.tvCloseD);
-        tvNameD = (CustomTextView) dialogImg.findViewById(R.id.tvNameD);
+        tvCloseD = (TextView) dialogImg.findViewById(R.id.tvCloseD);
+        tvNameD = (TextView) dialogImg.findViewById(R.id.tvNameD);
 
         ivImageD = (ImageView) dialogImg.findViewById(R.id.ivImageD);*/
         dialogImg.show();

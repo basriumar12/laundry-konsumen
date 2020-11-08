@@ -6,35 +6,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-
 import com.bumptech.glide.Glide;
 import com.samyotech.laundry.ModelClass.GetBannerDTO;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.utils.CustomTextView;
-import com.samyotech.laundry.utils.CustomTextViewBold;
-import com.samyotech.laundry.utils.CustomTextViewMuliBold;
-import com.samyotech.laundry.utils.CustomTextViewpoppins_bold;
 
 import java.util.ArrayList;
 
 
 public class ImageAdapter extends PagerAdapter {
 
-    private Context mContext;
-    private LayoutInflater layoutInflater;
-    ImageView imageView,ivBackImage;
-    CustomTextViewMuliBold desc;
-    CustomTextViewpoppins_bold    lonndes;
-    CustomTextViewpoppins_bold title;
-    ArrayList<GetBannerDTO>imageDTOArrayList;
+    private final Context mContext;
+    private final LayoutInflater layoutInflater;
+    ImageView imageView, ivBackImage;
+    TextView desc;
+    TextView lonndes;
+    TextView title;
+    ArrayList<GetBannerDTO> imageDTOArrayList;
 
 
-
-    public ImageAdapter(ArrayList<GetBannerDTO>imageDTOArrayList, Context mContext) {
+    public ImageAdapter(ArrayList<GetBannerDTO> imageDTOArrayList, Context mContext) {
         this.imageDTOArrayList = imageDTOArrayList;
         this.mContext = mContext;
         layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -42,17 +37,17 @@ public class ImageAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == ((RelativeLayout) object);
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         View itemView = layoutInflater.inflate(R.layout.viewpager_sliding_screens, container, false);
 
-        imageView = (ImageView) itemView.findViewById(R.id.image);
-        title = (CustomTextViewpoppins_bold) itemView.findViewById(R.id.tv_title);
-        desc = (CustomTextViewMuliBold) itemView.findViewById(R.id.short_description);
-        lonndes = (CustomTextViewpoppins_bold) itemView.findViewById(R.id.long_description);
+        imageView = itemView.findViewById(R.id.image);
+        title = itemView.findViewById(R.id.tv_title);
+        desc = itemView.findViewById(R.id.short_description);
+        lonndes = itemView.findViewById(R.id.long_description);
         Glide.with(mContext).load(imageDTOArrayList.get(position).getImage()).placeholder(R.drawable.laundryshop).into(imageView);
 
         title.setText(imageDTOArrayList.get(position).getTitle());
@@ -61,9 +56,6 @@ public class ImageAdapter extends PagerAdapter {
 
 
         container.addView(itemView);
-
-
-
 
 
         return itemView;

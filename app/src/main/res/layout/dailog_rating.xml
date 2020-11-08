@@ -15,7 +15,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <com.samyotech.laundry.utils.CustomTextView
+        <TextView
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             />
 
-    <com.samyotech.laundry.utils.CustomTextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
@@ -38,7 +38,7 @@
         android:layout_margin="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@id/ctvHead"
         android:text="@string/rate_if"
-        android:id="@+id/ctvline"/>
+        android:id="@+id/ctvline" />
         <RatingBar
             app:layout_constraintTop_toBottomOf="@id/ctvline"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -55,7 +55,7 @@
             android:theme="@style/RatingBarMy" />
 
 
-    <com.samyotech.laundry.utils.CustomButton
+    <Button
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_30sdp"
         android:id="@+id/cbCancelDailog"
@@ -65,8 +65,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@id/cbCancel"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:text="@string/cancel"/>
-    <com.samyotech.laundry.utils.CustomButton
+        android:text="@string/cancel" />
+
+    <Button
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_30sdp"
         android:id="@+id/cbCancel"

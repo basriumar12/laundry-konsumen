@@ -85,7 +85,7 @@
                         app:layout_scrollFlags="scroll|enterAlways|snap">
 
 
-                        <com.samyotech.laundry.utils.CustomTextViewBold
+                        <TextView
                             android:id="@+id/tvName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
-                        <com.samyotech.laundry.utils.CustomTextView
+                        <TextView
                             android:id="@+id/tvAddress"
                             android:layout_width="@dimen/_300sdp"
                             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
-                        <com.samyotech.laundry.utils.CustomTextView
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
                             android:layout_below="@+id/tvName"
@@ -149,7 +149,7 @@
                                         android:layout_height="wrap_content"
                                         android:orientation="vertical">
 
-                                        <com.samyotech.laundry.utils.CustomTextView
+                                        <TextView
                                             android:id="@+id/ctvprofile"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
                                             android:textColor="@color/gray"
                                             android:textSize="@dimen/_15sdp" />
 
-                                        <com.samyotech.laundry.utils.CustomTextView
+                                        <TextView
                                             android:id="@+id/ctvChangePassword"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
                                             android:textColor="@color/gray"
                                             android:textSize="@dimen/_15sdp" />
 
-                                        <com.samyotech.laundry.utils.CustomTextView
+                                        <TextView
                                             android:id="@+id/ctvMyOrder"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
                                         android:layout_height="wrap_content"
                                         android:orientation="vertical">
 
-                                        <com.samyotech.laundry.utils.CustomTextView
+                                        <TextView
                                             android:id="@+id/ctvnotification"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
                                             android:textColor="@color/gray"
                                             android:textSize="@dimen/_15sdp" />
 
-                                        <com.samyotech.laundry.utils.CustomTextView
+                                        <TextView
                                             android:id="@+id/ctvChat"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -225,7 +225,7 @@
                                             android:textSize="@dimen/_15sdp" />
 
 
-                                        <com.samyotech.laundry.utils.CustomTextView
+                                        <TextView
                                             android:id="@+id/ctvSupport"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -239,7 +239,7 @@
                                             android:textSize="@dimen/_15sdp" />
 
 
-                                        <com.samyotech.laundry.utils.CustomTextView
+                                        <TextView
                                             android:id="@+id/ctvDelete"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -262,7 +262,7 @@
                                         android:orientation="vertical">
 
 
-                                        <com.samyotech.laundry.utils.CustomTextView
+                                        <TextView
                                             android:id="@+id/ctvLogout"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"

@@ -52,7 +52,7 @@
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_left_arrow"/>
 
-                <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+                <TextView
                     android:layout_centerVertical="true"
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp"
                     android:layout_margin="@dimen/_10sdp"
-                    android:text="@string/SchedulePikcup"/>
+                    android:text="@string/SchedulePikcup" />
 
 
 
@@ -239,20 +239,22 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.6"
                 android:orientation="vertical">
-                <com.samyotech.laundry.utils.CustomTextViewBold
+
+                <TextView
                     android:layout_width="match_parent"
                     android:id="@+id/ctvbShopName"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_7sdp"
                     android:textSize="20sp"
-                    android:hint="@string/enterpickupdate"/>
-                <com.samyotech.laundry.utils.CustomTextView
+                    android:hint="@string/enterpickupdate" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:hint="@string/enterpickuptime"
                     android:maxLines="4"
                     android:id="@+id/ctvAddress"
                     android:layout_marginLeft="@dimen/_7sdp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
 
@@ -262,16 +264,16 @@
     </androidx.cardview.widget.CardView>
 
 
-    <com.samyotech.laundry.utils.CustomTextViewMuliBold
-        android:id="@+id/titleenw"
-        android:layout_margin="@dimen/_10sdp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_16sdp"
-        android:textColor="@color/black"
-        android:text="@string/paymath"/>
+            <TextView
+                android:id="@+id/titleenw"
+                android:layout_margin="@dimen/_10sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_16sdp"
+                android:textColor="@color/black"
+                android:text="@string/paymath" />
     <androidx.cardview.widget.CardView
         android:id="@+id/cvCoD"
         app:layout_constraintTop_toBottomOf="@id/titleenw"
@@ -307,9 +309,7 @@
                 android:layout_height="wrap_content">
 
 
-
-
-                <com.samyotech.laundry.utils.CustomTextViewBold
+                <TextView
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:id="@+id/titlehome"
@@ -318,9 +318,9 @@
                     android:textSize="@dimen/_14sdp"
                     android:layout_margin="@dimen/_5sdp"
                     android:text="COD"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
 
-                <com.samyotech.laundry.utils.CustomTextView
+                <TextView
                     android:id="@+id/address"
                     app:layout_constraintTop_toBottomOf="@+id/titlehome"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -374,7 +374,7 @@
                         android:padding="@dimen/_5sdp"
                         android:src="@drawable/procode" />
 
-                    <com.samyotech.laundry.utils.CustomTextView
+                    <TextView
                         android:id="@+id/ctvHaveProcode"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -400,7 +400,7 @@
                         android:padding="@dimen/_5sdp"
                         android:src="@drawable/procode" />
 
-                    <com.samyotech.laundry.utils.CustomEditText
+                    <EditText
                         android:id="@+id/cetEnterProcode"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -417,7 +417,7 @@
                         android:layout_weight="0.3"
                         android:background="@drawable/shape_for_gradient">
 
-                        <com.samyotech.laundry.utils.CustomTextView
+                        <TextView
                             android:id="@+id/ctvApply"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -434,7 +434,7 @@
                 android:id="@+id/view"
                 app:layout_constraintTop_toBottomOf="@+id/ll_header"/>
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/view"
@@ -447,7 +447,7 @@
                 android:textSize="16sp"
                 />
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/ctvSub_Total"
@@ -460,7 +460,7 @@
                 android:textSize="16sp"
                 />
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/ctvTax"
@@ -472,7 +472,8 @@
                 android:layout_marginRight="@dimen/_7sdp"
                 android:textSize="16sp"
                 />
-            <com.samyotech.laundry.utils.CustomTextView
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/view"
@@ -485,7 +486,7 @@
                 android:textSize="16sp"
                 />
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/ctvSub_Total"
@@ -497,7 +498,8 @@
                 android:layout_marginRight="@dimen/_7sdp"
                 android:textSize="16sp"
                 />
-            <com.samyotech.laundry.utils.CustomTextView
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/ctvTaxValue"
@@ -517,7 +519,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@+id/ctvDiscountValue"/>
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/view1"
@@ -530,7 +532,8 @@
                 android:layout_marginRight="@dimen/_7sdp"
                 android:textSize="16sp"
                 />
-            <com.samyotech.laundry.utils.CustomTextView
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/view1"
@@ -554,7 +557,7 @@
         android:layout_margin="@dimen/_10sdp"
         android:background="@drawable/ic_longbtn">
 
-        <com.samyotech.laundry.utils.CustomTextViewBold
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"

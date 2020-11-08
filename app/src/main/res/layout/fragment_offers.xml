@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <com.samyotech.laundry.utils.CustomTextView
+        <TextView
             android:id="@+id/ctvHeading"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

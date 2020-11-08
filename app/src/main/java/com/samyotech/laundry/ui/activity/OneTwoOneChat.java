@@ -1,24 +1,23 @@
 package com.samyotech.laundry.ui.activity;
 
-import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -38,16 +37,12 @@ import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.AdapterViewComment;
-import com.samyotech.laundry.utils.CustomEditText;
-import com.samyotech.laundry.utils.CustomTextView;
-import com.samyotech.laundry.utils.CustomTextViewBold;
 import com.samyotech.laundry.utils.ImageCompression;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,12 +55,12 @@ import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
 public class OneTwoOneChat extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
-    private String TAG = OneTwoOneChat.class.getSimpleName();
+    private final String TAG = OneTwoOneChat.class.getSimpleName();
     private ListView lvComment;
-    private CustomEditText etMessage;
+    private final String id = "";
     private ImageView buttonSendMessage, IVback, emojiButton;
     private AdapterViewComment adapterViewComment;
-    private String id = "";
+    private final HashMap<String, String> parmsGet = new HashMap<>();
     private ArrayList<GetCommentDTO> getCommentDTOList;
     private InputMethodManager inputManager;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -73,16 +68,16 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
     private EmojIconActions emojIcon;
     private RelativeLayout relative;
     private Context mContext;
-    private HashMap<String, String> parmsGet = new HashMap<>();
-    private CustomTextView tvNameHedar;
+    private final HashMap<String, File> paramsFile = new HashMap<>();
+    boolean clickcheck = true;
     private SharedPrefrence prefrence;
     private UserDTO userDTO;
-    private String ar_id="", ar_name="", image="";
+    private EditText etMessage;
     IntentFilter intentFilter = new IntentFilter();
     HashMap<String, String> values = new HashMap<>();
     private LinearLayout mContainerActions, mContainerImg;
     private boolean actions_container_visible = false, img_container_visible = false;
-    boolean clickcheck=true;
+    private TextView tvNameHedar;
     private ImageView mActionImage, mPreviewImg, mDeleteImg, mActionContainerImg;
 
     BottomSheet.Builder builder;
@@ -96,9 +91,8 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
     byte[] resultByteArray;
     File file;
     Bitmap bitmap = null;
-    private HashMap<String, File> paramsFile = new HashMap<>();
+    private String ar_id = "", ar_name = "", image = "";
     CircleImageView civProfilepic;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +106,7 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
         intentFilter.addAction(Consts.BROADCAST);
         LocalBroadcastManager.getInstance(this).registerReceiver(mBroadcastReceiver, intentFilter);
 
-        civProfilepic = (CircleImageView) findViewById(R.id.civProfilepic);
+        civProfilepic = findViewById(R.id.civProfilepic);
 
         if (getIntent().hasExtra(Consts.SHOP_ID)) {
 
@@ -148,7 +142,6 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
             values.put(Consts.TO_USER_ID, ar_id);
 
 
-
         }
         setUiAction();
 
@@ -156,32 +149,32 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
 
 
     public void setUiAction() {
-        mContainerActions = (LinearLayout) findViewById(R.id.container_actions);
+        mContainerActions = findViewById(R.id.container_actions);
         mContainerActions.setVisibility(View.GONE);
 
-        mContainerImg = (LinearLayout) findViewById(R.id.container_img);
+        mContainerImg = findViewById(R.id.container_img);
         mContainerImg.setVisibility(View.GONE);
 
 
-        relative = (RelativeLayout) findViewById(R.id.relative);
-        tvNameHedar = (CustomTextView) findViewById(R.id.ctvName);
-        edittextMessage = (EmojiconEditText) findViewById(R.id.edittextMessage);
-        emojiButton = (ImageView) findViewById(R.id.emojiButton);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
-        lvComment = (ListView) findViewById(R.id.lvComment);
-        etMessage = (CustomEditText) findViewById(R.id.etMessage);
-        buttonSendMessage = (ImageView) findViewById(R.id.buttonSendMessage);
-        IVback = (ImageView) findViewById(R.id.IVback);
+        relative = findViewById(R.id.relative);
+        tvNameHedar = findViewById(R.id.ctvName);
+        edittextMessage = findViewById(R.id.edittextMessage);
+        emojiButton = findViewById(R.id.emojiButton);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        lvComment = findViewById(R.id.lvComment);
+        etMessage = findViewById(R.id.etMessage);
+        buttonSendMessage = findViewById(R.id.buttonSendMessage);
+        IVback = findViewById(R.id.IVback);
         buttonSendMessage.setOnClickListener(this);
         IVback.setOnClickListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable() {
-                                    @Override
-                                    public void run() {
+            @Override
+            public void run() {
 
-                                        Log.e("Runnable", "FIRST");
-                                        if (NetworkManager.isConnectToInternet(mContext)) {
-                                            swipeRefreshLayout.setRefreshing(true);
+                Log.e("Runnable", "FIRST");
+                if (NetworkManager.isConnectToInternet(mContext)) {
+                    swipeRefreshLayout.setRefreshing(true);
                                             getComment();
 
                                         } else {
@@ -468,8 +461,9 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
             } catch (Exception e) {
             }
             if (NetworkManager.isConnectToInternet(mContext)) {
-                if(clickcheck){
-                doComment();}
+                if (clickcheck) {
+                    doComment();
+                }
             } else {
                 ProjectUtils.showToast(mContext, getResources().getString(R.string.internet_concation));
             }
@@ -514,8 +508,8 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
                         getCommentDTOList = new ArrayList<>();
                         Type getpetDTO = new TypeToken<List<GetCommentDTO>>() {
                         }.getType();
-                        clickcheck=true;
-                        getCommentDTOList = (ArrayList<GetCommentDTO>) new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
+                        clickcheck = true;
+                        getCommentDTOList = new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
                         showData();
 
                     } catch (Exception e) {
@@ -530,9 +524,8 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
     }
 
 
-
     public void showData() {
-        adapterViewComment = new AdapterViewComment(mContext, getCommentDTOList, userDTO,userDTO.getImage(),image);
+        adapterViewComment = new AdapterViewComment(mContext, getCommentDTOList, userDTO, userDTO.getImage(), image);
         lvComment.setAdapter(adapterViewComment);
         lvComment.setSelection(getCommentDTOList.size() - 1);
     }

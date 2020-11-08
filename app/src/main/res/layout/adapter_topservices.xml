@@ -35,7 +35,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+    <TextView
         app:layout_constraintTop_toBottomOf="@+id/ratings"
         android:id="@+id/title"
         app:layout_constraintLeft_toRightOf="@+id/cardView"
@@ -45,9 +45,9 @@
         android:text="Laundary Shop"
         android:textSize="@dimen/_14sdp"
         android:textColor="@color/black"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
-    <com.samyotech.laundry.utils.CustomTextView
+    <TextView
         app:layout_constraintTop_toBottomOf="@+id/title"
         android:id="@+id/location"
         app:layout_constraintLeft_toRightOf="@+id/cardView"
@@ -64,13 +64,7 @@
         android:layout_height="wrap_content"/>
 
 
-
-
-
-
-
-
-    <com.samyotech.laundry.utils.CustomTextViewMuliBold
+    <TextView
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginRight="@dimen/_5sdp"
@@ -86,8 +80,7 @@
         android:text="4.3"/>
 
 
-
-    <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+    <TextView
         app:layout_constraintTop_toBottomOf="@+id/location"
         android:id="@+id/distance"
         app:layout_constraintLeft_toRightOf="@+id/cardView"

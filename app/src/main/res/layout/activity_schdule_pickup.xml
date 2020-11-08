@@ -42,7 +42,7 @@
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_left_arrow"/>
 
-            <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+            <TextView
                 android:layout_centerVertical="true"
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
                 android:layout_margin="@dimen/_10sdp"
-                android:text="@string/SchedulePikcup"/>
+                android:text="@string/SchedulePikcup" />
 
 
 
@@ -190,7 +190,7 @@
     </androidx.cardview.widget.CardView>
 
 
-    <com.samyotech.laundry.utils.CustomTextViewMuliBold
+    <TextView
         android:id="@+id/titleenw"
         android:layout_margin="@dimen/_10sdp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -199,7 +199,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/_16sdp"
         android:textColor="@color/black"
-        android:text="@string/Wherehouldwedeliver"/>
+        android:text="@string/Wherehouldwedeliver" />
     <androidx.cardview.widget.CardView
         android:id="@+id/cvHome"
         app:layout_constraintTop_toBottomOf="@id/recyleList"
@@ -235,9 +235,7 @@
                 android:layout_height="wrap_content">
 
 
-
-
-                <com.samyotech.laundry.utils.CustomTextViewBold
+                <TextView
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:id="@+id/titlehome"
@@ -246,9 +244,9 @@
                     android:textSize="@dimen/_14sdp"
                     android:layout_margin="@dimen/_5sdp"
                     android:text="Home"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
 
-                <com.samyotech.laundry.utils.CustomTextView
+                <TextView
                     android:id="@+id/address"
                     app:layout_constraintTop_toBottomOf="@+id/titlehome"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -306,9 +304,7 @@
                 android:layout_height="wrap_content">
 
 
-
-
-                <com.samyotech.laundry.utils.CustomTextViewBold
+                <TextView
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:id="@+id/titleWork"
@@ -317,9 +313,9 @@
                     android:textSize="@dimen/_14sdp"
                     android:layout_margin="@dimen/_5sdp"
                     android:text="Work"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
 
-                <com.samyotech.laundry.utils.CustomTextView
+                <TextView
                     android:id="@+id/addressWork"
                     app:layout_constraintTop_toBottomOf="@+id/titleWork"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -376,9 +372,7 @@
                 android:layout_height="wrap_content">
 
 
-
-
-                <com.samyotech.laundry.utils.CustomTextViewBold
+                <TextView
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:id="@+id/titleOther"
@@ -387,9 +381,9 @@
                     android:textSize="@dimen/_14sdp"
                     android:layout_margin="@dimen/_5sdp"
                     android:text="Other"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black" />
 
-                <com.samyotech.laundry.utils.CustomTextView
+                <TextView
                     android:id="@+id/addressOther"
                     app:layout_constraintTop_toBottomOf="@+id/titleOther"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -444,7 +438,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_centerVertical="true"/>
 
-            <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+            <TextView
                 android:layout_toRightOf="@+id/add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -452,7 +446,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_centerVertical="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_14sdp"/>
+                android:textSize="@dimen/_14sdp" />
 
 
 
@@ -475,7 +469,7 @@
         android:layout_margin="@dimen/_10sdp"
         android:background="@drawable/ic_longbtn">
 
-        <com.samyotech.laundry.utils.CustomTextViewBold
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"

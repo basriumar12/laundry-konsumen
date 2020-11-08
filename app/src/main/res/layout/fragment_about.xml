@@ -13,29 +13,28 @@
         android:orientation="vertical"
         android:layout_margin="10dp">
 
-        <com.samyotech.laundry.utils.CustomTextViewBold
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/aboutus"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
-        <com.samyotech.laundry.utils.CustomTextView
+        <TextView
             android:id="@+id/ctvAboutUS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/about"
-            />
+            android:text="@string/about" />
 
 
-        <com.samyotech.laundry.utils.CustomTextViewBold
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/address"
             android:layout_marginTop="@dimen/_5sdp"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
         <com.google.android.gms.maps.MapView
             android:layout_width="match_parent"
@@ -44,21 +43,21 @@
             android:id="@+id/mvAddress"/>
 
 
-        <com.samyotech.laundry.utils.CustomTextView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/taptoview"
-            android:id="@+id/ctvTap"
-            />
-        <com.samyotech.laundry.utils.CustomTextViewBold
+            android:id="@+id/ctvTap" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/openinghours"
-            android:textColor="@color/black"
-            />
-        <com.samyotech.laundry.utils.CustomTextView
+            android:textColor="@color/black" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
@@ -66,9 +65,9 @@
             android:textSize="@dimen/_14sdp"
             android:drawableLeft="@drawable/online_circle"
             android:text="@string/taptoview"
-            android:id="@+id/ctvOnTime"
-            />
-        <com.samyotech.laundry.utils.CustomTextView
+            android:id="@+id/ctvOnTime" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
@@ -76,8 +75,7 @@
             android:textSize="@dimen/_14sdp"
             android:drawableLeft="@drawable/online_circle"
             android:text="@string/taptoview"
-            android:id="@+id/ctvOffTime"
-            />
+            android:id="@+id/ctvOffTime" />
 
 
         <androidx.cardview.widget.CardView
@@ -90,14 +88,14 @@
             app:cardBackgroundColor="@color/colorPrimary"
             >
 
-            <com.samyotech.laundry.utils.CustomTextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/schedule_pickup"
                 android:textAlignment="center"
                 android:textSize="@dimen/_16sdp"
                 android:padding="@dimen/_8sdp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
         </androidx.cardview.widget.CardView>
     </LinearLayout>

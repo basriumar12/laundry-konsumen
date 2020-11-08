@@ -28,7 +28,7 @@
 
             />
 
-        <com.samyotech.laundry.utils.CustomTextView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/_30sdp"
@@ -65,17 +65,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.samyotech.laundry.utils.CustomTextView
+                    <TextView
                         android:layout_marginTop="@dimen/_30sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_marginRight="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
-                        android:hint="@string/fname"
-                        />
+                        android:hint="@string/fname" />
 
-                    <com.samyotech.laundry.utils.CustomEditText
+                    <EditText
                         android:id="@+id/cetName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -102,14 +101,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.samyotech.laundry.utils.CustomTextView
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
-                        android:hint="@string/pnumber"
-                        />
+                        android:hint="@string/pnumber" />
 
-                    <com.samyotech.laundry.utils.CustomEditText
+                    <EditText
                         android:id="@+id/cetNumber"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -118,7 +116,7 @@
                         android:inputType="number"
                         android:drawablePadding="@dimen/_15sdp"
                         android:hint="@string/pnumber"
-                        android:singleLine="true"/>
+                        android:singleLine="true" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
@@ -135,15 +133,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.samyotech.laundry.utils.CustomTextView
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
-                        android:hint="@string/email"
-                        />
+                        android:hint="@string/email" />
 
 
-                    <com.samyotech.laundry.utils.CustomEditText
+                    <EditText
                         android:id="@+id/cetEmail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -173,15 +170,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <com.samyotech.laundry.utils.CustomTextView
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/_5sdp"
-                        android:hint="@string/address"
-                        />
+                        android:hint="@string/address" />
 
 
-                    <com.samyotech.laundry.utils.CustomEditText
+                    <EditText
                         android:id="@+id/cetAddress"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -208,7 +204,8 @@
                 android:weightSum="1"
                 android:elevation="@dimen/_5sdp"
                 >
-                <com.samyotech.laundry.utils.CustomTextView
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/update"
@@ -216,8 +213,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     android:padding="10dp"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    />
+                    android:textColor="@color/white" />
 
                 <ImageView
                     android:layout_width="wrap_content"

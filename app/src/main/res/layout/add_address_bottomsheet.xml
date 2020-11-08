@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_10sdp">
-
-
-    <com.samyotech.laundry.utils.CustomTextViewMuliBold
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/AddAddress"
-        android:textSize="@dimen/_16sdp"
-        android:layout_margin="@dimen/_10sdp"
-        android:textColor="@color/black"/>
+        android:layout_margin="@dimen/_10sdp">
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/AddAddress"
+            android:textSize="@dimen/_16sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:textColor="@color/black" />
 
- <com.samyotech.laundry.utils.CustomTextViewMuliBold
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/SelectArea"
-        android:textSize="@dimen/_14sdp"
-     android:layout_marginTop="@dimen/_10sdp"
-     android:layout_marginLeft="@dimen/_10sdp"
-        android:textColor="@color/darkgray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/SelectArea"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textColor="@color/darkgray" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:layout_width="match_parent"
@@ -44,15 +43,15 @@
         android:orientation="horizontal">
 
 
-        <com.samyotech.laundry.utils.CustomTextViewMuliBold
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/CompAddress"
             android:textSize="@dimen/_14sdp"
             android:layout_weight="1"
-            android:textColor="@color/darkgray"/>
+            android:textColor="@color/darkgray" />
 
-        <com.samyotech.laundry.utils.CustomTextViewpoppins_bold
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pinLocation"
@@ -60,48 +59,47 @@
             android:gravity="end"
             android:layout_weight="1"
 
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/colorAccent" />
 
 
 
     </LinearLayout>
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Schme number 485 vijynagar"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginRight="10dp"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/black" />
 
-    <com.samyotech.laundry.utils.CustomTextViewMuliBold
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Schme number 485 vijynagar"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_3sdp"
-        android:layout_marginRight="10dp"
-        android:textSize="@dimen/_12sdp"
-        android:textColor="@color/black"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Contactnum"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
 
-    <com.samyotech.laundry.utils.CustomTextViewMuliBold
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Contactnum"
-        android:textSize="@dimen/_14sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
+            android:textColor="@color/darkgray" />
 
-        android:textColor="@color/darkgray"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="98656456589"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="@dimen/_3sdp"
 
-    <com.samyotech.laundry.utils.CustomTextViewMuliBold
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="98656456589"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="@dimen/_3sdp"
-
-        android:textSize="@dimen/_12sdp"
-        android:textColor="@color/black"/>
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/black" />
 
 
     <LinearLayout
@@ -145,13 +143,13 @@
             android:layout_margin="@dimen/_20sdp"
             android:layout_height="@dimen/_40sdp">
 
-            <com.samyotech.laundry.utils.CustomTextViewBold
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/saveContinue"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_16sdp"/>
+                android:textSize="@dimen/_16sdp" />
 
 
 

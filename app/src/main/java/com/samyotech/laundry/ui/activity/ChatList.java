@@ -1,12 +1,10 @@
 package com.samyotech.laundry.ui.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,8 +21,6 @@ import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.ChatListAdapter;
-import com.samyotech.laundry.utils.CustomTextView;
-import com.samyotech.laundry.utils.CustomTextViewBold;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONObject;
@@ -35,14 +31,14 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ChatList extends AppCompatActivity {
-    private String TAG = ChatList.class.getSimpleName();
+    private final String TAG = ChatList.class.getSimpleName();
     private RecyclerView rvChatList;
     private ChatListAdapter chatListAdapter;
     private ArrayList<ChatListDTO> chatList = new ArrayList<>();
     private LinearLayoutManager mLayoutManager;
     private SharedPrefrence prefrence;
     private UserDTO userDTO;
-    private CustomTextView tvNo;
+    private TextView tvNo;
     Context mContext;
 
 
@@ -102,7 +98,7 @@ public class ChatList extends AppCompatActivity {
                         chatList = new ArrayList<>();
                         Type getpetDTO = new TypeToken<List<ChatListDTO>>() {
                         }.getType();
-                        chatList = (ArrayList<ChatListDTO>) new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
+                        chatList = new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
                         showData();
 
                     } catch (Exception e) {

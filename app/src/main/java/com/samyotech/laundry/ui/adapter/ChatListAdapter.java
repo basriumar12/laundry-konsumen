@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,8 +18,6 @@ import com.samyotech.laundry.ModelClass.ChatListDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.ui.activity.OneTwoOneChat;
-import com.samyotech.laundry.utils.CustomTextView;
-import com.samyotech.laundry.utils.CustomTextViewBold;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import java.util.ArrayList;
@@ -86,8 +85,8 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public CustomTextViewBold tvTitle;
-        public CustomTextView tvDay, tvDate, tvMsg;
+        public TextView tvTitle;
+        public TextView tvDay, tvDate, tvMsg;
         public CircleImageView IVprofile;
         public CardView cardClick;
 

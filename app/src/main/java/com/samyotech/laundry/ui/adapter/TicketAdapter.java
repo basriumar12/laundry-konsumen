@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,8 +21,6 @@ import com.samyotech.laundry.R;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.ui.activity.CommentOneByOne;
 import com.samyotech.laundry.ui.activity.TicketsActivity;
-import com.samyotech.laundry.utils.CustomTextView;
-import com.samyotech.laundry.utils.CustomTextViewBold;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import java.util.ArrayList;
@@ -29,10 +28,10 @@ import java.util.ArrayList;
 
 public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHolder> {
 
-    private Context mContext;
-    private TicketsActivity tickets;
-    private ArrayList<TicketDTO> ticketDTOSList;
-    private UserDTO userDTO;
+    private final Context mContext;
+    private final TicketsActivity tickets;
+    private final ArrayList<TicketDTO> ticketDTOSList;
+    private final UserDTO userDTO;
 
 
     public TicketAdapter(TicketsActivity tickets, Context mContext, ArrayList<TicketDTO> ticketDTOSList, UserDTO userDTO) {
@@ -103,8 +102,8 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public CustomTextViewBold tvTicket;
-        public CustomTextView tvDate,ctvDiscription, tvStatus;
+        public TextView tvTicket;
+        public TextView tvDate, ctvDiscription, tvStatus;
         public LinearLayout llStatus;
         public RelativeLayout rlClick;
 
