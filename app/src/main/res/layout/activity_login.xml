@@ -12,6 +12,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/auth_bg"
             tools:context=".Activity.Login">
 
             <LinearLayout
@@ -21,173 +22,105 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_260sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/login" />
-
-                <com.samyotech.laundry.utils.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/wlcome"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_20sdp" />
+                    android:layout_width="200dp"
+                    android:layout_height="350dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/white_icon" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:background="#F5F5F5"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="@dimen/_5sdp">
+                    android:padding="16dp">
 
-                    <androidx.cardview.widget.CardView
+                    <EditText
+                        android:id="@+id/cetEmailADD"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/_5sdp"
-                        app:cardElevation="@dimen/_1sdp">
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:backgroundTint="@color/white"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/light_gray" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <com.samyotech.laundry.utils.CustomTextViewBold
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_5sdp"
-                                android:text="@string/email"
-                                android:textColor="@color/quantum_grey"/>
-
-
-                            <com.samyotech.laundry.utils.CustomEditText
-                                android:id="@+id/cetEmailADD"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="@dimen/_5sdp"
-                                android:background="@null"
-                                android:drawablePadding="@dimen/_15sdp"
-                                android:hint="@string/email"
-                                android:inputType="textEmailAddress" />
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
+                    <EditText
+                        android:id="@+id/cetPasword"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/_5sdp"
-                        app:cardElevation="@dimen/_1sdp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <com.samyotech.laundry.utils.CustomTextViewBold
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:layout_marginRight="@dimen/_5sdp"
-                                android:text="@string/password"
-                                android:textColor="@color/quantum_grey"/>
-
-
-                            <com.samyotech.laundry.utils.CustomEditText
-                                android:id="@+id/cetPasword"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="@dimen/_5sdp"
-                                android:background="@null"
-                                android:drawablePadding="@dimen/_15sdp"
-                                android:hint="@string/password"
-
-                                android:inputType="textPassword" />
-
-                        </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:backgroundTint="@color/white"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/light_gray" />
 
                 </LinearLayout>
 
-                <LinearLayout
+
+                <com.samyotech.laundry.utils.CustomTextViewBold
+                    android:id="@+id/forgot_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_20sdp"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="32dp"
+                    android:layout_weight="1"
+                    android:paddingEnd="16dp"
+                    android:text="@string/forgot_password"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/white" />
 
-
-
-                    <com.samyotech.laundry.utils.CustomTextViewBold
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/forgot_password"
-                        android:textAlignment="viewEnd"
-                        android:text="@string/forgot_password"
-                        android:textColor="@color/colorPrimary" />
-                </LinearLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <mehdi.sakout.fancybuttons.FancyButton
                     android:id="@+id/login"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_margin="30dp"
-                    android:background="@drawable/button_selector2"
-                    android:orientation="horizontal"
-                    android:weightSum="1"
-                    android:elevation="@dimen/_5sdp"
-                    >
-                    <com.samyotech.laundry.utils.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@string/loginc"
-                        android:textSize="@dimen/_16sdp"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        android:padding="10dp"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        />
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:padding="12dp"
+                    app:fb_defaultColor="@color/white"
+                    app:fb_focusColor="@color/white"
+                    app:fb_iconPosition="left"
+                    app:fb_radius="30dp"
+                    app:fb_text="Login"
+                    app:fb_textColor="@color/colorPrimary" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/right"
-                        android:padding="5dp"
-                        android:layout_margin="@dimen/_10sdp"
-                        app:layout_constraintRight_toRightOf="parent"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/google_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="12dp"
+                    app:fb_defaultColor="#F44336"
+                    app:fb_focusColor="#F44336"
+                    app:fb_iconPosition="left"
+                    app:fb_radius="30dp"
+                    app:fb_text="Login dengan Google"
+                    app:fb_textColor="@color/white" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginTop="32dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <com.samyotech.laundry.utils.CustomTextViewBold
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="@string/dont_have_an_account" />
+                        android:hint="@string/dont_have_an_account"
+                        android:textColorHint="@color/light_gray"
+                        android:textColor="@color/white" />
 
-                    <com.samyotech.laundry.utils.CustomTextViewBold
+                    <TextView
+                        android:id="@+id/register_now"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_marginLeft="8dp"
                         android:text="@string/signupC"
-                        android:id="@+id/register_now"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -196,7 +129,7 @@
                 android:id="@+id/RRsncbar"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true" />
         </RelativeLayout>
 
 

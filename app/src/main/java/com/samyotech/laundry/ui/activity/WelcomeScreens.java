@@ -1,18 +1,17 @@
 package com.samyotech.laundry.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.samyotech.laundry.ModelClass.WelcomeDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityWelcomeScreensBinding;
-import com.samyotech.laundry.ui.adapter.ImageAdapter;
 import com.samyotech.laundry.ui.adapter.WelcomeImageAdapter;
 
 import java.util.ArrayList;
@@ -34,8 +33,8 @@ public class WelcomeScreens extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        kContext=WelcomeScreens.this;
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_welcome_screens);
+        kContext = WelcomeScreens.this;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome_screens);
         setUpViewpager();
 
 
@@ -61,7 +60,7 @@ public class WelcomeScreens extends AppCompatActivity {
         binding.btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(kContext,Login.class);
+                Intent intent = new Intent(kContext, Login.class);
                 startActivity(intent);
             }
         });
@@ -69,14 +68,12 @@ public class WelcomeScreens extends AppCompatActivity {
     }
 
     private void setUpViewpager() {
-
-
         imageDTOArrayList = new ArrayList<>();
-        imageDTOArrayList.add(new WelcomeDTO(R.drawable.welcome1,R.drawable.welcome4, getResources().getString(R.string.Choose),getResources().getString(R.string.dummuydata)));
-        imageDTOArrayList.add(new WelcomeDTO(R.drawable.welcome2,R.drawable.welcome6, getResources().getString(R.string.wash),getResources().getString(R.string.dummuydata2)));
-        imageDTOArrayList.add(new WelcomeDTO(R.drawable.welcome3,R.drawable.welcome4, getResources().getString(R.string.delivery),getResources().getString(R.string.dummuydata3)));
+        imageDTOArrayList.add(new WelcomeDTO(R.drawable.welcome1, getResources().getString(R.string.Choose), getResources().getString(R.string.dummuydata)));
+        imageDTOArrayList.add(new WelcomeDTO(R.drawable.welcome2, getResources().getString(R.string.wash), getResources().getString(R.string.dummuydata2)));
+        imageDTOArrayList.add(new WelcomeDTO(R.drawable.welcome3, getResources().getString(R.string.delivery), getResources().getString(R.string.dummuydata3)));
 
-        imageAdapter = new WelcomeImageAdapter(imageDTOArrayList,kContext);
+        imageAdapter = new WelcomeImageAdapter(imageDTOArrayList, kContext);
         binding.viewpager.setAdapter(imageAdapter);
         binding.tabDots.setViewPager(binding.viewpager);
     }

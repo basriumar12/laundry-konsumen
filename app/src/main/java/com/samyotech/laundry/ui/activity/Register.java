@@ -10,8 +10,11 @@ import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -43,6 +46,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         mContext = Register.this;
         binding = DataBindingUtil.setContentView(this,  R.layout.activity_register);
 
@@ -217,7 +224,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public void showSickbar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.RRsncbar, msg, Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
-        snackbarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+        snackbarView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
         snackbar.show();
     }
 

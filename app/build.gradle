@@ -112,4 +112,5 @@ dependencies {
         exclude group: 'com.google.android.gms'
         exclude module: "play-services-places"
     }
+    implementation 'com.github.medyo:fancybuttons:1.9.1'
 }

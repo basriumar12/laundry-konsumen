@@ -1,8 +1,5 @@
 package com.samyotech.laundry;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +8,16 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
+import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.Dashboard;
-import com.samyotech.laundry.ui.activity.LanguageSelection;
-import com.samyotech.laundry.ui.activity.WelcomeScreens;
+import com.samyotech.laundry.ui.activity.Login;
 
 import java.util.Locale;
 
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.CALL_PRIVILEGED,
             Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_COARSE_LOCATION};
-    private boolean cameraAccepted, storageAccepted, accessNetState,  call_privilage, callPhone,fineLoc, corasLoc;
+    private boolean cameraAccepted, storageAccepted, accessNetState, call_privilage, callPhone, fineLoc, corasLoc;
     private Handler handler = new Handler();
     private static int SPLASH_TIME_OUT = 3000;
     Context mContext;
@@ -38,11 +39,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         setContentView(R.layout.activity_main);
         prefference = SharedPrefrence.getInstance(MainActivity.this);
-        mContext=MainActivity.this;
+        mContext = MainActivity.this;
     }
-
 
 
     Runnable mTask = new Runnable() {
@@ -57,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 overridePendingTransition(R.anim.anim_slide_in_left,
                         R.anim.anim_slide_out_left);
-            }else {
+            } else {
 
-                Intent in = new Intent(mContext, LanguageSelection.class);
-                in.putExtra(Consts.TYPE,1);
+                Intent in = new Intent(mContext, Login.class);
+                in.putExtra(Consts.TYPE, 1);
                 startActivity(in);
                 finish();
                 overridePendingTransition(R.anim.anim_slide_in_left,
@@ -82,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
             handler.postDelayed(mTask, SPLASH_TIME_OUT);
         }
     }
-
 
 
     @Override

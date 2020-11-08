@@ -3,32 +3,22 @@ package com.samyotech.laundry.ModelClass;
 import java.io.Serializable;
 
 public class WelcomeDTO implements Serializable {
-    int topImage;
-    int btmImage;
+    int background;
     String heading="";
     String desc="";
 
-    public WelcomeDTO(int topImage, int btmImage, String heading, String desc) {
-        this.topImage = topImage;
-        this.btmImage = btmImage;
+    public WelcomeDTO(int background, String heading, String desc) {
+        this.background = background;
         this.heading = heading;
         this.desc = desc;
     }
 
-    public int getTopImage() {
-        return topImage;
+    public int getBackground() {
+        return background;
     }
 
-    public void setTopImage(int topImage) {
-        this.topImage = topImage;
-    }
-
-    public int getBtmImage() {
-        return btmImage;
-    }
-
-    public void setBtmImage(int btmImage) {
-        this.btmImage = btmImage;
+    public void setBackground(int background) {
+        this.background = background;
     }
 
     public String getHeading() {

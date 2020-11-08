@@ -4,15 +4,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -39,12 +43,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private UserDTO userDTO;
     private SharedPrefrence prefrence;
     private SharedPreferences firebase;
-    boolean doubleClick=true;
+    boolean doubleClick = true;
     private long lastClickTime = 0;
-    String newToken="";
+    String newToken = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         mContext = Login.this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
@@ -57,9 +65,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void genrate() {
-        newToken=   FirebaseInstanceId.getInstance().getToken();
+        newToken = FirebaseInstanceId.getInstance().getToken();
 
-        Log.e("tokensss",newToken);
+        Log.e("tokensss", newToken);
 
 
     }
@@ -93,36 +101,34 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         });
 
 
-
-
-
     }
 
 
     @Override
     public void onClick(View v) {
-        if (SystemClock.elapsedRealtime() - lastClickTime < 1000){
+        if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
             return;
-        }else {        lastClickTime = SystemClock.elapsedRealtime();
+        } else {
+            lastClickTime = SystemClock.elapsedRealtime();
             switch (v.getId()) {
 
 
                 case R.id.login:
 //                    if(doubleClick)
-                        clickForSubmit();
+                    clickForSubmit();
                     break;
                 case R.id.register_now:
 //                    if(doubleClick){
-                        Intent intent_register_now = new Intent(mContext, Register.class);
-                        startActivity(intent_register_now);
-                        doubleClick=false;
+                    Intent intent_register_now = new Intent(mContext, Register.class);
+                    startActivity(intent_register_now);
+                    doubleClick = false;
 //            }
                     break;
                 case R.id.forgot_password:
 //                    if(doubleClick) {
-                        Intent intent_forgot_password = new Intent(mContext, ForgotPassword.class);
-                        startActivity(intent_forgot_password);
-                        doubleClick=false;
+                    Intent intent_forgot_password = new Intent(mContext, ForgotPassword.class);
+                    startActivity(intent_forgot_password);
+                    doubleClick = false;
 //            }
                     break;
             }
@@ -153,7 +159,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             public void backResponse(boolean flag, String msg, JSONObject response) {
                 ProjectUtils.pauseProgressDialog();
                 if (flag) {
-                    try {doubleClick=false;
+                    try {
+                        doubleClick = false;
                         ProjectUtils.showToast(mContext, msg);
 
                         userDTO = new Gson().fromJson(response.getJSONObject("data").toString(), UserDTO.class);
@@ -168,7 +175,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         overridePendingTransition(R.anim.anim_slide_in_left,
                                 R.anim.anim_slide_out_left);
                     } catch (Exception e) {
-                        doubleClick=true;
+                        doubleClick = true;
                         e.printStackTrace();
                     }
 
@@ -188,10 +195,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         Log.e(TAG + " Login", parms.toString());
         return parms;
     }
+
     public void showSickbar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.RRsncbar, msg, Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
-        snackbarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+        snackbarView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
         snackbar.show();
     }
 
@@ -231,6 +240,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        doubleClick=true;
+        doubleClick = true;
     }
 }

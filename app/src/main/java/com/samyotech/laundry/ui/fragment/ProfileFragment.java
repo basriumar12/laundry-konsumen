@@ -25,7 +25,6 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cocosw.bottomsheet.BottomSheet;
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
 import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
@@ -37,7 +36,6 @@ import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.ChangPassword;
 import com.samyotech.laundry.ui.activity.ChatList;
 import com.samyotech.laundry.ui.activity.Dashboard;
-import com.samyotech.laundry.ui.activity.LanguageSelection;
 import com.samyotech.laundry.ui.activity.Login;
 import com.samyotech.laundry.ui.activity.ManageProfile;
 import com.samyotech.laundry.ui.activity.NotificationActivity;
@@ -111,7 +109,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         binding.ctvChat.setOnClickListener(this);
         binding.ctvnotification.setOnClickListener(this);
         binding.ctvChangePassword.setOnClickListener(this);
-        binding.ctvChangeLanguage.setOnClickListener(this);
     }
 
 
@@ -151,10 +148,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         case R.id.ctvChangePassword:
             Intent in3 =new Intent(getActivity(), ChangPassword.class);
             startActivity(in3);
-            break;
-        case R.id.ctvChangeLanguage:
-            Intent in4 =new Intent(getActivity(), LanguageSelection.class);
-            startActivity(in4);
             break;
     }
     }

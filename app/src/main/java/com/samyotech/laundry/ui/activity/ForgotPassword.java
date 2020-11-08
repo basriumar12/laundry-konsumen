@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -31,6 +34,10 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
         mContext = ForgotPassword.this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_forgot_password);
         setUiAction();
@@ -39,14 +46,14 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     public void setUiAction() {
 
 
-        binding.cvGyNp.setOnClickListener(this);
+        binding.resetBtn.setOnClickListener(this);
         binding.registerNow.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.cvGyNp:
+            case R.id.reset_btn:
                 if(doubleClick)
                 clickForSubmit();
 
@@ -119,7 +126,8 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     public void showSickbar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.RRsncbarF, msg, Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
-        snackbarView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
+        snackbarView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
         snackbar.show();
     }
 
