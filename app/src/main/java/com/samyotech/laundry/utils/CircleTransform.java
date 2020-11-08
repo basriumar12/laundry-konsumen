@@ -11,11 +11,6 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 public abstract class CircleTransform extends BitmapTransformation {
 
 
-    @Override
-    protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
-        return circleCrop(pool, toTransform);
-    }
-
     private static Bitmap circleCrop(BitmapPool pool, Bitmap source) {
         if (source == null) return null;
 
@@ -40,6 +35,10 @@ public abstract class CircleTransform extends BitmapTransformation {
         return result;
     }
 
+    @Override
+    protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
+        return circleCrop(pool, toTransform);
+    }
 
     public String getId() {
         return getClass().getName();

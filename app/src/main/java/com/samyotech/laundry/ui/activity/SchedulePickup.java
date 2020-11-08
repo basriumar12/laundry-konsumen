@@ -1,8 +1,5 @@
 package com.samyotech.laundry.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -11,6 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivitySchdulePickupBinding;
@@ -27,11 +27,11 @@ import static com.schibstedspain.leku.LocationPickerActivityKt.LONGITUDE;
 public class SchedulePickup extends AppCompatActivity implements View.OnClickListener {
     Context mContext;
     ActivitySchdulePickupBinding binding;
-    private double lats = 0;
-    private double longs = 0;
     int i = 0;
     String address = "", landmark = "";
     boolean doubleClick = true;
+    private double lats = 0;
+    private double longs = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,7 +179,6 @@ public class SchedulePickup extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         if (requestCode == 101) {
             if (resultCode == RESULT_OK) {

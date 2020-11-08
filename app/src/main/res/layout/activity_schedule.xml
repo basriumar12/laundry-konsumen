@@ -15,12 +15,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/ivBack"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_left_arrow"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:id="@+id/ivBack"
-                />
+                app:layout_constraintLeft_toLeftOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -39,14 +38,14 @@
             android:layout_height="@dimen/_40sdp"
             app:layout_constraintTop_toBottomOf="@id/clHeader"
             app:tabGravity="fill"
-            app:tabMode="fixed"/>
+            app:tabMode="fixed" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_410sdp"
             app:layout_constraintBottom_toTopOf="@id/clBottom"
-            app:layout_constraintTop_toBottomOf="@id/tabLayout"/>
+            app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,10 +61,10 @@
                 android:layout_margin="@dimen/_10sdp">
 
                 <TextView
+                    android:id="@+id/ctvTotalPrice"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.3"
-                    android:id="@+id/ctvTotalPrice"
                     android:gravity="center_vertical"
                     android:text="@string/total"
                     android:textColor="@color/white"
@@ -78,22 +77,22 @@
                     android:background="@color/white" />
 
                 <TextView
+                    android:id="@+id/ctvAdded"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.4"
-                    android:id="@+id/ctvAdded"
                     android:gravity="center_vertical"
                     android:text="@string/itemsadd"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp" />
 
                 <TextView
+                    android:id="@+id/ctvNext"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:gravity="center_vertical"
                     android:text="@string/next"
-                    android:id="@+id/ctvNext"
                     android:textAlignment="textEnd"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp" />

@@ -11,11 +11,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.samyotech.laundry.ModelClass.NearBYDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterNearBinding;
-import com.samyotech.laundry.databinding.AdapterPopularLaundriesBinding;
 import com.samyotech.laundry.interfaces.Consts;
+import com.samyotech.laundry.model.NearBYDTO;
 import com.samyotech.laundry.ui.activity.ServiceAcitivity;
 
 import java.util.ArrayList;
@@ -46,10 +45,9 @@ public class LaundriesNearAdapter extends RecyclerView.Adapter<LaundriesNearAdap
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         Glide.with(kContext)
-                .load(nearBYDTOArrayList.get(position).getImage())
+                .load(Consts.DEV_URL + nearBYDTOArrayList.get(position).getImage())
                 .placeholder(R.drawable.drawable_tag)
                 .into(holder.binding.image);
-
 
         binding.tvTitle.setText(nearBYDTOArrayList.get(position).getShop_name());
         binding.longDescription.setText(nearBYDTOArrayList.get(position).getDescription());
@@ -58,7 +56,7 @@ public class LaundriesNearAdapter extends RecyclerView.Adapter<LaundriesNearAdap
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(kContext, ServiceAcitivity.class);
-                in.putExtra(Consts.NEARSHOPDTO,nearBYDTOArrayList.get(position));
+                in.putExtra(Consts.NEARSHOPDTO, nearBYDTOArrayList.get(position));
                 kContext.startActivity(in);
             }
         });

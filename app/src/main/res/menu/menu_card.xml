@@ -5,25 +5,16 @@
 
     <item
         android:id="@+id/camera_cards"
-        android:icon="@drawable/card_camera"
-        android:orderInCategory="100"
+        android:icon="@drawable/icon_blue_camera_2"
         android:iconTintMode="multiply"
+        android:orderInCategory="100"
         android:title="@string/action_camera"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/gallery_cards"
-        android:icon="@drawable/gallery_card"
+        android:icon="@drawable/icon_blue_image"
+        android:iconTintMode="multiply"
         android:orderInCategory="100"
         android:title="@string/action_gallery"
-        android:iconTintMode="multiply"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/cancel_cards"
-        android:icon="@drawable/cards_cancel"
-        android:orderInCategory="100"
-        android:title="@string/cancel"
-        android:iconTintMode="multiply"
-
         app:showAsAction="never" />
 </menu>

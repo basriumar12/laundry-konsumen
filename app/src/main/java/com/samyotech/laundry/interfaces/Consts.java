@@ -3,10 +3,10 @@ package com.samyotech.laundry.interfaces;
 public interface Consts {
 
     String APP_NAME = "laundry";
-    String DEV_URL = "http://10.0.2.2:8000/api/";
+    String DEV_URL = "http://10.0.2.2:8000/";
     String PROD_URL = "http://phpstack-390430-1228229.cloudwaysapps.com/admin/api/";
-    String BASE_URL = DEV_URL;
-
+    String API_URL = DEV_URL + "api/";
+    String BASE_URL = API_URL;
 
 
     /*-----Apis-----*/
@@ -42,7 +42,6 @@ public interface Consts {
     String GETTIKETCOMMENT = "getTiketComment";
     String ADDTIKETCOMMENT = "addTiketComment";
     String USERUPDATE = "userUpdate";
-
 
 
     /*LOGINSIGNUPPARAMS*/
@@ -123,5 +122,5 @@ public interface Consts {
     String ORDERNOTIFICATION = "7004";//both
     String TICKETNOTIFICATION = "7005";//both
     //language
-    String LANGUAGE="language";
+    String LANGUAGE = "language";
 }

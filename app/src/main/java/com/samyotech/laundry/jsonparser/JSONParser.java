@@ -2,7 +2,6 @@ package com.samyotech.laundry.jsonparser;
 
 import android.content.Context;
 
-
 import com.samyotech.laundry.preferences.SharedPrefrence;
 
 import org.json.JSONArray;
@@ -11,17 +10,15 @@ import org.jsoup.Jsoup;
 
 
 public class JSONParser {
-    String jsonObjResponse;
+    public static String PIC_KEY = "profilepic";
+    public static String TAG_SUCCESS = "status";
+    public static String TAG_MESSAGE = "message";
     public String SUCCESS = "";
     public String MESSAGE = "";
     public boolean RESULT = false;
     public Context context;
-    public static String PIC_KEY = "profilepic";
     public JSONObject jObj;
-
-
-    public static String TAG_SUCCESS = "status";
-    public static String TAG_MESSAGE = "message";
+    String jsonObjResponse;
     private SharedPrefrence prefrence;
 
     public JSONParser(Context context, JSONObject response) {
@@ -31,18 +28,13 @@ public class JSONParser {
             SUCCESS = getJsonString(jObj, TAG_SUCCESS);
             MESSAGE = html2text(getJsonString(jObj, TAG_MESSAGE));
             prefrence = SharedPrefrence.getInstance(context);
-            if (SUCCESS.equals("0")) {
-                RESULT = false;
-
-            }/* else if (SUCCESS.equals("3")) {
+            /* else if (SUCCESS.equals("3")) {
                 prefrence.clearAllPreferences();
                 Intent intent = new Intent(context, SignIn.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(intent);
-            }*/ else {
-                RESULT = true;
-
-            }
+            }*/
+            RESULT = !SUCCESS.equals("0");
 
         } catch (Exception e) {
             jObj = null;
@@ -55,10 +47,7 @@ public class JSONParser {
     }
 
     public static boolean getBoolean(String val) {
-        if (val.equals("true"))
-            return true;
-        else
-            return false;
+        return val.equals("true");
     }
 
     public static JSONObject getJsonObject(JSONObject obj, String parameter) {

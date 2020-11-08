@@ -10,12 +10,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityChangPasswordBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.utils.ProjectUtils;
@@ -25,16 +25,15 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class ChangPassword extends AppCompatActivity implements View.OnClickListener {
+    private final String TAG = ChangPassword.class.getCanonicalName();
+    private final int checkValid = 1;
+    AlertDialog.Builder builder1;
     private Context sContext;
-    private String TAG = ChangPassword.class.getCanonicalName();
     private ActivityChangPasswordBinding binding;
     private SharedPrefrence prefrence;
     private UserDTO userDTO;
     private boolean isHide = false;
     private String user_pub_id;
-    AlertDialog.Builder builder1 ;
-    private int checkValid =1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +42,8 @@ public class ChangPassword extends AppCompatActivity implements View.OnClickList
         sContext = ChangPassword.this;
         prefrence = SharedPrefrence.getInstance(sContext);
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
-        user_pub_id=userDTO.getUser_id();
-        builder1=new AlertDialog.Builder(this);
+        user_pub_id = userDTO.getUser_id();
+        builder1 = new AlertDialog.Builder(this);
         setUiAction();
     }
 
@@ -116,7 +115,6 @@ public class ChangPassword extends AppCompatActivity implements View.OnClickList
     }
 
     private void submitForm() {
-
 
         if (!validateCurrentPin()) {
             return;
@@ -190,7 +188,6 @@ public class ChangPassword extends AppCompatActivity implements View.OnClickList
 
     private void changePassword() {
 
-
         ProjectUtils.showProgressDialog(sContext, false, getResources().getString(R.string.please_wait));
         new HttpsRequest(Consts.CHANGEPASSWORD, getParamsChangePass(), sContext).stringPost(TAG, new Helper() {
             @Override
@@ -204,7 +201,7 @@ public class ChangPassword extends AppCompatActivity implements View.OnClickList
 
                 } else {
 
-                        ProjectUtils.showToast(sContext, msg);
+                    ProjectUtils.showToast(sContext, msg);
 
                 }
             }
@@ -216,11 +213,9 @@ public class ChangPassword extends AppCompatActivity implements View.OnClickList
     protected HashMap<String, String> getParamsChangePass() {
         HashMap<String, String> paramsChangePass = new HashMap<>();
 
-
-            paramsChangePass.put(Consts.PASSWORD, ProjectUtils.getEditTextValue(binding.etOldPass));
-            paramsChangePass.put(Consts.NEW_PASSWORD, ProjectUtils.getEditTextValue(binding.etNewPass));
-            paramsChangePass.put(Consts.USER_ID,userDTO.getUser_id());
-
+        paramsChangePass.put(Consts.PASSWORD, ProjectUtils.getEditTextValue(binding.etOldPass));
+        paramsChangePass.put(Consts.NEW_PASSWORD, ProjectUtils.getEditTextValue(binding.etNewPass));
+        paramsChangePass.put(Consts.USER_ID, userDTO.getUser_id());
 
         ProjectUtils.showLog(TAG + "---Params --->", paramsChangePass.toString());
 

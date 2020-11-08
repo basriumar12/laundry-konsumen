@@ -1,36 +1,25 @@
 package com.samyotech.laundry.ui.activity;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.cocosw.bottomsheet.BottomSheet;
 import com.google.gson.Gson;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityManageProfileBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.utils.ProjectUtils;
@@ -38,19 +27,13 @@ import com.schibstedspain.leku.LocationPickerActivity;
 
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 public class ManageProfile extends AppCompatActivity implements View.OnClickListener {
+    public boolean checkAdd = true, doubleCheck = true;
     String TAG = ManageProfile.class.getSimpleName();
-
-
     ActivityManageProfileBinding binding;
     Context mContext;
     ProjectUtils projectUtils;
@@ -58,7 +41,6 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
     SharedPrefrence prefrence;
     UserDTO userDTO;
     HashMap<String, String> params = new HashMap<>();
-    public boolean checkAdd=true,doubleCheck=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,29 +49,25 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
         mContext = ManageProfile.this;
         prefrence = SharedPrefrence.getInstance(mContext);
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
-        params.put(Consts.USER_ID,userDTO.getUser_id());
+        params.put(Consts.USER_ID, userDTO.getUser_id());
 
         setdata();
-        binding.cvUpdate.setOnClickListener(this);
-        binding.cetAddress.setOnClickListener(this);
-        binding.profileback.setOnClickListener(this);
+        binding.simpan.setOnClickListener(this);
+        binding.alamat.setOnClickListener(this);
+        binding.back.setOnClickListener(this);
 
     }
 
     private void setdata() {
         Log.e(TAG, "setdata: " + userDTO.getUser_id());
 
-        binding.cetName.setText(userDTO.getName());
-        binding.cetNumber.setText(userDTO.getMobile());
-        binding.cetEmail.setText(userDTO.getEmail());
+        binding.namaLengkap.setText(userDTO.getName());
+        binding.nomorHp.setText(userDTO.getMobile());
+        binding.email.setText(userDTO.getEmail());
 
-        if(userDTO.getAddress().equalsIgnoreCase(""))
-        {}else {
-
-            binding.cetAddress.setText(userDTO.getAddress());
+        if (!userDTO.getAddress().equalsIgnoreCase("")) {
+            binding.alamat.setText(userDTO.getAddress());
         }
-
-
     }
 
 
@@ -97,35 +75,35 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
 
+            case R.id.simpan:
 
-                case R.id.cvUpdate:
-
-                    if(!ProjectUtils.isEditTextFilled(binding.cetName)){
-                        Toast.makeText(mContext,R.string.addname, Toast.LENGTH_SHORT).show();
-                    }else if(!ProjectUtils.isEditTextFilled(binding.cetAddress)){
-                        Toast.makeText(mContext,R.string.addAddress, Toast.LENGTH_SHORT).show();
-                    }else if (!ProjectUtils.isPhoneNumberValid(binding.cetNumber.getText().toString().trim())) {
-                        Toast.makeText(mContext,R.string.val_num, Toast.LENGTH_SHORT).show();
-                    }else {
-                        if(checkAdd) {
-                            params.put(Consts.LATITUDE, userDTO.getLatitude());
-                            params.put(Consts.LONGITUDE, userDTO.getLatitude());
-                        }
-                        params.put(Consts.ADDRESS, ProjectUtils.getEditTextValue(binding.cetAddress));
-
-                        getParams();
-                        updateProfile();
+                if (!ProjectUtils.isEditTextFilled(binding.namaLengkap)) {
+                    Toast.makeText(mContext, R.string.addname, Toast.LENGTH_SHORT).show();
+                } else if (!ProjectUtils.isEditTextFilled(binding.alamat)) {
+                    Toast.makeText(mContext, R.string.addAddress, Toast.LENGTH_SHORT).show();
+                } else if (!ProjectUtils.isPhoneNumberValid(binding.nomorHp.getText().toString().trim())) {
+                    Toast.makeText(mContext, R.string.val_num, Toast.LENGTH_SHORT).show();
+                } else {
+                    if (checkAdd) {
+                        params.put(Consts.LATITUDE, userDTO.getLatitude());
+                        params.put(Consts.LONGITUDE, userDTO.getLatitude());
                     }
+                    params.put(Consts.ADDRESS, ProjectUtils.getEditTextValue(binding.alamat));
+
+                    getParams();
+                    updateProfile();
+                }
                 break;
-                case R.id.cetAddress:
-                    if(doubleCheck){
-                        checkAdd=false;
-                        findPlace();
-                    doubleCheck=false;}
+            case R.id.alamat:
+                if (doubleCheck) {
+                    checkAdd = false;
+                    findPlace();
+                    doubleCheck = false;
+                }
 
                 break;
-                case R.id.profileback:
-                    onBackPressed();
+            case R.id.back:
+                onBackPressed();
                 break;
 
 
@@ -133,7 +111,6 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
 
 
     }
-
 
 
     @Override
@@ -154,28 +131,28 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
 
 
     }
-    public void updateProfile(){
-        ProjectUtils.showProgressDialog(mContext,true,getResources().getString(R.string.please_wait));
 
-        new HttpsRequest(Consts.USERUPDATE,params,mContext).stringPost(TAG, new Helper() {
+    public void updateProfile() {
+        ProjectUtils.showProgressDialog(mContext, true, getResources().getString(R.string.please_wait));
+
+        new HttpsRequest(Consts.USERUPDATE, params, mContext).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) {
-               ProjectUtils.pauseProgressDialog();
-                if (flag){
+                ProjectUtils.pauseProgressDialog();
+                if (flag) {
                     try {
-                        Log.e(TAG, "backResponse: "+response.toString());
-                        projectUtils.showToast(mContext,msg);
-                        userDTO=new Gson().fromJson(response.getJSONObject("data").toString(),UserDTO.class);
-                        prefrence.setParentUser(userDTO,Consts.USER_DTO);
-                        prefrence.setBooleanValue(Consts.IS_REGISTERED,true);
-                        Intent in=new Intent(mContext,Dashboard.class);
+                        Log.e(TAG, "backResponse: " + response.toString());
+                        ProjectUtils.showToast(mContext, msg);
+                        userDTO = new Gson().fromJson(response.getJSONObject("data").toString(), UserDTO.class);
+                        prefrence.setParentUser(userDTO, Consts.USER_DTO);
+                        prefrence.setBooleanValue(Consts.IS_REGISTERED, true);
+                        Intent in = new Intent(mContext, Dashboard.class);
                         startActivity(in);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
-                else {
-                    projectUtils.showToast(mContext,msg);
+                } else {
+                    ProjectUtils.showToast(mContext, msg);
                 }
 
             }
@@ -183,22 +160,19 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
     }
 
     private HashMap<String, String> getParams() {
-        if (!ProjectUtils.isEditTextFilled(binding.cetName))
-        params.put(Consts.NAME,ProjectUtils.getEditTextValue(binding.cetName));
+        if (!ProjectUtils.isEditTextFilled(binding.namaLengkap))
+            params.put(Consts.NAME, ProjectUtils.getEditTextValue(binding.namaLengkap));
         else
-            Toast.makeText(mContext,R.string.addname, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, R.string.addname, Toast.LENGTH_SHORT).show();
 
-        params.put(Consts.NAME,ProjectUtils.getEditTextValue(binding.cetName));
-        params.put(Consts.MOBILE,ProjectUtils.getEditTextValue(binding.cetNumber));
-        params.put(Consts.COUNTRY_CODE,"91");
-        params.put(Consts.DEVICE_TYPE,"Android");
-        params.put(Consts.DEVICE_TOKEN, Settings.Secure.getString(getApplicationContext().getContentResolver(),Settings.Secure.ANDROID_ID));
-
+        params.put(Consts.NAME, ProjectUtils.getEditTextValue(binding.namaLengkap));
+        params.put(Consts.MOBILE, ProjectUtils.getEditTextValue(binding.nomorHp));
+        params.put(Consts.COUNTRY_CODE, "62");
+        params.put(Consts.DEVICE_TYPE, "Android");
+        params.put(Consts.DEVICE_TOKEN, Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID));
 
         return params;
     }
-
-
 
 
     private void findPlace() {
@@ -229,8 +203,7 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
             // Toast.LENGTH_SHORT).show();
 
             // TennisAppActivity.showDialog(add);
-            binding.cetAddress.setText(obj.getAddressLine(0));
-
+            binding.alamat.setText(obj.getAddressLine(0));
 
             params.put(Consts.ADDRESS, obj.getAddressLine(0));
             params.put(Consts.LATITUDE, String.valueOf(obj.getLatitude()));
@@ -244,15 +217,12 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
 
-        checkAdd=true;
+        checkAdd = true;
 
     }
-
-
-
 
 
 }

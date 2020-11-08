@@ -39,9 +39,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     Context mContext;
     ActivityRegisterBinding binding;
-    boolean doubleClick=true;
+    boolean doubleClick = true;
+    boolean numCheck = false;
     private boolean isHide = false;
-    boolean numCheck=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         mContext = Register.this;
-        binding = DataBindingUtil.setContentView(this,  R.layout.activity_register);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
 
         setUiAction();
 
@@ -64,7 +64,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         binding.ivOldPass.setOnClickListener(this);
         binding.ivNewPass.setOnClickListener(this);
 
-
         binding.cetNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -74,13 +73,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()>9){
-                    if(isValidPhoneNumber(String.valueOf(s))) {
+                if (s.length() > 9) {
+                    if (isValidPhoneNumber(String.valueOf(s))) {
                         boolean status = validateUsing_libphonenumber(String.valueOf(s));
                         // Toast.makeText(mContext, "Valid Phone Number (libphonenumber)", Toast.LENGTH_SHORT).show();
                         //  tvIsValidPhone.setText("Valid Phone Number (libphonenumber)");
@@ -89,10 +87,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                             binding.cetNumber.requestFocus();*/
                         //   tvIsValidPhone.setText("Invalid Phone Number (libphonenumber)");
                         numCheck = status;
-                    }
-                    else {
+                    } else {
 
-                        numCheck=true;
+                        numCheck = true;
                         // tvIsValidPhone.setText("Invalid Phone Number (isValidPhoneNumber)");
                     }
 
@@ -107,18 +104,17 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_now:
-                if(doubleClick){
+                if (doubleClick) {
                     Intent intent_forgot_password = new Intent(mContext, Login.class);
                     startActivity(intent_forgot_password);
-                    doubleClick=false;
+                    doubleClick = false;
                 }
                 break;
 
-                case R.id.cvRegister:
-                    if(doubleClick)
+            case R.id.cvRegister:
+                if (doubleClick)
                     clickForSubmit();
                 break;
-
 
             case R.id.ivOldPass:
                 if (isHide) {
@@ -150,26 +146,26 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
 
     public void clickForSubmit() {
-        if(!ProjectUtils.isEditTextFilled(binding.cetName)){
+        if (!ProjectUtils.isEditTextFilled(binding.cetName)) {
             showSickbar(getResources().getString(R.string.val_name));
-        }else if (!ProjectUtils.isEmailValid(   binding.cetEmail.getText().toString().trim())) {
+        } else if (!ProjectUtils.isEmailValid(binding.cetEmail.getText().toString().trim())) {
             showSickbar(getResources().getString(R.string.val_email));
-        }else if (!ProjectUtils.isPhoneNumberValid(binding.cetNumber.getText().toString().trim())) {
+        } else if (!ProjectUtils.isPhoneNumberValid(binding.cetNumber.getText().toString().trim())) {
             showSickbar(getResources().getString(R.string.val_num));
-        }else if (!numCheck) {
+        } else if (!numCheck) {
             showSickbar(getResources().getString(R.string.val_num));
         } else if (!ProjectUtils.isPasswordValid(binding.cetPassword1.getText().toString().trim())) {
             showSickbar(getResources().getString(R.string.val_pass));
         } else if (!ProjectUtils.isPasswordValid(binding.cetPassword2.getText().toString().trim())) {
             showSickbar(getResources().getString(R.string.val_pass));
         } else if (ProjectUtils.getEditTextValue(binding.cetPassword1).equals(ProjectUtils.getEditTextValue(binding.cetPassword2))) {
-                if (NetworkManager.isConnectToInternet(mContext)) {
-                    registerUser();
-                } else {
-                    ProjectUtils.showToast(mContext, getResources().getString(R.string.internet_concation));
-                }
+            if (NetworkManager.isConnectToInternet(mContext)) {
+                registerUser();
+            } else {
+                ProjectUtils.showToast(mContext, getResources().getString(R.string.internet_concation));
+            }
 
-        }else  showSickbar(getResources().getString(R.string.pass_notmatch));
+        } else showSickbar(getResources().getString(R.string.pass_notmatch));
 
 
     }
@@ -183,7 +179,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 ProjectUtils.pauseProgressDialog();
                 if (flag) {
                     try {
-                        doubleClick=false;
+                        doubleClick = false;
                         ProjectUtils.showToast(mContext, msg);
                         Intent in = new Intent(mContext, Login.class);
                         startActivity(in);
@@ -195,7 +191,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     }
 
                 } else {
-                    doubleClick=true;
+                    doubleClick = true;
                     ProjectUtils.showToast(mContext, msg);
                 }
 
@@ -216,6 +212,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         Log.e(TAG + " Login", parms.toString());
         return parms;
     }
+
     public void showSickbar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.RRsncbar, msg, Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
@@ -241,7 +238,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         } catch (NumberParseException e) {
             System.err.println(e);
         }
-        try{   boolean isValid = phoneNumberUtil.isValidNumber(phoneNumber);
+        try {
+            boolean isValid = phoneNumberUtil.isValidNumber(phoneNumber);
             if (isValid) {
                 String internationalFormat = phoneNumberUtil.format(phoneNumber, PhoneNumberUtil.PhoneNumberFormat.INTERNATIONAL);
                 // Toast.makeText(this, "Phone Number is Valid " + internationalFormat, Toast.LENGTH_LONG).show();
@@ -249,7 +247,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             } else {
                 // Toast.makeText(this, "Phone Number is Invalid " + phoneNumber, Toast.LENGTH_LONG).show();
                 return false;
-            }}catch (Exception e){e.printStackTrace();}
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return false;
     }

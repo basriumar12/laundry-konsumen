@@ -23,36 +23,20 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SharedPrefrence prefference;
     private static final int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 1003;
-    private String[] permissions = new String[]{Manifest.permission.CAMERA
+    private static final int SPLASH_TIME_OUT = 3000;
+    private final String[] permissions = new String[]{Manifest.permission.CAMERA
             , Manifest.permission.WRITE_EXTERNAL_STORAGE
             , Manifest.permission.ACCESS_NETWORK_STATE,
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.CALL_PRIVILEGED,
             Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_COARSE_LOCATION};
-    private boolean cameraAccepted, storageAccepted, accessNetState, call_privilage, callPhone, fineLoc, corasLoc;
-    private Handler handler = new Handler();
-    private static int SPLASH_TIME_OUT = 3000;
+    private final Handler handler = new Handler();
     Context mContext;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        Window w = getWindow();
-        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
-        setContentView(R.layout.activity_main);
-        prefference = SharedPrefrence.getInstance(MainActivity.this);
-        mContext = MainActivity.this;
-    }
-
-
+    private SharedPrefrence prefference;
     Runnable mTask = new Runnable() {
         @Override
         public void run() {
-
 
             if (prefference.getBooleanValue(Consts.IS_REGISTERED)) {
                 Intent in = new Intent(mContext, Dashboard.class);
@@ -75,7 +59,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
+    private boolean cameraAccepted, storageAccepted, accessNetState, call_privilage, callPhone, fineLoc, corasLoc;
 
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+        setContentView(R.layout.activity_main);
+        prefference = SharedPrefrence.getInstance(MainActivity.this);
+        mContext = MainActivity.this;
+    }
 
     @Override
     protected void onResume() {
@@ -86,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             handler.postDelayed(mTask, SPLASH_TIME_OUT);
         }
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -104,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
                     accessNetState = grantResults[2] == PackageManager.PERMISSION_GRANTED;
                     prefference.setBooleanValue(Consts.MODIFY_AUDIO_ACCEPTED, accessNetState);
-
 
                     call_privilage = grantResults[3] == PackageManager.PERMISSION_GRANTED;
                     prefference.setBooleanValue(Consts.CALL_PRIVILAGE, call_privilage);
@@ -124,18 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
-    }
-
-
-    public static boolean hasPermissions(Context context, String... permissions) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     public void language(String language) {

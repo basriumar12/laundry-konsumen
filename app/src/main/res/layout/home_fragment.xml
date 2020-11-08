@@ -2,263 +2,281 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-       >
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp">
+            android:layout_height="match_parent"
+            android:background="@drawable/auth_bg"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/white">
 
-                <RelativeLayout
-                    android:id="@+id/relayTop"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_60sdp"
-                    android:background="@color/colorAccent">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/ic_launcher" />
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_centerVertical="true"
-                        android:layout_width="@dimen/_250sdp"
-                        app:cardCornerRadius="@dimen/_10sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        app:cardElevation="@dimen/_5sdp">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/svLaundry"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_toLeftOf="@id/ivNotification"
+                    android:src="@drawable/icon_search" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivNotification"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:src="@drawable/icon_notification" />
 
 
-                    <TextView
-                        android:id="@+id/svLaundry"
-                        android:layout_width="@dimen/_250sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:text="@string/search"
-                        android:textSize="@dimen/_12sdp"
-                        android:gravity="center_vertical"
-                        android:padding="@dimen/_10sdp"
-                        android:drawablePadding="@dimen/_5sdp"
-                        android:drawableLeft="@drawable/ic_search"
-                        android:background="@color/white" />
-                    </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/ivNotification"
-                        android:layout_width="30dp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:layout_centerVertical="true"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/ic_notification_white"/>
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginRight="4dp"
+                        android:src="@drawable/icon_location"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        style="@style/TextAppearance.AppCompat.Body2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lokasi Saya"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jalan Pahlawan"
+                    android:textColor="@color/white" />
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="4dp"
+                    app:fb_borderColor="#FFFFFF"
+                    app:fb_borderWidth="2dp"
+                    app:fb_defaultColor="@android:color/transparent"
+                    app:fb_focusColor="@color/white"
+                    app:fb_iconPosition="left"
+                    app:fb_radius="24dp"
+                    app:fb_text="Ganti Lokasi"
+                    app:fb_textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_background"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
 
+                    <FrameLayout
+                        android:id="@+id/relay"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp">
+
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/viewpager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="16dp" />
+
+                        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                            android:id="@+id/tabDots"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginBottom="24dp"
+                            android:gravity="center"
+                            app:dotsColor="@color/colorAccent"
+                            app:dotsCornerRadius="8dp"
+                            app:dotsSize="8dp"
+                            app:dotsSpacing="4dp"
+                            app:dotsWidthFactor="2.5"
+                            app:progressMode="false"
+                            app:selectedDotColor="@color/white" />
 
 
+                    </FrameLayout>
                 </RelativeLayout>
 
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cardView"
+                    android:layout_margin="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/tv_service"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/TopServices"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/ctvbTopService"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ViewAll"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyleService"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_service" />
+
+                    <TextView
+                        android:id="@+id/tv_popLaundr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/PopularLaundries"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/recyleService" />
+
+                    <TextView
+                        android:id="@+id/ctvbPopularLaundries"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/ViewAll"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/recyleService" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyleLaundriesPop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_popLaundr" />
 
 
+                    <TextView
+                        android:id="@+id/tv_offers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/SpecialOffer"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/recyleLaundriesPop" />
 
-    <RelativeLayout
-        android:layout_below="@+id/relayTop"
-        android:id="@+id/relay"
-        android:background="@color/white"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/ViewAll"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/_14sdp"
+                        android:visibility="gone"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/recyleLaundriesPop" />
 
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_190sdp">
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_170sdp"
-          />
-
-        <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-            android:layout_below="@+id/viewpager"
-
-
-
-            android:id="@+id/tabDots"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-
-            app:dotsColor="@color/colorAccent"
-            android:layout_marginTop="@dimen/_5sdp"
-            app:dotsCornerRadius="8dp"
-            app:dotsSize="8dp"
-
-
-            app:dotsSpacing="4dp"
-            android:gravity="center"
-            android:layout_centerInParent="true"
-            app:dotsWidthFactor="2.5"
-            android:layout_marginBottom="10dp"
-
-            app:progressMode="false"
-            app:selectedDotColor="@color/white" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyleOffers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_offers" />
 
 
+                    <TextView
+                        android:id="@+id/tv_near"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/Laundary_near"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/recyleOffers" />
 
-    </RelativeLayout>
-            </RelativeLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/ViewAll"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/_14sdp"
+                        android:visibility="gone"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/recyleOffers" />
 
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constLayout"
-            android:layout_below="@+id/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp">
-
-            <TextView
-                android:id="@+id/tv_service"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textColor="@color/black"
-                android:text="@string/TopServices"
-                android:textSize="@dimen/_14sdp" />
-
-            <TextView
-                android:id="@+id/ctvbTopService"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textColor="@color/colorAccent"
-                android:text="@string/ViewAll"
-                android:textSize="@dimen/_14sdp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                app:layout_constraintTop_toBottomOf="@+id/tv_service"
-                android:id="@+id/recyleService"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"/>
-
-            <TextView
-                android:id="@+id/tv_popLaundr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyleService"
-                android:textColor="@color/black"
-                android:text="@string/PopularLaundries"
-                android:textSize="@dimen/_14sdp" />
-
-            <TextView
-                android:id="@+id/ctvbPopularLaundries"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyleService"
-                android:textColor="@color/colorAccent"
-                android:text="@string/ViewAll"
-                android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_10sdp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                app:layout_constraintTop_toBottomOf="@+id/tv_popLaundr"
-                android:id="@+id/recyleLaundriesPop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyleNear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_near" />
 
 
-            <TextView
-                android:id="@+id/tv_offers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyleLaundriesPop"
-                android:textColor="@color/black"
-                android:text="@string/SpecialOffer"
-                android:textSize="@dimen/_14sdp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyleLaundriesPop"
-                android:textColor="@color/colorAccent"
-                android:text="@string/ViewAll"
-                android:visibility="gone"
-                android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_10sdp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                app:layout_constraintTop_toBottomOf="@+id/tv_offers"
-                android:id="@+id/recyleOffers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <TextView
-                android:id="@+id/tv_near"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyleOffers"
-                android:textColor="@color/black"
-                android:text="@string/Laundary_near"
-                android:textSize="@dimen/_14sdp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyleOffers"
-                android:textColor="@color/colorAccent"
-                android:text="@string/ViewAll"
-                android:visibility="gone"
-                android:textSize="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_10sdp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                app:layout_constraintTop_toBottomOf="@+id/tv_near"
-                android:id="@+id/recyleNear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_below="@+id/constLayout" />
 
 
-
-
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <TextView
-            android:layout_below="@+id/constLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp" />
-
-
-    </RelativeLayout>
-
-</ScrollView>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </layout>

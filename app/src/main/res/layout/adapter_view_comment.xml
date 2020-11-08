@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/tvName"
@@ -42,17 +42,17 @@
         android:id="@+id/ivView"
         android:layout_width="@dimen/_15sdp"
         android:layout_height="@dimen/_15sdp"
-        android:layout_marginTop="-25dp"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/leftbubbleContainer"
-        android:src="@drawable/ic_user_dummy"
-        />
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="-25dp"
+        android:src="@drawable/ic_user_dummy" />
+
     <ImageView
         android:id="@+id/imageViewmessageTicks"
         android:layout_width="15dp"
         android:layout_height="12dp"
-        android:layout_alignRight="@+id/leftbubbleContainer"
         android:layout_below="@+id/leftbubbleContainer"
+        android:layout_alignRight="@+id/leftbubbleContainer"
         android:layout_marginTop="2dp"
         android:visibility="gone" />
 

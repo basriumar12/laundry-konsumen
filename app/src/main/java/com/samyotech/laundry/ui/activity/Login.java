@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.text.Editable;
@@ -22,12 +21,12 @@ import androidx.databinding.DataBindingUtil;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityLoginBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.utils.ProjectUtils;
@@ -37,15 +36,15 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
-    private String TAG = Login.class.getSimpleName();
+    private final String TAG = Login.class.getSimpleName();
     Context mContext;
     ActivityLoginBinding binding;
+    boolean doubleClick = true;
+    String newToken = "";
     private UserDTO userDTO;
     private SharedPrefrence prefrence;
     private SharedPreferences firebase;
-    boolean doubleClick = true;
     private long lastClickTime = 0;
-    String newToken = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +72,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void setUiAction() {
-
 
         binding.login.setOnClickListener(this);
         binding.registerNow.setOnClickListener(this);
@@ -111,7 +109,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         } else {
             lastClickTime = SystemClock.elapsedRealtime();
             switch (v.getId()) {
-
 
                 case R.id.login:
 //                    if(doubleClick)
@@ -167,7 +164,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                         prefrence.setParentUser(userDTO, Consts.USER_DTO);
 
                         prefrence.setBooleanValue(Consts.IS_REGISTERED, true);
-
 
                         Intent in = new Intent(mContext, Dashboard.class);
                         startActivity(in);

@@ -1,8 +1,10 @@
 package com.samyotech.laundry.https;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.ANRequest;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
@@ -21,11 +23,11 @@ import java.util.Map;
 
 public class
 HttpsRequest {
-    private String match;
+    private final String match;
+    private final Context ctx;
     private Map<String, String> params;
     private Map<String, File> fileparams;
     private Map<String, ArrayList<File>> multiFileparams;
-    private Context ctx;
     private JSONObject jObject;
 
     public HttpsRequest(String match, Map<String, String> params, Context ctx) {
@@ -33,7 +35,6 @@ HttpsRequest {
         this.params = params;
         this.ctx = ctx;
     }
-
 
 
     public HttpsRequest(String match, Map<String, String> params, Map<String, File> fileparams, Context ctx) {
@@ -65,7 +66,7 @@ HttpsRequest {
 
 
     public void stringPostJson(final String TAG, final Helper h) {
-        AndroidNetworking.post(Consts.BASE_URL+match)
+        AndroidNetworking.post(Consts.BASE_URL + match)
                 .addJSONObjectBody(jObject)
                 .setTag("test")
                 //.addHeaders("Content-Type", "application/json")
@@ -104,24 +105,25 @@ HttpsRequest {
 
     public void stringPost(final String TAG, final Helper h) {
 
-     //unsafe// OkHttpClient okHttpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient();;
-        AndroidNetworking.post(Consts.BASE_URL + match)
-             //   .setOkHttpClient(okHttpClient)
+        //unsafe// OkHttpClient okHttpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient();;
+        ANRequest test = AndroidNetworking.post(Consts.BASE_URL + match)
+                //   .setOkHttpClient(okHttpClient)
                 .addBodyParameter(params)
                 .setTag("test")
                 .setPriority(Priority.HIGH)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        ProjectUtils.showLog(TAG, " response body --->" + response.toString());
-                        ProjectUtils.showLog(TAG, " param --->" + params.toString());
-                        JSONParser jsonParser = new JSONParser(ctx, response);
-                        if (jsonParser.RESULT) {
-                            try {
-                                h.backResponse(jsonParser.RESULT, jsonParser.MESSAGE, response);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                .build();
+        Log.d("LOG_", "stringPost: " + test.getUrl());
+        test.getAsJSONObject(new JSONObjectRequestListener() {
+            @Override
+            public void onResponse(JSONObject response) {
+                ProjectUtils.showLog(TAG, " response body --->" + response.toString());
+                ProjectUtils.showLog(TAG, " param --->" + params.toString());
+                JSONParser jsonParser = new JSONParser(ctx, response);
+                if (jsonParser.RESULT) {
+                    try {
+                        h.backResponse(jsonParser.RESULT, jsonParser.MESSAGE, response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                             }
                         } else {
                             try {

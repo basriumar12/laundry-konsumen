@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samyotech.laundry.ModelClass.ServicesDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityAllServicesBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.ServicesDTO;
 import com.samyotech.laundry.ui.adapter.AllServicesAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
 
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllServices extends AppCompatActivity {
-    private String TAG = AllServices.class.getSimpleName();
+    private final String TAG = AllServices.class.getSimpleName();
     ActivityAllServicesBinding binding;
     Context mContext;
     RecyclerView.LayoutManager layoutManagerServ;
@@ -40,7 +40,6 @@ public class AllServices extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_all_services);
         mContext = AllServices.this;
-
 
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +61,7 @@ public class AllServices extends AppCompatActivity {
                         getServic = new ArrayList<>();
                         Type getPetDTO = new TypeToken<List<ServicesDTO>>() {
                         }.getType();
-                        getServic = (ArrayList<ServicesDTO>) new Gson().fromJson(response.getJSONArray("data").toString(), getPetDTO);
+                        getServic = new Gson().fromJson(response.getJSONArray("data").toString(), getPetDTO);
 
                         setData();
                     } catch (Exception e) {

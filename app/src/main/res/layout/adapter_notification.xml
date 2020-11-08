@@ -35,8 +35,8 @@
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginRight="@dimen/_5sdp"
-                android:text="Laundary Shop"
                 android:singleLine="true"
+                android:text="Laundary Shop"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 app:layout_constraintLeft_toRightOf="@+id/ivImage"
@@ -63,12 +63,12 @@
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginRight="@dimen/_5sdp"
                 android:drawablePadding="@dimen/_5sdp"
-                android:text="10:00 AM"
                 android:singleLine="true"
+                android:text="10:00 AM"
                 android:textAlignment="center"
                 android:textSize="@dimen/_12sdp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

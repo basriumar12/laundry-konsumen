@@ -9,12 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.samyotech.laundry.ModelClass.BookingDTO;
-import com.samyotech.laundry.ModelClass.CurrencyDTO;
-import com.samyotech.laundry.ModelClass.ItemServiceDTO;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.databinding.AdapterBookingBinding;
 import com.samyotech.laundry.databinding.AdapterPreviewBinding;
+import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.ItemServiceDTO;
 
 import java.util.ArrayList;
 
@@ -26,7 +24,7 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.MyViewHo
     ArrayList<ItemServiceDTO> servicesDTOArrayList;
     CurrencyDTO currencyDTO;
 
-    public PreviewAdapter(Context kContext, ArrayList<ItemServiceDTO> servicesDTOArrayList,CurrencyDTO currencyDTO) {
+    public PreviewAdapter(Context kContext, ArrayList<ItemServiceDTO> servicesDTOArrayList, CurrencyDTO currencyDTO) {
         this.kContext = kContext;
         this.servicesDTOArrayList = servicesDTOArrayList;
         this.currencyDTO = currencyDTO;
@@ -46,15 +44,15 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        int i=0;
+        int i = 0;
 
-        i= Integer.parseInt(servicesDTOArrayList.get(position).getCount());
-        if(i>0) {
-            holder.binding.ctvName.setText("x"+" "+servicesDTOArrayList.get(position).getItem_name()/*+"("+servicesDTOArrayList.get(position).getService_name()+")"*/);
+        i = Integer.parseInt(servicesDTOArrayList.get(position).getCount());
+        if (i > 0) {
+            holder.binding.ctvName.setText("x" + " " + servicesDTOArrayList.get(position).getItem_name()/*+"("+servicesDTOArrayList.get(position).getService_name()+")"*/);
             holder.binding.ctvQuantity.setText(servicesDTOArrayList.get(position).getCount());
             holder.binding.ctvCategory.setText(servicesDTOArrayList.get(position).getService_name());
-            holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol()+" "+servicesDTOArrayList.get(position).getPrice());
-        }else holder.binding.clCard.setVisibility(View.GONE);
+            holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol() + " " + servicesDTOArrayList.get(position).getPrice());
+        } else holder.binding.clCard.setVisibility(View.GONE);
     }
 
     @Override

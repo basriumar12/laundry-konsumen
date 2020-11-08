@@ -6,30 +6,27 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.samyotech.laundry.ModelClass.PopLaundryDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.FragmentAboutBinding;
 import com.samyotech.laundry.interfaces.Consts;
+import com.samyotech.laundry.model.PopLaundryDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.Schedule_Activity;
 import com.samyotech.laundry.ui.activity.ServiceAcitivity;
@@ -42,18 +39,17 @@ import java.util.Hashtable;
 public class AboutFragment extends Fragment implements View.OnClickListener {
 
     FragmentAboutBinding binding;
-
-    private SharedPrefrence prefrence;
-    private GoogleMap googleMap;
-    private UserDTO userDTO;
-    private Bundle bundle;
     PopLaundryDTO popLaundryDTO;
     MarkerOptions markerOptions;
     LatLng sydney;
     ServiceAcitivity serviceAcitivity;
-    boolean checkClick=true;
-
+    boolean checkClick = true;
+    private SharedPrefrence prefrence;
+    private GoogleMap googleMap;
+    private UserDTO userDTO;
+    private Bundle bundle;
     private Hashtable<String, PopLaundryDTO> markers;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,7 +63,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         popLaundryDTO = (PopLaundryDTO) bundle.getSerializable(Consts.SHOPDTO);
 
         setUIAction();
-
 
         binding.mvAddress.onCreate(savedInstanceState);
         binding.mvAddress.getMapAsync(new OnMapReadyCallback() {
@@ -90,7 +85,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 
                 // For dropping a marker at a point on the Map
                 if (popLaundryDTO.getLongitude().equalsIgnoreCase("")) {
-
 
                     sydney = new LatLng(Double.parseDouble(prefrence.getValue(Consts.LATITUDE)), Double.parseDouble(prefrence.getValue(Consts.LONGITUDE)));
 
@@ -118,9 +112,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         binding.ctvTap.setOnClickListener(this);
         binding.cvSchedule.setOnClickListener(this);
 
-
-
-
         binding.mvAddress.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -139,7 +130,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
                 }
                 googleMap.setMyLocationEnabled(true);
 
-
                 // For dropping a marker at a point on the Map
 
                             /*    for (LatLng point : latlngs) {
@@ -151,9 +141,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
                                     googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                                 }*/
 
-
                 if (popLaundryDTO.getLongitude().equalsIgnoreCase("")) {
-
 
                     sydney = new LatLng(Double.parseDouble(prefrence.getValue(Consts.LATITUDE)), Double.parseDouble(prefrence.getValue(Consts.LONGITUDE)));
 
@@ -163,20 +151,16 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 
                     googleMap.addMarker(new MarkerOptions().position(sydney).title(userDTO.getName()).title(popLaundryDTO.getShop_name()).snippet(userDTO.getUser_id()));
 
-                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
+                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 
                 }
 
                 binding.mvAddress.onResume();
 
-                            // CameraPosition cameraPosition = new CameraPosition.Builder().target(options.getPosition()).zoom(12).build();
-                            // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-
+                // CameraPosition cameraPosition = new CameraPosition.Builder().target(options.getPosition()).zoom(12).build();
+                // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                 googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
@@ -199,8 +183,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
                 });
 
 
-
-
             }
         });
     }
@@ -219,21 +201,19 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 
             case R.id.cvSchedule:
                 if (checkClick) {
-                Intent in = new Intent(getActivity(), Schedule_Activity.class);
-                in.putExtra(Consts.SHOPDTO, popLaundryDTO);
-                startActivity(in);
-                    checkClick=false;
+                    Intent in = new Intent(getActivity(), Schedule_Activity.class);
+                    in.putExtra(Consts.SHOPDTO, popLaundryDTO);
+                    startActivity(in);
+                    checkClick = false;
                 }
         }
     }
 
 
-
-
     @Override
     public void onResume() {
         super.onResume();
-        checkClick=true;
+        checkClick = true;
     }
 
     @Override
@@ -241,8 +221,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         super.onAttach(context);
         serviceAcitivity = (ServiceAcitivity) context;
     }
-
-
 
 
     @Override

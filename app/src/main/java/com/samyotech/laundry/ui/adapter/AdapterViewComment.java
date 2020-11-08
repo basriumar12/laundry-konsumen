@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.samyotech.laundry.ModelClass.GetCommentDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
+import com.samyotech.laundry.model.GetCommentDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import java.util.ArrayList;
@@ -28,11 +28,10 @@ public class AdapterViewComment extends BaseAdapter {
     private final Context mContext;
     private final ArrayList<GetCommentDTO> getCommentDTOList;
     private final UserDTO userDTO;
-
+    String mypic = "", otherpic = "";
     private ImageView ivImageD;
     private TextView tvCloseD, tvNameD;
     private Dialog dialogImg;
-    String mypic = "", otherpic = "";
 
     public AdapterViewComment(Context mContext, ArrayList<GetCommentDTO> getCommentDTOList, UserDTO userDTO, String mypic, String otherpic) {
         this.mContext = mContext;
@@ -92,13 +91,12 @@ public class AdapterViewComment extends BaseAdapter {
                     .into(ivView);
         } else {
             Glide.with(mContext).
-                load(otherpic)
-                .placeholder(R.drawable.ic_user_dummy)
-                .dontAnimate()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(ivView);
+                    load(otherpic)
+                    .placeholder(R.drawable.ic_user_dummy)
+                    .dontAnimate()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(ivView);
         }
-
 
         ivView.setOnClickListener(new View.OnClickListener() {
             @Override

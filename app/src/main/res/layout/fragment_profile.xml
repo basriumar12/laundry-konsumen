@@ -10,7 +10,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
@@ -26,7 +27,7 @@
                     <RelativeLayout
                         android:id="@+id/collapsing"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="200dp"
                         android:orientation="vertical"
                         app:expandedTitleMarginEnd="64dp"
                         app:expandedTitleMarginStart="48dp"
@@ -46,15 +47,14 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp">
 
-
                             <ImageView
-                                android:id="@+id/ivEditBanner"
+                                android:id="@+id/updateBackground"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_alignParentRight="true"
                                 android:layout_alignParentBottom="true"
                                 android:layout_marginBottom="10dp"
-                                android:src="@drawable/ic_edit" />
+                                android:src="@drawable/icon_blue_camera" />
                         </RelativeLayout>
 
                     </RelativeLayout>
@@ -65,7 +65,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
                         android:layout_below="@+id/collapsing"
-                        android:background="@color/white"
+                        android:background="@drawable/round_background"
                         app:layout_scrollFlags="scroll|enterAlways|snap">
 
 
@@ -78,50 +78,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/header"
-                        android:layout_marginTop="@dimen/_5sdp"
                         android:background="@color/white"
-                        android:gravity="center"
                         android:orientation="vertical"
                         app:layout_scrollFlags="scroll|enterAlways|snap">
 
 
                         <TextView
                             android:id="@+id/tvName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/ivArtist"
-                            android:layout_centerHorizontal="true"
-                            android:singleLine="true"
-                            android:text="navn"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/tvAddress"
-                            android:layout_width="@dimen/_300sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvName"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:drawableLeft="@drawable/marker_small"
-                            android:drawablePadding="@dimen/_5sdp"
-                            android:singleLine="true"
-                            android:text="tilak"
-                            android:textColor="@color/black"
-                            android:textSize="14sp" />
-
-                        <TextView
+                            style="@style/TextAppearance.AppCompat.Title"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_40sdp"
-                            android:layout_below="@+id/tvName"
-                            android:layout_centerHorizontal="true"
-                            android:background="@color/light_gray"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="@dimen/_15sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:paddingLeft="16dp"
                             android:singleLine="true"
-                            android:text="@string/account"
-                            android:textColor="@color/gray"
-                            android:textSize="19sp" />
+                            android:text="Dariyanto"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/colorPrimary" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -138,264 +110,249 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/_10sdp"
-                                    android:layout_marginRight="@dimen/_10sdp"
-                                    android:layout_marginBottom="@dimen/_15sdp"
                                     android:orientation="vertical">
 
 
                                     <LinearLayout
+                                        android:id="@+id/ctvprofile"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:background="?selectableItemBackground"
+                                        android:gravity="center_vertical">
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="16dp"
+                                            android:src="@drawable/icon_person" />
 
                                         <TextView
-                                            android:id="@+id/ctvprofile"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="@dimen/_7sdp"
-                                            android:layout_marginBottom="@dimen/_7sdp"
-                                            android:background="?android:attr/selectableItemBackground"
-                                            android:drawableLeft="@drawable/ic_settings"
-                                            android:drawablePadding="@dimen/_10sdp"
-                                            android:padding="@dimen/_5sdp"
-                                            android:text="@string/profile"
-                                            android:textColor="@color/gray"
-                                            android:textSize="@dimen/_15sdp" />
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:text="Akun"
+                                            android:textColor="@color/black" />
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="18dp"
+                                            android:src="@drawable/icon_next" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/ctvChangePassword"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="?selectableItemBackground"
+                                        android:gravity="center_vertical">
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="16dp"
+                                            android:src="@drawable/icon_lock" />
 
                                         <TextView
-                                            android:id="@+id/ctvChangePassword"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="@dimen/_7sdp"
-                                            android:background="?android:attr/selectableItemBackground"
-                                            android:drawableLeft="@drawable/ic_lock"
-                                            android:drawablePadding="@dimen/_10sdp"
-                                            android:padding="@dimen/_5sdp"
-                                            android:text="@string/changepassword"
-                                            android:textColor="@color/gray"
-                                            android:textSize="@dimen/_15sdp" />
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:text="Ganti Password"
+                                            android:textColor="@color/black" />
 
-                                        <TextView
-                                            android:id="@+id/ctvMyOrder"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="@dimen/_7sdp"
-                                            android:background="?android:attr/selectableItemBackground"
-                                            android:drawableLeft="@drawable/ic_myorder"
-                                            android:drawablePadding="@dimen/_10sdp"
-                                            android:padding="@dimen/_5sdp"
-                                            android:text="@string/myorder"
-                                            android:textColor="@color/gray"
-                                            android:textSize="@dimen/_15sdp" />
-
-
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="18dp"
+                                            android:src="@drawable/icon_next" />
                                     </LinearLayout>
 
 
                                     <LinearLayout
+                                        android:id="@+id/ctvnotification"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:background="?selectableItemBackground"
+                                        android:gravity="center_vertical">
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="16dp"
+                                            android:src="@drawable/icon_notification" />
 
                                         <TextView
-                                            android:id="@+id/ctvnotification"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="@dimen/_7sdp"
-                                            android:background="?android:attr/selectableItemBackground"
-                                            android:drawableLeft="@drawable/ic_social_media"
-                                            android:drawablePadding="@dimen/_10sdp"
-                                            android:padding="@dimen/_5sdp"
-                                            android:text="@string/notification"
-                                            android:textColor="@color/gray"
-                                            android:textSize="@dimen/_15sdp" />
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:text="Notifikasi"
+                                            android:textColor="@color/black" />
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="18dp"
+                                            android:src="@drawable/icon_next" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/ctvChat"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="?selectableItemBackground"
+                                        android:gravity="center_vertical">
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="16dp"
+                                            android:src="@drawable/icon_chat" />
 
                                         <TextView
-                                            android:id="@+id/ctvChat"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="@dimen/_7sdp"
-                                            android:background="?android:attr/selectableItemBackground"
-                                            android:drawableLeft="@drawable/ic_chat"
-                                            android:drawablePadding="@dimen/_10sdp"
-                                            android:padding="@dimen/_5sdp"
-                                            android:text="@string/chat"
-                                            android:textColor="@color/gray"
-                                            android:textSize="@dimen/_15sdp" />
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:text="Pesan"
+                                            android:textColor="@color/black" />
 
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="18dp"
+                                            android:src="@drawable/icon_next" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/ctvSupport"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="?selectableItemBackground"
+                                        android:gravity="center_vertical">
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="16dp"
+                                            android:src="@drawable/icon_headset" />
 
                                         <TextView
-                                            android:id="@+id/ctvSupport"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="@dimen/_7sdp"
-                                            android:background="?android:attr/selectableItemBackground"
-                                            android:drawableLeft="@drawable/ic_customer_service"
-                                            android:drawablePadding="@dimen/_10sdp"
-                                            android:padding="@dimen/_5sdp"
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
                                             android:text="@string/support"
-                                            android:textColor="@color/gray"
-                                            android:textSize="@dimen/_15sdp" />
+                                            android:textColor="@color/black" />
 
-
-                                        <TextView
-                                            android:id="@+id/ctvDelete"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="@dimen/_7sdp"
-                                            android:background="?android:attr/selectableItemBackground"
-                                            android:drawableLeft="@drawable/ic_delete"
-                                            android:drawablePadding="@dimen/_10sdp"
-                                            android:padding="@dimen/_5sdp"
-                                            android:text="@string/cancelaccount"
-                                            android:textColor="@color/gray"
-                                            android:textSize="@dimen/_15sdp" />
-
-
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="18dp"
+                                            android:src="@drawable/icon_next" />
                                     </LinearLayout>
 
 
                                     <LinearLayout
+                                        android:id="@+id/ctvAbout"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical">
+                                        android:background="?selectableItemBackground"
+                                        android:gravity="center_vertical">
 
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="16dp"
+                                            android:src="@drawable/icon_info" />
 
                                         <TextView
-                                            android:id="@+id/ctvLogout"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="@dimen/_7sdp"
-                                            android:background="?android:attr/selectableItemBackground"
-                                            android:drawableLeft="@drawable/ic_logout"
-                                            android:drawablePadding="@dimen/_10sdp"
-                                            android:padding="@dimen/_5sdp"
-                                            android:text="@string/logout"
-                                            android:textColor="@color/gray"
-                                            android:textSize="@dimen/_15sdp" />
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:text="Tentang Aplikasi"
+                                            android:textColor="@color/black" />
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="18dp"
+                                            android:src="@drawable/icon_next" />
                                     </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/ctvLogout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="?selectableItemBackground"
+                                        android:gravity="center_vertical">
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="16dp"
+                                            android:src="@drawable/icon_logout" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:gravity="center_vertical"
+                                            android:text="@string/logout"
+                                            android:textColor="@color/black" />
+
+                                        <ImageView
+                                            android:layout_width="48dp"
+                                            android:layout_height="48dp"
+                                            android:padding="18dp"
+                                            android:src="@drawable/icon_next" />
+                                    </LinearLayout>
+
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
-
-
                         ​
                     </LinearLayout>
                     ​
 
                 </RelativeLayout>
 
-                <RelativeLayout
+                <FrameLayout
                     android:id="@+id/relayimage"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_150sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/cardRely"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_50sdp"
-                    android:visibility="gone"
                     app:layout_anchor="@id/titleContainer"
                     app:layout_anchorGravity="top|center_horizontal"
                     app:layout_scrollFlags="scroll">
 
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivAvtaimg"
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_120sdp"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@drawable/ic_avatar"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="4dp" />
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardImage"
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        app:cardCornerRadius="@dimen/_60sdp"
-                        app:cardElevation="@dimen/_10sdp">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/ivAvtaimg"
-                            android:layout_width="@dimen/_120sdp"
-                            android:layout_height="@dimen/_120sdp"
-                            android:padding="@dimen/_5sdp"
-                            android:src="@drawable/ic_avatar" />
-
-
-                    </androidx.cardview.widget.CardView>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/updatePhoto"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="bottom|right"
+                        android:layout_margin="18dp"
+                        android:src="@drawable/icon_blue_camera" />
 
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardCamera"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="@dimen/_100sdp"
-                        app:cardCornerRadius="@dimen/_20sdp"
-                        app:cardElevation="@dimen/_10sdp">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:padding="@dimen/_10sdp"
-                            android:src="@drawable/ic_edit" />
+                </FrameLayout>
 
 
-                    </androidx.cardview.widget.CardView>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/rlProPic"
-                    android:layout_width="@dimen/_120sdp"
-                    android:layout_height="@dimen/_120sdp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/_50sdp"
-                    app:layout_anchor="@id/titleContainer"
-                    app:layout_anchorGravity="top|center_horizontal"
-                    app:layout_scrollFlags="scroll">
-
-                    <RelativeLayout
-                        android:id="@+id/relayImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="@dimen/_120sdp"
-                            android:layout_height="@dimen/_120sdp"
-                            android:layout_centerInParent="true"
-                            android:layout_margin="@dimen/_5sdp"
-                            android:theme="@style/Theme.MaterialComponents.Light"
-                            app:cardCornerRadius="@dimen/_60sdp"
-                            app:cardElevation="@dimen/_5sdp">
-
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/civimage"
-                                android:layout_width="@dimen/_110sdp"
-                                android:layout_height="@dimen/_110sdp"
-                                android:padding="@dimen/_2sdp"
-                                android:src="@drawable/ic_avatar"
-                                app:civ_border_color="@color/white"
-                                app:civ_border_width="2dp" />
-
-
-                        </com.google.android.material.card.MaterialCardView>
-                    </RelativeLayout>
-
-
-                    <RelativeLayout
-                        android:id="@+id/rlEditProfile"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_50sdp"
-                        android:layout_marginLeft="@dimen/_90sdp"
-                        android:layout_marginTop="@dimen/_70sdp">
-
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:src="@drawable/ic_edit" />
-
-
-                    </RelativeLayout>
-
-
-                </RelativeLayout>
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
         </ScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

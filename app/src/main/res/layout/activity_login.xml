@@ -111,8 +111,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="@string/dont_have_an_account"
-                        android:textColorHint="@color/light_gray"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/light_gray" />
 
                     <TextView
                         android:id="@+id/register_now"

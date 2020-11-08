@@ -14,20 +14,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.google.gson.Gson;
-import com.samyotech.laundry.ModelClass.GetBannerDTO;
-import com.samyotech.laundry.ModelClass.HomeDTO;
-import com.samyotech.laundry.ModelClass.NearBYDTO;
-import com.samyotech.laundry.ModelClass.PopLaundryDTO;
-import com.samyotech.laundry.ModelClass.ServicesDTO;
-import com.samyotech.laundry.ModelClass.SpecialOfferPkgDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.HomeFragmentBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.GetBannerDTO;
+import com.samyotech.laundry.model.HomeDTO;
+import com.samyotech.laundry.model.NearBYDTO;
+import com.samyotech.laundry.model.PopLaundryDTO;
+import com.samyotech.laundry.model.ServicesDTO;
+import com.samyotech.laundry.model.SpecialOfferPkgDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.AllServices;
 import com.samyotech.laundry.ui.activity.Dashboard;
@@ -49,45 +48,33 @@ import java.util.HashMap;
 import java.util.Timer;
 
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment implements View.OnClickListener {
+    final long DELAY_MS = 500;
+    final long PERIOD_MS = 3000;
     HomeFragmentBinding binding;
     View view;
     ArrayList<GetBannerDTO> imageDTOArrayList;
-    private ImageAdapter imageAdapter;
-
     int currentPage = 0;
     Timer timer;
-    final long DELAY_MS = 500;
-    final long PERIOD_MS = 3000;
-
     Dashboard dashBoard;
-
-    String TAG= HomeFragment.class.getSimpleName();
-
+    String TAG = HomeFragment.class.getSimpleName();
     TopServiceAdapter topServiceAdapter;
-    ArrayList<ServicesDTO>servicesDTOArrayList;
+    ArrayList<ServicesDTO> servicesDTOArrayList;
     RecyclerView.LayoutManager layoutManagerServ;
-
     PopularLaundriesAdapter popularLaundriesAdapter;
-    ArrayList<PopLaundryDTO>popLaundryDTOArrayList;
+    ArrayList<PopLaundryDTO> popLaundryDTOArrayList;
     RecyclerView.LayoutManager layoutManagerPop;
-
     SpecialOffersAdapter specialOffersAdapter;
-    ArrayList<SpecialOfferPkgDTO>specialOffersAdapterArrayList;
+    ArrayList<SpecialOfferPkgDTO> specialOffersAdapterArrayList;
     RecyclerView.LayoutManager layoutManagerOffer;
-
-
     LaundriesNearAdapter laundriesNearAdapter;
-    ArrayList<NearBYDTO>nearBYDTOArrayList;
+    ArrayList<NearBYDTO> nearBYDTOArrayList;
     RecyclerView.LayoutManager layoutManagerNear;
-
-    HashMap<String,String> params=new HashMap<>();
+    HashMap<String, String> params = new HashMap<>();
     HomeDTO homeDTO;
-
     UserDTO userDTO;
+    private ImageAdapter imageAdapter;
     private SharedPrefrence prefrence;
-
-
 
 
     @Nullable
@@ -96,52 +83,40 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false);
         view = binding.getRoot();
         prefrence = SharedPrefrence.getInstance(getActivity());
-        userDTO=prefrence.getParentUser(Consts.USER_DTO);
+        userDTO = prefrence.getParentUser(Consts.USER_DTO);
 
         getData();
-
-
-
-
-
 
         return view;
     }
 
 
-    public void getData(){
-        params.put(Consts.LATITUDE,prefrence.getValue(Consts.LATITUDE));
-        params.put(Consts.LONGITUDE,prefrence.getValue(Consts.LONGITUDE));
-        params.put(Consts.USER_ID,userDTO.getUser_id());
+    public void getData() {
+        params.put(Consts.LATITUDE, prefrence.getValue(Consts.LATITUDE));
+        params.put(Consts.LONGITUDE, prefrence.getValue(Consts.LONGITUDE));
+        params.put(Consts.USER_ID, userDTO.getUser_id());
 
+        new HttpsRequest(Consts.GETHOMEDATA, params, getActivity()).stringPost(TAG, new Helper() {
+            @Override
+            public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
+                if (flag) {
 
+                    try {
+                        homeDTO = new Gson().fromJson(response.getJSONObject("data").toString(), HomeDTO.class);
+                        setupViewPager();
 
-            new HttpsRequest(Consts.GETHOMEDATA,params,getActivity()).stringPost(TAG, new Helper() {
-                @Override
-                public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
-                    if (flag){
-
-                        try {
-                            homeDTO = new Gson().fromJson(response.getJSONObject("data").toString(), HomeDTO.class);
-                            setupViewPager();
-
-                        }catch (Exception e){
-                            e.getMessage();
-                        }
-
-
+                    } catch (Exception e) {
+                        e.getMessage();
                     }
 
-                    else {
-                        ProjectUtils.showToast(getActivity(),msg);
-                    }
+
+                } else {
+                    ProjectUtils.showToast(getActivity(), msg);
                 }
-            });
+            }
+        });
 
-        }
-
-
-
+    }
 
 
     private void setupViewPager() {
@@ -150,35 +125,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         binding.viewpager.setAdapter(imageAdapter);
         binding.tabDots.setViewPager(binding.viewpager);
 
-
-
-
-   layoutManagerServ=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        layoutManagerServ = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         binding.recyleService.setLayoutManager(layoutManagerServ);
-        topServiceAdapter=new TopServiceAdapter(getActivity(),homeDTO.getService());
+        topServiceAdapter = new TopServiceAdapter(getActivity(), homeDTO.getService());
         binding.recyleService.setAdapter(topServiceAdapter);
 
-
-
-        layoutManagerPop=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        layoutManagerPop = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         binding.recyleLaundriesPop.setLayoutManager(layoutManagerPop);
-        popularLaundriesAdapter=new PopularLaundriesAdapter(getActivity(),homeDTO.getLaundry());
+        popularLaundriesAdapter = new PopularLaundriesAdapter(getActivity(), homeDTO.getLaundry());
         binding.recyleLaundriesPop.setAdapter(popularLaundriesAdapter);
 
-
-        layoutManagerOffer=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        layoutManagerOffer = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         binding.recyleOffers.setLayoutManager(layoutManagerOffer);
-        specialOffersAdapter=new SpecialOffersAdapter(getActivity(),homeDTO.getOffer());
+        specialOffersAdapter = new SpecialOffersAdapter(getActivity(), homeDTO.getOffer());
         binding.recyleOffers.setAdapter(specialOffersAdapter);
 
-
-
-        layoutManagerNear=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        layoutManagerNear = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         binding.recyleNear.setLayoutManager(layoutManagerNear);
-        laundriesNearAdapter=new LaundriesNearAdapter(getActivity(),homeDTO.getNear_by());
+        laundriesNearAdapter = new LaundriesNearAdapter(getActivity(), homeDTO.getNear_by());
         binding.recyleNear.setAdapter(laundriesNearAdapter);
-
-
 
         binding.ctvbTopService.setOnClickListener(this);
         binding.ctvbPopularLaundries.setOnClickListener(this);
@@ -186,9 +151,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         binding.ivNotification.setOnClickListener(this);
 
 
-
     }
-
 
 
     @Override
@@ -197,19 +160,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
 
-
     @Override
     public void onPause() {
-      //  stopLocationUpdates();
+        //  stopLocationUpdates();
         super.onPause();
     }
-
-
-
-
-
-
-
 
 
     @Override
@@ -221,27 +176,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-    switch (v.getId()){
-        case R.id.ctvbTopService:
-            Intent in = new Intent(getActivity(), AllServices.class);
-            startActivity(in);
-            break;
-        case R.id.ctvbPopularLaundries:
-            Intent in1 = new Intent(getActivity(), TopServices.class);
-            startActivity(in1);
-            break;
-        case R.id.svLaundry:
-            Intent in2 = new Intent(getActivity(), SearchActivity.class);
-            startActivity(in2);
-            break;
-        case R.id.ivNotification:
-            Intent in3 = new Intent(getActivity(), NotificationActivity.class);
-            startActivity(in3);
-            break;
+        switch (v.getId()) {
+            case R.id.ctvbTopService:
+                Intent in = new Intent(getActivity(), AllServices.class);
+                startActivity(in);
+                break;
+            case R.id.ctvbPopularLaundries:
+                Intent in1 = new Intent(getActivity(), TopServices.class);
+                startActivity(in1);
+                break;
+            case R.id.svLaundry:
+                Intent in2 = new Intent(getActivity(), SearchActivity.class);
+                startActivity(in2);
+                break;
+            case R.id.ivNotification:
+                Intent in3 = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(in3);
+                break;
+        }
     }
-    }
-
-
 
 
 }

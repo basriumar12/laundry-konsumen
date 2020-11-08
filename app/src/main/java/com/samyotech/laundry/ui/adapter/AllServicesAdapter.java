@@ -11,13 +11,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.samyotech.laundry.ModelClass.PopLaundryDTO;
-import com.samyotech.laundry.ModelClass.ServicesDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterAllservicesBinding;
-import com.samyotech.laundry.databinding.AdapterTopservicesBinding;
 import com.samyotech.laundry.interfaces.Consts;
-import com.samyotech.laundry.ui.activity.ServiceAcitivity;
+import com.samyotech.laundry.model.ServicesDTO;
 import com.samyotech.laundry.ui.activity.TopServices;
 
 import java.util.ArrayList;
@@ -49,7 +46,7 @@ public class AllServicesAdapter extends RecyclerView.Adapter<AllServicesAdapter.
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
         Glide.with(kContext)
-                .load(popLaundryDTOArrayList.get(position).getImage())
+                .load(Consts.DEV_URL + popLaundryDTOArrayList.get(position).getImage())
                 .placeholder(R.drawable.laundryshop)
                 .into(holder.binding.ivImage);
 
@@ -59,7 +56,7 @@ public class AllServicesAdapter extends RecyclerView.Adapter<AllServicesAdapter.
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(kContext, TopServices.class);
-                in.putExtra(Consts.SERVICE_ID,popLaundryDTOArrayList.get(position).getService_id());
+                in.putExtra(Consts.SERVICE_ID, popLaundryDTOArrayList.get(position).getService_id());
                 kContext.startActivity(in);
             }
         });

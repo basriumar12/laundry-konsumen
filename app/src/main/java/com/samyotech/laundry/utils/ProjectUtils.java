@@ -35,7 +35,6 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.interfaces.Consts;
 
@@ -59,12 +58,11 @@ import java.util.regex.Pattern;
 public class ProjectUtils {
 
     public static final String TAG = "ProjectUtility";
+    private static final String VERSION_UNAVAILABLE = "N/A";
+    public static Bitmap bmp;
     private static AlertDialog dialog;
     private static ProgressDialog mProgressDialog;
-    private static final String VERSION_UNAVAILABLE = "N/A";
     private static Dialog dialog_gif;
-
-    public static Bitmap bmp;
 
     public static int getScreenWidth() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -149,13 +147,8 @@ public class ProjectUtils {
 
     public static boolean isPriceBid(String number, String num) {
 
-
-        if (num.equals(number)) {
-            //	Log.d("tag", "Number is not valid");
-            return false;
-        }
-
-        return true;
+        //	Log.d("tag", "Number is not valid");
+        return !num.equals(number);
     }
 
 
@@ -388,7 +381,6 @@ public class ProjectUtils {
 
     public static boolean urlValidate(String url) {
 
-
         String expression = ".*(youtube|youtu.be).*";
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(url);
@@ -411,13 +403,8 @@ public class ProjectUtils {
      */
     public static boolean isPhoneNumberValid(String number) {
 
-
-        if (number.length() < 7 || number.length() > 16) {
-            //	Log.d("tag", "Number is not valid");
-            return false;
-        }
-
-        return true;
+        //	Log.d("tag", "Number is not valid");
+        return number.length() >= 7 && number.length() <= 16;
     }
 
 
@@ -426,12 +413,9 @@ public class ProjectUtils {
         //String regexStr = "^([0-9\\(\\)\\/\\+ \\-]*)$";
         String regexStr = " (?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,20})$";
 
-        if (number.length() < 6 || number.length() > 13 /*|| number.matches(regexStr) == false*/) {
-            //	Log.d("tag", "Number is not valid");
-            return false;
-        }
-
-        return true;
+        /*|| number.matches(regexStr) == false*/
+        //	Log.d("tag", "Number is not valid");
+        return number.length() >= 6 && number.length() <= 13;
     }
 
     public static long currentTimeInMillis() {
@@ -457,29 +441,18 @@ public class ProjectUtils {
      * @return True if not null.
      */
     public static boolean isEditTextFilled(EditText text) {
-        if (text.getText() != null && text.getText().toString().trim().length() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return text.getText() != null && text.getText().toString().trim().length() > 0;
     }
 
     public static boolean isPasswordLengthCorrect(EditText text) {
-        if (text.getText() != null && text.getText().toString().trim().length() >= 8) {
-            return true;
-        } else {
-            return false;
-        }
+        return text.getText() != null && text.getText().toString().trim().length() >= 8;
     }
 
     public static boolean isNetworkConnected(Context mContext) {
         ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni == null) {
-            // There are no active networks.
-            return false;
-        } else
-            return true;
+        // There are no active networks.
+        return ni != null;
     }
 
     public static void InternetAlertDialog(Context mContext) {
@@ -531,11 +504,9 @@ public class ProjectUtils {
     }
 
 
-    public static String changeTimeformate(String timeForm){
-
+    public static String changeTimeformate(String timeForm) {
 
         String startTime = timeForm;
-
 
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
         SimpleDateFormat sdfs = new SimpleDateFormat("hh:mm a");
@@ -546,15 +517,13 @@ public class ProjectUtils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        
+
         return sdf.format(dt);
     }
 
-    public static String changeTimeformatenewPat(String timeForm){
-
+    public static String changeTimeformatenewPat(String timeForm) {
 
         String startTime = timeForm;
-
 
         SimpleDateFormat sdf = new SimpleDateFormat("h:m:s");
         SimpleDateFormat sdfs = new SimpleDateFormat("hh:mm:ss");
@@ -695,7 +664,7 @@ public class ProjectUtils {
     }
 
     public static String convertTimestampDateToTime(long timestamp) {
-        Timestamp tStamp = new Timestamp(timestamp*1000);
+        Timestamp tStamp = new Timestamp(timestamp * 1000);
         SimpleDateFormat simpleDateFormat;
         simpleDateFormat = new SimpleDateFormat("dd MMM, yyyy hh:mm a");
         return simpleDateFormat.format(tStamp);
@@ -760,7 +729,8 @@ public class ProjectUtils {
         }
         return str;
     }
-  public static String changeDateFormateInaDay(String time) {//2018-07-18 09:48:39
+
+    public static String changeDateFormateInaDay(String time) {//2018-07-18 09:48:39
         String inputPattern = "yyyy-MM-dd";
         String outputPattern = "EEEE, dd MMM yyyy";
         SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
@@ -777,6 +747,7 @@ public class ProjectUtils {
         }
         return str;
     }
+
     public static String getCommaSepratedString(ArrayList<String> userService) {
         String strValue = "";
         StringBuilder sb = new StringBuilder();
@@ -806,17 +777,12 @@ public class ProjectUtils {
             Date date1 = df.parse(endDate);
             Date startingDate = df.parse(startDate);
 
-            if (startingDate.after(date1))
-                return true;
-            else
-                return false;
+            return startingDate.after(date1);
         } catch (Exception e) {
 
             return false;
         }
     }
-
-
 
 
     public static boolean checkBeforeTime(String openTime, String closeTime) {
@@ -884,7 +850,7 @@ public class ProjectUtils {
         Date date1 = null;
         Date date2 = null;
         int min = 0;
-        long difference=0;
+        long difference = 0;
 
         try {
             date1 = parseFormat.parse(openTime);
@@ -906,7 +872,7 @@ public class ProjectUtils {
     }
 
 
-    public static File getFileFromBitmap(Bitmap bitmap, Context mContext){
+    public static File getFileFromBitmap(Bitmap bitmap, Context mContext) {
         File file = null;
         try {
 //            file = new File(mContext.getCacheDir(), "pic");
@@ -924,8 +890,7 @@ public class ProjectUtils {
             fos.flush();
             fos.close();
 
-
-            Log.e("","file is exist:-------------- "+file.isFile());
+            Log.e("", "file is exist:-------------- " + file.isFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -958,14 +923,13 @@ public class ProjectUtils {
     }
 
 
-
     /**
      * Get a file path from a Uri. This will get the the path for Storage Access
      * Framework Documents, as well as the _data field for the MediaStore and
      * other file-based ContentProviders.
      *
      * @param context The context.
-     * @param uri The Uri to query.
+     * @param uri     The Uri to query.
      * @author paulburke
      */
     public static String getPath(final Context context, final Uri uri) {
@@ -1011,7 +975,7 @@ public class ProjectUtils {
                 }
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[] {
+                final String[] selectionArgs = new String[]{
                         split[1]
                 };
 
@@ -1039,9 +1003,9 @@ public class ProjectUtils {
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param context The context.
-     * @param uri The Uri to query.
-     * @param selection (Optional) Filter used in the query.
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */

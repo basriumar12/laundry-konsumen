@@ -28,12 +28,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samyotech.laundry.ModelClass.GetCommentDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.GetCommentDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.AdapterViewComment;
@@ -56,30 +56,12 @@ import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
 public class OneTwoOneChat extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
     private final String TAG = OneTwoOneChat.class.getSimpleName();
-    private ListView lvComment;
     private final String id = "";
-    private ImageView buttonSendMessage, IVback, emojiButton;
-    private AdapterViewComment adapterViewComment;
     private final HashMap<String, String> parmsGet = new HashMap<>();
-    private ArrayList<GetCommentDTO> getCommentDTOList;
-    private InputMethodManager inputManager;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private EmojiconEditText edittextMessage;
-    private EmojIconActions emojIcon;
-    private RelativeLayout relative;
-    private Context mContext;
     private final HashMap<String, File> paramsFile = new HashMap<>();
     boolean clickcheck = true;
-    private SharedPrefrence prefrence;
-    private UserDTO userDTO;
-    private EditText etMessage;
     IntentFilter intentFilter = new IntentFilter();
     HashMap<String, String> values = new HashMap<>();
-    private LinearLayout mContainerActions, mContainerImg;
-    private boolean actions_container_visible = false, img_container_visible = false;
-    private TextView tvNameHedar;
-    private ImageView mActionImage, mPreviewImg, mDeleteImg, mActionContainerImg;
-
     BottomSheet.Builder builder;
     Uri picUri;
     int PICK_FROM_CAMERA = 1, PICK_FROM_GALLERY = 2;
@@ -91,8 +73,35 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
     byte[] resultByteArray;
     File file;
     Bitmap bitmap = null;
-    private String ar_id = "", ar_name = "", image = "";
     CircleImageView civProfilepic;
+    private ListView lvComment;
+    private ImageView buttonSendMessage, IVback, emojiButton;
+    private AdapterViewComment adapterViewComment;
+    private ArrayList<GetCommentDTO> getCommentDTOList;
+    private InputMethodManager inputManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private EmojiconEditText edittextMessage;
+    private EmojIconActions emojIcon;
+    private RelativeLayout relative;
+    private Context mContext;
+    private SharedPrefrence prefrence;
+    private UserDTO userDTO;
+    BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equalsIgnoreCase(Consts.BROADCAST)) {
+                getComment();
+                Log.e("BROADCAST", "BROADCAST");
+
+            }
+        }
+    };
+    private EditText etMessage;
+    private LinearLayout mContainerActions, mContainerImg;
+    private boolean actions_container_visible = false, img_container_visible = false;
+    private TextView tvNameHedar;
+    private ImageView mActionImage, mPreviewImg, mDeleteImg, mActionContainerImg;
+    private String ar_id = "", ar_name = "", image = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +140,6 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
             ar_name = getIntent().getStringExtra(Consts.NAME);
             image = getIntent().getStringExtra(Consts.IMAGE);
 
-
             Glide.with(mContext)
                     .load(image)
                     .error(R.drawable.ic_avatar)
@@ -147,14 +155,12 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
 
     }
 
-
     public void setUiAction() {
         mContainerActions = findViewById(R.id.container_actions);
         mContainerActions.setVisibility(View.GONE);
 
         mContainerImg = findViewById(R.id.container_img);
         mContainerImg.setVisibility(View.GONE);
-
 
         relative = findViewById(R.id.relative);
         tvNameHedar = findViewById(R.id.ctvName);
@@ -175,12 +181,12 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
                 Log.e("Runnable", "FIRST");
                 if (NetworkManager.isConnectToInternet(mContext)) {
                     swipeRefreshLayout.setRefreshing(true);
-                                            getComment();
+                    getComment();
 
-                                        } else {
-                                            ProjectUtils.showToast(mContext, getResources().getString(R.string.internet_concation));
-                                        }
-                                    }
+                } else {
+                    ProjectUtils.showToast(mContext, getResources().getString(R.string.internet_concation));
+                }
+            }
                                 }
         );
 
@@ -438,7 +444,6 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
 //        mActionContainerImg.setBackgroundResource(R.drawable.ic_open_container_action);
     }
 
-
     public boolean validateMessage() {
         if (edittextMessage.getText().toString().trim().length() <= 0) {
             edittextMessage.setError(getResources().getString(R.string.val_comment));
@@ -523,13 +528,11 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
         });
     }
 
-
     public void showData() {
         adapterViewComment = new AdapterViewComment(mContext, getCommentDTOList, userDTO, userDTO.getImage(), image);
         lvComment.setAdapter(adapterViewComment);
         lvComment.setSelection(getCommentDTOList.size() - 1);
     }
-
 
     public void doComment() {
         values.put(Consts.FROM_USER_ID, userDTO.getUser_id());
@@ -558,18 +561,6 @@ public class OneTwoOneChat extends AppCompatActivity implements View.OnClickList
             }
         });
     }
-
-
-    BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equalsIgnoreCase(Consts.BROADCAST)) {
-                getComment();
-                Log.e("BROADCAST", "BROADCAST");
-
-            }
-        }
-    };
 
     @Override
     protected void onDestroy() {

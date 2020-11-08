@@ -19,6 +19,7 @@ public class KeyHashGenerator {
     /**
      * To generate the key hash to add in the facebook account
      * https://developers.facebook.com/apps/
+     *
      * @param activity the instance of the activity, where you gonna place the facebook login.
      * @return
      */
@@ -41,8 +42,7 @@ public class KeyHashGenerator {
             }
         } catch (PackageManager.NameNotFoundException e1) {
             Log.e("Name not found", e1.toString());
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             Log.e("No such an algorithm", e.toString());
         } catch (Exception e) {
             Log.e("Exception", e.toString());

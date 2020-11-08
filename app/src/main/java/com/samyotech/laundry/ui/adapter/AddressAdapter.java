@@ -8,11 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.samyotech.laundry.ModelClass.AddressDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterAddressBinding;
-import com.samyotech.laundry.databinding.AdapterPopularLaundriesBinding;
+import com.samyotech.laundry.model.AddressDTO;
 
 import java.util.ArrayList;
 
@@ -41,7 +39,6 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
 
         holder.binding.address.setText(popLaundryDTOArrayList.get(position).getAddress());
     }

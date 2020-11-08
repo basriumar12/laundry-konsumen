@@ -8,11 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.samyotech.laundry.ModelClass.BookingDTO;
-import com.samyotech.laundry.ModelClass.ShopServicesDTO;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.databinding.AdapterBookingBinding;
 import com.samyotech.laundry.databinding.ServicesAdapterBinding;
+import com.samyotech.laundry.model.ShopServicesDTO;
 
 import java.util.ArrayList;
 
@@ -41,7 +39,6 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
 
         holder.binding.ctvSerName.setText(servicesDTOArrayList.get(position).getService_name());
         holder.binding.ctvSerDescrition.setText(servicesDTOArrayList.get(position).getDescription());

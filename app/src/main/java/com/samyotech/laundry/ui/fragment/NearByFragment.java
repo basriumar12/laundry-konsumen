@@ -31,13 +31,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samyotech.laundry.ModelClass.PopLaundryDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.FragmentNearByBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.PopLaundryDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.Dashboard;
@@ -54,43 +54,35 @@ import java.util.List;
 
 public class NearByFragment extends Fragment {
     private final String TAG = NearByFragment.class.getSimpleName();
+    private final ArrayList<MarkerOptions> optionsList = new ArrayList<>();
+    private final HashMap<String, String> parmsCategory = new HashMap<>();
+    HashMap<String, String> parms = new HashMap<>();
+    FragmentNearByBinding binding;
+    LinearLayoutManager linearLayoutManager;
+    PopularLaundriesAdapter popularLaundriesAdapter;
     private NearByFragment nearByFragment;
     private GoogleMap googleMap;
-    private final ArrayList<MarkerOptions> optionsList = new ArrayList<>();
     private UserDTO userDTO;
     private SharedPrefrence prefrence;
-    HashMap<String, String> parms = new HashMap<>();
     private ArrayList<PopLaundryDTO> allAtristListDTOList;
     private Hashtable<String, PopLaundryDTO> markers;
     private Marker marker;
     private Dashboard dashboard;
-    private final HashMap<String, String> parmsCategory = new HashMap<>();
-    FragmentNearByBinding binding;
-
-    LinearLayoutManager linearLayoutManager;
-    PopularLaundriesAdapter popularLaundriesAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding= DataBindingUtil .inflate(inflater,R.layout.fragment_near_by, container, false);
-
-
-
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_near_by, container, false);
 
         prefrence = SharedPrefrence.getInstance(getActivity());
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
-
-
-
 
         binding.mapView.onCreate(savedInstanceState);
         markers = new Hashtable<String, PopLaundryDTO>();
@@ -122,11 +114,7 @@ public class NearByFragment extends Fragment {
             }
         });
 
-
-
         getNearByLaundry();
-
-
 
         return binding.getRoot();
     }
@@ -136,7 +124,6 @@ public class NearByFragment extends Fragment {
         super.onResume();
         binding.mapView.onResume();
         if (NetworkManager.isConnectToInternet(getActivity())) {
-
 
             getNearByLaundry();
 
@@ -165,10 +152,9 @@ public class NearByFragment extends Fragment {
 
 
     public void getNearByLaundry() {
-        parms.put(Consts.Count,"20");
-        parms.put(Consts.LATITUDE,prefrence.getValue(Consts.LATITUDE));
-        parms.put(Consts.LONGITUDE,prefrence.getValue(Consts.LONGITUDE));
-
+        parms.put(Consts.Count, "20");
+        parms.put(Consts.LATITUDE, prefrence.getValue(Consts.LATITUDE));
+        parms.put(Consts.LONGITUDE, prefrence.getValue(Consts.LONGITUDE));
 
 //        ProjectUtils.showProgressDialog(getActivity(), true, getResources().getString(R.string.please_wait));
         new HttpsRequest(Consts.GETALLLAUNDRYSHOP, parms, getActivity()).stringPost(TAG, new Helper() {
@@ -179,7 +165,7 @@ public class NearByFragment extends Fragment {
 
                     try {
 
-                        Log.e(TAG, "backResponse: "+response );
+                        Log.e(TAG, "backResponse: " + response);
 
                         allAtristListDTOList = new ArrayList<>();
                         Type getpetDTO = new TypeToken<List<PopLaundryDTO>>() {
@@ -188,7 +174,7 @@ public class NearByFragment extends Fragment {
 
                         for (int i = 0; i < allAtristListDTOList.size(); i++) {
 
-                                optionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(allAtristListDTOList.get(i).getLatitude()), Double.parseDouble(allAtristListDTOList.get(i).getLongitude()))).title(allAtristListDTOList.get(i).getShop_name()).icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(getActivity()))));
+                            optionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(allAtristListDTOList.get(i).getLatitude()), Double.parseDouble(allAtristListDTOList.get(i).getLongitude()))).title(allAtristListDTOList.get(i).getShop_name()).icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(getActivity()))));
 
                         }
 
@@ -218,7 +204,6 @@ public class NearByFragment extends Fragment {
                                 }
                                 googleMap.setMyLocationEnabled(true);
 
-
                                 // For dropping a marker at a point on the Map
 
                             /*    for (LatLng point : latlngs) {
@@ -230,7 +215,6 @@ public class NearByFragment extends Fragment {
                                     googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                                 }*/
 
-
                                 for (MarkerOptions options : optionsList) {
 
                                     options.position(options.getPosition());
@@ -238,7 +222,6 @@ public class NearByFragment extends Fragment {
                                     options.snippet(options.getSnippet());
                                     options.draggable(false);
                                     final Marker hamburg = googleMap.addMarker(options);
-
 
 //                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(options.getPosition()).zoom(12).build();
 //                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -275,8 +258,7 @@ public class NearByFragment extends Fragment {
                                     }
                                 });
 
-
-                    setData();
+                                setData();
 
                             }
                         });
@@ -297,11 +279,9 @@ public class NearByFragment extends Fragment {
 
     private void setData() {
 
-
-
-        linearLayoutManager=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         binding.rvLaundrytab.setLayoutManager(linearLayoutManager);
-        popularLaundriesAdapter=new PopularLaundriesAdapter(getActivity(),allAtristListDTOList);
+        popularLaundriesAdapter = new PopularLaundriesAdapter(getActivity(), allAtristListDTOList);
         binding.rvLaundrytab.setAdapter(popularLaundriesAdapter);
 
 
@@ -313,9 +293,6 @@ public class NearByFragment extends Fragment {
         View marker = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_maker_layout, null);
         ConstraintLayout constraintLayout = marker.findViewById(R.id.llCustom);
 
-
-
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         marker.setLayoutParams(new ViewGroup.LayoutParams(52, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -326,10 +303,8 @@ public class NearByFragment extends Fragment {
         Canvas canvas = new Canvas(bitmap);
         marker.draw(canvas);
 
-
         return bitmap;
     }
-
 
 
 }

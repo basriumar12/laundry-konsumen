@@ -5,12 +5,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -18,20 +15,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samyotech.laundry.ModelClass.TicketDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityTicketsBinding;
 import com.samyotech.laundry.databinding.DailogAddTicketBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.TicketDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.TicketAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
@@ -41,39 +37,38 @@ import java.util.List;
 import java.util.Random;
 
 public class TicketsActivity extends AppCompatActivity implements View.OnClickListener {
+    private final String TAG = TicketsActivity.class.getSimpleName();
+    private final HashMap<String, String> parmsadd = new HashMap<>();
+    private final HashMap<String, String> parmsGet = new HashMap<>();
     Context mContext;
-    private String TAG = TicketsActivity.class.getSimpleName();
+    ActivityTicketsBinding binding;
+    DailogAddTicketBinding binding1;
+    JSONObject jsonObject = new JSONObject();
+    JSONObject getjsonObject = new JSONObject();
+    String ranDom = "";
     private TicketAdapter ticketAdapter;
     private ArrayList<TicketDTO> ticketDTOSList;
     private LinearLayoutManager mLayoutManager;
     private SharedPrefrence prefrence;
     private UserDTO userDTO;
-    ActivityTicketsBinding binding;
-    private HashMap<String, String> parmsadd = new HashMap<>();
-    private HashMap<String, String> parmsGet = new HashMap<>();
-    DailogAddTicketBinding binding1;
     private Dialog dialog;
-    JSONObject jsonObject=new JSONObject();
-    JSONObject getjsonObject=new JSONObject();
-    String ranDom="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this, R.layout.activity_tickets);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_tickets);
 
-        mContext=TicketsActivity.this;
+        mContext = TicketsActivity.this;
 
         prefrence = SharedPrefrence.getInstance(mContext);
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
 
         binding.back.setOnClickListener(this);
-        binding.ivPost.setOnClickListener(this);
 
         try {
-            parmsadd.put(Consts.USER_ID,userDTO.getUser_id());
-            parmsGet.put(Consts.USER_ID,userDTO.getUser_id());
-        }catch (Exception e){
+            parmsadd.put(Consts.USER_ID, userDTO.getUser_id());
+            parmsGet.put(Consts.USER_ID, userDTO.getUser_id());
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -99,12 +94,12 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
                 ProjectUtils.pauseProgressDialog();
                 if (flag) {
 //                    binding.tvNo.setVisibility(View.GONE);
-                    binding.RVhistorylist.setVisibility(View.VISIBLE);
+                    binding.rvChatList.setVisibility(View.VISIBLE);
                     try {
                         ticketDTOSList = new ArrayList<>();
                         Type getpetDTO = new TypeToken<List<TicketDTO>>() {
                         }.getType();
-                        ticketDTOSList = (ArrayList<TicketDTO>) new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
+                        ticketDTOSList = new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
                         showData();
 
                     } catch (Exception e) {
@@ -114,7 +109,7 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
 
                 } else {
 //                    binding.tvNo.setVisibility(View.VISIBLE);
-                    binding.RVhistorylist.setVisibility(View.GONE);
+                    binding.rvChatList.setVisibility(View.GONE);
                 }
             }
         });
@@ -122,12 +117,10 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
 
 
     public void showData() {
-        binding.RVhistorylist.setLayoutManager(new LinearLayoutManager(mContext));
-        ticketAdapter = new TicketAdapter(TicketsActivity.this,mContext, ticketDTOSList, userDTO);
-        binding.RVhistorylist.setAdapter(ticketAdapter);
+        binding.rvChatList.setLayoutManager(new LinearLayoutManager(mContext));
+        ticketAdapter = new TicketAdapter(TicketsActivity.this, mContext, ticketDTOSList, userDTO);
+        binding.rvChatList.setAdapter(ticketAdapter);
     }
-
-
 
 
     public void dialogshow() {/*
@@ -144,8 +137,6 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
         //   final CommentBinding binding=DataBindingUtil.setContentView(this,R.layout.comment);
         dialog.show();
         dialog.setCancelable(true);
-
-
 
         binding1.tvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,7 +199,6 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
 
         try {
 
-
             parmsadd.put(Consts.DESCRIPTION, ProjectUtils.getEditTextValue(binding1.etDescription));
             parmsadd.put(Consts.TITLE, ProjectUtils.getEditTextValue(binding1.etReason));
         } catch (Exception e) {
@@ -232,13 +222,13 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.back:
                 onBackPressed();
                 break;
-            case R.id.ivPost:
-                dialogshow();
-                break;
+//            case R.id.ivPost:
+//                dialogshow();
+//                break;
         }
 
     }

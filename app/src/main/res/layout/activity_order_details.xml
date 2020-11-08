@@ -1,432 +1,428 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout >
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activity.OrderDetails">
+<layout>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.activity.OrderDetails">
 
-    <ImageView
-        android:id="@+id/ivBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_margin="@dimen/_10sdp"
-        android:src="@drawable/ic_left_arrow"/>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textSize="@dimen/_16sdp"
-        android:id="@+id/ctvHead"
-        android:text="@string/orderdetails" />
-
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@color/gray"
-        app:layout_constraintTop_toBottomOf="@+id/ctvHead"/>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ctvlist"
-            android:layout_marginTop="@dimen/_18sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:text="@string/clothlist"
-            android:textSize="@dimen/_17sdp"
-            app:layout_constraintTop_toBottomOf="@id/view" />
-
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvRatenow"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_40sdp"
-        app:cardCornerRadius="@dimen/_10sdp"
-        android:layout_margin="@dimen/_10sdp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@id/view"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <TextView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:text="@string/rate_now"
-            android:gravity="center_vertical"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_14sdp" />
+            android:layout_height="match_parent">
 
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:id="@+id/rvReview"
-        android:layout_height="@dimen/_150sdp"
-        app:layout_constraintTop_toBottomOf="@id/cvRatenow"
-        android:layout_margin="@dimen/_10sdp"/>
-
-
-    <View
-        android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray"
-        app:layout_constraintTop_toBottomOf="@+id/rvReview"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/rvReview"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:id="@+id/ctvSub_Total"
-            android:textColor="@color/black"
-            android:text="@string/subtotal"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_marginRight="@dimen/_7sdp"
-        android:textSize="16sp"
-        />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/ctvDiscount"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:id="@+id/ctvTax"
-            android:text="@string/tax"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_marginRight="@dimen/_7sdp"
-        android:textSize="16sp"
-        />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/ctvSub_Total"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:id="@+id/ctvDiscount"
-            android:text="@string/discount_amount"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_marginRight="@dimen/_7sdp"
-        android:textSize="16sp"
-        />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@color/gray"
-        app:layout_constraintTop_toBottomOf="@+id/ctvTax"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:id="@+id/ctvPaidVia"
-            android:text="@string/paidvia"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_marginRight="@dimen/_7sdp"
-        android:textSize="16sp"
-        />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/rvReview"
-            app:layout_constraintRight_toRightOf="parent"
-            android:id="@+id/ctvSub_TotalValue"
-            android:text="0"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_marginRight="@dimen/_7sdp"
-        android:textSize="16sp"
-        />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/ctvDiscountValue"
-            app:layout_constraintRight_toRightOf="parent"
-            android:id="@+id/ctvTaxValue"
-            android:text="0"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_marginRight="@dimen/_7sdp"
-        android:textSize="16sp"
-        />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/ctvSub_TotalValue"
-            app:layout_constraintRight_toRightOf="parent"
-            android:id="@+id/ctvDiscountValue"
-            android:text="0"
-            android:textColor="@color/black"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_marginRight="@dimen/_7sdp"
-        android:textSize="16sp"
-        />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/view2"
-            app:layout_constraintRight_toRightOf="parent"
-            android:id="@+id/ctvPaidViaValue"
-            android:text="0"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:layout_marginRight="@dimen/_7sdp"
-        android:textSize="16sp"
-        />
-
-
-    <View
-        android:id="@+id/view3"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:background="@color/offwhite"
-        app:layout_constraintTop_toBottomOf="@+id/ctvPaidViaValue"/>
-
-<LinearLayout
-    android:id="@+id/llDate"
-    app:layout_constraintTop_toBottomOf="@id/view3"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/_10sdp"
-    android:layout_height="@dimen/_180sdp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_90sdp">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:orientation="vertical">
-
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/pickedup"
-                android:textSize="18sp" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/ctvPickUpDay"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_10sdp" />
+                <ImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:src="@drawable/ic_left_arrow"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/ctvPickUpTime"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_10sdp" />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/deliveryonly"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:singleLine="true"
-                android:id="@+id/ctvDeliveryDate"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:singleLine="true"
-                android:id="@+id/ctvDeliveryTime"
-                android:textColor="@color/black" />
-
-
-        </LinearLayout></LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/pickupAddress"
-        android:textSize="18sp"
-        android:layout_marginTop="@dimen/_15sdp" />
-
-    <TextView
-        android:id="@+id/ctvAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:lines="3"
-        android:layout_marginTop="@dimen/_15sdp" />
-
- </LinearLayout>
-
-
-        <View
-            android:id="@+id/view4"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/offwhite"
-            app:layout_constraintTop_toBottomOf="@+id/llDate"/>
-
-        <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/llCall"
-            android:layout_margin="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/view4"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:src="@drawable/call"
-                android:layout_height="match_parent"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8"
-                android:layout_margin="@dimen/_5sdp"
-                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/ctvHead"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:text="@string/calldeliveryagent"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:text="@string/orderdetails"
+                    android:textSize="@dimen/_16sdp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@+id/ctvHead" />
+
+
+                <TextView
+                    android:id="@+id/ctvlist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:text="@string/clothlist"
+                    android:textSize="@dimen/_17sdp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvRatenow"
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center_vertical"
+                        android:text="@string/rate_now"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvReview"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/cvRatenow" />
+
+
+                <View
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@+id/rvReview" />
+
+                <TextView
+                    android:id="@+id/ctvSub_Total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_7sdp"
+                    android:text="@string/subtotal"
                     android:textColor="@color/black"
-                    android:layout_marginTop="@dimen/_5sdp" />
+                    android:textSize="16sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvReview" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/ctvTax"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:text="@string/callif"
-                    android:textColor="@color/gray"
-                    android:layout_marginTop="@dimen/_7sdp" />
-
-            </LinearLayout>
-            
-
-        </LinearLayout>
-        <View
-            android:visibility="gone"
-            android:id="@+id/view5"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/offwhite"
-            app:layout_constraintTop_toBottomOf="@+id/llCall"/>
-
-        <LinearLayout
-            android:layout_margin="@dimen/_10sdp"
-            android:id="@+id/llMsg"
-            app:layout_constraintTop_toBottomOf="@id/view5"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:orientation="horizontal">
-
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="0.2"
-                android:src="@drawable/chat"
-                android:layout_height="match_parent"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8"
-                android:layout_margin="@dimen/_5sdp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:text="@string/msgagent"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_7sdp"
+                    android:text="@string/tax"
                     android:textColor="@color/black"
-                    android:layout_marginTop="@dimen/_5sdp" />
+                    android:textSize="16sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ctvDiscount" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/ctvDiscount"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:text="@string/msgif"
-                    android:textColor="@color/gray"
-                    android:layout_marginTop="@dimen/_7sdp" />
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_7sdp"
+                    android:text="@string/discount_amount"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ctvSub_Total" />
 
-            </LinearLayout>
-        </LinearLayout>
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@+id/ctvTax" />
+
+                <TextView
+                    android:id="@+id/ctvPaidVia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_7sdp"
+                    android:text="@string/paidvia"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+                <TextView
+                    android:id="@+id/ctvSub_TotalValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_7sdp"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvReview" />
+
+                <TextView
+                    android:id="@+id/ctvTaxValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_7sdp"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ctvDiscountValue" />
+
+                <TextView
+                    android:id="@+id/ctvDiscountValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_7sdp"
+                    android:text="0"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ctvSub_TotalValue" />
+
+                <TextView
+                    android:id="@+id/ctvPaidViaValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_7sdp"
+                    android:text="0"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2" />
 
 
-        <View
-            android:id="@+id/view6"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/offwhite"
-            app:layout_constraintTop_toBottomOf="@+id/llMsg"/>
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/offwhite"
+                    app:layout_constraintTop_toBottomOf="@+id/ctvPaidViaValue" />
+
+                <LinearLayout
+                    android:id="@+id/llDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_180sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/view3">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_90sdp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:text="@string/pickedup"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/ctvPickUpDay"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:singleLine="true"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/ctvPickUpTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:singleLine="true"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:text="@string/deliveryonly"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/ctvDeliveryDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:singleLine="true"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/ctvDeliveryTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:singleLine="true"
+                                android:textColor="@color/black" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:text="@string/pickupAddress"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/ctvAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:lines="3" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:id="@+id/view4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/offwhite"
+                    app:layout_constraintTop_toBottomOf="@+id/llDate" />
+
+                <LinearLayout
+                    android:id="@+id/llCall"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/view4">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:src="@drawable/call" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_weight="0.8"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:singleLine="true"
+                            android:text="@string/calldeliveryagent"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:singleLine="true"
+                            android:text="@string/callif"
+                            android:textColor="@color/gray" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/offwhite"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@+id/llCall" />
+
+                <LinearLayout
+                    android:id="@+id/llMsg"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/view5">
+
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:src="@drawable/chat" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_5sdp"
+                        android:layout_weight="0.8"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:singleLine="true"
+                            android:text="@string/msgagent"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:singleLine="true"
+                            android:text="@string/msgif"
+                            android:textColor="@color/gray" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/offwhite"
+                    app:layout_constraintTop_toBottomOf="@+id/llMsg" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-</ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

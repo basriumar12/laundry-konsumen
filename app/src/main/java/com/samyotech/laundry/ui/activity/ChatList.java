@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samyotech.laundry.ModelClass.ChatListDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.ChatListDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.ChatListAdapter;
@@ -32,6 +32,8 @@ import java.util.List;
 
 public class ChatList extends AppCompatActivity {
     private final String TAG = ChatList.class.getSimpleName();
+    Context mContext;
+    ImageView back;
     private RecyclerView rvChatList;
     private ChatListAdapter chatListAdapter;
     private ArrayList<ChatListDTO> chatList = new ArrayList<>();
@@ -39,15 +41,12 @@ public class ChatList extends AppCompatActivity {
     private SharedPrefrence prefrence;
     private UserDTO userDTO;
     private TextView tvNo;
-    Context mContext;
 
-
-    ImageView IVback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_list);
-        mContext=ChatList.this;
+        mContext = ChatList.this;
         prefrence = SharedPrefrence.getInstance(mContext);
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
         setUiAction();
@@ -56,7 +55,7 @@ public class ChatList extends AppCompatActivity {
 
     public void setUiAction() {
         tvNo = findViewById(R.id.tvNo);
-        IVback = findViewById(R.id.IVback);
+        back = findViewById(R.id.back);
         rvChatList = findViewById(R.id.rvChatList);
 
         mLayoutManager = new LinearLayoutManager(mContext);
@@ -65,7 +64,7 @@ public class ChatList extends AppCompatActivity {
         chatListAdapter = new ChatListAdapter(mContext, chatList);
         rvChatList.setAdapter(chatListAdapter);
 
-        IVback.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();

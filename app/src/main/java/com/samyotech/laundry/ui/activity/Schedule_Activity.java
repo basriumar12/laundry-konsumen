@@ -1,28 +1,28 @@
 package com.samyotech.laundry.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.samyotech.laundry.GlobalState;
-import com.samyotech.laundry.ModelClass.CurrencyDTO;
-import com.samyotech.laundry.ModelClass.ItemDTO;
-import com.samyotech.laundry.ModelClass.ItemServiceDTO;
-import com.samyotech.laundry.ModelClass.PopLaundryDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityScheduleBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.ItemDTO;
+import com.samyotech.laundry.model.ItemServiceDTO;
+import com.samyotech.laundry.model.PopLaundryDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.TabsAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
@@ -39,20 +39,18 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
     String TAG = Schedule_Activity.class.getSimpleName();
     ItemDTO itemDTOS;
 
-    String valname, valprice, shopid="", itemid_se;
+    String valname, valprice, shopid = "", itemid_se;
     UserDTO userDTO;
     GlobalState globalState;
-    private SharedPrefrence prefrence;
     TabsAdapter adapter;
     LinearLayoutManager linearLayoutManager;
     int quantity = 0, check = 0;
     float price = 0;
-    boolean doubleClick=true;
-
+    boolean doubleClick = true;
     PopLaundryDTO popLaundryDTO;
-
-
     CurrencyDTO currencyDTO;
+    private SharedPrefrence prefrence;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,13 +59,13 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
         prefrence = SharedPrefrence.getInstance(mContext);
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
 
-        currencyDTO=prefrence.getCurrency(Consts.CURRENCYDTO);
+        currencyDTO = prefrence.getCurrency(Consts.CURRENCYDTO);
         globalState = (GlobalState) getApplication();
         binding.ctvNext.setOnClickListener(this);
         binding.ivBack.setOnClickListener(this);
 
-        if(getIntent().hasExtra(Consts.SHOPDTO)){
-            popLaundryDTO=(PopLaundryDTO) getIntent().getSerializableExtra(Consts.SHOPDTO);
+        if (getIntent().hasExtra(Consts.SHOPDTO)) {
+            popLaundryDTO = (PopLaundryDTO) getIntent().getSerializableExtra(Consts.SHOPDTO);
             getItem();
 
         }
@@ -107,16 +105,15 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
         }
 
         adapter = new TabsAdapter
-                (getSupportFragmentManager(), binding.tabLayout.getTabCount(), itemDTOS,currencyDTO);
+                (getSupportFragmentManager(), binding.tabLayout.getTabCount(), itemDTOS, currencyDTO);
         binding.viewPager.setAdapter(adapter);
         binding.viewPager.setOffscreenPageLimit(1);
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));
 
-
         binding.tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.e("llllllllllllllllllllll",""+tab.getPosition());
+                Log.e("llllllllllllllllllllll", "" + tab.getPosition());
                 binding.viewPager.setCurrentItem(tab.getPosition());
 
                 //   filter(mothRealPosition);
@@ -138,11 +135,10 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
     }
 
 
-
     @Override
     protected void onResume() {
         super.onResume();
-        doubleClick=true;
+        doubleClick = true;
 
     }
 
@@ -150,19 +146,21 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ctvNext:
-                if(doubleClick){
-                if(price==0){
-                    ProjectUtils.showToast(mContext,getResources().getString(R.string.val_Item));
-                }else {
-                globalState.setItem(itemDTOS);
-                globalState.setQuantity(String.valueOf(quantity));
-                globalState.setPopLaundryDTO(popLaundryDTO);
+                if (doubleClick) {
+                    if (price == 0) {
+                        ProjectUtils.showToast(mContext, getResources().getString(R.string.val_Item));
+                    } else {
+                        globalState.setItem(itemDTOS);
+                        globalState.setQuantity(String.valueOf(quantity));
+                        globalState.setPopLaundryDTO(popLaundryDTO);
 
-                Intent in = new Intent(mContext, PreViewActivity.class);
-                in.putExtra(Consts.TOTAL_PRICE,String.valueOf(price));
+                        Intent in = new Intent(mContext, PreViewActivity.class);
+                        in.putExtra(Consts.TOTAL_PRICE, String.valueOf(price));
 
-                startActivity(in);
-                doubleClick=false;}}
+                        startActivity(in);
+                        doubleClick = false;
+                    }
+                }
                 break;
 
             case R.id.ivBack:

@@ -12,16 +12,17 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
-import com.samyotech.laundry.ModelClass.WelcomeDTO;
 import com.samyotech.laundry.R;
+import com.samyotech.laundry.interfaces.Consts;
+import com.samyotech.laundry.model.WelcomeDTO;
 
 import java.util.ArrayList;
 
 
 public class WelcomeImageAdapter extends PagerAdapter {
 
-    private Context mContext;
-    private LayoutInflater layoutInflater;
+    private final Context mContext;
+    private final LayoutInflater layoutInflater;
     AppCompatImageView background;
     TextView desc;
     TextView title;
@@ -36,18 +37,18 @@ public class WelcomeImageAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == ((FrameLayout) object);
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, final int position) {
         View itemView = layoutInflater.inflate(R.layout.item_welcomescreens, container, false);
 
-        background = (AppCompatImageView) itemView.findViewById(R.id.background);
-        title = (TextView) itemView.findViewById(R.id.title);
-        desc = (TextView) itemView.findViewById(R.id.desc);
+        background = itemView.findViewById(R.id.background);
+        title = itemView.findViewById(R.id.title);
+        desc = itemView.findViewById(R.id.desc);
 
-        Glide.with(mContext).load(imageDTOArrayList.get(position).getBackground()).into(background);
+        Glide.with(mContext).load(Consts.DEV_URL + imageDTOArrayList.get(position).getBackground()).into(background);
         title.setText(imageDTOArrayList.get(position).getHeading());
         desc.setText(imageDTOArrayList.get(position).getDesc());
 

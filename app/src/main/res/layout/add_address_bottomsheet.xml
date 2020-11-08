@@ -2,146 +2,141 @@
 <layout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/AddAddress"
-            android:textSize="@dimen/_16sdp"
-            android:layout_margin="@dimen/_10sdp"
-            android:textColor="@color/black" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/SelectArea"
-            android:textSize="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:textColor="@color/darkgray" />
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_5sdp"/>
-
-    <LinearLayout
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/CompAddress"
-            android:textSize="@dimen/_14sdp"
-            android:layout_weight="1"
-            android:textColor="@color/darkgray" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pinLocation"
-            android:textSize="@dimen/_14sdp"
-            android:gravity="end"
-            android:layout_weight="1"
-
-            android:textColor="@color/colorAccent" />
-
-
-
-    </LinearLayout>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Schme number 485 vijynagar"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginRight="10dp"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/black" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Contactnum"
-            android:textSize="@dimen/_14sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-
-            android:textColor="@color/darkgray" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="98656456589"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="@dimen/_3sdp"
-
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/black" />
-
-
-    <LinearLayout
         android:layout_margin="@dimen/_10sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
-        <RadioButton
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/Home"/>
+            android:layout_margin="@dimen/_10sdp"
+            android:text="@string/AddAddress"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp" />
 
 
-        <RadioButton
-            android:layout_weight="1"
-
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Work"/>
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/SelectArea"
+            android:textColor="@color/darkgray"
+            android:textSize="@dimen/_14sdp" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:orientation="horizontal">
 
 
-        <RadioButton
-            android:layout_weight="1"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/CompAddress"
+                android:textColor="@color/darkgray"
+                android:textSize="@dimen/_14sdp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/pinLocation"
+                android:textColor="@color/colorAccent"
+
+                android:textSize="@dimen/_14sdp" />
+
+
+        </LinearLayout>
+
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Other"/>
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="Schme number 485 vijynagar"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp" />
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:text="@string/Contactnum"
+            android:textColor="@color/darkgray"
+
+            android:textSize="@dimen/_14sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="98656456589"
+
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp" />
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp">
 
-    </LinearLayout>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Home" />
 
+
+            <RadioButton
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Work" />
+
+
+            <RadioButton
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/Other" />
+
+
+        </LinearLayout>
 
 
         <RelativeLayout
-            android:background="@drawable/ic_longbtn"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
             android:layout_margin="@dimen/_20sdp"
-            android:layout_height="@dimen/_40sdp">
+            android:background="@drawable/ic_longbtn">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -152,14 +147,8 @@
                 android:textSize="@dimen/_16sdp" />
 
 
-
-
         </RelativeLayout>
 
 
-
-
-
-
-</LinearLayout>
+    </LinearLayout>
 </layout>

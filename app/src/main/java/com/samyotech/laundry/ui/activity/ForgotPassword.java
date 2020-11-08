@@ -26,10 +26,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class ForgotPassword extends AppCompatActivity implements View.OnClickListener {
-    private String TAG = ForgotPassword.class.getSimpleName();
+    private final String TAG = ForgotPassword.class.getSimpleName();
     Context mContext;
     ActivityForgotPasswordBinding binding;
-    boolean doubleClick=true;
+    boolean doubleClick = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,6 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
 
     public void setUiAction() {
 
-
         binding.resetBtn.setOnClickListener(this);
         binding.registerNow.setOnClickListener(this);
     }
@@ -54,26 +53,25 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.reset_btn:
-                if(doubleClick)
-                clickForSubmit();
+                if (doubleClick)
+                    clickForSubmit();
 
                 break;
             case R.id.register_now:
-                if(doubleClick){
-                Intent intent_register_now = new Intent(mContext, Register.class);
-                startActivity(intent_register_now);
-                    doubleClick=false;
+                if (doubleClick) {
+                    Intent intent_register_now = new Intent(mContext, Register.class);
+                    startActivity(intent_register_now);
+                    doubleClick = false;
                 }
                 break;
         }
     }
 
 
-
     public void clickForSubmit() {
         if (!ProjectUtils.isEmailValid(binding.cetEmailADD.getText().toString().trim())) {
             showSickbar(getResources().getString(R.string.val_email));
-        }  else {
+        } else {
             if (NetworkManager.isConnectToInternet(mContext)) {
                 forgetpassword();
             } else {
@@ -93,7 +91,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 ProjectUtils.pauseProgressDialog();
                 if (flag) {
                     try {
-                        doubleClick=false;
+                        doubleClick = false;
                         ProjectUtils.showToast(mContext, msg);
 /*
 
@@ -107,7 +105,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     }
 
                 } else {
-                    doubleClick=true;
+                    doubleClick = true;
                     ProjectUtils.showToast(mContext, msg);
                 }
 
@@ -115,6 +113,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
+
     public HashMap<String, String> getparm() {
         HashMap<String, String> parms = new HashMap<>();
         parms.put(Consts.EMAIL, ProjectUtils.getEditTextValue(binding.cetEmailADD));

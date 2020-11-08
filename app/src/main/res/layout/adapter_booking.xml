@@ -3,281 +3,268 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_margin="@dimen/_5sdp"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_190sdp">
-
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/_190sdp"
+        android:layout_margin="@dimen/_5sdp"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:padding="@dimen/_5sdp"
             android:layout_height="match_parent">
 
-<LinearLayout
-    android:id="@+id/llName"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_25sdp"
-    android:orientation="horizontal">
-    <TextView
-        android:layout_width="0dp"
-        android:id="@+id/ctvName"
-        android:layout_weight="0.7"
-        android:gravity="center_vertical"
-        android:textSize="@dimen/_16sdp"
-        android:text="@string/Laundary_care_service"
-        android:layout_height="match_parent" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:id="@+id/ctvPrice"
-        android:layout_weight="0.3"
-        android:textAlignment="textEnd"
-        android:gravity="center"
-        android:textSize="@dimen/_16sdp"
-        android:text="@string/price250"
-        android:layout_height="match_parent" />
-</LinearLayout>
-<LinearLayout
-    android:id="@+id/llOrder"
-    app:layout_constraintTop_toBottomOf="@id/llName"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_25sdp"
-    android:orientation="horizontal">
-
-    <TextView
-        android:layout_width="0dp"
-        android:id="@+id/ctvOrder"
-        android:layout_weight="0.7"
-        android:gravity="center_vertical"
-        android:text="@string/orderno"
-        android:layout_height="match_parent" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:id="@+id/ctvStatus"
-        android:layout_weight="0.3"
-        android:textAlignment="textEnd"
-        android:gravity="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/confirmed"
-        android:layout_height="match_parent" />
-</LinearLayout>
-
-<View
-    android:layout_marginTop="@dimen/_10sdp"
-    android:layout_width="match_parent"
-    android:layout_height="0.5dp"
-    android:background="@color/gray"
-    app:layout_constraintTop_toBottomOf="@id/llOrder"
-    android:id="@+id/view"
-    />
-
-<LinearLayout
-    android:id="@+id/llStatus"
-    app:layout_constraintTop_toBottomOf="@id/view"
-    android:layout_width="match_parent"
-    android:layout_marginTop="@dimen/_10sdp"
-    android:layout_height="@dimen/_55sdp"
-    android:orientation="horizontal">
-
-
-    <LinearLayout
-        android:id="@+id/llConfirm"
-        android:layout_width="0dp"
-        android:background="@color/transaparent_gray"
-        android:layout_height="match_parent"
-        android:layout_weight="0.2"
-        android:orientation="vertical"
-        >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
-            android:src="@drawable/ic_confirmed"
-            android:padding="@dimen/_5sdp"
-            android:id="@+id/ivConfirm"
-            />
-
-        <TextView
-            android:id="@+id/ctvconfirmed"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/confirmed" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llpickUp"
-        android:background="@color/transaparent_gray"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.2"
-        android:orientation="vertical"
-        >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
-            android:src="@drawable/ic_delivery"
-            android:padding="@dimen/_5sdp"
-            android:id="@+id/ivPicked"
-            />
-
-        <TextView
-            android:id="@+id/ctvPicked"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/pickedup" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llProcess"
-        android:background="@color/transaparent_gray"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.2"
-        android:orientation="vertical"
-        >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
-            android:src="@drawable/ic_progress"
-            android:padding="@dimen/_5sdp"
-            android:id="@+id/ivInProcess"
-            />
-
-        <TextView
-            android:id="@+id/ctvInProcess"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/inprocess" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llShiped"
-        android:background="@color/transaparent_gray"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.2"
-        android:orientation="vertical"
-        >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
-            android:src="@drawable/ic_shipped"
-            android:padding="@dimen/_5sdp"
-            android:id="@+id/ivShipped"
-            />
-
-        <TextView
-            android:id="@+id/ctvShipped"
-            android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:text="@string/shipped" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llDeliver"
-        android:background="@color/transaparent_gray"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.2"
-        android:orientation="vertical"
-        >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
-            android:src="@drawable/ic_delivered"
-            android:padding="@dimen/_5sdp"
-            android:id="@+id/ivDeliverd"
-            />
-
-        <TextView
-            android:id="@+id/ctvDelivered"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="@string/delivered" />
-
-    </LinearLayout>
-
-
-
-
-
-</LinearLayout>
-
-
-            <View
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@id/llStatus"
-                android:id="@+id/view2"
-                />
+                android:layout_height="match_parent"
+                android:padding="@dimen/_5sdp">
 
-            <androidx.cardview.widget.CardView
-    android:id="@+id/cvCancel"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_20sdp"
-    android:elevation="@dimen/_2sdp"
-    app:layout_constraintTop_toBottomOf="@+id/view2"
-    app:layout_constraintLeft_toLeftOf="parent">
+                <LinearLayout
+                    android:id="@+id/llName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:id="@+id/ctvOrderCancel"
-                    android:gravity="center"
-                    android:text="@string/cancelorder" />
-</androidx.cardview.widget.CardView>
+                    <TextView
+                        android:id="@+id/ctvName"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.7"
+                        android:gravity="center_vertical"
+                        android:text="@string/Laundary_care_service"
+                        android:textSize="@dimen/_16sdp" />
+
+                    <TextView
+                        android:id="@+id/ctvPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:gravity="center"
+                        android:text="@string/price250"
+                        android:textAlignment="textEnd"
+                        android:textSize="@dimen/_16sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/llName">
+
+                    <TextView
+                        android:id="@+id/ctvOrder"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.7"
+                        android:gravity="center_vertical"
+                        android:text="@string/orderno" />
+
+                    <TextView
+                        android:id="@+id/ctvStatus"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.3"
+                        android:gravity="center"
+                        android:text="@string/confirmed"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/colorPrimaryDark" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@id/llOrder" />
+
+                <LinearLayout
+                    android:id="@+id/llStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_55sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/view">
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="@dimen/_2sdp"
-        android:layout_margin="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@+id/view2"
-        app:layout_constraintRight_toRightOf="parent">
+                    <LinearLayout
+                        android:id="@+id/llConfirm"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@color/transaparent_gray"
+                        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:id="@+id/ctvViewDetails"
-            android:gravity="center"
-            android:text="@string/Viewdetails" />
-    </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:id="@+id/ivConfirm"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.8"
+                            android:padding="@dimen/_5sdp"
+                            android:src="@drawable/ic_confirmed" />
+
+                        <TextView
+                            android:id="@+id/ctvconfirmed"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/confirmed"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llpickUp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@color/transaparent_gray"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/ivPicked"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.8"
+                            android:padding="@dimen/_5sdp"
+                            android:src="@drawable/ic_delivery" />
+
+                        <TextView
+                            android:id="@+id/ctvPicked"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pickedup"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llProcess"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@color/transaparent_gray"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/ivInProcess"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.8"
+                            android:padding="@dimen/_5sdp"
+                            android:src="@drawable/ic_progress" />
+
+                        <TextView
+                            android:id="@+id/ctvInProcess"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/inprocess"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llShiped"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@color/transaparent_gray"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/ivShipped"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.8"
+                            android:padding="@dimen/_5sdp"
+                            android:src="@drawable/ic_shipped" />
+
+                        <TextView
+                            android:id="@+id/ctvShipped"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/shipped"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llDeliver"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@color/transaparent_gray"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/ivDeliverd"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.8"
+                            android:padding="@dimen/_5sdp"
+                            android:src="@drawable/ic_delivered" />
+
+                        <TextView
+                            android:id="@+id/ctvDelivered"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/delivered"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/gray"
+                    app:layout_constraintTop_toBottomOf="@id/llStatus" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_20sdp"
+                    android:elevation="@dimen/_2sdp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2">
+
+                    <TextView
+                        android:id="@+id/ctvOrderCancel"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:gravity="center"
+                        android:text="@string/cancelorder" />
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_20sdp"
+                    android:elevation="@dimen/_2sdp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2">
+
+                    <TextView
+                        android:id="@+id/ctvViewDetails"
+                        android:layout_width="@dimen/_90sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:gravity="center"
+                        android:text="@string/Viewdetails" />
+                </androidx.cardview.widget.CardView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>

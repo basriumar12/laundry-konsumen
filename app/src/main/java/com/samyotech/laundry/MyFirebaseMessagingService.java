@@ -16,7 +16,6 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.samyotech.laundry.interfaces.Consts;
@@ -26,11 +25,11 @@ import com.samyotech.laundry.ui.activity.Dashboard;
 import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+    public static final String MyPREFERENCES = "MyPrefs";
     private static final String TAG = "MyFirebaseMsgService";
     SharedPrefrence prefrence;
     int i = 0;
     SharedPreferences sharedpreferences;
-    public static final String MyPREFERENCES = "MyPrefs" ;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -40,7 +39,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.e(TAG, "From: " + remoteMessage.getFrom());
         if (remoteMessage.getData().size() > 0) {
             Log.e(TAG, "Message data payload: " + remoteMessage.getData());
-       }
+        }
 
 
 /*
@@ -73,29 +72,22 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     broadcastIntent.setAction(Consts.BROADCAST);
                     LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
 
+                    sendNotification(getValue(remoteMessage.getData(), "body"), Consts.CHATNOTIFICATION, getValue(remoteMessage.getData(), "title"));
+                } else if (remoteMessage.getData().get(Consts.TYPE).equalsIgnoreCase(Consts.BROADCASTNOTIFICATION)) {
 
-                    sendNotification(getValue(remoteMessage.getData(), "body"), Consts.CHATNOTIFICATION ,getValue(remoteMessage.getData(), "title"));
-                }else  if (remoteMessage.getData().get(Consts.TYPE).equalsIgnoreCase(Consts.BROADCASTNOTIFICATION)) {
+                    sendNotification(getValue(remoteMessage.getData(), "body"), Consts.BROADCASTNOTIFICATION, getValue(remoteMessage.getData(), "title"));
+                } else if (remoteMessage.getData().get(Consts.TYPE).equalsIgnoreCase(Consts.ORDERNOTIFICATION)) {
 
-
-
-                    sendNotification(getValue(remoteMessage.getData(), "body"), Consts.BROADCASTNOTIFICATION ,getValue(remoteMessage.getData(), "title"));
-                }else  if (remoteMessage.getData().get(Consts.TYPE).equalsIgnoreCase(Consts.ORDERNOTIFICATION)) {
-
-
-
-
-                    sendNotification(getValue(remoteMessage.getData(), "body"), Consts.ORDERNOTIFICATION,getValue(remoteMessage.getData(), "title") );
-                }else  if (remoteMessage.getData().get(Consts.TYPE).equalsIgnoreCase(Consts.TICKETNOTIFICATION)) {
+                    sendNotification(getValue(remoteMessage.getData(), "body"), Consts.ORDERNOTIFICATION, getValue(remoteMessage.getData(), "title"));
+                } else if (remoteMessage.getData().get(Consts.TYPE).equalsIgnoreCase(Consts.TICKETNOTIFICATION)) {
 
                     Intent broadcastIntent = new Intent();
                     broadcastIntent.setAction(Consts.BROADCAST);
                     LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent);
 
-
-                    sendNotification(getValue(remoteMessage.getData(), "body"), Consts.TICKETNOTIFICATION,getValue(remoteMessage.getData(), "title"));
-                }else{
-                    sendNotification(getValue(remoteMessage.getData(), "body"), "","");
+                    sendNotification(getValue(remoteMessage.getData(), "body"), Consts.TICKETNOTIFICATION, getValue(remoteMessage.getData(), "title"));
+                } else {
+                    sendNotification(getValue(remoteMessage.getData(), "body"), "", "");
                 }
             }
 
@@ -116,6 +108,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             return getString(R.string.app_name);
         }
     }
+
     @Override
     public void onNewToken(String token) {
 //        token= FirebaseInstanceId.getInstance().getToken();
@@ -128,6 +121,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "Refreshed token: " + token);
 
     }
+
     private void sendNotification(final String messageBody, String tag, String title) {
 
         Intent intent = new Intent(this, Dashboard.class);
@@ -142,7 +136,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setSound(defaultSoundUri)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(messageBody))
                 .setContentText(messageBody).setAutoCancel(true).setContentIntent(pendingIntent);
-
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

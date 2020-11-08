@@ -1,22 +1,18 @@
 package com.samyotech.laundry.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.google.android.material.snackbar.Snackbar;
-import com.samyotech.laundry.MainActivity;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivitySchedulePickupAddressBinding;
 import com.samyotech.laundry.interfaces.Consts;
@@ -29,17 +25,18 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class Schedule_PickupDate extends AppCompatActivity implements View.OnClickListener {
-    ActivitySchedulePickupAddressBinding binding;
-    Context mContext;
     final Calendar myCalendar = Calendar.getInstance();
     final Calendar myCalendarAdop = Calendar.getInstance();
     final Calendar myCalendarEnd = Calendar.getInstance();
-    private String TAG = Schedule_PickupDate.class.getSimpleName();
+    private final String TAG = Schedule_PickupDate.class.getSimpleName();
+    ActivitySchedulePickupAddressBinding binding;
+    Context mContext;
     int t = 123;
     TimePickerDialog timePickerDialog;
     DatePickerDialog datePickerDialogADp, datePickerDialogEnd;
-    HashMap<String, String> hashMap ;
-    boolean checkCLick=true;
+    HashMap<String, String> hashMap;
+    boolean checkCLick = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,26 +74,27 @@ public class Schedule_PickupDate extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.rlAdddate:
 
-                if(!ProjectUtils.isEditTextFilled(binding.ctvPickupDate)){
+                if (!ProjectUtils.isEditTextFilled(binding.ctvPickupDate)) {
 
                     showSickbar(getResources().getString(R.string.val_pdate));
 
-                }else if(!ProjectUtils.isEditTextFilled(binding.ctvPickupTime)){
+                } else if (!ProjectUtils.isEditTextFilled(binding.ctvPickupTime)) {
                     showSickbar(getResources().getString(R.string.val_ptime));
 
-                }else if(!ProjectUtils.isEditTextFilled(binding.ctvDeliveryDate)){
+                } else if (!ProjectUtils.isEditTextFilled(binding.ctvDeliveryDate)) {
                     showSickbar(getResources().getString(R.string.val_ddate));
 
-                }else if(!ProjectUtils.isEditTextFilled(binding.ctvDeliveryTime)){
+                } else if (!ProjectUtils.isEditTextFilled(binding.ctvDeliveryTime)) {
                     showSickbar(getResources().getString(R.string.val_dtime));
 
-                }else {
-                    if(checkCLick){
-                    Intent in = new Intent(mContext, PaymentActivity.class);
-                    in.putExtra("map", getParams());
-                    startActivity(in);
-                    checkCLick=false;
-                }}
+                } else {
+                    if (checkCLick) {
+                        Intent in = new Intent(mContext, PaymentActivity.class);
+                        in.putExtra("map", getParams());
+                        startActivity(in);
+                        checkCLick = false;
+                    }
+                }
                 break;
         }
     }
@@ -104,50 +102,52 @@ public class Schedule_PickupDate extends AppCompatActivity implements View.OnCli
     @Override
     protected void onResume() {
         super.onResume();
-        checkCLick=true;
+        checkCLick = true;
     }
 
     private void addtime() {
-
-
 
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
         int minute = mcurrentTime.get(Calendar.MINUTE);
 
-         timePickerDialog = new TimePickerDialog(Schedule_PickupDate.this, new TimePickerDialog.OnTimeSetListener() {
+        timePickerDialog = new TimePickerDialog(Schedule_PickupDate.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker mTimePicker, int selectedHour, int selectedMinute) {
-                String AM_PM ;
-                if(selectedHour < 12) {
+                String AM_PM;
+                if (selectedHour < 12) {
 
                     AM_PM = "AM";
 
-                    if(selectedHour==0){
+                    if (selectedHour == 0) {
                         if (t == 1) {
-                            binding.ctvPickupTime.setText(String.format("%02d", 12) + ":" + String.format("%02d", selectedMinute)+" "+AM_PM);
+                            binding.ctvPickupTime.setText(String.format("%02d", 12) + ":" + String.format("%02d", selectedMinute) + " " + AM_PM);
                         } else {
                             binding.ctvDeliveryTime.setText(String.format("%02d", 12) + ":" + String.format("%02d", selectedMinute) + " " + AM_PM);
-                        } }else {
-                    if (t == 1) {
-                        binding.ctvPickupTime.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute)+" "+AM_PM);
+                        }
                     } else {
-                        binding.ctvDeliveryTime.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute)+" "+AM_PM);
-                    }}
+                        if (t == 1) {
+                            binding.ctvPickupTime.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute) + " " + AM_PM);
+                        } else {
+                            binding.ctvDeliveryTime.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute) + " " + AM_PM);
+                        }
+                    }
                 } else {
                     AM_PM = "PM";
 
-                    if(selectedHour==12){
+                    if (selectedHour == 12) {
                         if (t == 1) {
-                            binding.ctvPickupTime.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute)+" "+AM_PM);
+                            binding.ctvPickupTime.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute) + " " + AM_PM);
                         } else {
-                            binding.ctvDeliveryTime.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute)+" "+AM_PM);
+                            binding.ctvDeliveryTime.setText(String.format("%02d", selectedHour) + ":" + String.format("%02d", selectedMinute) + " " + AM_PM);
                         }
-                    }else {   if (t == 1) {
-                        binding.ctvPickupTime.setText(String.format("%02d", selectedHour-12) + ":" + String.format("%02d", selectedMinute)+" "+AM_PM);
                     } else {
-                        binding.ctvDeliveryTime.setText(String.format("%02d", selectedHour-12) + ":" + String.format("%02d", selectedMinute)+" "+AM_PM);
-                    }}
+                        if (t == 1) {
+                            binding.ctvPickupTime.setText(String.format("%02d", selectedHour - 12) + ":" + String.format("%02d", selectedMinute) + " " + AM_PM);
+                        } else {
+                            binding.ctvDeliveryTime.setText(String.format("%02d", selectedHour - 12) + ":" + String.format("%02d", selectedMinute) + " " + AM_PM);
+                        }
+                    }
 
 
                 }
@@ -159,14 +159,11 @@ public class Schedule_PickupDate extends AppCompatActivity implements View.OnCli
     }
 
 
-
-
     public void openDatePickerStart() {
 
         int year = myCalendar.get(Calendar.YEAR);
         int monthOfYear = myCalendar.get(Calendar.MONTH);
         int dayOfMonth = myCalendar.get(Calendar.DAY_OF_MONTH);
-
 
         datePickerDialogADp = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -210,7 +207,6 @@ public class Schedule_PickupDate extends AppCompatActivity implements View.OnCli
         int monthOfYear = myCalendar.get(Calendar.MONTH);
         int dayOfMonth = myCalendar.get(Calendar.DAY_OF_MONTH);
 
-
         datePickerDialogEnd = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int y, int m, int d) {
@@ -246,7 +242,6 @@ public class Schedule_PickupDate extends AppCompatActivity implements View.OnCli
     }
 
 
-
     public void showSickbar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.RRsncbar, msg, Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
@@ -257,9 +252,9 @@ public class Schedule_PickupDate extends AppCompatActivity implements View.OnCli
 
     private HashMap<String, String> getParams() {
         hashMap.put(Consts.PICKUP_DATE, ProjectUtils.getEditTextValue(binding.ctvPickupDate));
-        hashMap.put(Consts.PICKUP_TIME,  ProjectUtils.getEditTextValue(binding.ctvPickupTime));
-        hashMap.put(Consts.DELIVERY_DATE,  ProjectUtils.getEditTextValue(binding.ctvDeliveryDate));
-        hashMap.put(Consts.DELIVERY_TIME,  ProjectUtils.getEditTextValue(binding.ctvDeliveryTime));
+        hashMap.put(Consts.PICKUP_TIME, ProjectUtils.getEditTextValue(binding.ctvPickupTime));
+        hashMap.put(Consts.DELIVERY_DATE, ProjectUtils.getEditTextValue(binding.ctvDeliveryDate));
+        hashMap.put(Consts.DELIVERY_TIME, ProjectUtils.getEditTextValue(binding.ctvDeliveryTime));
 
         return hashMap;
     }

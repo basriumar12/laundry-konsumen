@@ -8,13 +8,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.FileProvider;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -22,17 +15,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.FileProvider;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.cocosw.bottomsheet.BottomSheet;
 import com.google.gson.Gson;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.FragmentProfileBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
+import com.samyotech.laundry.ui.activity.About;
 import com.samyotech.laundry.ui.activity.ChangPassword;
 import com.samyotech.laundry.ui.activity.ChatList;
 import com.samyotech.laundry.ui.activity.Dashboard;
@@ -54,11 +54,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class ProfileFragment extends Fragment implements View.OnClickListener{
+public class ProfileFragment extends Fragment implements View.OnClickListener {
     private static final int RESULT_OK = -1;
+    private final String TAG = ProfileFragment.class.getSimpleName();
+    public ArrayList<File> files = new ArrayList<>();
     FragmentProfileBinding binding;
-
-    private String TAG = ProfileFragment.class.getSimpleName();
     Dashboard dashboard;
     SharedPrefrence sharedPrefrence;
     UserDTO userDTO;
@@ -72,17 +72,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     File file;
     Bitmap bm;
     int fileAvailable = 0;
-    public ArrayList<File> files = new ArrayList<>();
     HashMap<String, File> fileHashMap = new HashMap<>();
     HashMap<String, String> hashMap = new HashMap<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         sharedPrefrence = SharedPrefrence.getInstance(getActivity());
-        userDTO=sharedPrefrence.getParentUser(Consts.USER_DTO);
-        hashMap.put(Consts.USER_ID,userDTO.getUser_id());
+        userDTO = sharedPrefrence.getParentUser(Consts.USER_DTO);
+        hashMap.put(Consts.USER_ID, userDTO.getUser_id());
         setUIAction();
         return binding.getRoot();
     }
@@ -90,66 +90,65 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private void setUIAction() {
 
         Glide.with(getActivity())
-                .load(userDTO.getImage())
+                .load(Consts.DEV_URL + userDTO.getImage())
                 .error(R.drawable.ic_avatar)
-                .into(binding.civimage);
-            camera();
+                .into(binding.ivAvtaimg);
+        camera();
 
         binding.tvName.setText(userDTO.getName());
-        binding.tvAddress.setText(userDTO.getAddress());
 
 //        mMaxScrollSize = binding.appbar.getTotalScrollRange();
 
-        binding.ctvDelete.setOnClickListener(this);
-        binding.rlEditProfile.setOnClickListener(this);
         binding.ctvprofile.setOnClickListener(this);
-        binding.ctvMyOrder.setOnClickListener(this);
-        binding.ctvLogout.setOnClickListener(this);
-        binding.ctvSupport.setOnClickListener(this);
-        binding.ctvChat.setOnClickListener(this);
-        binding.ctvnotification.setOnClickListener(this);
         binding.ctvChangePassword.setOnClickListener(this);
+        binding.ctvnotification.setOnClickListener(this);
+        binding.ctvChat.setOnClickListener(this);
+        binding.ctvSupport.setOnClickListener(this);
+        binding.ctvAbout.setOnClickListener(this);
+        binding.ctvLogout.setOnClickListener(this);
+
+        binding.updatePhoto.setOnClickListener(this);
+        binding.updateBackground.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
-    switch (v.getId()){
-        case R.id.ctvLogout:
-        alertDialogLogout();
-            break;
-        case R.id.rlEditProfile:
-            builder.show();
-            break;
-        case R.id.ctvDelete:
-        alertDialogDelete();
-            break;
-        case R.id.ctvprofile:
-        Intent in123= new Intent(getActivity(), ManageProfile.class);
-        startActivity(in123);
-            break;
-        case R.id.ctvMyOrder:
-
-            Intent in12= new Intent(getActivity(),Dashboard.class);
-            in12.putExtra(Consts.SCREEN_TAG,Consts.BOOKINGFRAGMENT);
-            startActivity(in12);            break;
-        case R.id.ctvSupport:
-            Intent in =new Intent(getActivity(), TicketsActivity.class);
-            startActivity(in);
-            break;
-        case R.id.ctvChat:
-            Intent in1 =new Intent(getActivity(), ChatList.class);
-            startActivity(in1);
-            break;
-        case R.id.ctvnotification:
-            Intent in2 =new Intent(getActivity(), NotificationActivity.class);
-            startActivity(in2);
-            break;
-        case R.id.ctvChangePassword:
-            Intent in3 =new Intent(getActivity(), ChangPassword.class);
-            startActivity(in3);
-            break;
-    }
+        switch (v.getId()) {
+            case R.id.ctvLogout:
+                alertDialogLogout();
+                break;
+            case R.id.ctvprofile:
+                Intent in123 = new Intent(getActivity(), ManageProfile.class);
+                startActivity(in123);
+                break;
+            case R.id.ctvSupport:
+                Intent in = new Intent(getActivity(), TicketsActivity.class);
+                startActivity(in);
+                break;
+            case R.id.ctvChat:
+                Intent in1 = new Intent(getActivity(), ChatList.class);
+                startActivity(in1);
+                break;
+            case R.id.ctvnotification:
+                Intent in2 = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(in2);
+                break;
+            case R.id.ctvChangePassword:
+                Intent in3 = new Intent(getActivity(), ChangPassword.class);
+                startActivity(in3);
+                break;
+            case R.id.ctvAbout:
+                Intent in4 = new Intent(getActivity(), About.class);
+                startActivity(in4);
+                break;
+            case R.id.updatePhoto:
+                builder.show();
+                break;
+            case R.id.updateBackground:
+                builder.show();
+                break;
+        }
     }
 
 
@@ -184,10 +183,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 
     public HashMap<String, String> getparm() {
         HashMap<String, String> parms = new HashMap<>();
-        parms.put(Consts.USER_ID,userDTO.getUser_id());
+        parms.put(Consts.USER_ID, userDTO.getUser_id());
         Log.e(TAG + " Login", parms.toString());
         return parms;
     }
+
     public void alertDialogLogout() {
         new AlertDialog.Builder(dashboard)
                 .setIcon(R.mipmap.ic_launcher)
@@ -198,7 +198,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
-                logout();
+                        logout();
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -267,7 +267,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
-                deleteAccount();
+                        deleteAccount();
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -305,12 +305,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     }*/
 
 
-
-
     private void camera() {
-
-        builder = new BottomSheet.Builder(getActivity()).sheet(R.menu.menu_card);
-        builder.title("Please select image");
+        builder = new BottomSheet.Builder(requireActivity()).sheet(R.menu.menu_card);
         builder.listener(new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -332,12 +328,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                                         //Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), "com.example.asd", newFile);
 
-                                        picUri = FileProvider.getUriForFile(getActivity().getApplicationContext(),"com.samyotech.laundry"+".fileprovider",file);
+                                        picUri = FileProvider.getUriForFile(getActivity().getApplicationContext(), "com.samyotech.laundry" + ".fileprovider", file);
                                     } else {
                                         picUri = Uri.fromFile(file); // create
                                     }
-
-
 
                                     sharedPrefrence.setValue(Consts.IMAGE, picUri.toString());
                                     intent.putExtra(MediaStore.EXTRA_OUTPUT, picUri); // set the image file
@@ -372,14 +366,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                             }
                         }
                         break;
-                    case R.id.cancel_cards:
-                        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                            @Override
-                            public void onDismiss(DialogInterface dialog) {
-                                dialog.dismiss();
-                            }
-                        });
-                        break;
                 }
             }
         });
@@ -412,7 +398,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -428,11 +413,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     imageCompression.setOnTaskFinishedEvent(new ImageCompression.AsyncResponse() {
                         @Override
                         public void processFinish(String imagePath) {
-                            fileAvailable=1;
+                            fileAvailable = 1;
                             try {
                                 // bitmap = MediaStore.Images.Media.getBitmap(SaveDetailsActivityNew.this.getContentResolver(), resultUri);
                                 file = new File(imagePath);
-                                fileHashMap.put(Consts.IMAGE,file);
+                                fileHashMap.put(Consts.IMAGE, file);
 
                                 updateProfile();
                                /* Log.e("image", imagePath);
@@ -460,13 +445,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                         @Override
                         public void processFinish(String imagePath) {
 
-
-
-                            fileAvailable=1;
+                            fileAvailable = 1;
                             Log.e("image", imagePath);
                             try {
                                 file = new File(imagePath);
-                                fileHashMap.put(Consts.IMAGE,file);
+                                fileHashMap.put(Consts.IMAGE, file);
 
                                 updateProfile();
 
@@ -502,32 +485,26 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         }
 
 
-
-
     }
 
     private void updateProfile() {
-        new HttpsRequest(Consts.USERUPDATE,hashMap,fileHashMap,getActivity()).imagePost(TAG, new Helper() {
+        new HttpsRequest(Consts.USERUPDATE, hashMap, fileHashMap, getActivity()).imagePost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
-                if(flag){
-
-
+                if (flag) {
 
                     userDTO = new Gson().fromJson(response.getJSONObject("data").toString(), UserDTO.class);
                     sharedPrefrence.setParentUser(userDTO, Consts.USER_DTO);
 
                     sharedPrefrence.setBooleanValue(Consts.IS_REGISTERED, true);
 
-
-
-                    Glide.with(getActivity()).load(userDTO.getImage())
+                    Glide.with(getActivity()).load(Consts.DEV_URL + userDTO.getImage())
                             .thumbnail(0.5f)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(binding.civimage);
+                            .into(binding.ivAvtaimg);
 
-                }else {
-                    ProjectUtils.showToast(getActivity(),msg);
+                } else {
+                    ProjectUtils.showToast(getActivity(), msg);
                 }
             }
         });

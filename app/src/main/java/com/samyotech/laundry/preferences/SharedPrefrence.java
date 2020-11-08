@@ -6,9 +6,9 @@ import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samyotech.laundry.ModelClass.CurrencyDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.interfaces.Consts;
+import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.UserDTO;
 
 import java.lang.reflect.Type;
 
@@ -22,13 +22,6 @@ public class SharedPrefrence {
 
     }
 
-    public void clearAllPreferences() {
-        prefsEditor = myPrefs.edit();
-        prefsEditor.clear();
-        prefsEditor.commit();
-    }
-
-
     public static SharedPrefrence getInstance(Context ctx) {
         if (myObj == null) {
             myObj = new SharedPrefrence();
@@ -36,6 +29,12 @@ public class SharedPrefrence {
             prefsEditor = myPrefs.edit();
         }
         return myObj;
+    }
+
+    public void clearAllPreferences() {
+        prefsEditor = myPrefs.edit();
+        prefsEditor.clear();
+        prefsEditor.commit();
     }
 
     public void clearPreferences(String key) {
@@ -109,7 +108,6 @@ public class SharedPrefrence {
             return testHashMap;
         }
     }
-
 
 
     public void setSubscription(CurrencyDTO currencyDTO, String tag) {

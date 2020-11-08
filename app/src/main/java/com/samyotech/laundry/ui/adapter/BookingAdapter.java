@@ -15,18 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.samyotech.laundry.ModelClass.BookingDTO;
-import com.samyotech.laundry.ModelClass.CurrencyDTO;
-import com.samyotech.laundry.ModelClass.OrderListDTO;
-import com.samyotech.laundry.ModelClass.ServicesDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterBookingBinding;
-import com.samyotech.laundry.databinding.AdapterServicesBinding;
 import com.samyotech.laundry.databinding.DailogCancelOrderBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.OrderListDTO;
 import com.samyotech.laundry.ui.activity.OrderDetails;
 import com.samyotech.laundry.ui.fragment.BookingFragment;
 import com.samyotech.laundry.utils.ProjectUtils;
@@ -39,8 +35,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHolder> {
-    private String TAG = BookingAdapter.class.getSimpleName();
-
+    private final String TAG = BookingAdapter.class.getSimpleName();
     LayoutInflater layoutInflater;
     AdapterBookingBinding binding;
     Context kContext;
@@ -50,7 +45,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
     private Dialog dialog;
     private ArrayList<OrderListDTO> objects = null;
 
-    public BookingAdapter(Context kContext, ArrayList<OrderListDTO> objects, BookingFragment bookingFragment,CurrencyDTO currencyDTO) {
+    public BookingAdapter(Context kContext, ArrayList<OrderListDTO> objects, BookingFragment bookingFragment, CurrencyDTO currencyDTO) {
         this.kContext = kContext;
         this.currencyDTO = currencyDTO;
         this.bookingFragment = bookingFragment;
@@ -73,12 +68,9 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-
         holder.binding.ctvName.setText(objects.get(position).getShop_name());
         holder.binding.ctvOrder.setText(objects.get(position).getOrder_id());
-        holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol()+" "+objects.get(position).getPrice());
-
-
+        holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol() + " " + objects.get(position).getPrice());
 
         if (objects.get(position).getOrder_status().equalsIgnoreCase("0")) {
             holder.binding.ctvStatus.setText(kContext.getResources().getString(R.string.pending));
@@ -111,24 +103,22 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
             holder.binding.ctvStatus.setText(kContext.getResources().getString(R.string.cancel));
         }
 
-
         holder.binding.ctvViewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(kContext, OrderDetails.class);
-                in.putExtra(Consts.ORDERLISTDTO,objects.get(position));
+                in.putExtra(Consts.ORDERLISTDTO, objects.get(position));
                 kContext.startActivity(in);
             }
         });
-
 
         holder.binding.cvCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (objects.get(position).getOrder_status().equalsIgnoreCase("6")) {
                     Toast.makeText(kContext, R.string.ordercanceled, Toast.LENGTH_SHORT).show();
-                }else
-                dialogCancel(position);
+                } else
+                    dialogCancel(position);
             }
         });
     }
@@ -137,16 +127,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
     public int getItemCount() {
         return objects.size();
     }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        AdapterBookingBinding binding;
-
-        public MyViewHolder(@NonNull AdapterBookingBinding itemView) {
-            super(itemView.getRoot());
-            this.binding = itemView;
-        }
-    }
-
 
     public void dialogCancel(final int pos) {
         dialog = new Dialog(kContext/*, android.R.style.Theme_Dialog*/);
@@ -177,23 +157,21 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
     }
 
     private void cancelOrder(String orderid) {
-        HashMap<String,String>params=new HashMap<>();
-        params.put(Consts.ORDER_ID,orderid);
-        new HttpsRequest(Consts.ORDERCANCEL,params,kContext).stringPost(TAG, new Helper() {
+        HashMap<String, String> params = new HashMap<>();
+        params.put(Consts.ORDER_ID, orderid);
+        new HttpsRequest(Consts.ORDERCANCEL, params, kContext).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
-                if(flag){
+                if (flag) {
                     bookingFragment.getAllBookings();
                     notifyDataSetChanged();
                     bookingFragment.getAllBookings();
-                }else {
-                    ProjectUtils.showToast(kContext,msg);
+                } else {
+                    ProjectUtils.showToast(kContext, msg);
                 }
             }
         });
     }
-
-
 
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
@@ -209,6 +187,15 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
             }
         }
         notifyDataSetChanged();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        AdapterBookingBinding binding;
+
+        public MyViewHolder(@NonNull AdapterBookingBinding itemView) {
+            super(itemView.getRoot());
+            this.binding = itemView;
+        }
     }
 
 

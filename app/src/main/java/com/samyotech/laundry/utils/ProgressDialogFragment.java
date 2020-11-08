@@ -20,7 +20,6 @@ import androidx.fragment.app.DialogFragment;
 import com.samyotech.laundry.R;
 
 
-
 public class
 ProgressDialogFragment extends DialogFragment {
     public static final String TAG = ProgressDialogFragment.class.getSimpleName();
@@ -40,7 +39,7 @@ ProgressDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_progress_dialog, null, false);
-        ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress);
+        ProgressBar progressBar = view.findViewById(R.id.progress);
         progressBar.getIndeterminateDrawable().setColorFilter(getContext().getResources().getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN);
         return view;
     }

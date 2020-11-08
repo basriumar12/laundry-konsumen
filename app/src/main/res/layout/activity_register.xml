@@ -88,7 +88,7 @@
                             android:inputType="textEmailAddress"
                             android:singleLine="true"
                             android:textColor="@color/white"
-                        android:textColorHint="@color/light_gray" />
+                            android:textColorHint="@color/light_gray" />
 
                     </LinearLayout>
 
@@ -120,7 +120,7 @@
                                 android:paddingLeft="5dp"
                                 android:singleLine="true"
                                 android:textColor="@color/white"
-                        android:textColorHint="@color/light_gray"
+                                android:textColorHint="@color/light_gray"
                                 android:textSize="16sp" />
 
                             <ImageView
@@ -129,9 +129,9 @@
                                 android:layout_height="16dp"
                                 android:layout_gravity="center"
                                 android:layout_marginRight="5dp"
-                                app:tint="@color/white"
                                 android:gravity="center_vertical"
-                                android:src="@drawable/passwordhide" />
+                                android:src="@drawable/passwordhide"
+                                app:tint="@color/white" />
 
 
                         </LinearLayout>
@@ -165,7 +165,7 @@
                                 android:paddingLeft="5dp"
                                 android:singleLine="true"
                                 android:textColor="@color/white"
-                        android:textColorHint="@color/light_gray"
+                                android:textColorHint="@color/light_gray"
                                 android:textSize="16sp" />
 
                             <ImageView
@@ -175,8 +175,8 @@
                                 android:layout_gravity="center"
                                 android:layout_marginRight="5dp"
                                 android:gravity="center_vertical"
-                                app:tint="@color/white"
-                                android:src="@drawable/passwordhide" />
+                                android:src="@drawable/passwordhide"
+                                app:tint="@color/white" />
 
 
                         </LinearLayout>

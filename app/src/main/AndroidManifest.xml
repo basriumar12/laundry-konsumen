@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.samyotech.laundry">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -14,13 +18,17 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:replace="android:allowBackup,android:supportsRtl"
-        android:largeHeap="true">
-        <activity android:name=".ui.activity.AllServices"></activity>
+        tools:replace="android:allowBackup,android:supportsRtl">
+
+        <activity
+            android:name=".ui.activity.About"
+            android:label="@string/title_activity_about"></activity>
+        <activity android:name=".ui.activity.AllServices" />
         <activity
             android:name=".ui.activity.NotificationActivity"
             android:launchMode="singleTop" />
@@ -42,7 +50,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBjwJISIDoiwfMcS9ue6RwZ-GsvLhp2seg"/>
+            android:value="AIzaSyBjwJISIDoiwfMcS9ue6RwZ-GsvLhp2seg" />
 
         <activity
             android:name=".ui.activity.WelcomeScreens"
@@ -130,6 +138,7 @@
                 android:name="com.google.android.gms.version"
                 android:value="@integer/google_play_services_version" />
         </activity>
+
         <service
             android:name=".MyFirebaseMessagingService"
             android:exported="false">
@@ -137,6 +146,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.samyotech.laundry.fileprovider"

@@ -1,27 +1,26 @@
 package com.samyotech.laundry.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.bumptech.glide.Glide;
 import com.samyotech.laundry.GlobalState;
-import com.samyotech.laundry.ModelClass.CurrencyDTO;
-import com.samyotech.laundry.ModelClass.ItemDTO;
-import com.samyotech.laundry.ModelClass.PopLaundryDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityPaymentBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.ItemDTO;
+import com.samyotech.laundry.model.PopLaundryDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.utils.ProjectUtils;
 
@@ -37,19 +36,19 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
     Context mContext;
     UserDTO userDTO;
     GlobalState globalState;
-    private SharedPrefrence prefrence;
     ItemDTO itemServiceDTO;
     PopLaundryDTO popLaundryDTO;
     JSONArray jsonArray = new JSONArray();
     String TAG = PreViewActivity.class.getSimpleName();
-    String totalPrice = "0",totalPriceBef = "0", promoCode = "", latitude = "", longitude = "", discounted_price = "0", discounted_value = "0";
+    String totalPrice = "0", totalPriceBef = "0", promoCode = "", latitude = "", longitude = "", discounted_price = "0", discounted_value = "0";
     String otpGenrate = "";
     float discountValue = 0;
     HashMap<String, String> parms = new HashMap<>();
     HashMap<String, String> parmsSubmit = new HashMap<>();
     boolean checkCoup = true;
-    int k=0;
+    int k = 0;
     CurrencyDTO currencyDTO;
+    private SharedPrefrence prefrence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +61,9 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         globalState = (GlobalState) getApplication();
         prefrence = SharedPrefrence.getInstance(mContext);
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
-        currencyDTO = (CurrencyDTO) prefrence.getCurrency(Consts.CURRENCYDTO);
-        itemServiceDTO = (ItemDTO) GlobalState.getInstance().itemServiceDTO();
-        popLaundryDTO = (PopLaundryDTO) GlobalState.getInstance().getPopLaundryDTO();
+        currencyDTO = prefrence.getCurrency(Consts.CURRENCYDTO);
+        itemServiceDTO = GlobalState.getInstance().itemServiceDTO();
+        popLaundryDTO = GlobalState.getInstance().getPopLaundryDTO();
 
         setUiAction();
     }
@@ -86,17 +85,16 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         } else {
             binding.ctvHaveProcode.setText(getResources().getText(R.string.applied_code) + " " + promoCode);
             binding.ctvDiscountValue.setText(globalState.getDiscountcost());
-            discounted_value=globalState.getDiscountcost();
+            discounted_value = globalState.getDiscountcost();
 
         }
         Log.e(TAG, "setUiAction: " + discountValue);
         Glide.with(mContext)
-                .load(popLaundryDTO.getImage())
+                .load(Consts.DEV_URL + popLaundryDTO.getImage())
                 .error(R.drawable.shop_image)
                 .into(binding.ivImage);
         binding.ctvbShopName.setText(popLaundryDTO.getShop_name());
         binding.ctvAddress.setText(popLaundryDTO.getAddress());
-
 
         binding.rlConfirm.setOnClickListener(this);
 
@@ -196,9 +194,6 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                         jsonObject.putOpt(Consts.UPDATED_AT, itemServiceDTO.getItem_list().get(i).getServices().get(j).getUpdated_at());
                         jsonObject.putOpt(Consts.SERVICE_NAME, itemServiceDTO.getItem_list().get(i).getServices().get(j).getService_name());
 
-
-
-
                         jsonArray.put(k, jsonObject);
                         k++;
                 /*        final Handler handler = new Handler();
@@ -209,8 +204,6 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                             }
                         }, 200);
 */
-
-
 
                     } catch (Exception e) {
 

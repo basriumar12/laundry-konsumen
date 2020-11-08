@@ -18,6 +18,7 @@
             android:layout_margin="8dp"
             android:padding="10dp"
             android:src="@drawable/ic_left_arrow" />
+
         <TextView
             android:id="@+id/tvNameHedar"
             android:layout_width="wrap_content"
@@ -48,9 +49,9 @@
         android:id="@+id/linearLayoutFooter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -68,9 +69,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
                 android:layout_gravity="center_vertical"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_msg_panel_smiles" />
 
@@ -79,10 +80,10 @@
                 android:id="@+id/buttonLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="10dp"
                 android:layout_toLeftOf="@+id/buttonSendMessage"
                 android:layout_toRightOf="@+id/emojiButton"
                 android:background="@drawable/shape_for_gradient"
@@ -129,12 +130,11 @@
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center_vertical"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/send_msg_chat" />
-
 
 
         </RelativeLayout>

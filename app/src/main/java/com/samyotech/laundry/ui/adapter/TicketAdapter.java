@@ -15,10 +15,10 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.samyotech.laundry.ModelClass.TicketDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.interfaces.Consts;
+import com.samyotech.laundry.model.TicketDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.ui.activity.CommentOneByOne;
 import com.samyotech.laundry.ui.activity.TicketsActivity;
 import com.samyotech.laundry.utils.ProjectUtils;
@@ -53,8 +53,6 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-
-
         holder.tvTicket.setText(ticketDTOSList.get(position).getTitle());
         holder.ctvDiscription.setText(ticketDTOSList.get(position).getDescription());
 
@@ -62,7 +60,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
 
             holder.tvDate.setText(ProjectUtils.convertTimestampDateToTime(Long.parseLong(ticketDTOSList.get(position).getCreated_at())));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -84,9 +82,11 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
             @Override
             public void onClick(View v) {
                 if (ticketDTOSList.get(position).getStatus().equalsIgnoreCase("2")) {
-                  } else{ Intent in = new Intent(mContext, CommentOneByOne.class);
+                } else {
+                    Intent in = new Intent(mContext, CommentOneByOne.class);
                     in.putExtra(Consts.TICKET_ID, ticketDTOSList.get(position).getTiket_id());
-                    mContext.startActivity(in);}
+                    mContext.startActivity(in);
+                }
 
             }
         });

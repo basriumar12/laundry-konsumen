@@ -2,7 +2,6 @@ package com.samyotech.laundry.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -11,9 +10,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.samyotech.laundry.ModelClass.OfferDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.OffersBinding;
+import com.samyotech.laundry.interfaces.Consts;
+import com.samyotech.laundry.model.OfferDTO;
 
 import java.util.ArrayList;
 
@@ -42,25 +42,18 @@ public class OffersOtherAdapter extends RecyclerView.Adapter<OffersOtherAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+        OfferDTO item = specialOfferPkgDTOArrayList.get(position);
 
-
-        holder.binding.offer.setText(specialOfferPkgDTOArrayList.get(position).getDescription());
-        holder.binding.ctvCode.setText(specialOfferPkgDTOArrayList.get(position).getPromocode());
-        holder.binding.ctvOffer.setText(specialOfferPkgDTOArrayList.get(position).getDetail()+" "+specialOfferPkgDTOArrayList.get(position).getEnd_date());
+        holder.binding.presentase.setText(item.getAmount() + item.getAmount_type());
+        holder.binding.produk.setText(item.getService_name());
+        holder.binding.nama.setText(item.getShop_name());
+        holder.binding.alamat.setText(item.getAddress());
+        holder.binding.produk.setText("untuk " + item.getService_name());
+        String string = Consts.DEV_URL + item.getImage();
         Glide.with(kContext)
-                .load(specialOfferPkgDTOArrayList.get(position).getImage())
+                .load(string)
                 .error(R.drawable.offernewpa)
-                .into(holder.binding.acivOfferImage);
-
-
-        holder.binding.titleoffer.setText(specialOfferPkgDTOArrayList.get(position).getOffer_name());
-        holder.binding.ctvCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setClipboard(kContext,specialOfferPkgDTOArrayList.get(position).getPromocode());
-            }
-        });
-
+                .into(holder.binding.image);
     }
 
     @Override
@@ -68,18 +61,8 @@ public class OffersOtherAdapter extends RecyclerView.Adapter<OffersOtherAdapter.
         return specialOfferPkgDTOArrayList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        OffersBinding binding;
-
-        public MyViewHolder(@NonNull OffersBinding itemView) {
-            super(itemView.getRoot());
-            this.binding = itemView;
-        }
-    }
-
-
     private void setClipboard(Context context, String text) {
-        if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
             android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             clipboard.setText(text);
             Toast.makeText(context, R.string.copied, Toast.LENGTH_SHORT).show();
@@ -89,6 +72,15 @@ public class OffersOtherAdapter extends RecyclerView.Adapter<OffersOtherAdapter.
             clipboard.setPrimaryClip(clip);
             Toast.makeText(context, R.string.copied, Toast.LENGTH_SHORT).show();
 
+        }
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        OffersBinding binding;
+
+        public MyViewHolder(@NonNull OffersBinding itemView) {
+            super(itemView.getRoot());
+            this.binding = itemView;
         }
     }
 }

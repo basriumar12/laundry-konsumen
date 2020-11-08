@@ -13,9 +13,9 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.samyotech.laundry.ModelClass.CurrencyDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityDashboardBinding;
+import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.fragment.BookingFragment;
 import com.samyotech.laundry.ui.fragment.HomeFragment;
@@ -25,11 +25,13 @@ import com.samyotech.laundry.ui.fragment.ProfileFragment;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 public class Dashboard extends AppCompatActivity {
+    private final static int REQUEST_CHECK_SETTINGS_GPS = 0x1;
+    private final static int REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;
+    private final String TAG = Dashboard.class.getCanonicalName();
+    public String type = "";
     ActivityDashboardBinding binding;
     Fragment fragment;
     Context mContext;
-    private final String TAG = Dashboard.class.getCanonicalName();
-
     HomeFragment homeFragment = new HomeFragment();
     NearByFragment nearByFragment = new NearByFragment();
     BookingFragment bookingFragment = new BookingFragment();
@@ -38,11 +40,8 @@ public class Dashboard extends AppCompatActivity {
     FragmentManager fragmentManager;
     SharedPrefrence prefrence;
     CurrencyDTO currencyDTO;
-    public String type = "";
     private Location mylocation;
     private GoogleApiClient googleApiClient;
-    private final static int REQUEST_CHECK_SETTINGS_GPS = 0x1;
-    private final static int REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +57,6 @@ public class Dashboard extends AppCompatActivity {
 }
 //            }
 //        });*/
-
 
 //
 //                    binding= DataBindingUtil.setContentView(this,R.layout.activity_dashboard);

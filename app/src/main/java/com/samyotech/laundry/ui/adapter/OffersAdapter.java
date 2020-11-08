@@ -8,11 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.samyotech.laundry.ModelClass.OfferDTO;
-import com.samyotech.laundry.ModelClass.SpecialOfferPkgDTO;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.databinding.OffersBinding;
 import com.samyotech.laundry.databinding.SpecialOffersBinding;
+import com.samyotech.laundry.model.OfferDTO;
 
 import java.util.ArrayList;
 
@@ -41,7 +39,6 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
 
         holder.binding.offer.setText(specialOfferPkgDTOArrayList.get(position).getOffer_name());
     }

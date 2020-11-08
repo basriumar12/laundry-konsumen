@@ -12,8 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
-import com.samyotech.laundry.ModelClass.GetBannerDTO;
 import com.samyotech.laundry.R;
+import com.samyotech.laundry.interfaces.Consts;
+import com.samyotech.laundry.model.GetBannerDTO;
 
 import java.util.ArrayList;
 
@@ -22,9 +23,7 @@ public class ImageAdapter extends PagerAdapter {
 
     private final Context mContext;
     private final LayoutInflater layoutInflater;
-    ImageView imageView, ivBackImage;
-    TextView desc;
-    TextView lonndes;
+    ImageView imageView;
     TextView title;
     ArrayList<GetBannerDTO> imageDTOArrayList;
 
@@ -46,17 +45,9 @@ public class ImageAdapter extends PagerAdapter {
 
         imageView = itemView.findViewById(R.id.image);
         title = itemView.findViewById(R.id.tv_title);
-        desc = itemView.findViewById(R.id.short_description);
-        lonndes = itemView.findViewById(R.id.long_description);
-        Glide.with(mContext).load(imageDTOArrayList.get(position).getImage()).placeholder(R.drawable.laundryshop).into(imageView);
-
         title.setText(imageDTOArrayList.get(position).getTitle());
-        desc.setText(imageDTOArrayList.get(position).getShort_description());
-        lonndes.setText(imageDTOArrayList.get(position).getLong_description());
-
-
+        Glide.with(mContext).load(Consts.DEV_URL + imageDTOArrayList.get(position).getImage()).placeholder(R.drawable.laundryshop).into(imageView);
         container.addView(itemView);
-
 
         return itemView;
     }

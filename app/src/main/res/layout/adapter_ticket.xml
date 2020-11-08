@@ -7,10 +7,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="5dp"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="5dp"
         card_view:cardElevation="4dp">
@@ -33,21 +33,19 @@
                 android:id="@+id/ctvDiscription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_below="@+id/llStatus"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:maxLines="4"
                 android:text="@string/msgadmin" />
 
             <TextView
                 android:id="@+id/tvDate"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 android:layout_below="@+id/ctvDiscription"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLines="1"
                 android:text="" />
-
-
 
 
             <LinearLayout
@@ -61,8 +59,8 @@
                     android:id="@+id/tvStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:padding="7dp"
                     android:text="@string/pending"
 
@@ -70,9 +68,6 @@
                     android:textSize="@dimen/_14sdp" />
 
             </LinearLayout>
-
-
-
 
 
         </RelativeLayout>

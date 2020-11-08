@@ -1,77 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/cvCard"
-        android:layout_height="@dimen/_130sdp"
         android:layout_width="@dimen/_180sdp"
-        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_height="@dimen/_130sdp"
         android:layout_margin="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="@dimen/_5sdp">
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/laundrImage"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        android:scaleType="fitXY"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_90sdp"
-        android:src="@drawable/pop_laundry1"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/laundrImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                android:scaleType="fitXY"
 
-    <TextView
-        android:id="@+id/laundryName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/laundrImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:textSize="@dimen/_12sdp"
-        android:textColor="@color/black"
-        android:text="Laundary Care" />
+                android:src="@drawable/pop_laundry1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/address"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/laundryName"
-        android:layout_width="@dimen/_160sdp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/gray"
-        android:ellipsize="marquee"
-        android:fadingEdge="horizontal"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:textSize="@dimen/_10sdp"
-        android:text="Laundary Care"/>
+            <TextView
+                android:id="@+id/laundryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Laundary Care"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/laundrImage" />
 
-    <TextView
-        android:id="@+id/ratings"
-        app:layout_constraintTop_toBottomOf="@+id/laundrImage"
-        android:layout_marginTop="@dimen/_5sdp"
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="@dimen/_160sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Laundary Care"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/laundryName" />
 
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/_5sdp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_10sdp"
-        android:drawablePadding="@dimen/_5sdp"
-        android:drawableStart="@drawable/star"
-        android:text="4.3"/>
+            <TextView
+                android:id="@+id/ratings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:drawableStart="@drawable/star"
+                android:drawablePadding="@dimen/_5sdp"
+                android:text="4.3"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/laundrImage" />
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

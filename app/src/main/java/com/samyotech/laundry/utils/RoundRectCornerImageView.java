@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 public class RoundRectCornerImageView extends ImageView {
 
-    private float radius = 28.0f;
+    private final float radius = 28.0f;
     private Path path;
     private RectF rect;
 

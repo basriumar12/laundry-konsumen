@@ -1,40 +1,34 @@
 package com.samyotech.laundry.ui.fragment;
 
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.samyotech.laundry.ModelClass.BookingDTO;
-import com.samyotech.laundry.ModelClass.CurrencyDTO;
-import com.samyotech.laundry.ModelClass.PopLaundryDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.FragmentBookingBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.BookingDTO;
+import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.BookingAdapter;
-import com.samyotech.laundry.ui.adapter.PopularLaundriesAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,12 +40,12 @@ public class BookingFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     BookingAdapter bookingAdapter;
     ArrayList<BookingDTO> bookingDTOS = new ArrayList<>();
-    HashMap<String,String> params=new HashMap<>();
+    HashMap<String, String> params = new HashMap<>();
     BookingDTO bookingDTO;
     UserDTO userDTO;
-    private SharedPrefrence prefrence;
     CurrencyDTO currencyDTO;
-    int i=0;
+    int i = 0;
+    private SharedPrefrence prefrence;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,26 +54,26 @@ public class BookingFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_booking, container, false);
 
         prefrence = SharedPrefrence.getInstance(getActivity());
-        userDTO=prefrence.getParentUser(Consts.USER_DTO);
-        currencyDTO=(CurrencyDTO)prefrence.getCurrency(Consts.CURRENCYDTO);
+        userDTO = prefrence.getParentUser(Consts.USER_DTO);
+        currencyDTO = prefrence.getCurrency(Consts.CURRENCYDTO);
         getAllBookings();
 
         binding.ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(i==0){
+                if (i == 0) {
                     binding.ctvHead.setVisibility(View.GONE);
                     binding.cetSearch.setVisibility(View.VISIBLE);
                     binding.ivSearch.setImageResource(R.drawable.ic_cancel);
 
-                    i=1;
-                }else {
+                    i = 1;
+                } else {
 
                     binding.ctvHead.setVisibility(View.VISIBLE);
                     binding.cetSearch.setVisibility(View.GONE);
 
                     binding.ivSearch.setImageResource(R.drawable.ic_search);
-                    i=0;
+                    i = 0;
                 }
             }
         });
@@ -99,7 +93,6 @@ public class BookingFragment extends Fragment {
 
                 } else {
 
-
                 }
             }
 
@@ -109,14 +102,13 @@ public class BookingFragment extends Fragment {
             }
         });
 
-
         return binding.getRoot();
     }
 
     public void getAllBookings() {
         ProjectUtils.getProgressDialog(getActivity());
-        params.put(Consts.USER_ID,userDTO.getUser_id());
-        new HttpsRequest(Consts.GETBOOKINGLIST, params,getActivity()).stringPost(TAG, new Helper() {
+        params.put(Consts.USER_ID, userDTO.getUser_id());
+        new HttpsRequest(Consts.GETBOOKINGLIST, params, getActivity()).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
                 ProjectUtils.pauseProgressDialog();
@@ -142,10 +134,9 @@ public class BookingFragment extends Fragment {
 
     private void setData() {
 
-
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         binding.rvBooking.setLayoutManager(linearLayoutManager);
-        bookingAdapter = new BookingAdapter(getActivity(), bookingDTO.getOrder_list(),BookingFragment.this,currencyDTO);
+        bookingAdapter = new BookingAdapter(getActivity(), bookingDTO.getOrder_list(), BookingFragment.this, currencyDTO);
         binding.rvBooking.setAdapter(bookingAdapter);
     }
 

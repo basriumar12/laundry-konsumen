@@ -1,7 +1,6 @@
 package com.samyotech.laundry.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.samyotech.laundry.GlobalState;
-import com.samyotech.laundry.ModelClass.CurrencyDTO;
-import com.samyotech.laundry.ModelClass.ItemBookingDTO;
-import com.samyotech.laundry.ModelClass.ItemServiceDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterItemBinding;
+import com.samyotech.laundry.interfaces.Consts;
+import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.ItemServiceDTO;
 import com.samyotech.laundry.ui.activity.Schedule_Activity;
 
 import java.util.ArrayList;
@@ -28,11 +27,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     AdapterItemBinding binding;
     Context kContext;
     ArrayList<ItemServiceDTO> servicesDTOArrayList;
-    int i = -1,j=0;
-        Schedule_Activity schedule_activity;
-        CurrencyDTO currencyDTO;
-        GlobalState globalState;
-    public ItemAdapter(Context kContext, ArrayList<ItemServiceDTO> servicesDTOArrayList,Schedule_Activity schedule_activity,CurrencyDTO currencyDTO) {
+    int i = -1, j = 0;
+    Schedule_Activity schedule_activity;
+    CurrencyDTO currencyDTO;
+    GlobalState globalState;
+
+    public ItemAdapter(Context kContext, ArrayList<ItemServiceDTO> servicesDTOArrayList, Schedule_Activity schedule_activity, CurrencyDTO currencyDTO) {
         this.kContext = kContext;
         this.currencyDTO = currencyDTO;
         this.servicesDTOArrayList = servicesDTOArrayList;
@@ -54,25 +54,24 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
-
         holder.binding.ctvItemName.setText(servicesDTOArrayList.get(position).getItem_name());
         holder.binding.ctvDeliverenum.setText(servicesDTOArrayList.get(position).getCount());
         Glide.with(kContext)
-                .load(servicesDTOArrayList.get(position).getImage())
+                .load(Consts.DEV_URL + servicesDTOArrayList.get(position).getImage())
                 .error(R.drawable.shirt)
                 .into(holder.binding.ivItem);
 
-        holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol()+" "+servicesDTOArrayList.get(position).getPrice());
+        holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol() + " " + servicesDTOArrayList.get(position).getPrice());
 
         holder.binding.ivPLus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                j= Integer.parseInt(holder.binding.ctvDeliverenum.getText().toString().trim());
-                j=j+1;
+                j = Integer.parseInt(holder.binding.ctvDeliverenum.getText().toString().trim());
+                j = j + 1;
 
-            holder.binding.ctvDeliverenum.setText(String.valueOf(j));
-            servicesDTOArrayList.get(position).setCount(String.valueOf(j));
+                holder.binding.ctvDeliverenum.setText(String.valueOf(j));
+                servicesDTOArrayList.get(position).setCount(String.valueOf(j));
 
                 schedule_activity.addData(servicesDTOArrayList.get(position));
 
@@ -84,14 +83,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             @Override
             public void onClick(View v) {
 
-                j= Integer.parseInt(holder.binding.ctvDeliverenum.getText().toString().trim());
-                if(j==0){}else {j=j-1;
+                j = Integer.parseInt(holder.binding.ctvDeliverenum.getText().toString().trim());
+                if (j == 0) {
+                } else {
+                    j = j - 1;
 
                     holder.binding.ctvDeliverenum.setText(String.valueOf(j));
                     servicesDTOArrayList.get(position).setCount(String.valueOf(j));
 
-                    schedule_activity.subData(servicesDTOArrayList.get(position));}
-
+                    schedule_activity.subData(servicesDTOArrayList.get(position));
+                }
 
 
             }
@@ -111,7 +112,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             this.binding = itemView;
         }
     }
-
 
 
 }

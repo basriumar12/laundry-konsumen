@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:background="@color/black"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="@color/black">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="center"/>
+        android:scaleType="center" />
 
     <TextView
         android:id="@+id/title"
@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="96dp"
-        android:text="Choose Your Clothes"
         android:padding="8dp"
+        android:text="Choose Your Clothes"
         android:textColor="@color/white"
         android:textSize="@dimen/_16sdp" />
 

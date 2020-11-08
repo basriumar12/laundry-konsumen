@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.samyotech.laundry.ModelClass.TicketCommentDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
+import com.samyotech.laundry.model.TicketCommentDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class AdapterViewCommentTicket extends BaseAdapter {
                     .into(ivView);
             textViewTime.setText(ProjectUtils.convertTimestampToTime(ProjectUtils.correctTimestamp(Long.parseLong(ticketCommentDTOSList.get(position).getCreated_at()))));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return view;

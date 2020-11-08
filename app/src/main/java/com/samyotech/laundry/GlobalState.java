@@ -2,10 +2,9 @@ package com.samyotech.laundry;
 
 import android.app.Application;
 
-import com.samyotech.laundry.ModelClass.CategoryDTO;
-import com.samyotech.laundry.ModelClass.ItemDTO;
-import com.samyotech.laundry.ModelClass.ItemServiceDTO;
-import com.samyotech.laundry.ModelClass.PopLaundryDTO;
+import com.samyotech.laundry.model.ItemDTO;
+import com.samyotech.laundry.model.ItemServiceDTO;
+import com.samyotech.laundry.model.PopLaundryDTO;
 
 import java.util.ArrayList;
 
@@ -17,8 +16,13 @@ public class GlobalState extends Application {
     ItemDTO itemServiceDTO;
 
     PopLaundryDTO popLaundryDTO;
-    String cost="",costbefo="0",discountcost="",promoCode="";
-    String quantity="";
+    String cost = "", costbefo = "0", discountcost = "", promoCode = "";
+    String quantity = "";
+
+    public static synchronized GlobalState getInstance() {
+        return mInstance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -26,19 +30,12 @@ public class GlobalState extends Application {
 
     }
 
-    public static synchronized GlobalState getInstance() {
-        return mInstance;
-    }
-
-    public  ItemDTO itemServiceDTO() {
+    public ItemDTO itemServiceDTO() {
         return itemServiceDTO;
     }
 
 
-
-
-    public void setItem(ItemDTO  itemServiceDTO) {
-
+    public void setItem(ItemDTO itemServiceDTO) {
 
         this.itemServiceDTO = itemServiceDTO;
     }

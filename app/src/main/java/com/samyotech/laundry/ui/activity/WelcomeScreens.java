@@ -9,9 +9,9 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.samyotech.laundry.ModelClass.WelcomeDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityWelcomeScreensBinding;
+import com.samyotech.laundry.model.WelcomeDTO;
 import com.samyotech.laundry.ui.adapter.WelcomeImageAdapter;
 
 import java.util.ArrayList;
@@ -19,16 +19,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class WelcomeScreens extends AppCompatActivity {
-    ActivityWelcomeScreensBinding binding;
-    ArrayList<WelcomeDTO> imageDTOArrayList;
-    private WelcomeImageAdapter imageAdapter;
-
-    int currentPage = 0;
-    Timer timer;
     final long DELAY_MS = 500;
     final long PERIOD_MS = 3000;
+    ActivityWelcomeScreensBinding binding;
+    ArrayList<WelcomeDTO> imageDTOArrayList;
+    int currentPage = 0;
+    Timer timer;
     Context kContext;
-
+    private WelcomeImageAdapter imageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,6 @@ public class WelcomeScreens extends AppCompatActivity {
         kContext = WelcomeScreens.this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_welcome_screens);
         setUpViewpager();
-
 
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
@@ -55,7 +52,6 @@ public class WelcomeScreens extends AppCompatActivity {
                 handler.post(Update);
             }
         }, DELAY_MS, PERIOD_MS);
-
 
         binding.btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override

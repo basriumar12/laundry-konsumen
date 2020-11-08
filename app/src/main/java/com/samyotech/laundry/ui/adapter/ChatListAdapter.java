@@ -2,6 +2,7 @@ package com.samyotech.laundry.ui.adapter;
 /**
  * Created by VARUN on 01/01/19.
  */
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.samyotech.laundry.ModelClass.ChatListDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.interfaces.Consts;
+import com.samyotech.laundry.model.ChatListDTO;
 import com.samyotech.laundry.ui.activity.OneTwoOneChat;
 import com.samyotech.laundry.utils.ProjectUtils;
 
@@ -49,14 +50,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
 
         holder.tvTitle.setText(chatList.get(position).getUser_name());
         holder.tvMsg.setText(chatList.get(position).getMessage());
-        try{
+        try {
             holder.tvDay.setText(ProjectUtils.getDisplayableDay(ProjectUtils.correctTimestamp(Long.parseLong(chatList.get(position).getUpdated_at()))));
             holder.tvDate.setText(ProjectUtils.convertTimestampToTime(ProjectUtils.correctTimestamp(Long.parseLong(chatList.get(position).getUpdated_at()))));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         Glide.with(mContext).
                 load(chatList.get(position).getUser_image())

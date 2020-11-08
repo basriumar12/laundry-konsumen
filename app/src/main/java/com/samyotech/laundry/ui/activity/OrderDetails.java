@@ -1,38 +1,30 @@
 package com.samyotech.laundry.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.samyotech.laundry.ModelClass.BookingDTO;
-import com.samyotech.laundry.ModelClass.CurrencyDTO;
-import com.samyotech.laundry.ModelClass.OrderListDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityOrderDetailsBinding;
-import com.samyotech.laundry.databinding.DailogCancelOrderBinding;
 import com.samyotech.laundry.databinding.DailogRatingBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.OrderListDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
-import com.samyotech.laundry.ui.adapter.PreviewAdapter;
 import com.samyotech.laundry.ui.adapter.PreviewBookingAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
 
@@ -43,8 +35,7 @@ import java.util.HashMap;
 
 public class OrderDetails extends AppCompatActivity implements View.OnClickListener {
 
-    private String TAG = OrderDetails.class.getSimpleName();
-
+    private final String TAG = OrderDetails.class.getSimpleName();
     ActivityOrderDetailsBinding binding;
     Context mContext;
     OrderListDTO bookingDTO;
@@ -54,30 +45,30 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     PreviewBookingAdapter previewAdapter;
     LinearLayoutManager linearLayoutManager;
     UserDTO userDTO;
-    float rating=0;
+    float rating = 0;
     CurrencyDTO currencyDTO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      binding= DataBindingUtil. setContentView(this,R.layout.activity_order_details);
-        mContext=OrderDetails.this;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_order_details);
+        mContext = OrderDetails.this;
 
-
-        sharedPrefrence=SharedPrefrence.getInstance(mContext);
-        userDTO=sharedPrefrence.getParentUser(Consts.USER_DTO);
-        currencyDTO=(CurrencyDTO)sharedPrefrence.getCurrency(Consts.CURRENCYDTO);
-        if(getIntent().hasExtra(Consts.ORDERLISTDTO)){
-            bookingDTO =(OrderListDTO)getIntent().getSerializableExtra(Consts.ORDERLISTDTO);
+        sharedPrefrence = SharedPrefrence.getInstance(mContext);
+        userDTO = sharedPrefrence.getParentUser(Consts.USER_DTO);
+        currencyDTO = sharedPrefrence.getCurrency(Consts.CURRENCYDTO);
+        if (getIntent().hasExtra(Consts.ORDERLISTDTO)) {
+            bookingDTO = (OrderListDTO) getIntent().getSerializableExtra(Consts.ORDERLISTDTO);
         }
 
-            setUIAction();
+        setUIAction();
     }
 
     private void setUIAction() {
-        binding.ctvPaidViaValue.setText(currencyDTO.getCurrency_symbol()+" "+bookingDTO.getFinal_price());
-        binding.ctvSubTotalValue.setText(currencyDTO.getCurrency_symbol()+" "+bookingDTO.getPrice());
-        binding.ctvDiscountValue.setText(currencyDTO.getCurrency_symbol()+" "+bookingDTO.getDiscount());
-        binding.ctvTaxValue.setText(currencyDTO.getCurrency_symbol()+" 0");
+        binding.ctvPaidViaValue.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getFinal_price());
+        binding.ctvSubTotalValue.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getPrice());
+        binding.ctvDiscountValue.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getDiscount());
+        binding.ctvTaxValue.setText(currencyDTO.getCurrency_symbol() + " 0");
         binding.ctvAddress.setText(bookingDTO.getShipping_address());
         binding.ctvPickUpDay.setText(bookingDTO.getPickup_date());
         binding.ctvPickUpTime.setText(bookingDTO.getPickup_time());
@@ -95,10 +86,10 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.llCall:
 
-                Toast.makeText(mContext,R.string.optionwill, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, R.string.optionwill, Toast.LENGTH_SHORT).show();
 
 /*
                         if (ProjectUtils.hasPermissionInManifest(OrderDetails.this, CALL_PERMISSION, Manifest.permission.CALL_PHONE)) {
@@ -117,10 +108,10 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.llMsg:
 
-                Intent in = new Intent(mContext,OneTwoOneChat.class);
-                in.putExtra(Consts.SHOP_ID,bookingDTO.getShop_id());
-                in.putExtra(Consts.SHOP_NAME,bookingDTO.getShop_name());
-                in.putExtra(Consts.IMAGE,bookingDTO.getShop_image());
+                Intent in = new Intent(mContext, OneTwoOneChat.class);
+                in.putExtra(Consts.SHOP_ID, bookingDTO.getShop_id());
+                in.putExtra(Consts.SHOP_NAME, bookingDTO.getShop_name());
+                in.putExtra(Consts.IMAGE, bookingDTO.getShop_image());
                 startActivity(in);
                 break;
             case R.id.cvRatenow:
@@ -132,8 +123,6 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
-
 
 
     public void dialogRating() {
@@ -156,7 +145,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         binding1.cbCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            rating=binding1.rbReview.getRating();
+                rating = binding1.rbReview.getRating();
                 submitRating();
 
             }
@@ -166,19 +155,19 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
 
     private void submitRating() {
 
-        HashMap<String,String> params=new HashMap<>();
-        params.put(Consts.SHOP_ID,bookingDTO.getShop_id());
-        params.put(Consts.USER_ID,userDTO.getUser_id());
+        HashMap<String, String> params = new HashMap<>();
+        params.put(Consts.SHOP_ID, bookingDTO.getShop_id());
+        params.put(Consts.USER_ID, userDTO.getUser_id());
         params.put(Consts.RATING, String.valueOf(rating));
-        new HttpsRequest(Consts.ADDRATING,params,mContext).stringPost(TAG, new Helper() {
+        new HttpsRequest(Consts.ADDRATING, params, mContext).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
-                if(flag){
-                    ProjectUtils.showToast(mContext,msg);
+                if (flag) {
+                    ProjectUtils.showToast(mContext, msg);
                     dialog.dismiss();
 
-                }else {
-                    ProjectUtils.showToast(mContext,msg);
+                } else {
+                    ProjectUtils.showToast(mContext, msg);
                 }
             }
         });
@@ -187,13 +176,11 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
 
     private void setData() {
 
-
         linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         binding.rvReview.setLayoutManager(linearLayoutManager);
-        previewAdapter = new PreviewBookingAdapter(mContext, bookingDTO.getItem_details(),currencyDTO);
+        previewAdapter = new PreviewBookingAdapter(mContext, bookingDTO.getItem_details(), currencyDTO);
         binding.rvReview.setAdapter(previewAdapter);
     }
-
 
 
 }

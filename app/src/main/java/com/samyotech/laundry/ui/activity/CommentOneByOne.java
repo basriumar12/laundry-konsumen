@@ -20,12 +20,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.samyotech.laundry.ModelClass.TicketCommentDTO;
-import com.samyotech.laundry.ModelClass.UserDTO;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.TicketCommentDTO;
+import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.AdapterViewCommentTicket;
@@ -43,13 +43,13 @@ import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
 public class CommentOneByOne extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
     private final String TAG = CommentOneByOne.class.getSimpleName();
-    private ListView lvComment;
     private final String id = "";
+    private final HashMap<String, String> parmsGet = new HashMap<>();
+    IntentFilter intentFilter = new IntentFilter();
+    private ListView lvComment;
     private ImageView buttonSendMessage, IVback, emojiButton;
     private AdapterViewCommentTicket adapterViewCommentTicket;
-    private final HashMap<String, String> parmsGet = new HashMap<>();
     private ArrayList<TicketCommentDTO> ticketCommentDTOSList;
-    IntentFilter intentFilter = new IntentFilter();
     private InputMethodManager inputManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private EmojiconEditText edittextMessage;
@@ -60,6 +60,21 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
     private TextView tvNameHedar;
     private SharedPrefrence prefrence;
     private UserDTO userDTO;
+    BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equalsIgnoreCase(Consts.BROADCAST)) {
+                getComment();
+                Log.e("BROADCAST", "BROADCAST");
+               /* if (Projectutils.mInterstitialAd != null && Projectutils.mInterstitialAd.isLoaded()) {
+                    Projectutils.mInterstitialAd.show();
+                } else {
+                    Projectutils.initInterAdd(ShoppingDhashActivity.this);
+
+                }*/
+            }
+        }
+    };
     private String ticket_id;
 
     @Override
@@ -69,8 +84,6 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
         mContext = CommentOneByOne.this;
         prefrence = SharedPrefrence.getInstance(mContext);
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
-
-
 
         inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -89,7 +102,6 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
         setUiAction();
 
     }
-
 
     public void setUiAction() {
         tvNameHedar = findViewById(R.id.tvNameHedar);
@@ -111,12 +123,12 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
                 Log.e("Runnable", "FIRST");
                 if (NetworkManager.isConnectToInternet(mContext)) {
                     swipeRefreshLayout.setRefreshing(true);
-                                            getComment();
+                    getComment();
 
-                                        } else {
-                                            ProjectUtils.showToast(mContext, getResources().getString(R.string.internet_concation));
-                                        }
-                                    }
+                } else {
+                    ProjectUtils.showToast(mContext, getResources().getString(R.string.internet_concation));
+                }
+            }
                                 }
         );
 
@@ -223,7 +235,6 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
         lvComment.setSelection(ticketCommentDTOSList.size() - 1);
     }
 
-
     public void doComment() {
         ProjectUtils.showProgressDialog(mContext, true, getResources().getString(R.string.please_wait));
         new HttpsRequest(Consts.ADDTIKETCOMMENT, getParamDO(), mContext).stringPost(TAG, new Helper() {
@@ -246,22 +257,5 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
         Log.e("POST", values.toString());
         return values;
     }
-
-
-    BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equalsIgnoreCase(Consts.BROADCAST)) {
-                getComment();
-                Log.e("BROADCAST", "BROADCAST");
-               /* if (Projectutils.mInterstitialAd != null && Projectutils.mInterstitialAd.isLoaded()) {
-                    Projectutils.mInterstitialAd.show();
-                } else {
-                    Projectutils.initInterAdd(ShoppingDhashActivity.this);
-
-                }*/
-            }
-        }
-    };
 
 }

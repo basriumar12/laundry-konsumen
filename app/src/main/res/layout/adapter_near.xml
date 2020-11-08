@@ -2,14 +2,13 @@
 
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/cvCard"
-        xmlns:android="http://schemas.android.com/apk/res/android"
 
-        android:layout_height="@dimen/_120sdp"
         android:layout_width="match_parent"
-        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_height="@dimen/_120sdp"
         android:layout_margin="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
         app:cardElevation="@dimen/_5sdp">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -49,8 +48,8 @@
                     android:layout_height="@dimen/_120sdp"
                     android:layout_alignParentRight="true"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:src="@drawable/laundryshop"
-                    android:scaleType="fitCenter"/>
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/laundryshop" />
 
 
                 <androidx.appcompat.widget.AppCompatImageView
