@@ -9,12 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterBookingBinding;
 import com.samyotech.laundry.databinding.DailogCancelOrderBinding;
@@ -67,58 +67,29 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+        final OrderListDTO item = objects.get(position);
 
-        holder.binding.ctvName.setText(objects.get(position).getShop_name());
-        holder.binding.ctvOrder.setText(objects.get(position).getOrder_id());
-        holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol() + " " + objects.get(position).getPrice());
-
-        if (objects.get(position).getOrder_status().equalsIgnoreCase("0")) {
-            holder.binding.ctvStatus.setText(kContext.getResources().getString(R.string.pending));
-        } else if (objects.get(position).getOrder_status().equalsIgnoreCase("1")) {
-            holder.binding.ctvStatus.setText(kContext.getResources().getString(R.string.confirmed));
-            holder.binding.llConfirm.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-        } else if (objects.get(position).getOrder_status().equalsIgnoreCase("2")) {
-            holder.binding.ctvStatus.setText(kContext.getResources().getString(R.string.pickedup));
-            holder.binding.llConfirm.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-            holder.binding.llpickUp.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-        } else if (objects.get(position).getOrder_status().equalsIgnoreCase("3")) {
-            holder.binding.ctvStatus.setText(kContext.getResources().getString(R.string.inprogress));
-            holder.binding.llConfirm.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-            holder.binding.llpickUp.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-            holder.binding.llProcess.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-        } else if (objects.get(position).getOrder_status().equalsIgnoreCase("4")) {
-            holder.binding.ctvStatus.setText(kContext.getResources().getString(R.string.shipped));
-            holder.binding.llConfirm.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-            holder.binding.llpickUp.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-            holder.binding.llProcess.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-            holder.binding.llShiped.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-        } else if (objects.get(position).getOrder_status().equalsIgnoreCase("5")) {
-            holder.binding.ctvStatus.setText(kContext.getResources().getString(R.string.delivered));
-            holder.binding.llConfirm.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-            holder.binding.llpickUp.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-            holder.binding.llProcess.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-            holder.binding.llShiped.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-            holder.binding.llDeliver.setBackgroundColor(kContext.getResources().getColor(R.color.white));
-        } else if (objects.get(position).getOrder_status().equalsIgnoreCase("6")) {
-            holder.binding.ctvStatus.setText(kContext.getResources().getString(R.string.cancel));
+        holder.binding.namaToko.setText(item.getShop_name());
+        if (item.getOrder_status().equals("5")) {
+            Glide.with(kContext)
+                    .load(R.drawable.icon_green_check)
+                    .into(holder.binding.status);
+        } else {
+            Glide.with(kContext)
+                    .load(R.drawable.icon_orange_reload)
+                    .into(holder.binding.status);
         }
+        holder.binding.berat.setText("N/A Kg");
+        holder.binding.diterima.setText(item.getPickup_date() + " " + item.getPickup_time());
+        holder.binding.dikirim.setText(item.getDelivery_date() + " " + item.getDelivery_time());
+        holder.binding.harga.setText(currencyDTO.getCurrency_symbol() + " " + item.getPrice());
 
-        holder.binding.ctvViewDetails.setOnClickListener(new View.OnClickListener() {
+        holder.binding.selengkapnyaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(kContext, OrderDetails.class);
-                in.putExtra(Consts.ORDERLISTDTO, objects.get(position));
+                in.putExtra(Consts.ORDERLISTDTO, item);
                 kContext.startActivity(in);
-            }
-        });
-
-        holder.binding.cvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (objects.get(position).getOrder_status().equalsIgnoreCase("6")) {
-                    Toast.makeText(kContext, R.string.ordercanceled, Toast.LENGTH_SHORT).show();
-                } else
-                    dialogCancel(position);
             }
         });
     }

@@ -54,6 +54,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     private static final int RESULT_OK = -1;
     private final String TAG = ProfileFragment.class.getSimpleName();
@@ -189,25 +191,30 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     public void alertDialogLogout() {
-        new AlertDialog.Builder(dashboard)
-                .setIcon(R.mipmap.ic_launcher)
-                .setTitle(getString(R.string.app_name))
-                .setMessage(getResources().getString(R.string.logoutMsg))
-                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity(), R.style.CustomAlertDialog);
+        ViewGroup viewGroup = requireView().findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.logout_dialog, viewGroup, false);
 
-                        logout();
-                    }
-                })
-                .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        FancyButton cancel = dialogView.findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        FancyButton ok = dialogView.findViewById(R.id.ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+
+                logout();
+            }
+        });
     }
 
     @Override

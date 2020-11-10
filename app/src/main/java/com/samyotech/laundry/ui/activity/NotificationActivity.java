@@ -3,12 +3,16 @@ package com.samyotech.laundry.ui.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.annimon.stream.Stream;
+import com.annimon.stream.function.Predicate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.samyotech.laundry.R;
@@ -30,6 +34,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 public class NotificationActivity extends AppCompatActivity {
 
     private final String TAG = NotificationActivity.class.getCanonicalName();
@@ -39,7 +45,7 @@ public class NotificationActivity extends AppCompatActivity {
     UserDTO userDTO;
     AdapterNotifcation adapterNotifcation;
     RecyclerView.LayoutManager layoutManager;
-    ArrayList<NotificationDTO> arrayList = new ArrayList<>();
+    List<NotificationDTO> originalList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,43 @@ public class NotificationActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        binding.pending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterData(0, binding.pending);
+            }
+        });
+
+        binding.dikonfirmasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterData(1, binding.dikonfirmasi);
+            }
+        });
+        binding.diambil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterData(2, binding.diambil);
+            }
+        });
+        binding.diproses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterData(3, binding.diproses);
+            }
+        });
+        binding.dikirim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterData(4, binding.dikirim);
+            }
+        });
+        binding.sampai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterData(5, binding.sampai);
+            }
+        });
     }
 
     private void setData() {
@@ -65,11 +108,11 @@ public class NotificationActivity extends AppCompatActivity {
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
                 if (flag) {
 
-                    arrayList = new ArrayList<>();
                     Type getpetDTO = new TypeToken<List<NotificationDTO>>() {
                     }.getType();
-                    arrayList = new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
-                    showData();
+                    List<NotificationDTO> items = new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
+                    originalList.addAll(items);
+                    filterData(0, binding.pending);
 
                 } else {
                     ProjectUtils.showToast(mContext, msg);
@@ -81,10 +124,30 @@ public class NotificationActivity extends AppCompatActivity {
     private void showData() {
         layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         binding.rvNotification.setLayoutManager(new LinearLayoutManager(mContext));
-        adapterNotifcation = new AdapterNotifcation(mContext, arrayList);
+        adapterNotifcation = new AdapterNotifcation(mContext, originalList);
         binding.rvNotification.setAdapter(adapterNotifcation);
-
+        adapterNotifcation.notifyDataSetChanged();
     }
 
+    private void filterData(final int i, FancyButton btn) {
+        ViewGroup parent = (ViewGroup) btn.getParent();
+        for (int j = 0; j < parent.getChildCount(); j++) {
+            FancyButton childAt = (FancyButton) parent.getChildAt(j);
+            childAt.setTextColor(ContextCompat.getColor(this, R.color.black));
+        }
 
+        btn.setTextColor(ContextCompat.getColor(this, R.color.white));
+
+        List<NotificationDTO> filtered = Stream.of(originalList).filter(new Predicate<NotificationDTO>() {
+            @Override
+            public boolean test(NotificationDTO value) {
+                return value.getStatus().equals(String.valueOf(i));
+            }
+        }).toList();
+        layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        binding.rvNotification.setLayoutManager(new LinearLayoutManager(mContext));
+        adapterNotifcation = new AdapterNotifcation(mContext, filtered);
+        binding.rvNotification.setAdapter(adapterNotifcation);
+        adapterNotifcation.notifyDataSetChanged();
+    }
 }

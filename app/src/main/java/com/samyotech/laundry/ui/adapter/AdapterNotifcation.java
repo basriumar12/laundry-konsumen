@@ -1,7 +1,6 @@
 package com.samyotech.laundry.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -14,16 +13,16 @@ import com.samyotech.laundry.databinding.AdapterNotificationBinding;
 import com.samyotech.laundry.model.NotificationDTO;
 import com.samyotech.laundry.utils.ProjectUtils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterNotifcation extends RecyclerView.Adapter<AdapterNotifcation.MyViewHolder> {
 
     LayoutInflater layoutInflater;
     AdapterNotificationBinding binding;
     Context kContext;
-    ArrayList<NotificationDTO> popLaundryDTOArrayList;
+    List<NotificationDTO> popLaundryDTOArrayList;
 
-    public AdapterNotifcation(Context kContext, ArrayList<NotificationDTO> popLaundryDTOArrayList) {
+    public AdapterNotifcation(Context kContext, List<NotificationDTO> popLaundryDTOArrayList) {
         this.kContext = kContext;
         this.popLaundryDTOArrayList = popLaundryDTOArrayList;
     }
@@ -42,10 +41,10 @@ public class AdapterNotifcation extends RecyclerView.Adapter<AdapterNotifcation.
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
-        holder.binding.title.setText(popLaundryDTOArrayList.get(position).getTitle());
-        holder.binding.ctvMessage.setText(popLaundryDTOArrayList.get(position).getMessage());
-        holder.binding.ctvtime.setText(ProjectUtils.convertTimestampDateToTime(/*ProjectUtils.correctTimestamp(*/Long.parseLong(popLaundryDTOArrayList.get(position).getCreated_at())));
-        Log.e("Adap", "onBindViewHolder: " + ProjectUtils.correctTimestamp(Long.parseLong(popLaundryDTOArrayList.get(position).getCreated_at())));
+        NotificationDTO item = popLaundryDTOArrayList.get(position);
+        holder.binding.title.setText(item.getTitle());
+        holder.binding.ctvMessage.setText(item.getMessage());
+        holder.binding.ctvtime.setText(ProjectUtils.convertTimestampDateToTime(Long.parseLong(item.getCreated_at())));
     }
 
     @Override

@@ -1,47 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/cvCard"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_105sdp"
-        android:layout_margin="@dimen/_5sdp"
-        app:cardCornerRadius="@dimen/_5sdp"
-        app:cardElevation="@dimen/_5sdp">
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_105sdp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="1dp"
+            app:cardCornerRadius="8dp"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/servImage"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_70sdp"
-                android:layout_margin="@dimen/_5sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/intro_4"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:src="@drawable/intro_4" />
+        </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/servName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_5sdp"
-                android:maxLines="2"
-                android:text="Clothing"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/servImage" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/servName"
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="Clothing\nbaru"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
+    </LinearLayout>
 
 </layout>

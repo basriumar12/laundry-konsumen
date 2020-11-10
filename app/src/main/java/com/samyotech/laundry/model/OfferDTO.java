@@ -9,6 +9,7 @@ public class OfferDTO implements Serializable {
     String offer_id = "";
     String shop_id = "";
     String shop_name = "";
+    String rating = "";
     String address = "";
     String offer_name = "";
     String promocode = "";
@@ -24,6 +25,14 @@ public class OfferDTO implements Serializable {
     String updated_at = "";
     String service_name = "";
     String detail = "";
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
     public String getShop_name() {
         return shop_name;

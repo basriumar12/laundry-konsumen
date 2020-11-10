@@ -45,14 +45,15 @@ public class LaundriesNearAdapter extends RecyclerView.Adapter<LaundriesNearAdap
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         Glide.with(kContext)
-                .load(Consts.DEV_URL + nearBYDTOArrayList.get(position).getImage())
-                .placeholder(R.drawable.drawable_tag)
+                .load(Consts.DEV_URL + nearBYDTOArrayList.get(position).getShop_image())
+                .placeholder(R.drawable.banner_img)
+                .error(R.drawable.banner_img)
                 .into(holder.binding.image);
 
-        binding.tvTitle.setText(nearBYDTOArrayList.get(position).getShop_name());
-        binding.longDescription.setText(nearBYDTOArrayList.get(position).getDescription());
+        binding.namatoko.setText(nearBYDTOArrayList.get(position).getShop_name());
+        binding.alamat.setText(nearBYDTOArrayList.get(position).getAddress());
 
-        holder.binding.cvCard.setOnClickListener(new View.OnClickListener() {
+        holder.binding.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(kContext, ServiceAcitivity.class);

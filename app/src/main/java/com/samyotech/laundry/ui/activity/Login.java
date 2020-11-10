@@ -9,9 +9,12 @@ import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,10 +68,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     private void genrate() {
         newToken = FirebaseInstanceId.getInstance().getToken();
-
         Log.e("tokensss", newToken);
-
-
     }
 
     public void setUiAction() {
@@ -137,9 +137,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void clickForSubmit() {
         if (!ProjectUtils.isEmailValid(binding.cetEmailADD.getText().toString().trim())) {
             showSickbar(getResources().getString(R.string.val_email));
-        } else if (!ProjectUtils.isPasswordValid(binding.cetPasword.getText().toString().trim())) {
+        } /*else if (!ProjectUtils.isPasswordValid(binding.cetPasword.getText().toString().trim())) {
             showSickbar(getResources().getString(R.string.val_pass));
-        } else {
+        }*/ else {
             if (NetworkManager.isConnectToInternet(mContext)) {
                 login();
             } else {
@@ -176,7 +176,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     }
 
                 } else {
-                    ProjectUtils.showToast(mContext, msg);
+                    showDialog(msg);
+//                    ProjectUtils.showToast(mContext, msg);
                 }
             }
         });
@@ -198,6 +199,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         snackbar.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.black));
         snackbarView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
         snackbar.show();
+    }
+
+    public void showDialog(String msg) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.auth_dialog, viewGroup, false);
+        TextView text = dialogView.findViewById(R.id.text);
+        text.setText(msg);
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override

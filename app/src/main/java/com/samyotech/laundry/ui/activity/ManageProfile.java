@@ -53,7 +53,7 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
 
         setdata();
         binding.simpan.setOnClickListener(this);
-        binding.alamat.setOnClickListener(this);
+        binding.location.setOnClickListener(this);
         binding.back.setOnClickListener(this);
 
     }
@@ -94,13 +94,8 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
                     updateProfile();
                 }
                 break;
-            case R.id.alamat:
-                if (doubleCheck) {
-                    checkAdd = false;
-                    findPlace();
-                    doubleCheck = false;
-                }
-
+            case R.id.location:
+                findPlace();
                 break;
             case R.id.back:
                 onBackPressed();
@@ -116,20 +111,15 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == 101) {
             if (resultCode == RESULT_OK) {
                 try {
                     getAddress(data.getDoubleExtra(Consts.LATITUDE, 0.0), data.getDoubleExtra(Consts.LONGITUDE, 0.0));
-
-
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
             }
         }
-
-
     }
 
     public void updateProfile() {

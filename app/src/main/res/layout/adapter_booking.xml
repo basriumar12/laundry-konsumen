@@ -3,268 +3,149 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_190sdp"
-        android:layout_margin="@dimen/_5sdp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="16dp">
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/_5sdp">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="bottom"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/llName"
+                <TextView
+                    android:id="@+id/nama_toko"
+                    style="@style/TextAppearance.AppCompat.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Nama Toko" />
+
+                <ImageView
+                    android:id="@+id/status"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_orange_reload"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/dot_blue"
+                    android:padding="4dp"
+                    android:src="@drawable/icon_balace" />
+
+                <TextView
+                    android:id="@+id/berat"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_25sdp"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/confirmed"
+                    android:textColor="@color/black" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/ctvName"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.7"
-                        android:gravity="center_vertical"
-                        android:text="@string/Laundary_care_service"
-                        android:textSize="@dimen/_16sdp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/ctvPrice"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.3"
-                        android:gravity="center"
-                        android:text="@string/price250"
-                        android:textAlignment="textEnd"
-                        android:textSize="@dimen/_16sdp" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/dot_blue"
+                    android:padding="4dp"
+                    android:src="@drawable/icon_basket" />
 
-                <LinearLayout
-                    android:id="@+id/llOrder"
+                <TextView
+                    android:id="@+id/diterima"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_25sdp"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/llName">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/confirmed"
+                    android:textColor="@color/black" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/ctvOrder"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.7"
-                        android:gravity="center_vertical"
-                        android:text="@string/orderno" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/ctvStatus"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.3"
-                        android:gravity="center"
-                        android:text="@string/confirmed"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/colorPrimaryDark" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/dot_blue"
+                    android:padding="4dp"
+                    android:src="@drawable/icon_clothes" />
 
-                <View
-                    android:id="@+id/view"
+                <TextView
+                    android:id="@+id/dikirim"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/gray"
-                    app:layout_constraintTop_toBottomOf="@id/llOrder" />
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:text="@string/confirmed"
+                    android:textColor="@color/black" />
+            </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/llStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_55sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/view">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/harga"
+                    style="@style/TextAppearance.AppCompat.Subhead"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Rp 42.000"
+                    android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:id="@+id/llConfirm"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:background="@color/transaparent_gray"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/ivConfirm"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.8"
-                            android:padding="@dimen/_5sdp"
-                            android:src="@drawable/ic_confirmed" />
-
-                        <TextView
-                            android:id="@+id/ctvconfirmed"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/confirmed"
-                            android:textAlignment="center" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llpickUp"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:background="@color/transaparent_gray"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/ivPicked"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.8"
-                            android:padding="@dimen/_5sdp"
-                            android:src="@drawable/ic_delivery" />
-
-                        <TextView
-                            android:id="@+id/ctvPicked"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/pickedup"
-                            android:textAlignment="center" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llProcess"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:background="@color/transaparent_gray"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/ivInProcess"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.8"
-                            android:padding="@dimen/_5sdp"
-                            android:src="@drawable/ic_progress" />
-
-                        <TextView
-                            android:id="@+id/ctvInProcess"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/inprocess"
-                            android:textAlignment="center" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llShiped"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:background="@color/transaparent_gray"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/ivShipped"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.8"
-                            android:padding="@dimen/_5sdp"
-                            android:src="@drawable/ic_shipped" />
-
-                        <TextView
-                            android:id="@+id/ctvShipped"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/shipped"
-                            android:textAlignment="center" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llDeliver"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:background="@color/transaparent_gray"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/ivDeliverd"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="0.8"
-                            android:padding="@dimen/_5sdp"
-                            android:src="@drawable/ic_delivered" />
-
-                        <TextView
-                            android:id="@+id/ctvDelivered"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/delivered"
-                            android:textAlignment="center" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/gray"
-                    app:layout_constraintTop_toBottomOf="@id/llStatus" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cvCancel"
-                    android:layout_width="wrap_content"
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/selengkapnya_btn"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_20sdp"
-                    android:elevation="@dimen/_2sdp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view2">
-
-                    <TextView
-                        android:id="@+id/ctvOrderCancel"
-                        android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:gravity="center"
-                        android:text="@string/cancelorder" />
-                </androidx.cardview.widget.CardView>
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:textAlignment="textEnd"
+                    app:fb_defaultColor="@color/colorPrimary"
+                    app:fb_focusColor="@color/colorPrimary"
+                    app:fb_iconPosition="left"
+                    app:fb_radius="24dp"
+                    app:fb_text="Selengkapnya"
+                    app:fb_textColor="@color/white" />
+            </LinearLayout>
 
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cvDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_20sdp"
-                    android:elevation="@dimen/_2sdp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view2">
+        </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/ctvViewDetails"
-                        android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:gravity="center"
-                        android:text="@string/Viewdetails" />
-                </androidx.cardview.widget.CardView>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </layout>

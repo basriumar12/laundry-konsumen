@@ -8,7 +8,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/auth_bg"
             android:orientation="vertical">
 
@@ -18,8 +18,8 @@
                 android:background="@color/white">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
@@ -77,11 +77,12 @@
                     style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/alamat"
                     android:text="Jalan Pahlawan"
                     android:textColor="@color/white" />
 
                 <mehdi.sakout.fancybuttons.FancyButton
-                    android:id="@+id/login"
+                    android:id="@+id/ganti_alamat_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -140,138 +141,69 @@
                     </FrameLayout>
                 </RelativeLayout>
 
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constLayout"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/cardView"
-                    android:layout_margin="@dimen/_5sdp">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <TextView
-                        android:id="@+id/tv_service"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/TopServices"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14sdp"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/ctvbTopService"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ViewAll"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/_14sdp"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyleService"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_service" />
+                        android:layout_marginVertical="8dp"
+                        android:gravity="bottom">
 
-                    <TextView
-                        android:id="@+id/tv_popLaundr"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@string/PopularLaundries"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14sdp"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/recyleService" />
+                        <TextView
+                            style="@style/TextAppearance.AppCompat.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Laundry Terdekat"
+                            android:textColor="@color/colorPrimary" />
 
-                    <TextView
-                        android:id="@+id/ctvbPopularLaundries"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@string/ViewAll"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/_14sdp"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/recyleService" />
+                        <TextView
+                            android:id="@+id/lihat_semua_laundry_terdekat"
+                            style="@style/TextAppearance.AppCompat.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lihat semua"
+                            android:textAlignment="textEnd" />
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyleLaundriesPop"
+                        android:id="@+id/laundry_terdekat_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_popLaundr" />
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="bottom">
 
+                        <TextView
+                            style="@style/TextAppearance.AppCompat.Title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Layanan kami"
+                            android:textColor="@color/colorPrimary" />
 
-                    <TextView
-                        android:id="@+id/tv_offers"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@string/SpecialOffer"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14sdp"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/recyleLaundriesPop" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@string/ViewAll"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/_14sdp"
-                        android:visibility="gone"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/recyleLaundriesPop" />
+                        <TextView
+                            android:id="@+id/lihat_semua_layanan_kami"
+                            style="@style/TextAppearance.AppCompat.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lihat semua"
+                            android:textAlignment="textEnd" />
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyleOffers"
+                        android:id="@+id/layanan_kami_recyclerview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_offers" />
-
-
-                    <TextView
-                        android:id="@+id/tv_near"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@string/Laundary_near"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_14sdp"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/recyleOffers" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@string/ViewAll"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="@dimen/_14sdp"
-                        android:visibility="gone"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/recyleOffers" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyleNear"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_near" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:layout_below="@+id/constLayout" />
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
 
             </LinearLayout>

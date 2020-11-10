@@ -45,13 +45,14 @@ public class TopServiceAdapter extends RecyclerView.Adapter<TopServiceAdapter.My
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
-        Glide.with(kContext).load(Consts.DEV_URL + servicesDTOArrayList.get(position).getImage()).placeholder(R.drawable.laundryshop).into(holder.binding.servImage);
+        Glide.with(kContext).load(Consts.DEV_URL + servicesDTOArrayList.get(position).getImage())
+                .placeholder(R.drawable.laundryshop)
+                .into(holder.binding.servImage);
 
         holder.binding.servName.setText(servicesDTOArrayList.get(position).getService_name());
         holder.binding.cvCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent in = new Intent(kContext, TopServices.class);
                 in.putExtra(Consts.SERVICE_ID, servicesDTOArrayList.get(position).getService_id());
                 kContext.startActivity(in);

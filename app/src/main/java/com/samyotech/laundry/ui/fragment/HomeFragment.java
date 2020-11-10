@@ -2,7 +2,10 @@ package com.samyotech.laundry.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,20 +35,24 @@ import com.samyotech.laundry.ui.activity.AllServices;
 import com.samyotech.laundry.ui.activity.Dashboard;
 import com.samyotech.laundry.ui.activity.NotificationActivity;
 import com.samyotech.laundry.ui.activity.SearchActivity;
-import com.samyotech.laundry.ui.activity.TopServices;
 import com.samyotech.laundry.ui.adapter.ImageAdapter;
 import com.samyotech.laundry.ui.adapter.LaundriesNearAdapter;
 import com.samyotech.laundry.ui.adapter.PopularLaundriesAdapter;
 import com.samyotech.laundry.ui.adapter.SpecialOffersAdapter;
 import com.samyotech.laundry.ui.adapter.TopServiceAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
+import com.schibstedspain.leku.LocationPickerActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -90,6 +97,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.alamat.setText(userDTO.getAddress());
+        binding.gantiAlamatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findPlace();
+            }
+        });
+
+    }
 
     public void getData() {
         params.put(Consts.LATITUDE, prefrence.getValue(Consts.LATITUDE));
@@ -126,31 +146,100 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.tabDots.setViewPager(binding.viewpager);
 
         layoutManagerServ = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        binding.recyleService.setLayoutManager(layoutManagerServ);
+        binding.layananKamiRecyclerview.setLayoutManager(layoutManagerServ);
         topServiceAdapter = new TopServiceAdapter(getActivity(), homeDTO.getService());
-        binding.recyleService.setAdapter(topServiceAdapter);
-
-        layoutManagerPop = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        binding.recyleLaundriesPop.setLayoutManager(layoutManagerPop);
-        popularLaundriesAdapter = new PopularLaundriesAdapter(getActivity(), homeDTO.getLaundry());
-        binding.recyleLaundriesPop.setAdapter(popularLaundriesAdapter);
-
-        layoutManagerOffer = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        binding.recyleOffers.setLayoutManager(layoutManagerOffer);
-        specialOffersAdapter = new SpecialOffersAdapter(getActivity(), homeDTO.getOffer());
-        binding.recyleOffers.setAdapter(specialOffersAdapter);
+        binding.layananKamiRecyclerview.setAdapter(topServiceAdapter);
 
         layoutManagerNear = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        binding.recyleNear.setLayoutManager(layoutManagerNear);
+        binding.laundryTerdekatRecyclerview.setLayoutManager(layoutManagerNear);
         laundriesNearAdapter = new LaundriesNearAdapter(getActivity(), homeDTO.getNear_by());
-        binding.recyleNear.setAdapter(laundriesNearAdapter);
+        binding.laundryTerdekatRecyclerview.setAdapter(laundriesNearAdapter);
 
-        binding.ctvbTopService.setOnClickListener(this);
-        binding.ctvbPopularLaundries.setOnClickListener(this);
+        binding.lihatSemuaLayananKami.setOnClickListener(this);
+        binding.lihatSemuaLaundryTerdekat.setOnClickListener(this);
         binding.svLaundry.setOnClickListener(this);
         binding.ivNotification.setOnClickListener(this);
+    }
 
+    private void findPlace() {
+        Intent locationPickerIntent = new LocationPickerActivity.Builder()
+                .withGooglePlacesEnabled()
+                //.withLocation(41.4036299, 2.1743558)
+                .build(requireActivity());
 
+        startActivityForResult(locationPickerIntent, 101);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101) {
+            if (resultCode == RESULT_OK) {
+                try {
+                    getAddress(data.getDoubleExtra(Consts.LATITUDE, 0.0), data.getDoubleExtra(Consts.LONGITUDE, 0.0));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void getAddress(double lat, double lng) {
+        Geocoder geocoder = new Geocoder(requireActivity(), Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+            Address obj = addresses.get(0);
+            String add = obj.getAddressLine(0);
+            add = add + "\n" + obj.getCountryName();
+            add = add + "\n" + obj.getCountryCode();
+            add = add + "\n" + obj.getAdminArea();
+            add = add + "\n" + obj.getPostalCode();
+            add = add + "\n" + obj.getSubAdminArea();
+            add = add + "\n" + obj.getLocality();
+            add = add + "\n" + obj.getSubThoroughfare();
+            Log.e("IGA", "Address" + add);
+            // Toast.makeText(this, "Address=>" + add,
+            // Toast.LENGTH_SHORT).show();
+
+            // TennisAppActivity.showDialog(add);
+            binding.alamat.setText(obj.getAddressLine(0));
+
+            params.put(Consts.ADDRESS, obj.getAddressLine(0));
+            params.put(Consts.LATITUDE, String.valueOf(obj.getLatitude()));
+            params.put(Consts.LONGITUDE, String.valueOf(obj.getLongitude()));
+
+            updateProfile();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void updateProfile() {
+//        ProjectUtils.showProgressDialog(requireActivity(), true, getResources().getString(R.string.please_wait));
+
+        new HttpsRequest(Consts.USERUPDATE, params, requireActivity()).stringPost(TAG, new Helper() {
+            @Override
+            public void backResponse(boolean flag, String msg, JSONObject response) {
+//                ProjectUtils.pauseProgressDialog();
+                if (flag) {
+                    try {
+                        Log.e(TAG, "backResponse: " + response.toString());
+                        ProjectUtils.showToast(requireContext(), msg);
+                        userDTO = new Gson().fromJson(response.getJSONObject("data").toString(), UserDTO.class);
+                        prefrence.setParentUser(userDTO, Consts.USER_DTO);
+                        prefrence.setBooleanValue(Consts.IS_REGISTERED, true);
+                        Intent in = new Intent(requireContext(), Dashboard.class);
+                        startActivity(in);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+//                    ProjectUtils.showToast(mContext, msg);
+                }
+
+            }
+        });
     }
 
 
@@ -177,13 +266,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ctvbTopService:
+            case R.id.lihat_semua_layanan_kami:
                 Intent in = new Intent(getActivity(), AllServices.class);
                 startActivity(in);
                 break;
-            case R.id.ctvbPopularLaundries:
-                Intent in1 = new Intent(getActivity(), TopServices.class);
-                startActivity(in1);
+            case R.id.lihat_semua_laundry_terdekat:
+                // FIXME: 10-Nov-20
+//                Intent in = new Intent(getActivity(), AllServices.class);
+//                startActivity(in);
                 break;
             case R.id.svLaundry:
                 Intent in2 = new Intent(getActivity(), SearchActivity.class);
