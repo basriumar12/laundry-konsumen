@@ -1,7 +1,6 @@
 package com.samyotech.laundry.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.model.OfferDTO;
 import com.samyotech.laundry.model.PopLaundryDTO;
-import com.samyotech.laundry.ui.activity.Schedule_Activity;
 import com.samyotech.laundry.ui.activity.ServiceAcitivity;
 import com.samyotech.laundry.ui.adapter.OffersOtherAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
@@ -62,19 +60,6 @@ public class OfferShopFragment extends Fragment {
         bundle = this.getArguments();
         popLaundryDTO = (PopLaundryDTO) bundle.getSerializable(Consts.SHOPDTO);
         getOffer();
-
-        binding.cvSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkClick) {
-
-                    Intent in = new Intent(getActivity(), Schedule_Activity.class);
-                    in.putExtra(Consts.SHOPDTO, popLaundryDTO);
-                    startActivity(in);
-                    checkClick = false;
-                }
-            }
-        });
 
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         binding.rvoffer.setLayoutManager(linearLayoutManager);
@@ -119,14 +104,16 @@ public class OfferShopFragment extends Fragment {
                         Type getPetDTO = new TypeToken<List<OfferDTO>>() {
                         }.getType();
                         offerDTOS = new Gson().fromJson(response.getJSONArray("data").toString(), getPetDTO);
-
+                        binding.rvoffer.setVisibility(View.VISIBLE);
+                        binding.ctvnodata.setVisibility(View.GONE);
                         setData();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 } else {
-
+                    binding.rvoffer.setVisibility(View.GONE);
+                    binding.ctvnodata.setVisibility(View.VISIBLE);
                 }
             }
         });

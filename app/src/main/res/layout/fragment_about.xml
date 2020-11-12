@@ -1,103 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
         tools:context=".ui.fragment.AboutFragment">
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/aboutus"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/ctvAboutUS"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/about" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/nama_toko"
+                        style="@style/TextAppearance.AppCompat.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/aboutus"
+                        android:textColor="@color/colorPrimary" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/address"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                    <ImageView
+                        android:layout_width="4dp"
+                        android:layout_height="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:src="@drawable/dot" />
 
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/mvAddress"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_190sdp"
-                android:layout_marginTop="@dimen/_5sdp" />
+                    <TextView
+                        android:id="@+id/rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5" />
 
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:src="@drawable/ic_baseline_star_24"
+                        app:tint="#FFC107" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/ctvTap"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/taptoview" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/openinghours"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/ctvOnTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:drawableLeft="@drawable/online_circle"
-                android:drawablePadding="@dimen/_5sdp"
-                android:text="@string/taptoview"
-                android:textSize="@dimen/_14sdp" />
-
-            <TextView
-                android:id="@+id/ctvOffTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:drawableLeft="@drawable/online_circle"
-                android:drawablePadding="@dimen/_5sdp"
-                android:text="@string/taptoview"
-                android:textSize="@dimen/_14sdp" />
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cvSchedule"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_margin="@dimen/_20sdp"
-                app:cardBackgroundColor="@color/colorPrimary"
-                app:cardCornerRadius="@dimen/_20sdp"
-                app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
+                    android:id="@+id/ctvAboutUS"
+                    style="@style/TextAppearance.AppCompat.Body1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/_8sdp"
-                    android:text="@string/schedule_pickup"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_16sdp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/about" />
 
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+
+                <TextView
+                    android:id="@+id/jam_buka"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Buka: Senin - Samptu Jam: 08.00 - 20.00" />
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mvAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="16dp" />
+
+
+                <TextView
+                    android:id="@+id/alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Jl. Pahlawan" />
+            </LinearLayout>
+        </ScrollView>
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/booking_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            app:fb_defaultColor="@color/colorPrimary"
+            app:fb_focusColor="@color/colorPrimary"
+            app:fb_iconPosition="left"
+            app:fb_radius="30dp"
+            app:fb_text="Booking Sekarang"
+            app:fb_textColor="@color/white" />
+    </RelativeLayout>
 </layout>

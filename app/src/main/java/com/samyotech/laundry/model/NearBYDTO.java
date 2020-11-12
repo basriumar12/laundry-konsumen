@@ -21,6 +21,15 @@ public class NearBYDTO implements Serializable {
     String created_at = "";
     String updated_at = "";
     String distance = "";
+    String rating = "";
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
     public String getShop_image() {
         return shop_image;

@@ -1,7 +1,6 @@
 package com.samyotech.laundry.https;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.ANRequest;
@@ -112,7 +111,7 @@ HttpsRequest {
                 .setTag("test")
                 .setPriority(Priority.HIGH)
                 .build();
-        Log.d("LOG_", "stringPost: " + test.getUrl());
+        ProjectUtils.showLog(TAG, " url --->" + test.getUrl());
         test.getAsJSONObject(new JSONObjectRequestListener() {
             @Override
             public void onResponse(JSONObject response) {
@@ -145,11 +144,14 @@ HttpsRequest {
     }
 
     public void stringGet(final String TAG, final Helper h) {
-        AndroidNetworking.get(Consts.BASE_URL + match)
+        ANRequest request = AndroidNetworking.get(Consts.BASE_URL + match)
                 .setTag("test")
 
                 .setPriority(Priority.HIGH)
-                .build()
+                .build();
+        ProjectUtils.showLog(TAG, " url --->" + request.getUrl());
+
+        request
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {

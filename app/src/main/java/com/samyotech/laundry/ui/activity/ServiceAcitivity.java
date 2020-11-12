@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.google.android.material.appbar.AppBarLayout;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityServiceAcitivityBinding;
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ServiceAcitivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
+public class ServiceAcitivity extends AppCompatActivity {
     private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 20;
     String TAG = ServiceAcitivity.class.getSimpleName();
     ServicesFragment servicesFragment = new ServicesFragment();
@@ -53,8 +53,8 @@ public class ServiceAcitivity extends AppCompatActivity implements AppBarLayout.
     RatingDTO ratingDTO;
     private Bundle bundle;
     private ViewPagerAdapter adapter;
-    private int mMaxScrollSize;
-    private boolean mIsAvatarShown = true;
+    //    private int mMaxScrollSize;
+    private final boolean mIsAvatarShown = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +67,6 @@ public class ServiceAcitivity extends AppCompatActivity implements AppBarLayout.
         if (getIntent().hasExtra(Consts.SHOPDTO)) {
             popLaundryDTOs = (PopLaundryDTO) getIntent().getSerializableExtra(Consts.SHOPDTO);
             setUiAction1();
-            getRating1();
-
         }
         if (getIntent().hasExtra(Consts.NEARSHOPDTO)) {
             nearBYDTO = (NearBYDTO) getIntent().getSerializableExtra(Consts.NEARSHOPDTO);
@@ -90,13 +88,14 @@ public class ServiceAcitivity extends AppCompatActivity implements AppBarLayout.
             object.setStatus(nearBYDTO.getStatus());
             object.setCreated_at(nearBYDTO.getCreated_at());
             object.setUpdated_at(nearBYDTO.getUpdated_at());
+            object.setRating(nearBYDTO.getRating());
+            object.setShop_image(nearBYDTO.getShop_image());
             popLaundryDTO.add(object);
 
-            getRating();
             setUiAction();
+
+
         }
-
-
     }
 
     private void getRating() {
@@ -109,8 +108,8 @@ public class ServiceAcitivity extends AppCompatActivity implements AppBarLayout.
 
                     ratingDTO = new Gson().fromJson(response.getJSONObject("data").toString(), RatingDTO.class);
 
-                    binding.ratingbar.setRating(Float.valueOf(ratingDTO.getAverage()));
-                    binding.ctvReview.setText("(" + ratingDTO.getAverage() + " " + getResources().getText(R.string.review));
+//                    binding.ratingbar.setRating(Float.valueOf(ratingDTO.getAverage()));
+//                    binding.ctvReview.setText("(" + ratingDTO.getAverage() + " " + getResources().getText(R.string.review));
                 } else {
                     ProjectUtils.showToast(mContext, msg);
                 }
@@ -128,8 +127,8 @@ public class ServiceAcitivity extends AppCompatActivity implements AppBarLayout.
 
                     ratingDTO = new Gson().fromJson(response.getJSONObject("data").toString(), RatingDTO.class);
 
-                    binding.ratingbar.setRating(Float.valueOf(ratingDTO.getAverage()));
-                    binding.ctvReview.setText("(" + ratingDTO.getAverage() + " " + getResources().getText(R.string.review));
+//                    binding.ratingbar.setRating(Float.valueOf(ratingDTO.getAverage()));
+//                    binding.ctvReview.setText("(" + ratingDTO.getAverage() + " " + getResources().getText(R.string.review));
                 } else {
                     ProjectUtils.showToast(mContext, msg);
                 }
@@ -141,14 +140,14 @@ public class ServiceAcitivity extends AppCompatActivity implements AppBarLayout.
         bundle = new Bundle();
         bundle.putSerializable(Consts.SHOPDTO, popLaundryDTO.get(0));
         binding.ivShopName.setText(popLaundryDTO.get(0).getShop_name());
-        binding.ctvAddress.setText(popLaundryDTO.get(0).getAddress());
-        binding.ivBack.setOnClickListener(new View.OnClickListener() {
+        Glide.with(this).load(Consts.DEV_URL + popLaundryDTO.get(0).getShop_image()).into(binding.ivBanner);
+        binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-        mMaxScrollSize = binding.appbar.getTotalScrollRange();
+//        mMaxScrollSize = binding.appbar.getTotalScrollRange();
         servicesFragment.setArguments(bundle);
         offerShopFragment.setArguments(bundle);
         aboutFragment.setArguments(bundle);
@@ -166,14 +165,14 @@ public class ServiceAcitivity extends AppCompatActivity implements AppBarLayout.
         bundle = new Bundle();
         bundle.putSerializable(Consts.SHOPDTO, popLaundryDTOs);
         binding.ivShopName.setText(popLaundryDTOs.getShop_name());
-        binding.ctvAddress.setText(popLaundryDTOs.getAddress());
-        binding.ivBack.setOnClickListener(new View.OnClickListener() {
+        Glide.with(this).load(Consts.DEV_URL + popLaundryDTOs.getShop_image()).into(binding.ivBanner);
+        binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-        mMaxScrollSize = binding.appbar.getTotalScrollRange();
+//        mMaxScrollSize = binding.appbar.getTotalScrollRange();
         servicesFragment.setArguments(bundle);
         offerShopFragment.setArguments(bundle);
         aboutFragment.setArguments(bundle);
@@ -187,30 +186,30 @@ public class ServiceAcitivity extends AppCompatActivity implements AppBarLayout.
         binding.tabLayout.setupWithViewPager(binding.pager);
     }
 
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-        if (mMaxScrollSize == 0)
-            mMaxScrollSize = appBarLayout.getTotalScrollRange();
-
-        int percentage = (Math.abs(i)) * 100 / mMaxScrollSize;
-
-        if (percentage >= PERCENTAGE_TO_ANIMATE_AVATAR && mIsAvatarShown) {
-            mIsAvatarShown = false;
-
-            binding.ivBanner.animate()
-                    .scaleY(0).scaleX(0)
-                    .setDuration(200)
-                    .start();
-        }
-
-        if (percentage <= PERCENTAGE_TO_ANIMATE_AVATAR && !mIsAvatarShown) {
-            mIsAvatarShown = true;
-
-            binding.ivBanner.animate()
-                    .scaleY(1).scaleX(1)
-                    .start();
-        }
-    }
+//    @Override
+//    public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+//        if (mMaxScrollSize == 0)
+//            mMaxScrollSize = appBarLayout.getTotalScrollRange();
+//
+//        int percentage = (Math.abs(i)) * 100 / mMaxScrollSize;
+//
+//        if (percentage >= PERCENTAGE_TO_ANIMATE_AVATAR && mIsAvatarShown) {
+//            mIsAvatarShown = false;
+//
+//            binding.ivBanner.animate()
+//                    .scaleY(0).scaleX(0)
+//                    .setDuration(200)
+//                    .start();
+//        }
+//
+//        if (percentage <= PERCENTAGE_TO_ANIMATE_AVATAR && !mIsAvatarShown) {
+//            mIsAvatarShown = true;
+//
+//            binding.ivBanner.animate()
+//                    .scaleY(1).scaleX(1)
+//                    .start();
+//        }
+//    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();

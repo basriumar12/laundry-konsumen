@@ -44,20 +44,21 @@ public class LaundriesNearAdapter extends RecyclerView.Adapter<LaundriesNearAdap
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+        final NearBYDTO item = nearBYDTOArrayList.get(position);
         Glide.with(kContext)
-                .load(Consts.DEV_URL + nearBYDTOArrayList.get(position).getShop_image())
+                .load(Consts.DEV_URL + item.getShop_image())
                 .placeholder(R.drawable.banner_img)
                 .error(R.drawable.banner_img)
                 .into(holder.binding.image);
 
-        binding.namatoko.setText(nearBYDTOArrayList.get(position).getShop_name());
-        binding.alamat.setText(nearBYDTOArrayList.get(position).getAddress());
+        binding.namatoko.setText(item.getShop_name());
+        binding.alamat.setText(item.getAddress());
 
         holder.binding.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(kContext, ServiceAcitivity.class);
-                in.putExtra(Consts.NEARSHOPDTO, nearBYDTOArrayList.get(position));
+                in.putExtra(Consts.NEARSHOPDTO, item);
                 kContext.startActivity(in);
             }
         });

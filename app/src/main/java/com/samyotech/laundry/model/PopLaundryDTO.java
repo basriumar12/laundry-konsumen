@@ -20,7 +20,24 @@ public class PopLaundryDTO implements Serializable {
     String status = "";
     String created_at = "";
     String updated_at = "";
+    String rating = "";
+    String shop_image = "";
 
+    public String getShop_image() {
+        return shop_image;
+    }
+
+    public void setShop_image(String shop_image) {
+        this.shop_image = shop_image;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
 
     public String getS_no() {
         return s_no;

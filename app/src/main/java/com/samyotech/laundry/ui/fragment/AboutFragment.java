@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +35,7 @@ import java.util.Hashtable;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AboutFragment extends Fragment implements View.OnClickListener {
+public class AboutFragment extends Fragment {
 
     FragmentAboutBinding binding;
     PopLaundryDTO popLaundryDTO;
@@ -106,12 +105,19 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setUIAction() {
+        binding.namaToko.setText(popLaundryDTO.getShop_name());
         binding.ctvAboutUS.setText(popLaundryDTO.getDescription());
-        binding.ctvOnTime.setText(getResources().getText(R.string.monday) + " " + popLaundryDTO.getOpening_time() + " - " + popLaundryDTO.getClosing_time());
-        binding.ctvOffTime.setText(getResources().getText(R.string.tuesday) + " " + popLaundryDTO.getOpening_time() + " - " + popLaundryDTO.getClosing_time());
-        binding.ctvTap.setOnClickListener(this);
-        binding.cvSchedule.setOnClickListener(this);
-
+        binding.jamBuka.setText(getResources().getText(R.string.monday) + " " + popLaundryDTO.getOpening_time() + " - " + popLaundryDTO.getClosing_time());
+        binding.alamat.setText(popLaundryDTO.getAddress());
+        binding.rating.setText(popLaundryDTO.getRating());
+        binding.bookingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(requireContext(), Schedule_Activity.class);
+                in.putExtra(Consts.SHOPDTO, popLaundryDTO);
+                startActivity(in);
+            }
+        });
         binding.mvAddress.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap mMap) {
@@ -185,28 +191,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ctvTap:
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("geo:" + Double.parseDouble(
-                                prefrence.getValue(Consts.LATITUDE)) + "," + Double.parseDouble(
-                                prefrence.getValue(Consts.LONGITUDE)) + "?q=" + popLaundryDTO.getLatitude() + "," + popLaundryDTO.getLongitude() + "(" + popLaundryDTO.getAddress() + ")"));
-                startActivity(intent);
-
-                break;
-
-            case R.id.cvSchedule:
-                if (checkClick) {
-                    Intent in = new Intent(getActivity(), Schedule_Activity.class);
-                    in.putExtra(Consts.SHOPDTO, popLaundryDTO);
-                    startActivity(in);
-                    checkClick = false;
-                }
-        }
     }
 
 

@@ -1,7 +1,6 @@
 package com.samyotech.laundry.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,7 +20,6 @@ import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.model.PopLaundryDTO;
 import com.samyotech.laundry.model.ShopServicesDTO;
-import com.samyotech.laundry.ui.activity.Schedule_Activity;
 import com.samyotech.laundry.ui.activity.ServiceAcitivity;
 import com.samyotech.laundry.ui.adapter.ServiceAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
@@ -41,9 +39,8 @@ public class ServicesFragment extends Fragment {
     PopLaundryDTO popLaundryDTO;
     HashMap<String, String> params = new HashMap<>();
     ArrayList<ShopServicesDTO> shopServicesDTOS = new ArrayList<>();
-    LinearLayoutManager linearLayoutManager;
+    GridLayoutManager linearLayoutManager;
     ServiceAdapter serviceAdapter;
-    boolean checkClick = true;
     ServiceAcitivity serviceAcitivity;
     private Bundle bundle;
 
@@ -56,29 +53,7 @@ public class ServicesFragment extends Fragment {
         bundle = this.getArguments();
         popLaundryDTO = (PopLaundryDTO) bundle.getSerializable(Consts.SHOPDTO);
         getSerivces();
-
-        binding.cvSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (shopServicesDTOS.size() > 0) {
-                    if (checkClick) {
-                        Intent in = new Intent(getActivity(), Schedule_Activity.class);
-                        in.putExtra(Consts.SHOPDTO, popLaundryDTO);
-                        startActivity(in);
-                        checkClick = false;
-                    }
-                } else {
-                }
-            }
-        });
         return binding.getRoot();
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        checkClick = true;
     }
 
 
@@ -86,21 +61,21 @@ public class ServicesFragment extends Fragment {
 
         ProjectUtils.getProgressDialog(getActivity());
         params.put(Consts.SHOP_ID, popLaundryDTO.getShop_id());
-        new HttpsRequest(Consts.GETSHOPSERVICES, params, getActivity()).stringPost(TAG, new Helper() {
-            @Override
-            public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
-                ProjectUtils.pauseProgressDialog();
-                if (flag) {
-                    try {
+        new HttpsRequest(Consts.GETSHOPSERVICES, params, getActivity())
+                .stringPost(TAG, new Helper() {
+                    @Override
+                    public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
+                        ProjectUtils.pauseProgressDialog();
+                        if (flag) {
+                            try {
 
-                        shopServicesDTOS = new ArrayList<>();
-                        Type getPetDTO = new TypeToken<List<ShopServicesDTO>>() {
-                        }.getType();
-                        shopServicesDTOS = new Gson().fromJson(response.getJSONArray("data").toString(), getPetDTO);
+                                shopServicesDTOS = new ArrayList<>();
+                                Type getPetDTO = new TypeToken<List<ShopServicesDTO>>() {
+                                }.getType();
+                                shopServicesDTOS = new Gson().fromJson(response.getJSONArray("data").toString(), getPetDTO);
 
                         binding.rvServices.setVisibility(View.VISIBLE);
                         binding.ctvnodata.setVisibility(View.GONE);
-                        binding.cvSchedule.setVisibility(View.VISIBLE);
                         setData();
 
                     } catch (Exception e) {
@@ -110,7 +85,6 @@ public class ServicesFragment extends Fragment {
                 } else {
                     binding.rvServices.setVisibility(View.GONE);
                     binding.ctvnodata.setVisibility(View.VISIBLE);
-                    binding.cvSchedule.setVisibility(View.GONE);
 
                 }
             }
@@ -121,7 +95,7 @@ public class ServicesFragment extends Fragment {
 
     private void setData() {
 
-        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager = new GridLayoutManager(requireContext(), 3);
         binding.rvServices.setLayoutManager(linearLayoutManager);
         serviceAdapter = new ServiceAdapter(getActivity(), shopServicesDTOS);
         binding.rvServices.setAdapter(serviceAdapter);
