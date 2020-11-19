@@ -20,7 +20,7 @@ import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.model.PopLaundryDTO;
 import com.samyotech.laundry.model.ShopServicesDTO;
-import com.samyotech.laundry.ui.activity.ServiceAcitivity;
+import com.samyotech.laundry.ui.activity.ShopAcitivity;
 import com.samyotech.laundry.ui.adapter.ServiceAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
 
@@ -41,7 +41,7 @@ public class ServicesFragment extends Fragment {
     ArrayList<ShopServicesDTO> shopServicesDTOS = new ArrayList<>();
     GridLayoutManager linearLayoutManager;
     ServiceAdapter serviceAdapter;
-    ServiceAcitivity serviceAcitivity;
+    ShopAcitivity serviceAcitivity;
     private Bundle bundle;
 
     @Override
@@ -105,7 +105,7 @@ public class ServicesFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        serviceAcitivity = (ServiceAcitivity) context;
+        serviceAcitivity = (ShopAcitivity) context;
     }
 
 

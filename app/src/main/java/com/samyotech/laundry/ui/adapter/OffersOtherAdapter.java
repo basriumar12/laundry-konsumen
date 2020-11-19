@@ -47,9 +47,10 @@ public class OffersOtherAdapter extends RecyclerView.Adapter<OffersOtherAdapter.
         holder.binding.presentase.setText(item.getAmount() + item.getAmount_type());
         holder.binding.produk.setText(item.getService_name());
         holder.binding.rating.setText(item.getRating());
+        holder.binding.arb.setRating(Float.parseFloat(item.getRating()));
         holder.binding.nama.setText(item.getShop_name());
         holder.binding.alamat.setText(item.getAddress());
-        holder.binding.produk.setText("untuk " + item.getService_name());
+        holder.binding.produk.setText(item.getDescription());
         String string = Consts.DEV_URL + item.getImage();
         Glide.with(kContext)
                 .load(string)

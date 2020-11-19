@@ -3,7 +3,7 @@
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="16dp">
@@ -15,7 +15,7 @@
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="180dp"
                 android:scaleType="center" />
 
             <LinearLayout
@@ -59,18 +59,25 @@
                         android:id="@+id/rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="2dp"
                         android:text="5" />
 
-                    <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
-                        android:src="@drawable/ic_baseline_star_24"
-                        app:tint="#FFC107" />
+                    <com.bigstark.animatedratingbar.lib.AnimatedRatingBar
+                        android:id="@+id/arb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        app:gapSize="1dp"
+                        app:max="5"
+                        app:numStars="5"
+                        app:progressImage="@drawable/icon_star_yellow"
+                        app:secondaryProgressImage="@drawable/icon_star_gray"
+                        app:starSize="16dp" />
                 </LinearLayout>
 
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -87,7 +94,8 @@
 
                 <TextView
                     android:id="@+id/produk"
-                    style="@style/TextAppearance.AppCompat.Subhead"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nama laundry" />

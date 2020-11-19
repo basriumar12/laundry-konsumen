@@ -28,7 +28,7 @@ import com.samyotech.laundry.model.PopLaundryDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.Schedule_Activity;
-import com.samyotech.laundry.ui.activity.ServiceAcitivity;
+import com.samyotech.laundry.ui.activity.ShopAcitivity;
 
 import java.util.Hashtable;
 
@@ -41,7 +41,7 @@ public class AboutFragment extends Fragment {
     PopLaundryDTO popLaundryDTO;
     MarkerOptions markerOptions;
     LatLng sydney;
-    ServiceAcitivity serviceAcitivity;
+    ShopAcitivity serviceAcitivity;
     boolean checkClick = true;
     private SharedPrefrence prefrence;
     private GoogleMap googleMap;
@@ -107,9 +107,11 @@ public class AboutFragment extends Fragment {
     private void setUIAction() {
         binding.namaToko.setText(popLaundryDTO.getShop_name());
         binding.ctvAboutUS.setText(popLaundryDTO.getDescription());
-        binding.jamBuka.setText(getResources().getText(R.string.monday) + " " + popLaundryDTO.getOpening_time() + " - " + popLaundryDTO.getClosing_time());
+        binding.hariBuka.setText("Buka : " + popLaundryDTO.getMulai_hari() + " - " + popLaundryDTO.getSampai_hari());
+        binding.jamBuka.setText("Jam : " + popLaundryDTO.getOpening_time() + " - " + popLaundryDTO.getClosing_time());
         binding.alamat.setText(popLaundryDTO.getAddress());
         binding.rating.setText(popLaundryDTO.getRating());
+        binding.arb.setRating(Float.parseFloat(popLaundryDTO.getRating()));
         binding.bookingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,7 +205,7 @@ public class AboutFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        serviceAcitivity = (ServiceAcitivity) context;
+        serviceAcitivity = (ShopAcitivity) context;
     }
 
 

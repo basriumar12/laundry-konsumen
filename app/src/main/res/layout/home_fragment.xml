@@ -2,14 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/auth_bg"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -18,8 +17,8 @@
                 android:background="@color/white">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
@@ -46,62 +45,74 @@
 
             </RelativeLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_height="160dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:scaleType="center"
+                    android:src="@drawable/auth_bg" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginRight="4dp"
-                        android:src="@drawable/icon_location"
-                        app:tint="@color/white" />
-
-                    <TextView
-                        style="@style/TextAppearance.AppCompat.Body2"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lokasi Saya"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:gravity="center_vertical">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginRight="4dp"
+                            android:src="@drawable/icon_location"
+                            app:tint="@color/white" />
+
+                        <TextView
+                            style="@style/TextAppearance.AppCompat.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lokasi Saya"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/alamat"
+                        style="@style/TextAppearance.AppCompat.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jalan Pahlawan"
+                        android:textColor="@color/white" />
+
+                    <mehdi.sakout.fancybuttons.FancyButton
+                        android:id="@+id/ganti_alamat_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="4dp"
+                        app:fb_borderColor="#FFFFFF"
+                        app:fb_borderWidth="2dp"
+                        app:fb_defaultColor="@android:color/transparent"
+                        app:fb_focusColor="@color/white"
+                        app:fb_iconPosition="left"
+                        app:fb_radius="24dp"
+                        app:fb_text="Ganti Lokasi"
+                        app:fb_textColor="@color/white" />
                 </LinearLayout>
-
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Body1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/alamat"
-                    android:text="Jalan Pahlawan"
-                    android:textColor="@color/white" />
-
-                <mehdi.sakout.fancybuttons.FancyButton
-                    android:id="@+id/ganti_alamat_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp"
-                    app:fb_borderColor="#FFFFFF"
-                    app:fb_borderWidth="2dp"
-                    app:fb_defaultColor="@android:color/transparent"
-                    app:fb_focusColor="@color/white"
-                    app:fb_iconPosition="left"
-                    app:fb_radius="24dp"
-                    app:fb_text="Ganti Lokasi"
-                    app:fb_textColor="@color/white" />
-
-            </LinearLayout>
+            </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-16dp"
                 android:background="@drawable/round_background"
                 android:orientation="vertical">
 
@@ -154,20 +165,28 @@
                         android:gravity="bottom">
 
                         <TextView
-                            style="@style/TextAppearance.AppCompat.Title"
+                            style="@style/TextAppearance.AppCompat.Subhead"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Laundry Terdekat"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/lihat_semua_laundry_terdekat"
                             style="@style/TextAppearance.AppCompat.Caption"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="2dp"
                             android:text="Lihat semua"
                             android:textAlignment="textEnd" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:layout_marginBottom="2dp"
+                            android:src="@drawable/icon_next" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -183,32 +202,26 @@
                         android:gravity="bottom">
 
                         <TextView
-                            style="@style/TextAppearance.AppCompat.Title"
+                            style="@style/TextAppearance.AppCompat.Subhead"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Layanan kami"
-                            android:textColor="@color/colorPrimary" />
-
-                        <TextView
-                            android:id="@+id/lihat_semua_layanan_kami"
-                            style="@style/TextAppearance.AppCompat.Caption"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Lihat semua"
-                            android:textAlignment="textEnd" />
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/layanan_kami_recyclerview"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
                 </LinearLayout>
 
 
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
 </layout>

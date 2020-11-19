@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,10 +32,10 @@ import com.samyotech.laundry.model.ServicesDTO;
 import com.samyotech.laundry.model.SpecialOfferPkgDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
-import com.samyotech.laundry.ui.activity.AllServices;
 import com.samyotech.laundry.ui.activity.Dashboard;
 import com.samyotech.laundry.ui.activity.NotificationActivity;
 import com.samyotech.laundry.ui.activity.SearchActivity;
+import com.samyotech.laundry.ui.activity.TopServices;
 import com.samyotech.laundry.ui.adapter.ImageAdapter;
 import com.samyotech.laundry.ui.adapter.LaundriesNearAdapter;
 import com.samyotech.laundry.ui.adapter.PopularLaundriesAdapter;
@@ -67,7 +68,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     String TAG = HomeFragment.class.getSimpleName();
     TopServiceAdapter topServiceAdapter;
     ArrayList<ServicesDTO> servicesDTOArrayList;
-    RecyclerView.LayoutManager layoutManagerServ;
+    GridLayoutManager layoutManagerServ;
     PopularLaundriesAdapter popularLaundriesAdapter;
     ArrayList<PopLaundryDTO> popLaundryDTOArrayList;
     RecyclerView.LayoutManager layoutManagerPop;
@@ -145,7 +146,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.viewpager.setAdapter(imageAdapter);
         binding.tabDots.setViewPager(binding.viewpager);
 
-        layoutManagerServ = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        layoutManagerServ = new GridLayoutManager(getActivity(), 3);
         binding.layananKamiRecyclerview.setLayoutManager(layoutManagerServ);
         topServiceAdapter = new TopServiceAdapter(getActivity(), homeDTO.getService());
         binding.layananKamiRecyclerview.setAdapter(topServiceAdapter);
@@ -155,7 +156,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         laundriesNearAdapter = new LaundriesNearAdapter(getActivity(), homeDTO.getNear_by());
         binding.laundryTerdekatRecyclerview.setAdapter(laundriesNearAdapter);
 
-        binding.lihatSemuaLayananKami.setOnClickListener(this);
         binding.lihatSemuaLaundryTerdekat.setOnClickListener(this);
         binding.svLaundry.setOnClickListener(this);
         binding.ivNotification.setOnClickListener(this);
@@ -266,22 +266,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.lihat_semua_layanan_kami:
-                Intent in = new Intent(getActivity(), AllServices.class);
-                startActivity(in);
-                break;
             case R.id.lihat_semua_laundry_terdekat:
-                // FIXME: 10-Nov-20
-//                Intent in = new Intent(getActivity(), AllServices.class);
-//                startActivity(in);
-                break;
-            case R.id.svLaundry:
-                Intent in2 = new Intent(getActivity(), SearchActivity.class);
+                Intent in2 = new Intent(getActivity(), TopServices.class);
                 startActivity(in2);
                 break;
-            case R.id.ivNotification:
-                Intent in3 = new Intent(getActivity(), NotificationActivity.class);
+//            case R.id.lihat_semua_layanan_kami:
+//                Intent in = new Intent(getActivity(), AllServices.class);
+//                startActivity(in);
+//                break;
+            case R.id.svLaundry:
+                Intent in3 = new Intent(getActivity(), SearchActivity.class);
                 startActivity(in3);
+                break;
+            case R.id.ivNotification:
+                Intent in4 = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(in4);
                 break;
         }
     }

@@ -1,7 +1,9 @@
 package com.samyotech.laundry.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ServicesAdapterBinding;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.ShopServicesDTO;
+import com.samyotech.laundry.ui.activity.ServiceActivity;
 
 import java.util.ArrayList;
 
@@ -42,9 +45,19 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        ShopServicesDTO item = servicesDTOArrayList.get(position);
+        final ShopServicesDTO item = servicesDTOArrayList.get(position);
         holder.binding.namaJasa.setText(item.getService_name());
         Glide.with(kContext).load(Consts.DEV_URL + item.getImage()).placeholder(R.drawable.icon_service_118).into(binding.image);
+
+        holder.binding.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(kContext, ServiceActivity.class);
+                in.putExtra(Consts.SHOPSERVICEDTO, item);
+                kContext.startActivity(in);
+            }
+        });
+
     }
 
     @Override

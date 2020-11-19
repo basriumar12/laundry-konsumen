@@ -15,7 +15,7 @@ import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterTopservicesBinding;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.PopLaundryDTO;
-import com.samyotech.laundry.ui.activity.ServiceAcitivity;
+import com.samyotech.laundry.ui.activity.ShopAcitivity;
 
 import java.util.ArrayList;
 
@@ -53,7 +53,7 @@ public class PopularFullLaundriesAdapter extends RecyclerView.Adapter<PopularFul
         holder.binding.cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(kContext, ServiceAcitivity.class);
+                Intent in = new Intent(kContext, ShopAcitivity.class);
                 in.putExtra(Consts.SHOPDTO, popLaundryDTOArrayList.get(position));
                 kContext.startActivity(in);
             }

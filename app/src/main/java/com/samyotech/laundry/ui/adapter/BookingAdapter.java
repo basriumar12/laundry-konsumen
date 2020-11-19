@@ -2,7 +2,6 @@ package com.samyotech.laundry.ui.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.model.OrderListDTO;
-import com.samyotech.laundry.ui.activity.OrderDetails;
 import com.samyotech.laundry.ui.fragment.BookingFragment;
 import com.samyotech.laundry.utils.ProjectUtils;
 
@@ -79,19 +77,19 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
                     .load(R.drawable.icon_orange_reload)
                     .into(holder.binding.status);
         }
-        holder.binding.berat.setText("N/A Kg");
+        holder.binding.layanan.setText(item.getService_name());
         holder.binding.diterima.setText(item.getPickup_date() + " " + item.getPickup_time());
         holder.binding.dikirim.setText(item.getDelivery_date() + " " + item.getDelivery_time());
         holder.binding.harga.setText(currencyDTO.getCurrency_symbol() + " " + item.getPrice());
 
-        holder.binding.selengkapnyaBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(kContext, OrderDetails.class);
-                in.putExtra(Consts.ORDERLISTDTO, item);
-                kContext.startActivity(in);
-            }
-        });
+//        holder.binding.selengkapnyaBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent in = new Intent(kContext, OrderDetails.class);
+//                in.putExtra(Consts.ORDERLISTDTO, item);
+//                kContext.startActivity(in);
+//            }
+//        });
     }
 
     @Override

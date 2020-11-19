@@ -15,7 +15,7 @@ import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterServicesBinding;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.ServicesDTO;
-import com.samyotech.laundry.ui.activity.TopServices;
+import com.samyotech.laundry.ui.activity.ServiceActivity;
 
 import java.util.ArrayList;
 
@@ -45,16 +45,17 @@ public class TopServiceAdapter extends RecyclerView.Adapter<TopServiceAdapter.My
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
-        Glide.with(kContext).load(Consts.DEV_URL + servicesDTOArrayList.get(position).getImage())
+        final ServicesDTO item = servicesDTOArrayList.get(position);
+        Glide.with(kContext).load(Consts.DEV_URL + item.getImage())
                 .placeholder(R.drawable.laundryshop)
                 .into(holder.binding.servImage);
 
-        holder.binding.servName.setText(servicesDTOArrayList.get(position).getService_name());
+        holder.binding.servName.setText(item.getService_name());
         holder.binding.cvCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(kContext, TopServices.class);
-                in.putExtra(Consts.SERVICE_ID, servicesDTOArrayList.get(position).getService_id());
+                Intent in = new Intent(kContext, ServiceActivity.class);
+                in.putExtra(Consts.SERVICEDTO, item);
                 kContext.startActivity(in);
 
             }

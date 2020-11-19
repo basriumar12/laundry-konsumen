@@ -6,8 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,7 +30,7 @@ public class AllServices extends AppCompatActivity {
     private final String TAG = AllServices.class.getSimpleName();
     ActivityAllServicesBinding binding;
     Context mContext;
-    RecyclerView.LayoutManager layoutManagerServ;
+    GridLayoutManager layoutManagerServ;
     AllServicesAdapter allServicesAdapter;
     ArrayList<ServicesDTO> getServic = new ArrayList<>();
 
@@ -77,10 +76,10 @@ public class AllServices extends AppCompatActivity {
     }
 
     private void setData() {
-        layoutManagerServ = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
-        binding.recyleService.setLayoutManager(layoutManagerServ);
+        layoutManagerServ = new GridLayoutManager(this, 3);
+        binding.recyclerview.setLayoutManager(layoutManagerServ);
         allServicesAdapter = new AllServicesAdapter(mContext, getServic);
-        binding.recyleService.setAdapter(allServicesAdapter);
+        binding.recyclerview.setAdapter(allServicesAdapter);
     }
 
 

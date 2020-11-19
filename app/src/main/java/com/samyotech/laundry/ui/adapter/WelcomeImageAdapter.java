@@ -13,31 +13,29 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.WelcomeDTO;
 
 import java.util.ArrayList;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 
 public class WelcomeImageAdapter extends PagerAdapter {
 
     private final Context mContext;
     private final LayoutInflater layoutInflater;
+    private final ClickListener listener;
     AppCompatImageView background;
     TextView desc;
     TextView title;
     ArrayList<WelcomeDTO> imageDTOArrayList;
+    FancyButton registerBtn;
 
-
-    public WelcomeImageAdapter(ArrayList<WelcomeDTO> imageDTOArrayList, Context mContext) {
+    public WelcomeImageAdapter(ArrayList<WelcomeDTO> imageDTOArrayList, Context mContext, ClickListener listener) {
         this.imageDTOArrayList = imageDTOArrayList;
         this.mContext = mContext;
         layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-
-    @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == object;
+        this.listener = listener;
     }
 
     @Override
@@ -47,13 +45,35 @@ public class WelcomeImageAdapter extends PagerAdapter {
         background = itemView.findViewById(R.id.background);
         title = itemView.findViewById(R.id.title);
         desc = itemView.findViewById(R.id.desc);
+        registerBtn = itemView.findViewById(R.id.register_btn);
 
-        Glide.with(mContext).load(Consts.DEV_URL + imageDTOArrayList.get(position).getBackground()).into(background);
+        Glide.with(mContext).load(imageDTOArrayList.get(position).getBackground()).into(background);
         title.setText(imageDTOArrayList.get(position).getHeading());
         desc.setText(imageDTOArrayList.get(position).getDesc());
 
+        if (position == imageDTOArrayList.size() - 1) {
+            registerBtn.setVisibility(View.VISIBLE);
+            registerBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClick();
+                }
+            });
+        } else {
+            registerBtn.setVisibility(View.GONE);
+        }
+
         container.addView(itemView);
         return itemView;
+    }
+
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return view == object;
+    }
+
+    public interface ClickListener {
+        void onClick();
     }
 
 

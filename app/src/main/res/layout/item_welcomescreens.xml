@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:background="@color/black">
 
@@ -17,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="96dp"
+        android:layout_marginBottom="140dp"
         android:padding="8dp"
         android:text="Choose Your Clothes"
         android:textColor="@color/white"
@@ -28,11 +29,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="80dp"
         android:padding="8dp"
         android:text="@string/dummuydata"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/register_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="32dp"
+        android:paddingHorizontal="32dp"
+        android:paddingVertical="12dp"
+        android:visibility="visible"
+        app:fb_defaultColor="@color/white"
+        app:fb_focusColor="@color/white"
+        app:fb_iconPosition="left"
+        app:fb_radius="30dp"
+        app:fb_text="Daftar Sekarang"
+        app:fb_textColor="@color/colorPrimary" />
 
 </FrameLayout>

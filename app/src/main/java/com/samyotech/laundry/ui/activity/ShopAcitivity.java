@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.databinding.ActivityServiceAcitivityBinding;
+import com.samyotech.laundry.databinding.ActivityShopAcitivityBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
@@ -34,9 +34,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ServiceAcitivity extends AppCompatActivity {
+public class ShopAcitivity extends AppCompatActivity {
     private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 20;
-    String TAG = ServiceAcitivity.class.getSimpleName();
+    String TAG = ShopAcitivity.class.getSimpleName();
     ServicesFragment servicesFragment = new ServicesFragment();
     OfferShopFragment offerShopFragment = new OfferShopFragment();
     AboutFragment aboutFragment = new AboutFragment();
@@ -44,7 +44,7 @@ public class ServiceAcitivity extends AppCompatActivity {
     PopLaundryDTO object;
     PopLaundryDTO popLaundryDTOs;
     NearBYDTO nearBYDTO;
-    ActivityServiceAcitivityBinding binding;
+    ActivityShopAcitivityBinding binding;
     HashMap<String, String> params = new HashMap<>();
     UserDTO userDTO;
     SharedPrefrence sharedPrefrence;
@@ -59,8 +59,8 @@ public class ServiceAcitivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_service_acitivity);
-        mContext = ServiceAcitivity.this;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_shop_acitivity);
+        mContext = ShopAcitivity.this;
         sharedPrefrence = SharedPrefrence.getInstance(mContext);
         userDTO = sharedPrefrence.getParentUser(Consts.USER_DTO);
 
@@ -81,6 +81,8 @@ public class ServiceAcitivity extends AppCompatActivity {
             object.setAddress(nearBYDTO.getAddress());
             object.setLatitude(nearBYDTO.getLatitude());
             object.setLongitude(nearBYDTO.getLongitude());
+            object.setMulai_hari(nearBYDTO.getMulai_hari());
+            object.setSampai_hari(nearBYDTO.getSampai_hari());
             object.setOpening_time(nearBYDTO.getOpening_time());
             object.setClosing_time(nearBYDTO.getClosing_time());
             object.setDescription(nearBYDTO.getDescription());

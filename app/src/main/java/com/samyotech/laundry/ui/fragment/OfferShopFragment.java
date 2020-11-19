@@ -20,7 +20,7 @@ import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.model.OfferDTO;
 import com.samyotech.laundry.model.PopLaundryDTO;
-import com.samyotech.laundry.ui.activity.ServiceAcitivity;
+import com.samyotech.laundry.ui.activity.ShopAcitivity;
 import com.samyotech.laundry.ui.adapter.OffersOtherAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
 
@@ -45,7 +45,7 @@ public class OfferShopFragment extends Fragment {
     HashMap<String, String> params = new HashMap<>();
     OffersOtherAdapter offersAdapter;
     PopLaundryDTO popLaundryDTO;
-    ServiceAcitivity serviceAcitivity;
+    ShopAcitivity serviceAcitivity;
     boolean checkClick = true;
     int page = 20;
     boolean request = false;
@@ -133,7 +133,7 @@ public class OfferShopFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        serviceAcitivity = (ServiceAcitivity) context;
+        serviceAcitivity = (ShopAcitivity) context;
     }
 
 

@@ -87,11 +87,13 @@ public interface Consts {
     String PROMOCODE = "promocode";
     String TOTAL_PRICE = "total_price";
     String IS_REGISTERED = "is_registered";
+    String IS_NOT_FIRST_TIME = "is_first_time";
 
     String ORDER_ID = "order_id";
     String SHOP_ID = "shop_id";
     String SERVICE_ID = "service_id";
     String SERVICEDTO = "servicedto";
+    String SHOPSERVICEDTO = "shopservicedto";
     String ITEM_ID = "item_id";
     String ITEM_NAME = "item_name";
     String TO_USER_ID = "to_user_id";

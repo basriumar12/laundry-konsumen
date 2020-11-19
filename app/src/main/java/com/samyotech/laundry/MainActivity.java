@@ -18,6 +18,7 @@ import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.Dashboard;
 import com.samyotech.laundry.ui.activity.Login;
+import com.samyotech.laundry.ui.activity.WelcomeScreens;
 
 import java.util.Locale;
 
@@ -38,24 +39,28 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void run() {
 
-            if (prefference.getBooleanValue(Consts.IS_REGISTERED)) {
-                Intent in = new Intent(mContext, Dashboard.class);
-                language(prefference.getValue(Consts.LANGUAGE));
+            if (!prefference.getBooleanValue(Consts.IS_NOT_FIRST_TIME)) {
+                Intent in = new Intent(mContext, WelcomeScreens.class);
                 startActivity(in);
                 finish();
-                overridePendingTransition(R.anim.anim_slide_in_left,
-                        R.anim.anim_slide_out_left);
             } else {
+                if (prefference.getBooleanValue(Consts.IS_REGISTERED)) {
+                    Intent in = new Intent(mContext, Dashboard.class);
+                    language(prefference.getValue(Consts.LANGUAGE));
+                    startActivity(in);
+                    finish();
+                    overridePendingTransition(R.anim.anim_slide_in_left,
+                            R.anim.anim_slide_out_left);
+                } else {
 
-                Intent in = new Intent(mContext, Login.class);
-                in.putExtra(Consts.TYPE, 1);
-                startActivity(in);
-                finish();
-                overridePendingTransition(R.anim.anim_slide_in_left,
-                        R.anim.anim_slide_out_left);
+                    Intent in = new Intent(mContext, Login.class);
+                    in.putExtra(Consts.TYPE, 1);
+                    startActivity(in);
+                    finish();
+                    overridePendingTransition(R.anim.anim_slide_in_left,
+                            R.anim.anim_slide_out_left);
+                }
             }
-
-
         }
 
     };

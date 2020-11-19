@@ -30,6 +30,15 @@ public class OrderListDTO implements Serializable {
     String updated_at = "";
     String shop_name = "";
     String shop_image = "";
+    String service_name = "";
+
+    public String getService_name() {
+        return service_name;
+    }
+
+    public void setService_name(String service_name) {
+        this.service_name = service_name;
+    }
 
     public String getS_no() {
         return s_no;

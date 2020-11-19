@@ -15,7 +15,7 @@ import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterNearBinding;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.NearBYDTO;
-import com.samyotech.laundry.ui.activity.ServiceAcitivity;
+import com.samyotech.laundry.ui.activity.ShopAcitivity;
 
 import java.util.ArrayList;
 
@@ -57,7 +57,7 @@ public class LaundriesNearAdapter extends RecyclerView.Adapter<LaundriesNearAdap
         holder.binding.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(kContext, ServiceAcitivity.class);
+                Intent in = new Intent(kContext, ShopAcitivity.class);
                 in.putExtra(Consts.NEARSHOPDTO, item);
                 kContext.startActivity(in);
             }

@@ -22,6 +22,24 @@ public class NearBYDTO implements Serializable {
     String updated_at = "";
     String distance = "";
     String rating = "";
+    String mulai_hari = "";
+    String sampai_hari = "";
+
+    public String getMulai_hari() {
+        return mulai_hari;
+    }
+
+    public void setMulai_hari(String mulai_hari) {
+        this.mulai_hari = mulai_hari;
+    }
+
+    public String getSampai_hari() {
+        return sampai_hari;
+    }
+
+    public void setSampai_hari(String sampai_hari) {
+        this.sampai_hari = sampai_hari;
+    }
 
     public String getRating() {
         return rating;

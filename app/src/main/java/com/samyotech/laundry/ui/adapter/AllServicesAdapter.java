@@ -48,11 +48,11 @@ public class AllServicesAdapter extends RecyclerView.Adapter<AllServicesAdapter.
         Glide.with(kContext)
                 .load(Consts.DEV_URL + popLaundryDTOArrayList.get(position).getImage())
                 .placeholder(R.drawable.laundryshop)
-                .into(holder.binding.ivImage);
+                .into(holder.binding.image);
 
-        holder.binding.title.setText(popLaundryDTOArrayList.get(position).getService_name());
+        holder.binding.namaJasa.setText(popLaundryDTOArrayList.get(position).getService_name());
 
-        holder.binding.cardView1.setOnClickListener(new View.OnClickListener() {
+        holder.binding.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(kContext, TopServices.class);

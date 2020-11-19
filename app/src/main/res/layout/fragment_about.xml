@@ -31,7 +31,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/aboutus"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/black" />
 
                     <ImageView
                         android:layout_width="4dp"
@@ -44,13 +44,19 @@
                         android:id="@+id/rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="2dp"
                         android:text="5" />
 
-                    <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
-                        android:src="@drawable/ic_baseline_star_24"
-                        app:tint="#FFC107" />
+                    <com.bigstark.animatedratingbar.lib.AnimatedRatingBar
+                        android:id="@+id/arb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        app:gapSize="1dp"
+                        app:max="5"
+                        app:numStars="5"
+                        app:progressImage="@drawable/icon_star_yellow"
+                        app:secondaryProgressImage="@drawable/icon_star_gray"
+                        app:starSize="16dp" />
                 </LinearLayout>
 
 
@@ -63,13 +69,34 @@
                     android:text="@string/about" />
 
 
-                <TextView
-                    android:id="@+id/jam_buka"
-                    style="@style/TextAppearance.AppCompat.Caption"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="Buka: Senin - Samptu Jam: 08.00 - 20.00" />
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/hari_buka"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Buka: Senin - Sabtu" />
+
+                    <ImageView
+                        android:layout_width="4dp"
+                        android:layout_height="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:src="@drawable/dot" />
+
+                    <TextView
+                        android:id="@+id/jam_buka"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jam: 08.00 - 20.00" />
+                </LinearLayout>
 
                 <com.google.android.gms.maps.MapView
                     android:id="@+id/mvAddress"
@@ -78,12 +105,24 @@
                     android:layout_marginTop="16dp" />
 
 
-                <TextView
-                    android:id="@+id/alamat"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Jl. Pahlawan" />
+                    android:gravity="center_vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="16dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="4dp"
+                        android:src="@drawable/icon_location" />
+
+                    <TextView
+                        android:id="@+id/alamat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jl. Pahlawan" />
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
 

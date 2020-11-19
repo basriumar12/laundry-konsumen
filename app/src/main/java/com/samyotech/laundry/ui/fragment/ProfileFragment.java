@@ -1,6 +1,7 @@
 package com.samyotech.laundry.ui.fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -95,7 +96,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 .load(Consts.DEV_URL + userDTO.getImage())
                 .error(R.drawable.ic_avatar)
                 .into(binding.ivAvtaimg);
-        camera();
+//        camera();
 
         binding.tvName.setText(userDTO.getName());
 
@@ -145,10 +146,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 startActivity(in4);
                 break;
             case R.id.updatePhoto:
-                builder.show();
+//                builder.show();
+                camera();
                 break;
             case R.id.updateBackground:
-                builder.show();
+//                builder.show();
+                camera();
                 break;
         }
     }
@@ -313,12 +316,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 
     private void camera() {
-        builder = new BottomSheet.Builder(requireActivity()).sheet(R.menu.menu_card);
-        builder.listener(new DialogInterface.OnClickListener() {
+        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment(new BottomSheetFragment.ClickListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(int which) {
                 switch (which) {
-                    case R.id.camera_cards:
+                    case R.id.camera:
+                        // FIXME: 18-Nov-20
                         if (ProjectUtils.hasPermissionInManifest(getActivity(), PICK_FROM_CAMERA, Manifest.permission.CAMERA)) {
                             if (ProjectUtils.hasPermissionInManifest(getActivity(), PICK_FROM_GALLERY, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                                 try {
@@ -350,7 +354,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                         }
 
                         break;
-                    case R.id.gallery_cards:
+                    case R.id.gallery:
+                        // FIXME: 18-Nov-20
                         if (ProjectUtils.hasPermissionInManifest(getActivity(), PICK_FROM_CAMERA, Manifest.permission.CAMERA)) {
                             if (ProjectUtils.hasPermissionInManifest(getActivity(), PICK_FROM_GALLERY, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
@@ -376,8 +381,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-
-
+        bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
     }
 
     private File getOutputMediaFile(int type) {
