@@ -15,12 +15,20 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
@@ -48,6 +56,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private SharedPrefrence prefrence;
     private SharedPreferences firebase;
     private long lastClickTime = 0;
+    private final int GOOGLE_SIGN_IN = 1;
+    private GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +74,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
 //        genrate();
         setUiAction();
+
+        // [START config_signin]
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id)) //fixme update token
+                .requestEmail()
+                .build();
+        // [END config_signin]
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
     private void genrate() {
@@ -76,6 +96,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         binding.login.setOnClickListener(this);
         binding.registerNow.setOnClickListener(this);
         binding.forgotPassword.setOnClickListener(this);
+        binding.googleLogin.setOnClickListener(this);
 
         binding.cetPasword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -128,9 +149,71 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     doubleClick = false;
 //            }
                     break;
+                case R.id.google_login:
+                    Intent signInIntent = googleSignInClient.getSignInIntent();
+                    startActivityForResult(signInIntent, GOOGLE_SIGN_IN);
+                    break;
             }
 
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GOOGLE_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleGoogleSignInResult(task);
+        }
+    }
+
+    private void handleGoogleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            if (account != null) {
+                Log.d("GOOGLE_", account.toString());
+                googleLogin(account.getEmail());
+            } else {
+                Toast.makeText(this, "Gagal mendapatkan user detail", Toast.LENGTH_LONG).show();
+            }
+        } catch (ApiException e) {
+            Log.w("GOOGLE_", "signInResult:failed code=" + e.getStatusCode());
+            Toast.makeText(this, "Login gagal, Silahkan coba beberapa menit lagi.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void googleLogin(String email) {
+        ProjectUtils.showProgressDialog(mContext, true, getResources().getString(R.string.please_wait));
+        new HttpsRequest(Consts.LOGIN_GOOGLE, getparmGoogle(email), mContext).stringPost(TAG, new Helper() {
+            @Override
+            public void backResponse(boolean flag, String msg, JSONObject response) {
+                ProjectUtils.pauseProgressDialog();
+                if (flag) {
+                    try {
+                        doubleClick = false;
+                        ProjectUtils.showToast(mContext, msg);
+
+                        userDTO = new Gson().fromJson(response.getJSONObject("data").toString(), UserDTO.class);
+                        prefrence.setParentUser(userDTO, Consts.USER_DTO);
+
+                        prefrence.setBooleanValue(Consts.IS_REGISTERED, true);
+
+                        Intent in = new Intent(mContext, Dashboard.class);
+                        startActivity(in);
+                        finish();
+                        overridePendingTransition(R.anim.anim_slide_in_left,
+                                R.anim.anim_slide_out_left);
+                    } catch (Exception e) {
+                        doubleClick = true;
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    showDialog(msg);
+//                    ProjectUtils.showToast(mContext, msg);
+                }
+            }
+        });
     }
 
 
@@ -181,6 +264,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         });
+    }
+
+    public HashMap<String, String> getparmGoogle(String email) {
+        HashMap<String, String> parms = new HashMap<>();
+        parms.put(Consts.EMAIL, email);
+        parms.put(Consts.DEVICE_TYPE, "ANDROID");
+        parms.put(Consts.DEVICE_TOKEN, firebase.getString(Consts.DEVICE_TOKEN, ""));
+        Log.e(TAG + " Login", parms.toString());
+        return parms;
     }
 
     public HashMap<String, String> getparm() {
