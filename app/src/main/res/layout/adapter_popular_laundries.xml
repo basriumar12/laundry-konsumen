@@ -1,74 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/cvCard"
-        android:layout_width="@dimen/_180sdp"
-        android:layout_height="@dimen/_130sdp"
-        android:layout_margin="@dimen/_5sdp"
-        app:cardCornerRadius="@dimen/_5sdp"
-        app:cardElevation="@dimen/_5sdp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <TextView
+            android:id="@+id/laundryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:text="Laundary Care"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/laundrImage"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_90sdp"
-                android:scaleType="fitXY"
-
-                android:src="@drawable/pop_laundry1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/icon_location" />
 
             <TextView
-                android:id="@+id/laundryName"
+                android:id="@+id/alamat"
+                style="@style/TextAppearance.AppCompat.Caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="Laundary Care"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/laundrImage" />
+                android:text="Alamat laundry" />
+
+            <ImageView
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:src="@drawable/dot" />
 
             <TextView
-                android:id="@+id/address"
-                android:layout_width="@dimen/_160sdp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:ellipsize="marquee"
-                android:fadingEdge="horizontal"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:text="Laundary Care"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/_10sdp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/laundryName" />
-
-            <TextView
-                android:id="@+id/ratings"
+                android:id="@+id/rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:text="5" />
 
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:drawableStart="@drawable/star"
-                android:drawablePadding="@dimen/_5sdp"
-                android:text="4.3"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/laundrImage" />
+            <com.bigstark.animatedratingbar.lib.AnimatedRatingBar
+                android:id="@+id/arb"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                app:gapSize="1dp"
+                app:max="5"
+                app:numStars="5"
+                app:progressImage="@drawable/icon_star_yellow"
+                app:secondaryProgressImage="@drawable/icon_star_gray"
+                app:starSize="16dp" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/hari_buka"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buka: Senin - Sabtu" />
+
+            <ImageView
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:src="@drawable/dot" />
+
+            <TextView
+                android:id="@+id/jam_buka"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jam: 08.00 - 20.00" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/light_gray" />
+    </LinearLayout>
 </layout>

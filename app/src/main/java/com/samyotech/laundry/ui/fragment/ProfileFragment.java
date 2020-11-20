@@ -166,14 +166,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 if (flag) {
                     try {
                         sharedPrefrence.clearAllPreferences();
-                        dashboard.finish();
                         Intent i = new Intent(dashboard, Login.class);
                         i.putExtra("finish", true);
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        dashboard.finish();
                         startActivity(i);
+                        dashboard.finish();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -1,5 +1,6 @@
 package com.samyotech.laundry.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +22,7 @@ import com.samyotech.laundry.model.BookingDTO;
 import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
+import com.samyotech.laundry.ui.activity.NotificationActivity;
 import com.samyotech.laundry.ui.adapter.BookingAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
 
@@ -99,6 +101,14 @@ public class BookingFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        binding.ivNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in4 = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(in4);
             }
         });
 

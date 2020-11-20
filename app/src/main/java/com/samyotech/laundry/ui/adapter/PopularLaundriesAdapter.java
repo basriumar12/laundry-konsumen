@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterPopularLaundriesBinding;
 import com.samyotech.laundry.interfaces.Consts;
@@ -45,17 +44,18 @@ public class PopularLaundriesAdapter extends RecyclerView.Adapter<PopularLaundri
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
 
-        Glide.with(kContext).load(Consts.DEV_URL + popLaundryDTOArrayList.get(position).getImage()).placeholder(R.drawable.laundryshop).into(holder.binding.laundrImage);
-
-        holder.binding.laundryName.setText(popLaundryDTOArrayList.get(position).getShop_name());
-        holder.binding.address.setText(popLaundryDTOArrayList.get(position).getAddress());
+        final PopLaundryDTO item = popLaundryDTOArrayList.get(position);
+        holder.binding.laundryName.setText(item.getShop_name());
+        holder.binding.alamat.setText(item.getAddress());
+        holder.binding.rating.setText(item.getRating());
+        holder.binding.arb.setRating(Float.parseFloat(item.getRating()));
 
         holder.binding.cvCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent in = new Intent(kContext, ShopAcitivity.class);
-                in.putExtra(Consts.SHOPDTO, popLaundryDTOArrayList.get(position));
+                in.putExtra(Consts.SHOPDTO, item);
                 kContext.startActivity(in);
             }
         });

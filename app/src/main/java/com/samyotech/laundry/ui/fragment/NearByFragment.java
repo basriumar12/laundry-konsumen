@@ -13,7 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
@@ -42,6 +45,7 @@ import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.Dashboard;
 import com.samyotech.laundry.ui.adapter.PopularLaundriesAdapter;
+import com.samyotech.laundry.utils.AnchorSheetBehavior;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONObject;
@@ -68,6 +72,7 @@ public class NearByFragment extends Fragment {
     private Hashtable<String, PopLaundryDTO> markers;
     private Marker marker;
     private Dashboard dashboard;
+    private AnchorSheetBehavior<LinearLayout> bsBehavior;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,6 +122,79 @@ public class NearByFragment extends Fragment {
         getNearByLaundry();
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding.tapActionLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bsBehavior.getState() == AnchorSheetBehavior.STATE_COLLAPSED) {
+                    bsBehavior.setState(AnchorSheetBehavior.STATE_ANCHOR);
+                }
+            }
+        });
+
+        bsBehavior = AnchorSheetBehavior.from(binding.bottomsheetMap);
+        bsBehavior.setState(AnchorSheetBehavior.STATE_COLLAPSED);
+
+//anchor offset. any value between 0 and 1 depending upon the position u want
+        bsBehavior.setAnchorOffset(0.5f);
+        bsBehavior.setAnchorSheetCallback(new AnchorSheetBehavior.AnchorSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == AnchorSheetBehavior.STATE_COLLAPSED) {
+                    //action if needed
+                }
+
+                if (newState == AnchorSheetBehavior.STATE_EXPANDED) {
+
+                }
+
+                if (newState == AnchorSheetBehavior.STATE_DRAGGING) {
+
+                }
+
+                if (newState == AnchorSheetBehavior.STATE_ANCHOR) {
+
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+                float h = bottomSheet.getHeight();
+                float off = h * slideOffset;
+
+                switch (bsBehavior.getState()) {
+                    case AnchorSheetBehavior.STATE_DRAGGING:
+                        setMapPaddingBotttom(off);
+                        //reposition marker at the center
+//                        if (mLoc != null)
+//                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(mLoc));
+                        break;
+                    case AnchorSheetBehavior.STATE_SETTLING:
+                        setMapPaddingBotttom(off);
+                        //reposition marker at the center
+//                        if (mLoc != null) googleMap.moveCamera(CameraUpdateFactory.newLatLng(mLoc));
+                        break;
+                    case AnchorSheetBehavior.STATE_HIDDEN:
+                        break;
+                    case AnchorSheetBehavior.STATE_EXPANDED:
+                        break;
+                    case AnchorSheetBehavior.STATE_COLLAPSED:
+                        break;
+                }
+            }
+        });
+    }
+
+    private void setMapPaddingBotttom(Float offset) {
+        //From 0.0 (min) - 1.0 (max) // bsExpanded - bsCollapsed;
+        Float maxMapPaddingBottom = 1.0f;
+        binding.mapView.setPadding(0, 0, 0, Math.round(offset * maxMapPaddingBottom));
+
     }
 
     @Override
@@ -234,8 +312,6 @@ public class NearByFragment extends Fragment {
                                             // CameraPosition cameraPosition = new CameraPosition.Builder().target(options.getPosition()).zoom(12).build();
                                             // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                                         }
-
-
                                     }
                                 }
 
@@ -278,13 +354,10 @@ public class NearByFragment extends Fragment {
     }
 
     private void setData() {
-
-        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         binding.rvLaundrytab.setLayoutManager(linearLayoutManager);
         popularLaundriesAdapter = new PopularLaundriesAdapter(getActivity(), allAtristListDTOList);
         binding.rvLaundrytab.setAdapter(popularLaundriesAdapter);
-
-
     }
 
 

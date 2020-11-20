@@ -157,7 +157,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         binding.laundryTerdekatRecyclerview.setAdapter(laundriesNearAdapter);
 
         binding.lihatSemuaLaundryTerdekat.setOnClickListener(this);
-        binding.svLaundry.setOnClickListener(this);
+        binding.ivSearch.setOnClickListener(this);
         binding.ivNotification.setOnClickListener(this);
     }
 
@@ -274,7 +274,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //                Intent in = new Intent(getActivity(), AllServices.class);
 //                startActivity(in);
 //                break;
-            case R.id.svLaundry:
+            case R.id.ivSearch:
                 Intent in3 = new Intent(getActivity(), SearchActivity.class);
                 startActivity(in3);
                 break;

@@ -2,6 +2,8 @@ package com.samyotech.laundry.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -25,10 +27,13 @@ import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.utils.ProjectUtils;
+import com.schibstedspain.leku.LocationPickerActivity;
 
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 import io.michaelrocks.libphonenumber.android.NumberParseException;
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
@@ -42,10 +47,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     boolean doubleClick = true;
     boolean numCheck = false;
     private boolean isHide = false;
+    HashMap<String, String> params = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // TODO: 20-Nov-20 add alamat field
 
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -63,6 +71,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         binding.loginNow.setOnClickListener(this);
         binding.ivOldPass.setOnClickListener(this);
         binding.ivNewPass.setOnClickListener(this);
+        binding.location.setOnClickListener(this);
 
         binding.cetNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -142,6 +151,63 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     isHide = true;
                 }
                 break;
+            case R.id.location:
+                findPlace();
+                break;
+        }
+    }
+
+    private void findPlace() {
+        Intent locationPickerIntent = new LocationPickerActivity.Builder()
+                .withGooglePlacesEnabled()
+                //.withLocation(41.4036299, 2.1743558)
+                .build(mContext);
+
+        startActivityForResult(locationPickerIntent, 101);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101) {
+            if (resultCode == RESULT_OK) {
+                try {
+                    getAddress(data.getDoubleExtra(Consts.LATITUDE, 0.0), data.getDoubleExtra(Consts.LONGITUDE, 0.0));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void getAddress(double lat, double lng) {
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+            Address obj = addresses.get(0);
+            String add = obj.getAddressLine(0);
+            add = add + "\n" + obj.getCountryName();
+            add = add + "\n" + obj.getCountryCode();
+            add = add + "\n" + obj.getAdminArea();
+            add = add + "\n" + obj.getPostalCode();
+            add = add + "\n" + obj.getSubAdminArea();
+            add = add + "\n" + obj.getLocality();
+            add = add + "\n" + obj.getSubThoroughfare();
+            Log.e("IGA", "Address" + add);
+            // Toast.makeText(this, "Address=>" + add,
+            // Toast.LENGTH_SHORT).show();
+
+            // TennisAppActivity.showDialog(add);
+            binding.alamat.setText(obj.getAddressLine(0));
+
+            params.put(Consts.ADDRESS, obj.getAddressLine(0));
+            params.put(Consts.LATITUDE, String.valueOf(obj.getLatitude()));
+            params.put(Consts.LONGITUDE, String.valueOf(obj.getLongitude()));
+
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 
@@ -173,7 +239,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     public void registerUser() {
         ProjectUtils.showProgressDialog(mContext, true, getResources().getString(R.string.please_wait));
-        new HttpsRequest(Consts.SIGNUP, getparm(), mContext).stringPost(TAG, new Helper() {
+        Log.d(TAG, "registerUser: " + getParams().toString());
+        new HttpsRequest(Consts.SIGNUP, getParams(), mContext).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) {
                 ProjectUtils.pauseProgressDialog();
@@ -200,17 +267,16 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         });
     }
 
-    public HashMap<String, String> getparm() {
-        HashMap<String, String> parms = new HashMap<>();
-        parms.put(Consts.NAME, ProjectUtils.getEditTextValue(binding.cetName));
-        parms.put(Consts.EMAIL, ProjectUtils.getEditTextValue(binding.cetEmail));
-        parms.put(Consts.PASSWORD, ProjectUtils.getEditTextValue(binding.cetPassword2));
-        parms.put(Consts.MOBILE, ProjectUtils.getEditTextValue(binding.cetNumber));
-        parms.put(Consts.COUNTRY_CODE, "91");
-        parms.put(Consts.DEVICE_TYPE, "android");
-        parms.put(Consts.DEVICE_TOKEN, "android");
-        Log.e(TAG + " Login", parms.toString());
-        return parms;
+    public HashMap<String, String> getParams() {
+        params.put(Consts.NAME, ProjectUtils.getEditTextValue(binding.cetName));
+        params.put(Consts.EMAIL, ProjectUtils.getEditTextValue(binding.cetEmail));
+        params.put(Consts.PASSWORD, ProjectUtils.getEditTextValue(binding.cetPassword2));
+        params.put(Consts.MOBILE, ProjectUtils.getEditTextValue(binding.cetNumber));
+        params.put(Consts.ADDRESS, ProjectUtils.getEditTextValue(binding.alamat));
+        params.put(Consts.COUNTRY_CODE, "62");
+        params.put(Consts.DEVICE_TYPE, "android");
+        params.put(Consts.DEVICE_TOKEN, "android");
+        return params;
     }
 
     public void showSickbar(String msg) {

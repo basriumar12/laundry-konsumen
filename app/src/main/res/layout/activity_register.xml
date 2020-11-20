@@ -92,6 +92,35 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <EditText
+                            android:id="@+id/alamat"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_weight="0.8"
+                            android:backgroundTint="@color/white"
+                            android:gravity="center_vertical"
+                            android:hint="Alamat"
+                            android:inputType="text"
+                            android:paddingLeft="5dp"
+                            android:singleLine="true"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/light_gray" />
+
+                        <ImageView
+                            android:id="@+id/location"
+                            android:layout_width="24dp"
+                            android:layout_height="match_parent"
+                            android:background="?selectableItemBackground"
+                            android:padding="2dp"
+                            android:src="@drawable/icon_location"
+                            app:tint="@color/white" />
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -120,8 +149,7 @@
                                 android:paddingLeft="5dp"
                                 android:singleLine="true"
                                 android:textColor="@color/white"
-                                android:textColorHint="@color/light_gray"
-                                android:textSize="16sp" />
+                                android:textColorHint="@color/light_gray" />
 
                             <ImageView
                                 android:id="@+id/ivOldPass"
@@ -165,8 +193,7 @@
                                 android:paddingLeft="5dp"
                                 android:singleLine="true"
                                 android:textColor="@color/white"
-                                android:textColorHint="@color/light_gray"
-                                android:textSize="16sp" />
+                                android:textColorHint="@color/light_gray" />
 
                             <ImageView
                                 android:id="@+id/ivNewPass"
