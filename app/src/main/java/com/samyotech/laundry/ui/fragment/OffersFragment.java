@@ -1,5 +1,6 @@
 package com.samyotech.laundry.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.model.OfferDTO;
+import com.samyotech.laundry.ui.activity.NotificationActivity;
 import com.samyotech.laundry.ui.adapter.OffersOtherAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
 
@@ -68,6 +70,14 @@ public class OffersFragment extends Fragment {
             }
         });
 */
+        binding.ivNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in4 = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(in4);
+            }
+        });
+
         getOffer();
 
         return binding.getRoot();

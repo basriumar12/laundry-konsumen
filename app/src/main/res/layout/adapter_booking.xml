@@ -57,28 +57,39 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="16dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/diterima"
-                    style="@style/TextAppearance.AppCompat.Caption"
-                    android:layout_width="wrap_content"
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/batalkan"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Diterima" />
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    app:fb_borderColor="@color/colorPrimary"
+                    app:fb_borderWidth="2dp"
+                    app:fb_defaultColor="@color/white"
+                    app:fb_focusColor="@color/white"
+                    app:fb_iconPosition="left"
+                    app:fb_radius="24dp"
+                    app:fb_text="Batalkan"
+                    app:fb_textColor="@color/black" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/selengkapnya"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text=" - " />
-
-                <TextView
-                    android:id="@+id/dikirim"
-                    style="@style/TextAppearance.AppCompat.Caption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dikirim" />
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    app:fb_defaultColor="@color/colorPrimary"
+                    app:fb_focusColor="@color/colorPrimary"
+                    app:fb_iconPosition="left"
+                    app:fb_radius="24dp"
+                    app:fb_text="Selengkapnya"
+                    app:fb_textColor="@color/white" />
             </LinearLayout>
 
         </LinearLayout>

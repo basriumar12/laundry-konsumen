@@ -3,6 +3,7 @@ package com.samyotech.laundry.ui.fragment;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -44,6 +45,7 @@ import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.Dashboard;
+import com.samyotech.laundry.ui.activity.SearchActivity;
 import com.samyotech.laundry.ui.adapter.PopularLaundriesAdapter;
 import com.samyotech.laundry.utils.AnchorSheetBehavior;
 import com.samyotech.laundry.utils.ProjectUtils;
@@ -133,6 +135,13 @@ public class NearByFragment extends Fragment {
                 if (bsBehavior.getState() == AnchorSheetBehavior.STATE_COLLAPSED) {
                     bsBehavior.setState(AnchorSheetBehavior.STATE_ANCHOR);
                 }
+            }
+        });
+
+        binding.searchBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(requireContext(), SearchActivity.class));
             }
         });
 

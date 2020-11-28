@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Judul" />
+
+        <EditText
+            android:id="@+id/judul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi" />
+
+        <EditText
+            android:id="@+id/deskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/tambahkan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="8dp"
+            app:fb_defaultColor="@color/colorPrimary"
+            app:fb_focusColor="@color/colorPrimary"
+            app:fb_iconPosition="left"
+            app:fb_radius="24dp"
+            app:fb_text="Tambahkan"
+            app:fb_textColor="@color/white" />
+
+
+    </LinearLayout>
+</layout>

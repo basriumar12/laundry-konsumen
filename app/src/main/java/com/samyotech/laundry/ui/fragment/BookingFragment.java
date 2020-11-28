@@ -74,7 +74,7 @@ public class BookingFragment extends Fragment {
                     binding.ctvHead.setVisibility(View.VISIBLE);
                     binding.cetSearch.setVisibility(View.GONE);
 
-                    binding.ivSearch.setImageResource(R.drawable.ic_search);
+                    binding.ivSearch.setImageResource(R.drawable.icon_search);
                     i = 0;
                 }
             }

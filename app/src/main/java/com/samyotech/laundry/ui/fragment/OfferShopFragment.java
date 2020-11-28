@@ -92,8 +92,8 @@ public class OfferShopFragment extends Fragment {
     private void getOffer() {
 
         ProjectUtils.getProgressDialog(getActivity());
-        params.put(Consts.Count, String.valueOf(page));
-        new HttpsRequest(Consts.GETALLOFFER, params, getActivity()).stringPost(TAG, new Helper() {
+        params.put(Consts.SHOP_ID, popLaundryDTO.getShop_id());
+        new HttpsRequest(Consts.GETOFFERFORLAUNDRYSHOP, params, getActivity()).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
                 ProjectUtils.pauseProgressDialog();

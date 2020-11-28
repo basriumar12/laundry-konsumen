@@ -1,27 +1,26 @@
 package com.samyotech.laundry.ui.adapter;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterBookingBinding;
-import com.samyotech.laundry.databinding.DailogCancelOrderBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.model.OrderListDTO;
+import com.samyotech.laundry.ui.activity.OrderDetails;
 import com.samyotech.laundry.ui.fragment.BookingFragment;
 import com.samyotech.laundry.utils.ProjectUtils;
 
@@ -32,6 +31,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHolder> {
     private final String TAG = BookingAdapter.class.getSimpleName();
     LayoutInflater layoutInflater;
@@ -40,7 +41,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
     ArrayList<OrderListDTO> servicesDTOArrayList;
     BookingFragment bookingFragment;
     CurrencyDTO currencyDTO;
-    private Dialog dialog;
     private ArrayList<OrderListDTO> objects = null;
 
     public BookingAdapter(Context kContext, ArrayList<OrderListDTO> objects, BookingFragment bookingFragment, CurrencyDTO currencyDTO) {
@@ -78,18 +78,26 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
                     .into(holder.binding.status);
         }
         holder.binding.layanan.setText(item.getService_name());
-        holder.binding.diterima.setText(item.getPickup_date() + " " + item.getPickup_time());
-        holder.binding.dikirim.setText(item.getDelivery_date() + " " + item.getDelivery_time());
         holder.binding.harga.setText(currencyDTO.getCurrency_symbol() + " " + item.getPrice());
 
-//        holder.binding.selengkapnyaBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent in = new Intent(kContext, OrderDetails.class);
-//                in.putExtra(Consts.ORDERLISTDTO, item);
-//                kContext.startActivity(in);
-//            }
-//        });
+        holder.binding.selengkapnya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(kContext, OrderDetails.class);
+                in.putExtra(Consts.ORDERLISTDTO, objects.get(position));
+                kContext.startActivity(in);
+            }
+        });
+
+        holder.binding.batalkan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (objects.get(position).getOrder_status().equalsIgnoreCase("6")) {
+                    Toast.makeText(kContext, R.string.ordercanceled, Toast.LENGTH_SHORT).show();
+                } else
+                    alertDialogBatal(position);
+            }
+        });
     }
 
     @Override
@@ -97,32 +105,29 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
         return objects.size();
     }
 
-    public void dialogCancel(final int pos) {
-        dialog = new Dialog(kContext/*, android.R.style.Theme_Dialog*/);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    public void alertDialogBatal(final int pos) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(kContext, R.style.CustomAlertDialog);
+        View dialogView = LayoutInflater.from(kContext).inflate(R.layout.dialog_batal_booking, null, false);
 
-        final DailogCancelOrderBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(kContext), R.layout.dailog_cancel_order, null, false);
-        dialog.setContentView(binding1.getRoot());
-        ///dialog.getWindow().setBackgroundDrawableResource(R.color.black);
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
 
-        dialog.show();
-        dialog.setCancelable(false);
-        binding1.cbCancelDailog.setOnClickListener(new View.OnClickListener() {
+        FancyButton cancel = dialogView.findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                alertDialog.dismiss();
             }
         });
-        binding1.cbCancel.setOnClickListener(new View.OnClickListener() {
+        FancyButton ok = dialogView.findViewById(R.id.ok);
+        ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cancelOrder(objects.get(pos).getOrder_id());
-                dialog.dismiss();
-
+                alertDialog.dismiss();
             }
         });
-
     }
 
     private void cancelOrder(String orderid) {

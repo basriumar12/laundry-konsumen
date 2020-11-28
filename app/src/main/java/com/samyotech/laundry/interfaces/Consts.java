@@ -22,6 +22,7 @@ public interface Consts {
     String SEARCH = "search";
     String Count = "count";
     String GETALLOFFER = "getAllOffer";
+    String GETOFFERFORLAUNDRYSHOP = "getOfferForLaundryShop";
     String other = "getMenuByCategoryId";
     String GETALLLAUNDRYSHOP = "getAllLaundryShop";
     String GETBOOKINGLIST = "getBookingList";

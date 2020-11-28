@@ -68,27 +68,25 @@ public class ServicesFragment extends Fragment {
                         ProjectUtils.pauseProgressDialog();
                         if (flag) {
                             try {
-
                                 shopServicesDTOS = new ArrayList<>();
                                 Type getPetDTO = new TypeToken<List<ShopServicesDTO>>() {
                                 }.getType();
                                 shopServicesDTOS = new Gson().fromJson(response.getJSONArray("data").toString(), getPetDTO);
 
-                        binding.rvServices.setVisibility(View.VISIBLE);
-                        binding.ctvnodata.setVisibility(View.GONE);
-                        setData();
+                                binding.rvServices.setVisibility(View.VISIBLE);
+                                binding.ctvnodata.setVisibility(View.GONE);
+                                setData();
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            binding.rvServices.setVisibility(View.GONE);
+                            binding.ctvnodata.setVisibility(View.VISIBLE);
+                        }
                     }
-
-                } else {
-                    binding.rvServices.setVisibility(View.GONE);
-                    binding.ctvnodata.setVisibility(View.VISIBLE);
-
-                }
-            }
-        });
+                });
 
 
     }

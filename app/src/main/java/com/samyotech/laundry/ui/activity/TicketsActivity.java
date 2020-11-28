@@ -1,23 +1,21 @@
 package com.samyotech.laundry.ui.activity;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityTicketsBinding;
-import com.samyotech.laundry.databinding.DailogAddTicketBinding;
+import com.samyotech.laundry.databinding.DialogBuatTiketBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
@@ -42,7 +40,7 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
     private final HashMap<String, String> parmsGet = new HashMap<>();
     Context mContext;
     ActivityTicketsBinding binding;
-    DailogAddTicketBinding binding1;
+    DialogBuatTiketBinding binding1;
     JSONObject jsonObject = new JSONObject();
     JSONObject getjsonObject = new JSONObject();
     String ranDom = "";
@@ -51,7 +49,7 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayoutManager mLayoutManager;
     private SharedPrefrence prefrence;
     private UserDTO userDTO;
-    private Dialog dialog;
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +69,29 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
         } catch (Exception e) {
             e.printStackTrace();
         }
+        binding.buatTiket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogBuatTiket();
+            }
+        });
 
     }
 
+    public void alertDialogBuatTiket() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);
+        binding1 = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.dialog_buat_tiket, null, false);
+        builder.setView(binding1.getRoot());
+        dialog = builder.create();
+        dialog.show();
+
+        binding1.tambahkan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitForm();
+            }
+        });
+    }
 
     @Override
     public void onResume() {
@@ -120,37 +138,7 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
         binding.rvChatList.setLayoutManager(new LinearLayoutManager(mContext));
         ticketAdapter = new TicketAdapter(TicketsActivity.this, mContext, ticketDTOSList, userDTO);
         binding.rvChatList.setAdapter(ticketAdapter);
-    }
-
-
-    public void dialogshow() {/*
-        dialog = new Dialog(mContext*//*, android.R.style.Theme_Dialog*//*);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dailog_add_ticket);*/
-
-        dialog = new Dialog(mContext/*, android.R.style.Theme_Dialog*/);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        binding1 = DataBindingUtil.inflate(LayoutInflater.from(dialog.getContext()), R.layout.dailog_add_ticket, null, false);
-        dialog.setContentView(binding1.getRoot());
-        //   final CommentBinding binding=DataBindingUtil.setContentView(this,R.layout.comment);
-        dialog.show();
-        dialog.setCancelable(true);
-
-        binding1.tvCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        binding1.ctvSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submitForm();
-            }
-        });
-
+        binding.rvChatList.addItemDecoration(new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL));
     }
 
     public void submitForm() {
@@ -165,25 +153,25 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public boolean validateReason() {
-        if (binding1.etReason.getText().toString().trim().equalsIgnoreCase("")) {
-            binding1.etReason.setError(getResources().getString(R.string.val_title));
-            binding1.etReason.requestFocus();
+        if (binding1.judul.getText().toString().trim().equalsIgnoreCase("")) {
+            binding1.judul.setError(getResources().getString(R.string.val_title));
+            binding1.judul.requestFocus();
             return false;
         } else {
-            binding1.etReason.setError(null);
-            binding1.etReason.clearFocus();
+            binding1.judul.setError(null);
+            binding1.judul.clearFocus();
             return true;
         }
     }
 
     public boolean validateDescription() {
-        if (binding1.etDescription.getText().toString().trim().equalsIgnoreCase("")) {
-            binding1.etDescription.setError(getResources().getString(R.string.val_description));
-            binding1.etDescription.requestFocus();
+        if (binding1.deskripsi.getText().toString().trim().equalsIgnoreCase("")) {
+            binding1.deskripsi.setError(getResources().getString(R.string.val_description));
+            binding1.deskripsi.requestFocus();
             return false;
         } else {
-            binding1.etDescription.setError(null);
-            binding1.etDescription.clearFocus();
+            binding1.deskripsi.setError(null);
+            binding1.deskripsi.clearFocus();
             return true;
         }
     }
@@ -199,8 +187,8 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
 
         try {
 
-            parmsadd.put(Consts.DESCRIPTION, ProjectUtils.getEditTextValue(binding1.etDescription));
-            parmsadd.put(Consts.TITLE, ProjectUtils.getEditTextValue(binding1.etReason));
+            parmsadd.put(Consts.DESCRIPTION, ProjectUtils.getEditTextValue(binding1.deskripsi));
+            parmsadd.put(Consts.TITLE, ProjectUtils.getEditTextValue(binding1.judul));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -210,7 +198,8 @@ public class TicketsActivity extends AppCompatActivity implements View.OnClickLi
             public void backResponse(boolean flag, String msg, JSONObject response) {
                 ProjectUtils.pauseProgressDialog();
                 if (flag) {
-                    dialog.dismiss();
+                    if (dialog != null)
+                        dialog.dismiss();
                     ProjectUtils.showToast(mContext, msg);
                     getTicket();
                 } else {

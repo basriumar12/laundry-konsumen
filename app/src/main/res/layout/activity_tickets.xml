@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -17,7 +17,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -54,5 +53,15 @@
 
         </LinearLayout>
 
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/buat_tiket"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="16dp"
+            app:fb_defaultColor="@color/colorPrimary"
+            app:fb_focusColor="@color/colorPrimary"
+            app:fb_text="Tambahkan Tiket"
+            app:fb_textColor="@color/white" />
     </RelativeLayout>
 </layout>

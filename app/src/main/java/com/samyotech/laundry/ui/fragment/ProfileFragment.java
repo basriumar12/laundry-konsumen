@@ -195,7 +195,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void alertDialogLogout() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity(), R.style.CustomAlertDialog);
         ViewGroup viewGroup = requireView().findViewById(android.R.id.content);
-        View dialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.logout_dialog, viewGroup, false);
+        View dialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_logout, viewGroup, false);
 
         builder.setView(dialogView);
         final AlertDialog alertDialog = builder.create();

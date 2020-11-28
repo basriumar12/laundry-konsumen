@@ -36,7 +36,7 @@
             app:fb_iconPosition="left"
             app:fb_radius="24dp"
             app:fb_text="Tidak"
-            app:fb_textColor="@color/colorPrimary" />
+            app:fb_textColor="@color/black" />
 
         <mehdi.sakout.fancybuttons.FancyButton
             android:id="@+id/ok"
