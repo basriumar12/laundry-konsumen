@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -28,7 +27,7 @@ import com.samyotech.laundry.model.TicketCommentDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.network.NetworkManager;
 import com.samyotech.laundry.preferences.SharedPrefrence;
-import com.samyotech.laundry.ui.adapter.AdapterViewCommentTicket;
+import com.samyotech.laundry.ui.adapter.TicketChatAdapter;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONObject;
@@ -38,25 +37,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
-public class CommentOneByOne extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
-    private final String TAG = CommentOneByOne.class.getSimpleName();
+public class TicketChatActivity extends AppCompatActivity implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener {
+    private final String TAG = TicketChatActivity.class.getSimpleName();
     private final String id = "";
     private final HashMap<String, String> parmsGet = new HashMap<>();
     IntentFilter intentFilter = new IntentFilter();
     private ListView lvComment;
-    private ImageView buttonSendMessage, IVback, emojiButton;
-    private AdapterViewCommentTicket adapterViewCommentTicket;
+    private ImageView sendBtn, IVback;
+    private TicketChatAdapter adapterViewCommentTicket;
     private ArrayList<TicketCommentDTO> ticketCommentDTOSList;
     private InputMethodManager inputManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private EmojiconEditText edittextMessage;
-    private EmojIconActions emojIcon;
     private RelativeLayout relative;
     private Context mContext;
-    private EditText etMessage;
     private TextView tvNameHedar;
     private SharedPrefrence prefrence;
     private UserDTO userDTO;
@@ -80,8 +76,8 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment_one_by_one);
-        mContext = CommentOneByOne.this;
+        setContentView(R.layout.activity_ticket_chat);
+        mContext = TicketChatActivity.this;
         prefrence = SharedPrefrence.getInstance(mContext);
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
 
@@ -104,16 +100,14 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
     }
 
     public void setUiAction() {
-        tvNameHedar = findViewById(R.id.tvNameHedar);
+        tvNameHedar = findViewById(R.id.header_title);
         relative = findViewById(R.id.relative);
         edittextMessage = findViewById(R.id.edittextMessage);
-        emojiButton = findViewById(R.id.emojiButton);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         lvComment = findViewById(R.id.lvComment);
-        etMessage = findViewById(R.id.etMessage);
-        buttonSendMessage = findViewById(R.id.buttonSendMessage);
-        IVback = findViewById(R.id.IVback);
-        buttonSendMessage.setOnClickListener(this);
+        sendBtn = findViewById(R.id.sendBtn);
+        IVback = findViewById(R.id.back);
+        sendBtn.setOnClickListener(this);
         IVback.setOnClickListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable() {
@@ -131,20 +125,6 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
             }
                                 }
         );
-
-        emojIcon = new EmojIconActions(this, relative, edittextMessage, emojiButton, "#495C66", "#DCE1E2", "#E6EBEF");
-        emojIcon.ShowEmojIcon();
-        emojIcon.setKeyboardListener(new EmojIconActions.KeyboardListener() {
-            @Override
-            public void onKeyboardOpen() {
-                Log.e("Keyboard", "open");
-            }
-
-            @Override
-            public void onKeyboardClose() {
-                Log.e("Keyboard", "close");
-            }
-        });
 
     }
 
@@ -182,10 +162,10 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.buttonSendMessage:
+            case R.id.sendBtn:
                 submit();
                 break;
-            case R.id.IVback:
+            case R.id.back:
                 finish();
                 break;
         }
@@ -230,7 +210,7 @@ public class CommentOneByOne extends AppCompatActivity implements View.OnClickLi
     }
 
     public void showData() {
-        adapterViewCommentTicket = new AdapterViewCommentTicket(mContext, ticketCommentDTOSList, userDTO);
+        adapterViewCommentTicket = new TicketChatAdapter(mContext, ticketCommentDTOSList, userDTO);
         lvComment.setAdapter(adapterViewCommentTicket);
         lvComment.setSelection(ticketCommentDTOSList.size() - 1);
     }

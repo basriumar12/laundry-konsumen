@@ -44,9 +44,8 @@ public class PreviewBookingAdapter extends RecyclerView.Adapter<PreviewBookingAd
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.binding.ctvName.setText("x" + " " + servicesDTOArrayList.get(position).getItem_name());
+        holder.binding.ctvName.setText(servicesDTOArrayList.get(position).getItem_name());
         holder.binding.ctvQuantity.setText(servicesDTOArrayList.get(position).getQuantity());
-        holder.binding.ctvCategory.setText(servicesDTOArrayList.get(position).getService_name());
         holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol() + " " + servicesDTOArrayList.get(position).getPrice());
     }
 

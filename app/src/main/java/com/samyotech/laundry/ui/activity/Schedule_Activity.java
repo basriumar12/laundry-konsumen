@@ -20,6 +20,7 @@ import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.model.ItemDTO;
+import com.samyotech.laundry.model.ItemListDTO;
 import com.samyotech.laundry.model.ItemServiceDTO;
 import com.samyotech.laundry.model.PopLaundryDTO;
 import com.samyotech.laundry.model.UserDTO;
@@ -30,6 +31,7 @@ import com.samyotech.laundry.utils.ProjectUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Schedule_Activity extends AppCompatActivity implements View.OnClickListener {
@@ -100,8 +102,9 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
 
     private void setData() {
 
-        for (int k = 0; k < itemDTOS.getItem_list().size(); k++) {
-            binding.tabLayout.addTab(binding.tabLayout.newTab().setText(itemDTOS.getItem_list().get(k).getService_name()));
+        ArrayList<ItemListDTO> items = itemDTOS.getItem_list();
+        for (int k = 0; k < items.size(); k++) {
+            binding.tabLayout.addTab(binding.tabLayout.newTab().setText(items.get(k).getService_name()));
         }
 
         adapter = new TabsAdapter
@@ -154,7 +157,7 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
                         globalState.setQuantity(String.valueOf(quantity));
                         globalState.setPopLaundryDTO(popLaundryDTO);
 
-                        Intent in = new Intent(mContext, PreViewActivity.class);
+                        Intent in = new Intent(mContext, PreviewOrderActivity.class);
                         in.putExtra(Consts.TOTAL_PRICE, String.valueOf(price));
 
                         startActivity(in);

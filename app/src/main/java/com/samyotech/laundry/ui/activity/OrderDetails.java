@@ -1,16 +1,12 @@
 package com.samyotech.laundry.ui.activity;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,7 +35,6 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     ActivityOrderDetailsBinding binding;
     Context mContext;
     OrderListDTO bookingDTO;
-    Dialog dialog;
     int CALL_PERMISSION = 101;
     SharedPrefrence sharedPrefrence;
     PreviewBookingAdapter previewAdapter;
@@ -47,6 +42,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     UserDTO userDTO;
     float rating = 0;
     CurrencyDTO currencyDTO;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,21 +61,21 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setUIAction() {
-        binding.ctvPaidViaValue.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getFinal_price());
-        binding.ctvSubTotalValue.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getPrice());
-        binding.ctvDiscountValue.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getDiscount());
-        binding.ctvTaxValue.setText(currencyDTO.getCurrency_symbol() + " 0");
-        binding.ctvAddress.setText(bookingDTO.getShipping_address());
-        binding.ctvPickUpDay.setText(bookingDTO.getPickup_date());
-        binding.ctvPickUpTime.setText(bookingDTO.getPickup_time());
-        binding.ctvDeliveryTime.setText(bookingDTO.getDelivery_time());
-        binding.ctvDeliveryDate.setText(bookingDTO.getDelivery_date());
+        binding.total.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getFinal_price());
+        binding.subtotal.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getPrice());
+        binding.discount.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getDiscount());
+        binding.tax.setText(currencyDTO.getCurrency_symbol() + " 0");
+        binding.pickupAddress.setText(bookingDTO.getShipping_address());
+        binding.deliveryAddress.setText(bookingDTO.getShipping_address());
+        binding.pickupDay.setText(bookingDTO.getPickup_date());
+        binding.pickupTime.setText(bookingDTO.getPickup_time());
+        binding.deliveryTime.setText(bookingDTO.getDelivery_time());
+        binding.deliveryDate.setText(bookingDTO.getDelivery_date());
 //        binding.ctvPaidVia.setText(bookingDTO.getPayment_status());
 
-        binding.ivBack.setOnClickListener(this);
-        binding.llMsg.setOnClickListener(this);
-        binding.llCall.setOnClickListener(this);
-        binding.cvRatenow.setOnClickListener(this);
+        binding.back.setOnClickListener(this);
+        binding.kirimPesanBtn.setOnClickListener(this);
+        binding.rateNowBtn.setOnClickListener(this);
         setData();
     }
 
@@ -87,9 +83,9 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.llCall:
+//            case R.id.llCall:
 
-                Toast.makeText(mContext, R.string.optionwill, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, R.string.optionwill, Toast.LENGTH_SHORT).show();
 
 /*
                         if (ProjectUtils.hasPermissionInManifest(OrderDetails.this, CALL_PERMISSION, Manifest.permission.CALL_PHONE)) {
@@ -105,52 +101,41 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                             }
                         }*/
 
-                break;
-            case R.id.llMsg:
+//                break;
+            case R.id.kirim_pesan_btn:
 
-                Intent in = new Intent(mContext, OneTwoOneChat.class);
+                Intent in = new Intent(mContext, ChatActivity.class);
                 in.putExtra(Consts.SHOP_ID, bookingDTO.getShop_id());
                 in.putExtra(Consts.SHOP_NAME, bookingDTO.getShop_name());
                 in.putExtra(Consts.IMAGE, bookingDTO.getShop_image());
                 startActivity(in);
                 break;
-            case R.id.cvRatenow:
-                dialogRating();
+            case R.id.rate_now_btn:
+                rateDialog();
                 break;
-            case R.id.ivBack:
+            case R.id.back:
                 onBackPressed();
                 break;
         }
 
     }
 
-
-    public void dialogRating() {
-        dialog = new Dialog(mContext/*, android.R.style.Theme_Dialog*/);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
+    public void rateDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext, R.style.CustomAlertDialog);
         final DailogRatingBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dailog_rating, null, false);
-        dialog.setContentView(binding1.getRoot());
-        ///dialog.getWindow().setBackgroundDrawableResource(R.color.black);
 
-        dialog.show();
-        dialog.setCancelable(false);
-        binding1.cbCancelDailog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        binding1.cbCancel.setOnClickListener(new View.OnClickListener() {
+        builder.setView(binding1.getRoot());
+        alertDialog = builder.create();
+        alertDialog.setCancelable(false);
+        alertDialog.show();
+
+        binding1.simpanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rating = binding1.rbReview.getRating();
                 submitRating();
-
             }
         });
-
     }
 
     private void submitRating() {
@@ -164,7 +149,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
                 if (flag) {
                     ProjectUtils.showToast(mContext, msg);
-                    dialog.dismiss();
+                    alertDialog.dismiss();
 
                 } else {
                     ProjectUtils.showToast(mContext, msg);
@@ -177,9 +162,9 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     private void setData() {
 
         linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
-        binding.rvReview.setLayoutManager(linearLayoutManager);
+        binding.recyclerviewOrders.setLayoutManager(linearLayoutManager);
         previewAdapter = new PreviewBookingAdapter(mContext, bookingDTO.getItem_details(), currencyDTO);
-        binding.rvReview.setAdapter(previewAdapter);
+        binding.recyclerviewOrders.setAdapter(previewAdapter);
     }
 
 

@@ -20,6 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:supportsRtl">
 
@@ -36,11 +37,11 @@
         <activity
             android:name=".ui.activity.OrderDetails"
             android:launchMode="singleTop" />
-        <activity android:name=".ui.activity.ConfirmedOrder" />
-        <activity android:name=".ui.activity.PaymentActivity" />
-        <activity android:name=".ui.activity.Schedule_PickupDate" />
-        <activity android:name=".ui.activity.SchedulePickup" />
-        <activity android:name=".ui.activity.PreViewActivity" />
+        <activity android:name=".ui.activity.BookingConfirmActivity" />
+        <activity android:name=".ui.activity.BookingPaymentActivity" />
+        <activity android:name=".ui.activity.BookingPickDateTimeActivity" />
+        <activity android:name=".ui.activity.BookingPickAddressActivity" />
+        <activity android:name=".ui.activity.PreviewOrderActivity" />
         <activity android:name=".ui.activity.Schedule_Activity" />
         <activity
             android:name=".ui.activity.ShopAcitivity"
@@ -62,7 +63,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".ui.activity.CommentOneByOne"
+            android:name=".ui.activity.TicketChatActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -86,7 +87,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.OneTwoOneChat"
+            android:name=".ui.activity.ChatActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity

@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.samyotech.laundry.GlobalState;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.databinding.ActivityConfirmedOrderBinding;
+import com.samyotech.laundry.databinding.ActivityBookingConfirmBinding;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.model.ItemDTO;
@@ -19,8 +19,8 @@ import com.samyotech.laundry.model.UserDTO;
 
 import java.util.HashMap;
 
-public class ConfirmedOrder extends AppCompatActivity {
-    ActivityConfirmedOrderBinding binding;
+public class BookingConfirmActivity extends AppCompatActivity {
+    ActivityBookingConfirmBinding binding;
     Context mContext;
     UserDTO userDTO;
     GlobalState globalState;
@@ -34,8 +34,8 @@ public class ConfirmedOrder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_confirmed_order);
-        mContext = ConfirmedOrder.this;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_booking_confirm);
+        mContext = BookingConfirmActivity.this;
         globalState = (GlobalState) getApplication();
         parmsSubmit = (HashMap<String, String>) getIntent().getSerializableExtra("map");
 

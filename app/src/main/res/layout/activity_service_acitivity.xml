@@ -20,7 +20,7 @@
             <FrameLayout
                 android:id="@+id/collapsing"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_160sdp"
+                android:layout_height="300dp"
                 android:orientation="vertical"
                 app:layout_scrollFlags="scroll|snap">
                 ​
@@ -40,22 +40,15 @@
                     android:src="@drawable/blue_gradient"
                     app:layout_collapseMode="parallax" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="2dp"
-                    app:cardMaxElevation="4dp">
 
-                    <ImageView
-                        android:id="@+id/service_icon"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/icon_service_117"
-                        app:layout_collapseMode="parallax" />
-                </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/service_icon"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icon_service_117"
+                    app:layout_collapseMode="parallax" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

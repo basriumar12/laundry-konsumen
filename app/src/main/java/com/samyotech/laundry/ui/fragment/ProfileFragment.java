@@ -1,16 +1,10 @@
 package com.samyotech.laundry.ui.fragment;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,13 +12,12 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.cocosw.bottomsheet.BottomSheet;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.gson.Gson;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.FragmentProfileBinding;
@@ -41,18 +34,12 @@ import com.samyotech.laundry.ui.activity.Login;
 import com.samyotech.laundry.ui.activity.ManageProfile;
 import com.samyotech.laundry.ui.activity.NotificationActivity;
 import com.samyotech.laundry.ui.activity.TicketsActivity;
-import com.samyotech.laundry.utils.ImageCompression;
-import com.samyotech.laundry.utils.MainFragment;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -60,23 +47,13 @@ import mehdi.sakout.fancybuttons.FancyButton;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
     private static final int RESULT_OK = -1;
     private final String TAG = ProfileFragment.class.getSimpleName();
-    public ArrayList<File> files = new ArrayList<>();
     FragmentProfileBinding binding;
     Dashboard dashboard;
     SharedPrefrence sharedPrefrence;
     UserDTO userDTO;
-    BottomSheet.Builder builder;
-    int PICK_FROM_CAMERA = 1, PICK_FROM_GALLERY = 2;
-    int CROP_CAMERA_IMAGE = 3, CROP_GALLERY_IMAGE = 4;
-    String imageName;
-    Uri picUri;
-    ImageCompression imageCompression;
-    String pathOfImage;
-    File file;
-    Bitmap bm;
-    int fileAvailable = 0;
     HashMap<String, File> fileHashMap = new HashMap<>();
     HashMap<String, String> hashMap = new HashMap<>();
+    private BottomSheetFragment bottomSheetFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -147,11 +124,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.updatePhoto:
 //                builder.show();
-                camera();
+                showBs();
                 break;
             case R.id.updateBackground:
 //                builder.show();
-                camera();
+                showBs();
                 break;
         }
     }
@@ -225,18 +202,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         dashboard = (Dashboard) context;
     }
 
-/*
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        Glide.with(getActivity())
-                .load(userDTO.getImage())
-                .error(R.drawable.ic_avatar)
-                .into(binding.civimage);
-        camera();
-    }*/
-
     public void deleteAccount() {
         ProjectUtils.showProgressDialog(getActivity(), true, getResources().getString(R.string.please_wait));
         new HttpsRequest(Consts.DELETEACCOUNT, getparm(), getActivity()).stringPost(TAG, new Helper() {
@@ -286,96 +251,27 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     }
                 })
                 .show();
-    }/*
+    }
 
-    @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-        if (mMaxScrollSize == 0)
-            mMaxScrollSize = appBarLayout.getTotalScrollRange();
-
-        int percentage = (Math.abs(i)) * 100 / mMaxScrollSize;
-
-        if (percentage >= PERCENTAGE_TO_ANIMATE_AVATAR && mIsAvatarShown) {
-            mIsAvatarShown = false;
-
-            binding.rlProPic.animate()
-                    .scaleY(0).scaleX(0)
-                    .setDuration(200)
-                    .start();
-        }
-
-        if (percentage <= PERCENTAGE_TO_ANIMATE_AVATAR && !mIsAvatarShown) {
-            mIsAvatarShown = true;
-
-            binding.rlProPic.animate()
-                    .scaleY(1).scaleX(1)
-                    .start();
-        }
-    }*/
-
-
-    private void camera() {
-        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment(new BottomSheetFragment.ClickListener() {
+    private void showBs() {
+        bottomSheetFragment = new BottomSheetFragment(new BottomSheetFragment.ClickListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public void onClick(int which) {
                 switch (which) {
                     case R.id.camera:
-                        // FIXME: 18-Nov-20
-                        if (ProjectUtils.hasPermissionInManifest(getActivity(), PICK_FROM_CAMERA, Manifest.permission.CAMERA)) {
-                            if (ProjectUtils.hasPermissionInManifest(getActivity(), PICK_FROM_GALLERY, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                                try {
-                                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                    File file = getOutputMediaFile(1);
-                                    if (!file.exists()) {
-                                        try {
-                                            ProjectUtils.pauseProgressDialog();
-                                            file.createNewFile();
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                        //Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), "com.example.asd", newFile);
-
-                                        picUri = FileProvider.getUriForFile(getActivity().getApplicationContext(), "com.samyotech.laundry" + ".fileprovider", file);
-                                    } else {
-                                        picUri = Uri.fromFile(file); // create
-                                    }
-
-                                    sharedPrefrence.setValue(Consts.IMAGE, picUri.toString());
-                                    intent.putExtra(MediaStore.EXTRA_OUTPUT, picUri); // set the image file
-                                    startActivityForResult(intent, PICK_FROM_CAMERA);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-
+                        ImagePicker.Companion.with(requireActivity())
+                                .cameraOnly()
+                                .crop()
+                                .compress(512)
+                                .start();
                         break;
                     case R.id.gallery:
-                        // FIXME: 18-Nov-20
-                        if (ProjectUtils.hasPermissionInManifest(getActivity(), PICK_FROM_CAMERA, Manifest.permission.CAMERA)) {
-                            if (ProjectUtils.hasPermissionInManifest(getActivity(), PICK_FROM_GALLERY, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-                                File file = getOutputMediaFile(1);
-                                if (!file.exists()) {
-                                    try {
-                                        file.createNewFile();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                picUri = Uri.fromFile(file);
-
-                                Intent intent = new Intent();
-                                intent.setType("image/*");
-                                intent.setAction(Intent.ACTION_GET_CONTENT);
-                                startActivityForResult(Intent.createChooser(intent, "Please select image."), PICK_FROM_GALLERY);
-
-
-                            }
-                        }
+                        ImagePicker.Companion.with(requireActivity())
+                                .galleryOnly()
+                                .crop()
+                                .compress(512)
+                                .start();
                         break;
                 }
             }
@@ -383,118 +279,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         bottomSheetFragment.show(getChildFragmentManager(), bottomSheetFragment.getTag());
     }
 
-    private File getOutputMediaFile(int type) {
-        String root = Environment.getExternalStorageDirectory().toString();
-        File mediaStorageDir = new File(root, Consts.APP_NAME);
-        /**Create the storage directory if it does not exist*/
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                return null;
-            }
-        }
-
-        /**Create a media file name*/
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File mediaFile;
-        if (type == 1) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                    Consts.APP_NAME + timeStamp + ".png");
-
-            imageName = Consts.APP_NAME + timeStamp + ".png";
-        } else {
-            return null;
-        }
-        return mediaFile;
-    }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CROP_CAMERA_IMAGE) {
-            if (data != null) {
-                picUri = Uri.parse(data.getExtras().getString("resultUri"));
-                try {
-                    //bitmap = MediaStore.Images.Media.getBitmap(SaveDetailsActivityNew.this.getContentResolver(), resultUri);
-                    pathOfImage = picUri.getPath();
-                    imageCompression = new ImageCompression(getActivity());
-                    imageCompression.execute(pathOfImage);
-                    imageCompression.setOnTaskFinishedEvent(new ImageCompression.AsyncResponse() {
-                        @Override
-                        public void processFinish(String imagePath) {
-                            fileAvailable = 1;
-                            try {
-                                // bitmap = MediaStore.Images.Media.getBitmap(SaveDetailsActivityNew.this.getContentResolver(), resultUri);
-                                file = new File(imagePath);
-                                fileHashMap.put(Consts.IMAGE, file);
-
-                                updateProfile();
-                               /* Log.e("image", imagePath);
-                                paramsFile.put(Const.IMAGE, file);*/
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        if (resultCode == RESULT_OK) {
+            File file = ImagePicker.Companion.getFile(data);
+            fileHashMap.put(Consts.IMAGE, file);
+            if (bottomSheetFragment != null) {
+                bottomSheetFragment.dismiss();
             }
+            updateProfile();
         }
-        if (requestCode == CROP_GALLERY_IMAGE) {
-            if (data != null) {
-                picUri = Uri.parse(data.getExtras().getString("resultUri"));
-                try {
-                    bm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), picUri);
-                    pathOfImage = picUri.getPath();
-                    imageCompression = new ImageCompression(getActivity());
-                    imageCompression.execute(pathOfImage);
-                    imageCompression.setOnTaskFinishedEvent(new ImageCompression.AsyncResponse() {
-                        @Override
-                        public void processFinish(String imagePath) {
-
-                            fileAvailable = 1;
-                            Log.e("image", imagePath);
-                            try {
-                                file = new File(imagePath);
-                                fileHashMap.put(Consts.IMAGE, file);
-
-                                updateProfile();
-
-                                Log.e("image", imagePath);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        if (requestCode == PICK_FROM_CAMERA && resultCode == RESULT_OK) {
-            if (picUri != null) {
-                picUri = Uri.parse(sharedPrefrence.getValue(Consts.IMAGE));
-                startCropping(picUri, CROP_CAMERA_IMAGE);
-            } else {
-                picUri = Uri.parse(sharedPrefrence
-                        .getValue(Consts.IMAGE));
-                startCropping(picUri, CROP_CAMERA_IMAGE);
-            }
-        }
-        if (requestCode == PICK_FROM_GALLERY && resultCode == RESULT_OK) {
-            try {
-                Uri imgUri = data.getData();
-
-                startCropping(imgUri, CROP_GALLERY_IMAGE);
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
-        }
-
-
     }
 
     private void updateProfile() {
@@ -521,13 +317,4 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 
     }
-
-    public void startCropping(Uri uri, int requestCode) {
-        Intent intent = new Intent(getActivity(), MainFragment.class);
-        intent.putExtra("imageUri", uri.toString());
-        intent.putExtra("requestCode", requestCode);
-        startActivityForResult(intent, requestCode);
-    }
-
-
 }

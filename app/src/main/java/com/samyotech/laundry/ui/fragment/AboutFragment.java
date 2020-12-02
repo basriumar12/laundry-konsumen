@@ -80,7 +80,7 @@ public class AboutFragment extends Fragment {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                googleMap.setMyLocationEnabled(true);
+//                googleMap.setMyLocationEnabled(true);
 
                 // For dropping a marker at a point on the Map
                 if (popLaundryDTO.getLongitude().equalsIgnoreCase("")) {
@@ -136,7 +136,7 @@ public class AboutFragment extends Fragment {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                googleMap.setMyLocationEnabled(true);
+//                googleMap.setMyLocationEnabled(true);
 
                 // For dropping a marker at a point on the Map
 

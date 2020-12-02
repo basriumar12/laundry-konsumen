@@ -13,8 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.samyotech.laundry.R;
+import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.GetCommentDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.utils.ProjectUtils;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 /**
  * Created by VARUN on 01/01/19.
  */
-public class AdapterViewComment extends BaseAdapter {
+public class ChatAdapter extends BaseAdapter {
     private final Context mContext;
     private final ArrayList<GetCommentDTO> getCommentDTOList;
     private final UserDTO userDTO;
@@ -33,7 +33,7 @@ public class AdapterViewComment extends BaseAdapter {
     private TextView tvCloseD, tvNameD;
     private Dialog dialogImg;
 
-    public AdapterViewComment(Context mContext, ArrayList<GetCommentDTO> getCommentDTOList, UserDTO userDTO, String mypic, String otherpic) {
+    public ChatAdapter(Context mContext, ArrayList<GetCommentDTO> getCommentDTOList, UserDTO userDTO, String mypic, String otherpic) {
         this.mContext = mContext;
         this.getCommentDTOList = getCommentDTOList;
         this.userDTO = userDTO;
@@ -61,54 +61,34 @@ public class AdapterViewComment extends BaseAdapter {
     public View getView(final int position, View view, ViewGroup parent) {
 
         //ViewHolder holder = new ViewHolder();
-        if (!getCommentDTOList.get(position).getTo_user_id().equalsIgnoreCase(userDTO.getUser_id())) {
+        GetCommentDTO item = getCommentDTOList.get(position);
+        if (!item.getTo_user_id().equalsIgnoreCase(userDTO.getUser_id())) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.adapter_view_comment_my, parent, false);
-
         } else {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.adapter_view_comment, parent, false);
-
         }
 
         TextView textViewMessage = view.findViewById(R.id.textViewMessage);
         TextView textViewTime = view.findViewById(R.id.textViewTime);
-        TextView tvName = view.findViewById(R.id.tvName);
-        ImageView ivView = view.findViewById(R.id.ivView);
-        ImageView imageViewmessageTicks = view.findViewById(R.id.imageViewmessageTicks);
-/*
-        if (getCommentDTOList.get(position).getChat_type().equalsIgnoreCase("2")) {
-            ivView.setVisibility(View.VISIBLE);
+        ImageView media = view.findViewById(R.id.media);
+        TextView status = view.findViewById(R.id.status);
+        if (item.getIs_read().equals("1")) {
+            status.setText("Dibaca");
         } else {
-            ivView.setVisibility(View.GONE);
-        }*/
-        if (!getCommentDTOList.get(position).getTo_user_id().equalsIgnoreCase(userDTO.getUser_id())) {
-            Glide.with(mContext).
-                    load(mypic)
-                    .placeholder(R.drawable.ic_user_dummy)
-                    .dontAnimate()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(ivView);
-        } else {
-            Glide.with(mContext).
-                    load(otherpic)
-                    .placeholder(R.drawable.ic_user_dummy)
-                    .dontAnimate()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(ivView);
+            status.setText("");
         }
-
-        ivView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialogshare(position);
-            }
-        });
-        textViewMessage.setText(getCommentDTOList.get(position).getMessage());
+        if (item.getType().equalsIgnoreCase("2")) {
+            media.setVisibility(View.VISIBLE);
+            Glide.with(mContext).load(Consts.DEV_URL + item.getMedia()).into(media);
+        } else {
+            media.setVisibility(View.GONE);
+        }
+        textViewMessage.setText(item.getMessage());
 
         try {
-            textViewTime.setText(ProjectUtils.convertTimestampToTime(ProjectUtils.correctTimestamp(Long.parseLong(getCommentDTOList.get(position).getCreated_at()))));
-
+            textViewTime.setText(ProjectUtils.convertTimestampToTime(ProjectUtils.correctTimestamp(Long.parseLong(item.getCreated_at()))));
         } catch (Exception e) {
             e.printStackTrace();
         }

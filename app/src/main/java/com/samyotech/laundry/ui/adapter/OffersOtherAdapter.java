@@ -2,6 +2,7 @@ package com.samyotech.laundry.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.databinding.OffersBinding;
+import com.samyotech.laundry.databinding.AdapterOffersBinding;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.OfferDTO;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class OffersOtherAdapter extends RecyclerView.Adapter<OffersOtherAdapter.MyViewHolder> {
 
     LayoutInflater layoutInflater;
-    OffersBinding binding;
+    AdapterOffersBinding binding;
     Context kContext;
     ArrayList<OfferDTO> specialOfferPkgDTOArrayList;
 
@@ -35,7 +36,7 @@ public class OffersOtherAdapter extends RecyclerView.Adapter<OffersOtherAdapter.
         if (layoutInflater == null) {
             layoutInflater = LayoutInflater.from(parent.getContext());
         }
-        binding = DataBindingUtil.inflate(layoutInflater, R.layout.offers, parent, false);
+        binding = DataBindingUtil.inflate(layoutInflater, R.layout.adapter_offers, parent, false);
         return new MyViewHolder(binding);
     }
 
@@ -56,6 +57,13 @@ public class OffersOtherAdapter extends RecyclerView.Adapter<OffersOtherAdapter.
                 .load(string)
                 .error(R.drawable.offernewpa)
                 .into(holder.binding.image);
+
+        holder.binding.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setClipboard(kContext, specialOfferPkgDTOArrayList.get(position).getPromocode());
+            }
+        });
     }
 
     @Override
@@ -78,9 +86,9 @@ public class OffersOtherAdapter extends RecyclerView.Adapter<OffersOtherAdapter.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        OffersBinding binding;
+        AdapterOffersBinding binding;
 
-        public MyViewHolder(@NonNull OffersBinding itemView) {
+        public MyViewHolder(@NonNull AdapterOffersBinding itemView) {
             super(itemView.getRoot());
             this.binding = itemView;
         }

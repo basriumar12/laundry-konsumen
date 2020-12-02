@@ -13,8 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.databinding.ActivitySchdulePickupBinding;
+import com.samyotech.laundry.databinding.ActivityBookingPickAddressBinding;
 import com.samyotech.laundry.interfaces.Consts;
+import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.schibstedspain.leku.LocationPickerActivity;
 
 import java.util.HashMap;
@@ -24,20 +25,22 @@ import java.util.Locale;
 import static com.schibstedspain.leku.LocationPickerActivityKt.LATITUDE;
 import static com.schibstedspain.leku.LocationPickerActivityKt.LONGITUDE;
 
-public class SchedulePickup extends AppCompatActivity implements View.OnClickListener {
+public class BookingPickAddressActivity extends AppCompatActivity implements View.OnClickListener {
     Context mContext;
-    ActivitySchdulePickupBinding binding;
+    ActivityBookingPickAddressBinding binding;
     int i = 0;
     String address = "", landmark = "";
     boolean doubleClick = true;
     private double lats = 0;
     private double longs = 0;
+    private SharedPrefrence prefrence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_schdule_pickup);
-        mContext = SchedulePickup.this;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_booking_pick_address);
+        mContext = BookingPickAddressActivity.this;
+        prefrence = SharedPrefrence.getInstance(this);
 
         binding.cvHome.setOnClickListener(this);
         binding.back.setOnClickListener(this);
@@ -46,21 +49,22 @@ public class SchedulePickup extends AppCompatActivity implements View.OnClickLis
         binding.rdbtn.setOnClickListener(this);
         binding.rdbtnWork.setOnClickListener(this);
         binding.rdbtnOther.setOnClickListener(this);
-        binding.rlSelectAddress.setOnClickListener(this);
+        binding.nextBtn.setOnClickListener(this);
     }
 
 
     private void findPlace() {
         Intent locationPickerIntent = new LocationPickerActivity.Builder()
                 .withGooglePlacesEnabled()
-                //.withLocation(41.4036299, 2.1743558)
+                .withLocation(Double.parseDouble(prefrence.getValue(Consts.LATITUDE)),
+                        Double.parseDouble(prefrence.getValue(Consts.LONGITUDE)))
                 .build(mContext);
 
         startActivityForResult(locationPickerIntent, 101);
     }
 
     public void getAddress(double lat, double lng) {
-        Geocoder geocoder = new Geocoder(SchedulePickup.this, Locale.getDefault());
+        Geocoder geocoder = new Geocoder(BookingPickAddressActivity.this, Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
             Address obj = addresses.get(0);
@@ -139,12 +143,12 @@ public class SchedulePickup extends AppCompatActivity implements View.OnClickLis
                 binding.rdbtnWork.setChecked(false);
                 binding.rdbtnOther.setChecked(true);
                 break;
-            case R.id.rlSelectAddress:
+            case R.id.next_btn:
 
                 if (binding.rdbtn.isChecked() || binding.rdbtnWork.isChecked() || binding.rdbtnOther.isChecked()) {
                     if (doubleClick) {
                         doubleClick = false;
-                        Intent in = new Intent(mContext, Schedule_PickupDate.class);
+                        Intent in = new Intent(mContext, BookingPickDateTimeActivity.class);
                         in.putExtra("map", getParams());
                         startActivity(in);
                     }

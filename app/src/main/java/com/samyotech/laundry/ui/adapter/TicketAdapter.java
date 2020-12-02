@@ -19,7 +19,7 @@ import com.samyotech.laundry.databinding.AdapterTicketBinding;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.TicketDTO;
 import com.samyotech.laundry.model.UserDTO;
-import com.samyotech.laundry.ui.activity.CommentOneByOne;
+import com.samyotech.laundry.ui.activity.TicketChatActivity;
 import com.samyotech.laundry.ui.activity.TicketsActivity;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        holder.binding.header.setText(ticketDTOSList.get(position).getTitle());
+        holder.binding.headerTitle.setText(ticketDTOSList.get(position).getTitle());
         holder.binding.des.setText(ticketDTOSList.get(position).getDescription());
 
         if (ticketDTOSList.get(position).getStatus().equalsIgnoreCase("0")) {
@@ -71,9 +71,8 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.MyViewHold
         holder.binding.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ticketDTOSList.get(position).getStatus().equalsIgnoreCase("2")) {
-                } else {
-                    Intent in = new Intent(mContext, CommentOneByOne.class);
+                if (!ticketDTOSList.get(position).getStatus().equalsIgnoreCase("2")) {
+                    Intent in = new Intent(mContext, TicketChatActivity.class);
                     in.putExtra(Consts.TICKET_ID, ticketDTOSList.get(position).getTiket_id());
                     mContext.startActivity(in);
                 }

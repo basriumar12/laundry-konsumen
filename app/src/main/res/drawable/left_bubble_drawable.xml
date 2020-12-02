@@ -3,17 +3,11 @@
 
     <solid android:color="@color/chat_in" />
 
-
     <padding
-        android:bottom="1dp"
-        android:left="1dp"
-        android:right="1dp"
-        android:top="1dp" />
+        android:bottom="4dp"
+        android:left="8dp"
+        android:right="8dp"
+        android:top="4dp" />
 
-    <corners
-        android:bottomLeftRadius="8dp"
-        android:bottomRightRadius="8dp"
-        android:radius="1dp"
-        android:topLeftRadius="0dp"
-        android:topRightRadius="8dp" />
+    <corners android:radius="8dp" />
 </shape>

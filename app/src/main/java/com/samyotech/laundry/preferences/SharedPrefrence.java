@@ -3,6 +3,7 @@ package com.samyotech.laundry.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -63,12 +64,14 @@ public class SharedPrefrence {
 
 
     public void setValue(String Tag, String token) {
+        Log.d("LOC_", "setValue: " + token);
         prefsEditor.putString(Tag, token);
         prefsEditor.commit();
     }
 
 
     public String getValue(String Tag) {
+        Log.d("LOC_", "getValue: " + Tag);
         if (Tag.equalsIgnoreCase(Consts.LATITUDE))
             return myPrefs.getString(Tag, "22.7497853");
         else if (Tag.equalsIgnoreCase(Consts.LONGITUDE))

@@ -168,7 +168,8 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
     private void findPlace() {
         Intent locationPickerIntent = new LocationPickerActivity.Builder()
                 .withGooglePlacesEnabled()
-                //.withLocation(41.4036299, 2.1743558)
+                .withLocation(Double.parseDouble(prefrence.getValue(Consts.LATITUDE)),
+                        Double.parseDouble(prefrence.getValue(Consts.LONGITUDE)))
                 .build(mContext);
 
         startActivityForResult(locationPickerIntent, 101);

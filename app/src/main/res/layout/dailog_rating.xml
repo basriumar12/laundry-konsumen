@@ -1,89 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <androidx.cardview.widget.CardView
+
+        <TextView
+            android:id="@+id/ctvline"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_160sdp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="Apakah anda menyukai pelayanan kami ?"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <RatingBar
+            android:id="@+id/rbReview"
+            style="@style/RatingBarMy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:numStars="5"
+            android:stepSize="1"
+            android:theme="@style/RatingBarMy" />
 
-                <TextView
-                    android:id="@+id/ctvHead"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:text="@string/rate_now"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_18sdp"
-                    app:layout_constraintBottom_toTopOf="@id/ctvline"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/ctvline"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:text="@string/rate_if"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintTop_toBottomOf="@id/ctvHead" />
-
-                <RatingBar
-                    android:id="@+id/rbReview"
-                    style="@style/RatingBarMy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:numStars="5"
-                    android:stepSize="1"
-                    android:theme="@style/RatingBarMy"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ctvline" />
-
-
-                <Button
-                    android:id="@+id/cbCancelDailog"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:background="@drawable/shape_for_gradientround"
-                    android:text="@string/cancel"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/cbCancel"
-                    app:layout_constraintTop_toBottomOf="@id/rbReview" />
-
-                <Button
-                    android:id="@+id/cbCancel"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:background="@drawable/shape_for_rectangleblueround"
-                    android:text="@string/submit"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/cbCancelDailog"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rbReview" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/simpan_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="8dp"
+            app:fb_defaultColor="@color/colorPrimary"
+            app:fb_focusColor="@color/colorPrimary"
+            app:fb_iconPosition="left"
+            app:fb_radius="30dp"
+            app:fb_text="Simpan"
+            app:fb_textColor="@color/white" />
+    </LinearLayout>
 </layout>

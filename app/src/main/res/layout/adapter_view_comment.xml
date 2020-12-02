@@ -1,71 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/leftbubbleContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:gravity="start"
+    android:orientation="horizontal"
+    android:paddingVertical="4dp">
 
-    <TextView
-        android:id="@+id/tvName"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="6dp"
-        android:text=""
-        android:textColor="#9a9a9a"
-        android:textSize="12sp" />
+        android:background="@drawable/right_bubble_drawable">
 
-    <RelativeLayout
-        android:id="@+id/leftbubbleContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvName"
-        android:layout_alignLeft="@+id/ivView"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginTop="3dp"
-        android:background="@drawable/left_bubble_drawable"
-        android:padding="10dp">
+        <ImageView
+            android:id="@+id/media"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="200dp"
+            android:maxHeight="200dp"
+            android:visibility="gone" />
 
-        <TextView
+        <hani.momanii.supernova_emoji_library.Helper.EmojiconTextView
             android:id="@+id/textViewMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:maxWidth="250dp"
             android:text=""
-            android:textColor="#646464"
-            android:textSize="16dp" />
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
 
-
-    </RelativeLayout>
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivView"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
-        android:layout_below="@+id/leftbubbleContainer"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="-25dp"
-        android:src="@drawable/ic_user_dummy" />
-
-    <ImageView
-        android:id="@+id/imageViewmessageTicks"
-        android:layout_width="15dp"
-        android:layout_height="12dp"
-        android:layout_below="@+id/leftbubbleContainer"
-        android:layout_alignRight="@+id/leftbubbleContainer"
-        android:layout_marginTop="2dp"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/textViewTime"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/leftbubbleContainer"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="2dp"
-        android:layout_toLeftOf="@id/imageViewmessageTicks"
-        android:text=""
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="8dp"
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-        android:textColor="#9a9a9a"
-        android:textSize="12sp" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#9a9a9a"
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
+
+        <TextView
+            android:id="@+id/textViewTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#9a9a9a"
+            android:textSize="10sp"
+            tools:ignore="SmallSp" />
+    </LinearLayout>
+</LinearLayout>
+
+

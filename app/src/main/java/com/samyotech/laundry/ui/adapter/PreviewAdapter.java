@@ -50,7 +50,7 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.MyViewHo
         if (i > 0) {
             holder.binding.ctvName.setText("x" + " " + servicesDTOArrayList.get(position).getItem_name()/*+"("+servicesDTOArrayList.get(position).getService_name()+")"*/);
             holder.binding.ctvQuantity.setText(servicesDTOArrayList.get(position).getCount());
-            holder.binding.ctvCategory.setText(servicesDTOArrayList.get(position).getService_name());
+//            holder.binding.ctvCategory.setText(servicesDTOArrayList.get(position).getService_name());
             holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol() + " " + servicesDTOArrayList.get(position).getPrice());
         } else holder.binding.clCard.setVisibility(View.GONE);
     }

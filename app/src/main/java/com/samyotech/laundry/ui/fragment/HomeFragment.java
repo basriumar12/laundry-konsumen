@@ -164,7 +164,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void findPlace() {
         Intent locationPickerIntent = new LocationPickerActivity.Builder()
                 .withGooglePlacesEnabled()
-                //.withLocation(41.4036299, 2.1743558)
+                .withLocation(Double.parseDouble(prefrence.getValue(Consts.LATITUDE)),
+                        Double.parseDouble(prefrence.getValue(Consts.LONGITUDE)))
                 .build(requireActivity());
 
         startActivityForResult(locationPickerIntent, 101);
@@ -207,6 +208,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             params.put(Consts.ADDRESS, obj.getAddressLine(0));
             params.put(Consts.LATITUDE, String.valueOf(obj.getLatitude()));
             params.put(Consts.LONGITUDE, String.valueOf(obj.getLongitude()));
+
+            prefrence.setValue(Consts.LATITUDE, String.valueOf(obj.getLatitude()));
+            prefrence.setValue(Consts.LONGITUDE, String.valueOf(obj.getLongitude()));
 
             updateProfile();
         } catch (Exception e) {

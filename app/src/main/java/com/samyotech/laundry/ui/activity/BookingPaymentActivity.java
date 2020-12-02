@@ -13,7 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import com.bumptech.glide.Glide;
 import com.samyotech.laundry.GlobalState;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.databinding.ActivityPaymentBinding;
+import com.samyotech.laundry.databinding.ActivityBookingPaymentBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
@@ -31,15 +31,15 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Random;
 
-public class PaymentActivity extends AppCompatActivity implements View.OnClickListener {
-    ActivityPaymentBinding binding;
+public class BookingPaymentActivity extends AppCompatActivity implements View.OnClickListener {
+    ActivityBookingPaymentBinding binding;
     Context mContext;
     UserDTO userDTO;
     GlobalState globalState;
     ItemDTO itemServiceDTO;
     PopLaundryDTO popLaundryDTO;
     JSONArray jsonArray = new JSONArray();
-    String TAG = PreViewActivity.class.getSimpleName();
+    String TAG = PreviewOrderActivity.class.getSimpleName();
     String totalPrice = "0", totalPriceBef = "0", promoCode = "", latitude = "", longitude = "", discounted_price = "0", discounted_value = "0";
     String otpGenrate = "";
     float discountValue = 0;
@@ -53,8 +53,8 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_payment);
-        mContext = PaymentActivity.this;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_booking_payment);
+        mContext = BookingPaymentActivity.this;
 
         parmsSubmit = (HashMap<String, String>) getIntent().getSerializableExtra("map");
 
@@ -69,8 +69,8 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void setUiAction() {
-        binding.ctvPayAbleAmount.setText(currencyDTO.getCurrency_symbol() + " " + globalState.getCost());
-        binding.ctvSubTotalValue.setText(currencyDTO.getCurrency_symbol() + " " + globalState.getCostbefo());
+        binding.total.setText(currencyDTO.getCurrency_symbol() + " " + globalState.getCost());
+        binding.subtotal.setText(currencyDTO.getCurrency_symbol() + " " + globalState.getCostbefo());
 
         totalPriceBef = globalState.getCostbefo();
         totalPrice = globalState.getCost();
@@ -78,15 +78,10 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
 
         discountValue = Float.parseFloat(globalState.getDiscountcost());
         if (discountValue == 0) {
-            binding.llSubmit.setOnClickListener(this);
-            binding.ctvHaveProcode.setOnClickListener(this);
-
-
+            binding.promoBtn.setOnClickListener(this);
         } else {
-            binding.ctvHaveProcode.setText(getResources().getText(R.string.applied_code) + " " + promoCode);
-            binding.ctvDiscountValue.setText(globalState.getDiscountcost());
+            binding.discount.setText(globalState.getDiscountcost());
             discounted_value = globalState.getDiscountcost();
-
         }
         Log.e(TAG, "setUiAction: " + discountValue);
         Glide.with(mContext)
@@ -96,7 +91,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         binding.ctvbShopName.setText(popLaundryDTO.getShop_name());
         binding.ctvAddress.setText(popLaundryDTO.getAddress());
 
-        binding.rlConfirm.setOnClickListener(this);
+        binding.confirmBtn.setOnClickListener(this);
 
 
     }
@@ -106,7 +101,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
 
         parms.put(Consts.TOTAL_PRICE, totalPrice);
         parms.put(Consts.SHOP_ID, itemServiceDTO.getItem_list().get(0).getServices().get(0).getShop_id());
-        parms.put(Consts.PROMOCODE, ProjectUtils.getEditTextValue(binding.cetEnterProcode));
+        parms.put(Consts.PROMOCODE, ProjectUtils.getEditTextValue(binding.kodePromo));
         new HttpsRequest(Consts.APPLYPROMOCODE, parms, mContext).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
@@ -115,13 +110,12 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
                     Log.e(TAG, "backResponse: " + discounted_price);
                     discounted_value = String.valueOf(Float.valueOf(totalPrice) - Float.valueOf(discounted_price));
                     totalPrice = discounted_price;
-                    binding.ctvApply.setText(getResources().getText(R.string.cancel));
                     checkCoup = false;
 
-                    binding.cetEnterProcode.setFocusable(false);
+                    binding.kodePromo.setFocusable(false);
 
-                    binding.ctvDiscountValue.setText(currencyDTO.getCurrency_symbol() + " " + discounted_value);
-                    binding.ctvPayAbleAmount.setText(currencyDTO.getCurrency_symbol() + " " + discounted_price);
+                    binding.discount.setText(currencyDTO.getCurrency_symbol() + " " + discounted_value);
+                    binding.total.setText(currencyDTO.getCurrency_symbol() + " " + discounted_price);
                 } else {
 
                     ProjectUtils.showToast(mContext, msg);
@@ -136,28 +130,23 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.ctvHaveProcode:
-                binding.llEnterCode.setVisibility(View.VISIBLE);
-                binding.llSave.setVisibility(View.GONE);
-                break;
-            case R.id.llSubmit:
+            case R.id.promo_btn:
                 if (checkCoup) {
                     addPromocode();
                 } else {
-                    binding.cetEnterProcode.setText("");
-                    binding.ctvApply.setText(getResources().getText(R.string.apply));
+                    binding.kodePromo.setText("");
                     totalPriceBef = globalState.getCostbefo();
                     totalPrice = globalState.getCost();
 
-                    binding.cetEnterProcode.setFocusableInTouchMode(true);
-                    binding.ctvDiscountValue.setText(currencyDTO.getCurrency_symbol() + " 0");
-                    binding.ctvPayAbleAmount.setText(currencyDTO.getCurrency_symbol() + " " + totalPrice);
+                    binding.kodePromo.setFocusableInTouchMode(true);
+                    binding.discount.setText(currencyDTO.getCurrency_symbol() + " 0");
+                    binding.total.setText(currencyDTO.getCurrency_symbol() + " " + totalPrice);
                     checkCoup = true;
 
                 }
 
                 break;
-            case R.id.rlConfirm:
+            case R.id.confirm_btn:
                 if (binding.rdbtn.isChecked()) {
                     setData();
                 } else {
@@ -226,14 +215,14 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         parmsSubmit.put(Consts.FINAL_PRICE, totalPrice);
         parmsSubmit.put(Consts.CURRENCY_CODE, itemServiceDTO.getCurrency_code());
         parmsSubmit.put(Consts.ITEM_DETAILS, String.valueOf(jsonArray));
-        globalState.setCost(binding.ctvPayAbleAmount.getText().toString().trim());
+        globalState.setCost(binding.total.getText().toString().trim());
 
         new HttpsRequest(Consts.ORDERSUBMIT, parmsSubmit, mContext).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
                 if (flag) {
 
-                    Intent in = new Intent(mContext, ConfirmedOrder.class);
+                    Intent in = new Intent(mContext, BookingConfirmActivity.class);
                     in.putExtra("map", parmsSubmit);
                     startActivity(in);
                     finish();

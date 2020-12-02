@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,6 +60,7 @@ public class ChatList extends AppCompatActivity {
         rvChatList = findViewById(R.id.rvChatList);
 
         mLayoutManager = new LinearLayoutManager(mContext);
+        rvChatList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         rvChatList.setLayoutManager(mLayoutManager);
 
         chatListAdapter = new ChatListAdapter(mContext, chatList);

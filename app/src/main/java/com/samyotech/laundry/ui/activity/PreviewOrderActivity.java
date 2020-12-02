@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.samyotech.laundry.GlobalState;
 import com.samyotech.laundry.R;
-import com.samyotech.laundry.databinding.ActivityPreViewBinding;
+import com.samyotech.laundry.databinding.ActivityPreviewOrderBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
@@ -32,13 +32,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PreViewActivity extends AppCompatActivity implements View.OnClickListener {
+public class PreviewOrderActivity extends AppCompatActivity implements View.OnClickListener {
 
     Context mContext;
-    String TAG = PreViewActivity.class.getSimpleName();
+    String TAG = PreviewOrderActivity.class.getSimpleName();
 
     HashMap<String, String> parms = new HashMap<>();
-    ActivityPreViewBinding binding;
     UserDTO userDTO;
     ItemDTO itemServiceDTO;
     PreviewAdapter previewAdapter;
@@ -52,12 +51,13 @@ public class PreViewActivity extends AppCompatActivity implements View.OnClickLi
     boolean checkCoup = true;
     private SharedPrefrence prefrence;
     private TextWatcher mTextEditorWatcher;
+    private ActivityPreviewOrderBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_pre_view);
-        mContext = PreViewActivity.this;
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_preview_order);
+        mContext = PreviewOrderActivity.this;
 
         prefrence = SharedPrefrence.getInstance(mContext);
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
@@ -78,18 +78,15 @@ public class PreViewActivity extends AppCompatActivity implements View.OnClickLi
         }
         if (getIntent().hasExtra(Consts.TOTAL_PRICE)) {
             totalPrice = getIntent().getStringExtra(Consts.TOTAL_PRICE);
-            binding.ctvSubTotalValue.setText(currencyDTO.getCurrency_symbol() + " " + totalPrice);
-            binding.ctvPayAbleAmount.setText(currencyDTO.getCurrency_symbol() + " " + totalPrice);
+            binding.subtotal.setText(currencyDTO.getCurrency_symbol() + " " + totalPrice);
+            binding.total.setText(currencyDTO.getCurrency_symbol() + " " + totalPrice);
         }
         parms.put(Consts.TOTAL_PRICE, totalPrice);
         parms.put(Consts.SHOP_ID, itemServiceDTO.getItem_list().get(0).getServices().get(0).getShop_id());
 
-        binding.ctvHaveProcode.setOnClickListener(this);
-        binding.llSubmit.setOnClickListener(this);
-        binding.ctvSchedule.setOnClickListener(this);
-        binding.ctvAddmore.setOnClickListener(this);
-        binding.ctvEdit.setOnClickListener(this);
-        binding.ivBack.setOnClickListener(this);
+        binding.promoBtn.setOnClickListener(this);
+        binding.bookingBtn.setOnClickListener(this);
+        binding.back.setOnClickListener(this);
         setData();
 
         mTextEditorWatcher = new TextWatcher() {
@@ -124,7 +121,7 @@ public class PreViewActivity extends AppCompatActivity implements View.OnClickLi
             }
         };
 
-        binding.cetEnterProcode.addTextChangedListener(mTextEditorWatcher);
+        binding.kodePromo.addTextChangedListener(mTextEditorWatcher);
 /*
 
         binding.cetEnterProcode.addTextChangedListener(new TextWatcher() {
@@ -161,9 +158,9 @@ public class PreViewActivity extends AppCompatActivity implements View.OnClickLi
     private void setData() {
 
         linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
-        binding.rvReview.setLayoutManager(linearLayoutManager);
+        binding.recyclerviewOrders.setLayoutManager(linearLayoutManager);
         previewAdapter = new PreviewAdapter(mContext, categoryArrayList, currencyDTO);
-        binding.rvReview.setAdapter(previewAdapter);
+        binding.recyclerviewOrders.setAdapter(previewAdapter);
     }
 
     @Override
@@ -175,35 +172,24 @@ public class PreViewActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ctvHaveProcode:
-                binding.llEnterCode.setVisibility(View.VISIBLE);
-                binding.llSave.setVisibility(View.GONE);
-                break;
-            case R.id.llSubmit:
+            case R.id.promo_btn:
                 if (checkCoup) {
                     addPromocode();
                 } else {
-                    binding.cetEnterProcode.setText("");
-                    binding.ctvApply.setText(getResources().getText(R.string.apply));
+                    binding.kodePromo.setText("");
                     totalPrice = getIntent().getStringExtra(Consts.TOTAL_PRICE);
                     discounted_price = "0";
-                    binding.cetEnterProcode.setFocusableInTouchMode(true);
-                    binding.ctvDiscountValue.setText(currencyDTO.getCurrency_symbol() + " 0");
-                    binding.ctvPayAbleAmount.setText(currencyDTO.getCurrency_symbol() + " " + totalPrice);
+                    binding.kodePromo.setFocusableInTouchMode(true);
+                    binding.discount.setText(currencyDTO.getCurrency_symbol() + " 0");
+                    binding.total.setText(currencyDTO.getCurrency_symbol() + " " + totalPrice);
                     checkCoup = true;
 
                 }
                 break;
-            case R.id.ivBack:
-            case R.id.ctvAddmore:
-            case R.id.ctvEdit:
-                if (doubleClick) {
-                    doubleClick = false;
-                    onBackPressed();
-
-                }
+            case R.id.back:
+                onBackPressed();
                 break;
-            case R.id.ctvSchedule:
+            case R.id.booking_btn:
                 if (doubleClick) {
                     doubleClick = false;
 
@@ -218,7 +204,7 @@ public class PreViewActivity extends AppCompatActivity implements View.OnClickLi
                         globalState.setCostbefo(totalPrice);
                     }
 
-                    Intent in = new Intent(mContext, SchedulePickup.class);
+                    Intent in = new Intent(mContext, BookingPickAddressActivity.class);
                     startActivity(in);
                 }
                 break;
@@ -226,21 +212,20 @@ public class PreViewActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void addPromocode() {
-        parms.put(Consts.PROMOCODE, ProjectUtils.getEditTextValue(binding.cetEnterProcode));
+        parms.put(Consts.PROMOCODE, ProjectUtils.getEditTextValue(binding.kodePromo));
         new HttpsRequest(Consts.APPLYPROMOCODE, parms, mContext).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
                 if (flag) {
                     discounted_price = (response.getString("data"));
                     Log.e(TAG, "backResponse: " + discounted_price);
-                    globalState.setPromoCode(ProjectUtils.getEditTextValue(binding.cetEnterProcode));
+                    globalState.setPromoCode(ProjectUtils.getEditTextValue(binding.kodePromo));
                     discounted_value = String.valueOf(Float.valueOf(totalPrice) - Float.valueOf(discounted_price));
-                    binding.cetEnterProcode.setFocusable(false);
-                    binding.ctvApply.setText(getResources().getText(R.string.cancel));
+                    binding.kodePromo.setFocusable(false);
                     checkCoup = false;
 
-                    binding.ctvDiscountValue.setText(currencyDTO.getCurrency_symbol() + " " + discounted_value);
-                    binding.ctvPayAbleAmount.setText(currencyDTO.getCurrency_symbol() + " " + discounted_price);
+                    binding.discount.setText(currencyDTO.getCurrency_symbol() + " " + discounted_value);
+                    binding.total.setText(currencyDTO.getCurrency_symbol() + " " + discounted_price);
                 } else {
 
                     ProjectUtils.showToast(mContext, msg);

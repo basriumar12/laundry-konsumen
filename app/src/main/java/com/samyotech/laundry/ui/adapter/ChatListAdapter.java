@@ -8,22 +8,18 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.ChatListDTO;
-import com.samyotech.laundry.ui.activity.OneTwoOneChat;
+import com.samyotech.laundry.ui.activity.ChatActivity;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import java.util.ArrayList;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyViewHolder> {
@@ -51,23 +47,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
         holder.tvTitle.setText(chatList.get(position).getUser_name());
         holder.tvMsg.setText(chatList.get(position).getMessage());
         try {
-            holder.tvDay.setText(ProjectUtils.getDisplayableDay(ProjectUtils.correctTimestamp(Long.parseLong(chatList.get(position).getUpdated_at()))));
             holder.tvDate.setText(ProjectUtils.convertTimestampToTime(ProjectUtils.correctTimestamp(Long.parseLong(chatList.get(position).getUpdated_at()))));
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Glide.with(mContext).
-                load(chatList.get(position).getUser_image())
-                .placeholder(R.drawable.ic_user_dummy)
-                .dontAnimate()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.IVprofile);
-        holder.cardClick.setOnClickListener(new View.OnClickListener() {
+        holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in = new Intent(mContext, OneTwoOneChat.class);
+                Intent in = new Intent(mContext, ChatActivity.class);
                 in.putExtra(Consts.TO_USER_ID, chatList.get(position).getUser_id());
                 in.putExtra(Consts.NAME, chatList.get(position).getUser_name());
                 in.putExtra(Consts.IMAGE, chatList.get(position).getUser_image());
@@ -87,16 +74,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.MyView
 
         public TextView tvTitle;
         public TextView tvDay, tvDate, tvMsg;
-        public CircleImageView IVprofile;
-        public CardView cardClick;
+        public LinearLayout container;
 
         public MyViewHolder(View view) {
             super(view);
 
-            cardClick = view.findViewById(R.id.cardClick);
-            IVprofile = view.findViewById(R.id.IVprofile);
+            container = view.findViewById(R.id.container);
             tvTitle = view.findViewById(R.id.tvTitle);
-            tvDay = view.findViewById(R.id.tvDay);
             tvDate = view.findViewById(R.id.tvDate);
             tvMsg = view.findViewById(R.id.tvMsg);
 

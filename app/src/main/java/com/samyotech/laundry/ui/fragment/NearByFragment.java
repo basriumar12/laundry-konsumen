@@ -70,7 +70,7 @@ public class NearByFragment extends Fragment {
     private GoogleMap googleMap;
     private UserDTO userDTO;
     private SharedPrefrence prefrence;
-    private ArrayList<PopLaundryDTO> allAtristListDTOList;
+    private ArrayList<PopLaundryDTO> laundryList;
     private Hashtable<String, PopLaundryDTO> markers;
     private Marker marker;
     private Dashboard dashboard;
@@ -93,33 +93,6 @@ public class NearByFragment extends Fragment {
 
         binding.mapView.onCreate(savedInstanceState);
         markers = new Hashtable<String, PopLaundryDTO>();
-        binding.mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap mMap) {
-                googleMap = mMap;
-
-                // For showing a move to my location button
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                googleMap.setMyLocationEnabled(true);
-
-                // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(Double.parseDouble(prefrence.getValue(Consts.LATITUDE)), Double.parseDouble(prefrence.getValue(Consts.LONGITUDE)));
-                //  googleMap.addMarker(new MarkerOptions().position(sydney).title(userDTO.getName()).title("My Location").snippet(userDTO.getUser_id()));
-
-                // For zooming automatically to the location of the marker
-                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(14).build();
-                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-            }
-        });
 
         getNearByLaundry();
 
@@ -254,21 +227,24 @@ public class NearByFragment extends Fragment {
 
                         Log.e(TAG, "backResponse: " + response);
 
-                        allAtristListDTOList = new ArrayList<>();
-                        Type getpetDTO = new TypeToken<List<PopLaundryDTO>>() {
+                        laundryList = new ArrayList<>();
+                        Type popLaundryDTO = new TypeToken<List<PopLaundryDTO>>() {
                         }.getType();
-                        allAtristListDTOList = new Gson().fromJson(response.getJSONArray("data").toString(), getpetDTO);
+                        laundryList = new Gson().fromJson(response.getJSONArray("data").toString(), popLaundryDTO);
 
-                        for (int i = 0; i < allAtristListDTOList.size(); i++) {
+                        for (int i = 0; i < laundryList.size(); i++) {
 
-                            optionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(allAtristListDTOList.get(i).getLatitude()), Double.parseDouble(allAtristListDTOList.get(i).getLongitude()))).title(allAtristListDTOList.get(i).getShop_name()).icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(getActivity()))));
+                            PopLaundryDTO l = laundryList.get(i);
+                            optionsList.add(new MarkerOptions().position(new LatLng(Double.parseDouble(l.getLatitude()), Double.parseDouble(l.getLongitude())))
+                                    .title(l.getShop_name())
+                                    .icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(requireContext()))));
 
                         }
 
                         //    binding.mapView.onResume(); // needed to get the map to display immediately
 
                         try {
-                            MapsInitializer.initialize(getActivity().getApplicationContext());
+                            MapsInitializer.initialize(requireContext());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -279,7 +255,7 @@ public class NearByFragment extends Fragment {
                                 googleMap = mMap;
 
                                 // For showing a move to my location button
-                                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                                if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                                     // TODO: Consider calling
                                     //    ActivityCompat#requestPermissions
                                     // here to request the missing permissions, and then overriding
@@ -289,6 +265,15 @@ public class NearByFragment extends Fragment {
                                     // for ActivityCompat#requestPermissions for more details.
                                     return;
                                 }
+
+                                // For dropping a marker at a point on the Map
+                                LatLng currentPos = new LatLng(Double.parseDouble(prefrence.getValue(Consts.LATITUDE)), Double.parseDouble(prefrence.getValue(Consts.LONGITUDE)));
+                                //  googleMap.addMarker(new MarkerOptions().position(currentPos).title(userDTO.getName()).title("My Location").snippet(userDTO.getUser_id()));
+
+                                // For zooming automatically to the location of the marker
+                                CameraPosition cameraPosition = new CameraPosition.Builder().target(currentPos).zoom(14).build();
+                                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
                                 googleMap.setMyLocationEnabled(true);
 
                                 // For dropping a marker at a point on the Map
@@ -304,20 +289,21 @@ public class NearByFragment extends Fragment {
 
                                 for (MarkerOptions options : optionsList) {
 
-                                    options.position(options.getPosition());
-                                    options.title(options.getTitle());
-                                    options.snippet(options.getSnippet());
-                                    options.draggable(false);
-                                    final Marker hamburg = googleMap.addMarker(options);
+//                                    options.position(options.getPosition());
+//                                    options.title(options.getTitle());
+//                                    options.snippet(options.getSnippet());
+//                                    options.draggable(false);
+                                    final Marker marker = googleMap.addMarker(options);
 
 //                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(options.getPosition()).zoom(12).build();
 //                                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-                                    for (int i = 0; i < allAtristListDTOList.size(); i++) {
-                                        if (!allAtristListDTOList.get(i).getLatitude().equalsIgnoreCase(prefrence.getValue(Consts.LATITUDE)) && !allAtristListDTOList.get(i).getLongitude().equalsIgnoreCase(prefrence.getValue(Consts.LATITUDE))) {
-                                            if (allAtristListDTOList.get(i).getUser_id().equalsIgnoreCase(options.getSnippet()))
+                                    for (int i = 0; i < laundryList.size(); i++) {
+                                        if (!laundryList.get(i).getLatitude().equalsIgnoreCase(prefrence.getValue(Consts.LATITUDE)) &&
+                                                !laundryList.get(i).getLongitude().equalsIgnoreCase(prefrence.getValue(Consts.LONGITUDE))) {
+                                            if (laundryList.get(i).getUser_id().equalsIgnoreCase(options.getSnippet()))
 
-                                                markers.put(hamburg.getId(), allAtristListDTOList.get(i));
+                                                markers.put(marker.getId(), laundryList.get(i));
                                             // CameraPosition cameraPosition = new CameraPosition.Builder().target(options.getPosition()).zoom(12).build();
                                             // googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                                         }
@@ -365,7 +351,7 @@ public class NearByFragment extends Fragment {
     private void setData() {
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         binding.rvLaundrytab.setLayoutManager(linearLayoutManager);
-        popularLaundriesAdapter = new PopularLaundriesAdapter(getActivity(), allAtristListDTOList);
+        popularLaundriesAdapter = new PopularLaundriesAdapter(getActivity(), laundryList);
         binding.rvLaundrytab.setAdapter(popularLaundriesAdapter);
     }
 
