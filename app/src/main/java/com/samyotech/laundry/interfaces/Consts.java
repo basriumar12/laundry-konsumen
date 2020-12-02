@@ -127,4 +127,5 @@ public interface Consts {
     String TICKETNOTIFICATION = "7005";//both
     //language
     String LANGUAGE = "language";
+    String BACKGROUND = "background";
 }

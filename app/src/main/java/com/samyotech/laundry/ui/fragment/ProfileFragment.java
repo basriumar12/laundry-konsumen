@@ -1,11 +1,11 @@
 package com.samyotech.laundry.ui.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +54,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     HashMap<String, File> fileHashMap = new HashMap<>();
     HashMap<String, String> hashMap = new HashMap<>();
     private BottomSheetFragment bottomSheetFragment;
+    private String type;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +74,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 .load(Consts.DEV_URL + userDTO.getImage())
                 .error(R.drawable.ic_avatar)
                 .into(binding.ivAvtaimg);
+        Glide.with(getActivity())
+                .load(Consts.DEV_URL + userDTO.getBackground())
+                .error(R.drawable.banner_img)
+                .into(binding.ivBanner);
+
 //        camera();
 
         binding.tvName.setText(userDTO.getName());
@@ -124,11 +130,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.updatePhoto:
 //                builder.show();
-                showBs();
+                showBs("image");
                 break;
             case R.id.updateBackground:
 //                builder.show();
-                showBs();
+                showBs("background");
                 break;
         }
     }
@@ -136,7 +142,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     public void logout() {
         ProjectUtils.showProgressDialog(getActivity(), true, getResources().getString(R.string.please_wait));
-        new HttpsRequest(Consts.LOGOUT, getparm(), getActivity()).stringPost(TAG, new Helper() {
+        new HttpsRequest(Consts.LOGOUT, hashMap, getActivity()).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) {
                 ProjectUtils.pauseProgressDialog();
@@ -159,14 +165,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-    }
-
-
-    public HashMap<String, String> getparm() {
-        HashMap<String, String> parms = new HashMap<>();
-        parms.put(Consts.USER_ID, userDTO.getUser_id());
-        Log.e(TAG + " Login", parms.toString());
-        return parms;
     }
 
     public void alertDialogLogout() {
@@ -204,7 +202,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     public void deleteAccount() {
         ProjectUtils.showProgressDialog(getActivity(), true, getResources().getString(R.string.please_wait));
-        new HttpsRequest(Consts.DELETEACCOUNT, getparm(), getActivity()).stringPost(TAG, new Helper() {
+        new HttpsRequest(Consts.DELETEACCOUNT, hashMap, getActivity()).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) {
                 ProjectUtils.pauseProgressDialog();
@@ -253,21 +251,22 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 .show();
     }
 
-    private void showBs() {
+    private void showBs(String type) {
+        this.type = type;
         bottomSheetFragment = new BottomSheetFragment(new BottomSheetFragment.ClickListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public void onClick(int which) {
                 switch (which) {
                     case R.id.camera:
-                        ImagePicker.Companion.with(requireActivity())
+                        ImagePicker.Companion.with(ProfileFragment.this)
                                 .cameraOnly()
                                 .crop()
                                 .compress(512)
                                 .start();
                         break;
                     case R.id.gallery:
-                        ImagePicker.Companion.with(requireActivity())
+                        ImagePicker.Companion.with(ProfileFragment.this)
                                 .galleryOnly()
                                 .crop()
                                 .compress(512)
@@ -284,36 +283,60 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            File file = ImagePicker.Companion.getFile(data);
-            fileHashMap.put(Consts.IMAGE, file);
-            if (bottomSheetFragment != null) {
-                bottomSheetFragment.dismiss();
+            if (type.equals("image")) {
+                File file = ImagePicker.Companion.getFile(data);
+                fileHashMap.put(Consts.IMAGE, file);
+                hashMap.put(Consts.IMAGE, file.getPath());
+                if (bottomSheetFragment != null) {
+                    bottomSheetFragment.dismiss();
+                }
+                updateProfile();
+            } else if (type.equals("background")) {
+                File file = ImagePicker.Companion.getFile(data);
+                fileHashMap.put(Consts.BACKGROUND, file);
+                hashMap.put(Consts.BACKGROUND, file.getPath());
+                if (bottomSheetFragment != null) {
+                    bottomSheetFragment.dismiss();
+                }
+                updateProfile();
             }
-            updateProfile();
         }
     }
 
     private void updateProfile() {
-        new HttpsRequest(Consts.USERUPDATE, hashMap, fileHashMap, getActivity()).imagePost(TAG, new Helper() {
-            @Override
-            public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
-                if (flag) {
+        final ProgressDialog progressDialog = new ProgressDialog(requireActivity(), R.style.CustomAlertDialog);
+        progressDialog.setMessage("loading");
+        progressDialog.show();
+        new HttpsRequest(Consts.USERUPDATE, hashMap, fileHashMap, getActivity())
+                .imagePost(TAG, new Helper() {
+                    @Override
+                    public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
+                        progressDialog.dismiss();
+                        if (flag) {
 
-                    userDTO = new Gson().fromJson(response.getJSONObject("data").toString(), UserDTO.class);
-                    sharedPrefrence.setParentUser(userDTO, Consts.USER_DTO);
+                            userDTO = new Gson().fromJson(response.getJSONObject("data").toString(), UserDTO.class);
+                            sharedPrefrence.setParentUser(userDTO, Consts.USER_DTO);
 
-                    sharedPrefrence.setBooleanValue(Consts.IS_REGISTERED, true);
+                            sharedPrefrence.setBooleanValue(Consts.IS_REGISTERED, true);
 
-                    Glide.with(getActivity()).load(Consts.DEV_URL + userDTO.getImage())
-                            .thumbnail(0.5f)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .into(binding.ivAvtaimg);
+                            Glide.with(getActivity()).load(Consts.DEV_URL + userDTO.getImage())
+                                    .thumbnail(0.5f)
+//                                    .placeholder(R.drawable.ic_avatar)
+//                                    .error(R.drawable.ic_avatar)
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .into(binding.ivAvtaimg);
+                            Glide.with(getActivity())
+                                    .load(Consts.DEV_URL + userDTO.getBackground())
+//                                    .placeholder(R.drawable.banner_img)
+//                                    .error(R.drawable.banner_img)
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .into(binding.ivBanner);
 
-                } else {
-                    ProjectUtils.showToast(getActivity(), msg);
-                }
-            }
-        });
+                        } else {
+                            ProjectUtils.showToast(getActivity(), msg);
+                        }
+                    }
+                });
 
 
     }

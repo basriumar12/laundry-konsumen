@@ -356,6 +356,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:singleLine="true"
+                            android:id="@+id/hubungi_title"
                             android:text="Hubungi Laundry Satu"
                             android:textAlignment="center"
                             android:textColor="@color/black" />

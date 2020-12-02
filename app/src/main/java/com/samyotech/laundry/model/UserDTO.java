@@ -11,6 +11,7 @@ public class UserDTO implements Serializable {
     String country_code = "";
     String mobile = "";
     String image = "";
+    String background = "";
     String password = "";
     String address = "";
     String status = "";
@@ -22,6 +23,13 @@ public class UserDTO implements Serializable {
     String email_token = "";
     String created_at = "";
 
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
 
     public String getUser_id() {
         return user_id;

@@ -71,7 +71,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         binding.pickupTime.setText(bookingDTO.getPickup_time());
         binding.deliveryTime.setText(bookingDTO.getDelivery_time());
         binding.deliveryDate.setText(bookingDTO.getDelivery_date());
-//        binding.ctvPaidVia.setText(bookingDTO.getPayment_status());
+        binding.hubungiTitle.setText(String.format("Hubungi %s", bookingDTO.getShop_name()));
 
         binding.back.setOnClickListener(this);
         binding.kirimPesanBtn.setOnClickListener(this);

@@ -20,8 +20,7 @@ import androidx.fragment.app.DialogFragment;
 import com.samyotech.laundry.R;
 
 
-public class
-ProgressDialogFragment extends DialogFragment {
+public class ProgressDialogFragment extends DialogFragment {
     public static final String TAG = ProgressDialogFragment.class.getSimpleName();
 
     // Note: only the system can call this constructor by reflection. 
