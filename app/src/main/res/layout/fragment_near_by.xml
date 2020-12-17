@@ -43,7 +43,7 @@
                 android:background="@drawable/round_background"
                 android:orientation="vertical"
                 app:behavior_peekHeight="140dp"
-                app:layout_behavior=".utils.AnchorSheetBehavior">
+                app:layout_behavior="com.samyotech.laundry.utils.AnchorSheetBehavior">
 
                 <View
                     android:id="@+id/tap_action_layout"

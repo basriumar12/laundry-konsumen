@@ -181,67 +181,67 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/title2"
-            style="@style/TextAppearance.AppCompat.Caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/deliverydate"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cvHome" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/title2"-->
+        <!--            style="@style/TextAppearance.AppCompat.Caption"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="16dp"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:layout_marginBottom="8dp"-->
+        <!--            android:text="@string/deliverydate"-->
+        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/cvHome" />-->
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvDeliver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="1dp"
-            app:layout_constraintTop_toBottomOf="@id/title2">
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/_5sdp">
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:id="@+id/cvDeliver"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="16dp"-->
+        <!--            app:cardCornerRadius="8dp"-->
+        <!--            app:cardElevation="1dp"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/title2">-->
 
 
-                <EditText
-                    android:id="@+id/delivery_date"
-                    style="@style/TextAppearance.AppCompat.Caption"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@drawable/chat_background"
-                    android:clickable="true"
-                    android:drawableEnd="@drawable/icon_next_x"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="@string/enterdeliverydate"
-                    android:padding="@dimen/_5sdp"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <EditText
-                    android:id="@+id/delivery_time"
-                    style="@style/TextAppearance.AppCompat.Caption"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/chat_background"
-                    android:clickable="true"
-                    android:drawableEnd="@drawable/icon_next_x"
-                    android:editable="false"
-                    android:focusable="false"
-                    android:hint="@string/enterdeliverytime"
-                    android:padding="@dimen/_5sdp"
-                    app:layout_constraintTop_toBottomOf="@id/delivery_date" />
+        <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="vertical"-->
+        <!--                android:padding="@dimen/_5sdp">-->
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        <!--                <EditText-->
+        <!--                    android:id="@+id/delivery_date"-->
+        <!--                    style="@style/TextAppearance.AppCompat.Caption"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="@dimen/_30sdp"-->
+        <!--                    android:background="@drawable/chat_background"-->
+        <!--                    android:clickable="true"-->
+        <!--                    android:drawableEnd="@drawable/icon_next_x"-->
+        <!--                    android:editable="false"-->
+        <!--                    android:focusable="false"-->
+        <!--                    android:hint="@string/enterdeliverydate"-->
+        <!--                    android:padding="@dimen/_5sdp"-->
+        <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--                <EditText-->
+        <!--                    android:id="@+id/delivery_time"-->
+        <!--                    style="@style/TextAppearance.AppCompat.Caption"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="@dimen/_30sdp"-->
+        <!--                    android:layout_marginTop="@dimen/_10sdp"-->
+        <!--                    android:background="@drawable/chat_background"-->
+        <!--                    android:clickable="true"-->
+        <!--                    android:drawableEnd="@drawable/icon_next_x"-->
+        <!--                    android:editable="false"-->
+        <!--                    android:focusable="false"-->
+        <!--                    android:hint="@string/enterdeliverytime"-->
+        <!--                    android:padding="@dimen/_5sdp"-->
+        <!--                    app:layout_constraintTop_toBottomOf="@id/delivery_date" />-->
+
+
+        <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+        <!--        </androidx.cardview.widget.CardView>-->
 
         <mehdi.sakout.fancybuttons.FancyButton
             android:id="@+id/next_btn"

@@ -82,9 +82,9 @@ public class TopServices extends AppCompatActivity implements View.OnClickListen
                         popLaundryDTOArrayList = new Gson().fromJson(response.getJSONArray("data").toString(), getPetDTO);
                         layoutManager = new LinearLayoutManager(kContext, LinearLayoutManager.VERTICAL, false);
 
-                        binding.recyleService.setLayoutManager(layoutManager);
+                        binding.recyclerview.setLayoutManager(layoutManager);
                         popularFullLaundriesAdapter = new PopularFullLaundriesAdapter(kContext, popLaundryDTOArrayList);
-                        binding.recyleService.setAdapter(popularFullLaundriesAdapter);
+                        binding.recyclerview.setAdapter(popularFullLaundriesAdapter);
                     } catch (Exception e) {
                         e.printStackTrace();
 
@@ -121,9 +121,9 @@ public class TopServices extends AppCompatActivity implements View.OnClickListen
                         popLaundryDTOArrayList = new Gson().fromJson(response.getJSONArray("data").toString(), getPetDTO);
                         layoutManager = new LinearLayoutManager(kContext, LinearLayoutManager.VERTICAL, false);
 
-                        binding.recyleService.setLayoutManager(layoutManager);
+                        binding.recyclerview.setLayoutManager(layoutManager);
                         popularFullLaundriesAdapter = new PopularFullLaundriesAdapter(kContext, popLaundryDTOArrayList);
-                        binding.recyleService.setAdapter(popularFullLaundriesAdapter);
+                        binding.recyclerview.setAdapter(popularFullLaundriesAdapter);
                     } catch (Exception e) {
                         e.printStackTrace();
 

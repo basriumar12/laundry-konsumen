@@ -45,16 +45,19 @@ public class PopularFullLaundriesAdapter extends RecyclerView.Adapter<PopularFul
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
-        Glide.with(kContext).load(Consts.DEV_URL + popLaundryDTOArrayList.get(position).getImage()).placeholder(R.drawable.laundryshop).into(holder.binding.ivImage);
+        final PopLaundryDTO item = popLaundryDTOArrayList.get(position);
+        Glide.with(kContext).load(Consts.BASE_URL + item.getImage()).placeholder(R.drawable.laundryshop).into(holder.binding.ivImage);
 
-        holder.binding.title.setText(popLaundryDTOArrayList.get(position).getShop_name());
-        holder.binding.location.setText(popLaundryDTOArrayList.get(position).getAddress());
+        holder.binding.title.setText(item.getShop_name());
+        holder.binding.alamat.setText(item.getAddress());
+        holder.binding.rating.setText(item.getRating());
+        holder.binding.arb.setRating(Float.parseFloat(item.getRating()));
 
         holder.binding.cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(kContext, ShopAcitivity.class);
-                in.putExtra(Consts.SHOPDTO, popLaundryDTOArrayList.get(position));
+                in.putExtra(Consts.SHOPDTO, item);
                 kContext.startActivity(in);
             }
         });

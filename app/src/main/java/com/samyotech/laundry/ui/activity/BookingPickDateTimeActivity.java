@@ -45,8 +45,8 @@ public class BookingPickDateTimeActivity extends AppCompatActivity implements Vi
         hashMap = (HashMap<String, String>) getIntent().getSerializableExtra("map");
         binding.ctvPickupDate.setOnClickListener(this);
         binding.ctvPickupTime.setOnClickListener(this);
-        binding.deliveryDate.setOnClickListener(this);
-        binding.deliveryTime.setOnClickListener(this);
+//        binding.deliveryDate.setOnClickListener(this);
+//        binding.deliveryTime.setOnClickListener(this);
         binding.nextBtn.setOnClickListener(this);
         binding.back.setOnClickListener(this);
     }
@@ -64,13 +64,13 @@ public class BookingPickDateTimeActivity extends AppCompatActivity implements Vi
                 t = 1;
                 addtime();
                 break;
-            case R.id.delivery_date:
-                openDatePickerEnd();
-                break;
-            case R.id.delivery_time:
-                t = 2;
-                addtime();
-                break;
+//            case R.id.delivery_date:
+//                openDatePickerEnd();
+//                break;
+//            case R.id.delivery_time:
+//                t = 2;
+//                addtime();
+//                break;
             case R.id.next_btn:
 
                 if (!ProjectUtils.isEditTextFilled(binding.ctvPickupDate)) {
@@ -80,13 +80,13 @@ public class BookingPickDateTimeActivity extends AppCompatActivity implements Vi
                 } else if (!ProjectUtils.isEditTextFilled(binding.ctvPickupTime)) {
                     showSickbar(getResources().getString(R.string.val_ptime));
 
-                } else if (!ProjectUtils.isEditTextFilled(binding.deliveryDate)) {
+                }/* else if (!ProjectUtils.isEditTextFilled(binding.deliveryDate)) {
                     showSickbar(getResources().getString(R.string.val_ddate));
 
                 } else if (!ProjectUtils.isEditTextFilled(binding.deliveryTime)) {
                     showSickbar(getResources().getString(R.string.val_dtime));
 
-                } else {
+                }*/ else {
                     if (checkCLick) {
                         Intent in = new Intent(mContext, BookingPaymentActivity.class);
                         in.putExtra("map", getParams());
@@ -117,7 +117,7 @@ public class BookingPickDateTimeActivity extends AppCompatActivity implements Vi
                 if (t == 1) {
                     binding.ctvPickupTime.setText(sdf.format(time.getTime()));
                 } else {
-                    binding.deliveryTime.setText(sdf.format(time.getTime()));
+//                    binding.deliveryTime.setText(sdf.format(time.getTime()));
                 }
             }
         });
@@ -136,7 +136,7 @@ public class BookingPickDateTimeActivity extends AppCompatActivity implements Vi
                 String myFormat = "dd-MMM-yyyy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
                 binding.ctvPickupDate.setText(sdf.format(dateStart.getTime()));
-                binding.deliveryDate.setText("");
+//                binding.deliveryDate.setText("");
             }
         });
 
@@ -153,7 +153,7 @@ public class BookingPickDateTimeActivity extends AppCompatActivity implements Vi
                 dateEnd.set(Calendar.DAY_OF_MONTH, day);
                 String myFormat = "dd-MMM-yyyy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-                binding.deliveryDate.setText(sdf.format(dateEnd.getTime()));
+//                binding.deliveryDate.setText(sdf.format(dateEnd.getTime()));
             }
         });
 
@@ -172,8 +172,8 @@ public class BookingPickDateTimeActivity extends AppCompatActivity implements Vi
     private HashMap<String, String> getParams() {
         hashMap.put(Consts.PICKUP_DATE, ProjectUtils.getEditTextValue(binding.ctvPickupDate));
         hashMap.put(Consts.PICKUP_TIME, ProjectUtils.getEditTextValue(binding.ctvPickupTime));
-        hashMap.put(Consts.DELIVERY_DATE, ProjectUtils.getEditTextValue(binding.deliveryDate));
-        hashMap.put(Consts.DELIVERY_TIME, ProjectUtils.getEditTextValue(binding.deliveryTime));
+//        hashMap.put(Consts.DELIVERY_DATE, ProjectUtils.getEditTextValue(binding.deliveryDate));
+//        hashMap.put(Consts.DELIVERY_TIME, ProjectUtils.getEditTextValue(binding.deliveryTime));
 
         return hashMap;
     }

@@ -46,7 +46,7 @@ public class TopServiceAdapter extends RecyclerView.Adapter<TopServiceAdapter.My
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
         final ServicesDTO item = servicesDTOArrayList.get(position);
-        Glide.with(kContext).load(Consts.DEV_URL + item.getImage())
+        Glide.with(kContext).load(Consts.BASE_URL + item.getImage())
                 .placeholder(R.drawable.laundryshop)
                 .into(holder.binding.servImage);
 

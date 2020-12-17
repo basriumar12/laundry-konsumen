@@ -46,7 +46,7 @@ public class LaundriesNearAdapter extends RecyclerView.Adapter<LaundriesNearAdap
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         final NearBYDTO item = nearBYDTOArrayList.get(position);
         Glide.with(kContext)
-                .load(Consts.DEV_URL + item.getShop_image())
+                .load(Consts.BASE_URL + item.getShop_image())
                 .placeholder(R.drawable.banner_img)
                 .error(R.drawable.banner_img)
                 .into(holder.binding.image);

@@ -1,7 +1,6 @@
 package com.samyotech.laundry.ui.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -9,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityServiceAcitivityBinding;
 import com.samyotech.laundry.interfaces.Consts;
@@ -54,25 +54,28 @@ public class ServiceActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        binding.bookingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(getApplicationContext(), Schedule_Activity.class);
-                in.putExtra(Consts.SHOPDTO, popLaundryDTO);
-                startActivity(in);
-            }
-        });
+//        binding.bookingBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent in = new Intent(getApplicationContext(), Schedule_Activity.class);
+//                in.putExtra(Consts.SHOPDTO, popLaundryDTO);
+//                startActivity(in);
+//            }
+//        });
     }
 
     private void setupUi2() {
         binding.ivShopName.setText(shopServicesDTO.getService_name());
         binding.des.setText(shopServicesDTO.getDescription());
-        Glide.with(this).load(Consts.DEV_URL + shopServicesDTO.getImage()).into(binding.serviceIcon);
+        Glide.with(this).load(Consts.BASE_URL + shopServicesDTO.getImage())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(binding.serviceIcon);
     }
 
     private void setupUi() {
         binding.ivShopName.setText(servicesDTO.getService_name());
         binding.des.setText(servicesDTO.getDescription());
-        Glide.with(this).load(Consts.DEV_URL + servicesDTO.getImage()).into(binding.serviceIcon);
+        Glide.with(this).load(Consts.BASE_URL + servicesDTO.getImage())
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(binding.serviceIcon);
     }
 }

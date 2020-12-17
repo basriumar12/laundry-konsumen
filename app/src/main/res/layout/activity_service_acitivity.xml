@@ -102,19 +102,19 @@
                     android:layout_marginTop="16dp"
                     android:text="halo" />
 
-                <mehdi.sakout.fancybuttons.FancyButton
-                    android:id="@+id/booking_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp"
-                    app:fb_defaultColor="@color/colorPrimary"
-                    app:fb_focusColor="@color/colorPrimary"
-                    app:fb_iconPosition="left"
-                    app:fb_radius="16dp"
-                    app:fb_text="Pesan Sekarang"
-                    app:fb_textColor="@color/white" />
+                <!--                <mehdi.sakout.fancybuttons.FancyButton-->
+                <!--                    android:id="@+id/booking_btn"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_gravity="end"-->
+                <!--                    android:paddingHorizontal="16dp"-->
+                <!--                    android:paddingVertical="4dp"-->
+                <!--                    app:fb_defaultColor="@color/colorPrimary"-->
+                <!--                    app:fb_focusColor="@color/colorPrimary"-->
+                <!--                    app:fb_iconPosition="left"-->
+                <!--                    app:fb_radius="16dp"-->
+                <!--                    app:fb_text="Pesan Sekarang"-->
+                <!--                    app:fb_textColor="@color/white" />-->
             </LinearLayout>
 
         </LinearLayout>

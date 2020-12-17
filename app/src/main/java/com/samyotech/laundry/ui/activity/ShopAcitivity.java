@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityShopAcitivityBinding;
@@ -142,7 +143,8 @@ public class ShopAcitivity extends AppCompatActivity {
         bundle = new Bundle();
         bundle.putSerializable(Consts.SHOPDTO, popLaundryDTO.get(0));
         binding.ivShopName.setText(popLaundryDTO.get(0).getShop_name());
-        Glide.with(this).load(Consts.DEV_URL + popLaundryDTO.get(0).getShop_image()).into(binding.ivBanner);
+        Glide.with(this).load(Consts.BASE_URL + popLaundryDTO.get(0).getShop_image())
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(binding.ivBanner);
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +169,8 @@ public class ShopAcitivity extends AppCompatActivity {
         bundle = new Bundle();
         bundle.putSerializable(Consts.SHOPDTO, popLaundryDTOs);
         binding.ivShopName.setText(popLaundryDTOs.getShop_name());
-        Glide.with(this).load(Consts.DEV_URL + popLaundryDTOs.getShop_image()).into(binding.ivBanner);
+        Glide.with(this).load(Consts.BASE_URL + popLaundryDTOs.getShop_image())
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(binding.ivBanner);
         binding.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

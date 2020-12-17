@@ -52,7 +52,7 @@ public class OffersOtherAdapter extends RecyclerView.Adapter<OffersOtherAdapter.
         holder.binding.nama.setText(item.getShop_name());
         holder.binding.alamat.setText(item.getAddress());
         holder.binding.produk.setText(item.getDescription());
-        String string = Consts.DEV_URL + item.getImage();
+        String string = Consts.BASE_URL + item.getImage();
         Glide.with(kContext)
                 .load(string)
                 .error(R.drawable.offernewpa)

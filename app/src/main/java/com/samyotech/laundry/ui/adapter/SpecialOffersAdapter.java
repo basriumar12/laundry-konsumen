@@ -48,7 +48,7 @@ public class SpecialOffersAdapter extends RecyclerView.Adapter<SpecialOffersAdap
         holder.binding.ctvCode.setText(specialOfferPkgDTOArrayList.get(position).getPromocode());
         holder.binding.ctvOffer.setText(specialOfferPkgDTOArrayList.get(position).getOffer_name());
         Glide.with(kContext)
-                .load(Consts.DEV_URL + specialOfferPkgDTOArrayList.get(position).getImage())
+                .load(Consts.BASE_URL + specialOfferPkgDTOArrayList.get(position).getImage())
                 .error(R.drawable.offernewpa)
                 .into(holder.binding.acivOfferImage);
 

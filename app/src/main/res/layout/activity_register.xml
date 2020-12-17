@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/signup"
+                    android:text="Registrasi akun"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp" />
 
@@ -51,7 +51,7 @@
                         android:backgroundTint="@color/white"
                         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                         android:drawablePadding="@dimen/_15sdp"
-                        android:hint="@string/fname"
+                        android:hint="Nama lengkap"
                         android:maxLength="20"
                         android:singleLine="true"
                         android:textColor="@color/white"
@@ -64,7 +64,7 @@
                         android:layout_marginTop="8dp"
                         android:backgroundTint="@color/white"
                         android:drawablePadding="@dimen/_15sdp"
-                        android:hint="@string/pnumber"
+                        android:hint="Nomor HP"
                         android:inputType="number"
                         android:singleLine="true"
                         android:textColor="@color/white"
@@ -187,7 +187,7 @@
                                 android:backgroundTint="@color/white"
                                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^*()_+=-{}|';:?/1234567890"
                                 android:gravity="center_vertical"
-                                android:hint="@string/password"
+                                android:hint="Konfirmasi Password"
                                 android:inputType="textPassword"
                                 android:maxLength="15"
                                 android:paddingLeft="5dp"
@@ -221,7 +221,7 @@
                     app:fb_focusColor="@color/white"
                     app:fb_iconPosition="left"
                     app:fb_radius="30dp"
-                    app:fb_text="Register"
+                    app:fb_text="Daftar"
                     app:fb_textColor="@color/colorPrimary" />
 
                 <LinearLayout
@@ -236,7 +236,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="@string/already"
+                        android:hint="Sudah punya akun?"
                         android:textColor="@color/light_gray"
                         android:textColorHint="@color/light_gray" />
 
@@ -245,7 +245,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:text="@string/loginc"
+                        android:text="Login sekarang"
                         android:textColor="@color/white" />
                 </LinearLayout>
 

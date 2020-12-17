@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ServicesAdapterBinding;
 import com.samyotech.laundry.interfaces.Consts;
@@ -47,7 +48,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.MyViewHo
 
         final ShopServicesDTO item = servicesDTOArrayList.get(position);
         holder.binding.namaJasa.setText(item.getService_name());
-        Glide.with(kContext).load(Consts.DEV_URL + item.getImage()).placeholder(R.drawable.icon_service_118).into(binding.image);
+        Glide.with(kContext).load(Consts.BASE_URL + item.getImage()).placeholder(R.drawable.icon_service_118)
+                .diskCacheStrategy(DiskCacheStrategy.ALL).into(binding.image);
 
         holder.binding.container.setOnClickListener(new View.OnClickListener() {
             @Override

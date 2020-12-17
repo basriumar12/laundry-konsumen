@@ -65,7 +65,7 @@ HttpsRequest {
 
 
     public void stringPostJson(final String TAG, final Helper h) {
-        AndroidNetworking.post(Consts.BASE_URL + match)
+        AndroidNetworking.post(Consts.API_URL + match)
                 .addJSONObjectBody(jObject)
                 .setTag("test")
                 //.addHeaders("Content-Type", "application/json")
@@ -105,7 +105,7 @@ HttpsRequest {
     public void stringPost(final String TAG, final Helper h) {
 
         //unsafe// OkHttpClient okHttpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient();;
-        ANRequest test = AndroidNetworking.post(Consts.BASE_URL + match)
+        ANRequest test = AndroidNetworking.post(Consts.API_URL + match)
                 //   .setOkHttpClient(okHttpClient)
                 .addBodyParameter(params)
                 .setTag("test")
@@ -144,7 +144,7 @@ HttpsRequest {
     }
 
     public void stringGet(final String TAG, final Helper h) {
-        ANRequest request = AndroidNetworking.get(Consts.BASE_URL + match)
+        ANRequest request = AndroidNetworking.get(Consts.API_URL + match)
                 .setTag("test")
 
                 .setPriority(Priority.HIGH)
@@ -183,7 +183,7 @@ HttpsRequest {
     }
 
     public void imagePost(final String TAG, final Helper h) {
-        AndroidNetworking.upload(Consts.BASE_URL + match)
+        AndroidNetworking.upload(Consts.API_URL + match)
                 .addMultipartFile(fileparams)
                 .addMultipartParameter(params)
                 .setTag("uploadTest")
@@ -229,7 +229,7 @@ HttpsRequest {
     }
 
     public void multiImagePost(final String TAG, final Helper h) {
-        AndroidNetworking.upload(Consts.BASE_URL + match)
+        AndroidNetworking.upload(Consts.API_URL + match)
                 .addMultipartFileList(multiFileparams)
                 .addMultipartParameter(params)
                 .setTag("uploadTest")

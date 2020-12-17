@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.samyotech.laundry.GlobalState;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityBookingPaymentBinding;
@@ -85,8 +86,9 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
         }
         Log.e(TAG, "setUiAction: " + discountValue);
         Glide.with(mContext)
-                .load(Consts.DEV_URL + popLaundryDTO.getImage())
+                .load(Consts.BASE_URL + popLaundryDTO.getImage())
                 .error(R.drawable.shop_image)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.ivImage);
         binding.ctvbShopName.setText(popLaundryDTO.getShop_name());
         binding.ctvAddress.setText(popLaundryDTO.getAddress());

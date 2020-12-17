@@ -46,7 +46,7 @@ public class ImageAdapter extends PagerAdapter {
         imageView = itemView.findViewById(R.id.image);
         title = itemView.findViewById(R.id.tv_title);
         title.setText(imageDTOArrayList.get(position).getTitle());
-        Glide.with(mContext).load(Consts.DEV_URL + imageDTOArrayList.get(position).getImage()).placeholder(R.drawable.laundryshop).into(imageView);
+        Glide.with(mContext).load(Consts.BASE_URL + imageDTOArrayList.get(position).getImage()).placeholder(R.drawable.laundryshop).into(imageView);
         container.addView(itemView);
 
         return itemView;

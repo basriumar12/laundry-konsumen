@@ -57,7 +57,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         holder.binding.ctvItemName.setText(servicesDTOArrayList.get(position).getItem_name());
         holder.binding.ctvDeliverenum.setText(servicesDTOArrayList.get(position).getCount());
         Glide.with(kContext)
-                .load(Consts.DEV_URL + servicesDTOArrayList.get(position).getImage())
+                .load(Consts.BASE_URL + servicesDTOArrayList.get(position).getImage())
                 .error(R.drawable.shirt)
                 .into(holder.binding.ivItem);
 

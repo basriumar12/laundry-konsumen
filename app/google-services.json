@@ -1,50 +1,33 @@
 {
   "project_info": {
-    "project_number": "234322083449",
-    "firebase_url": "https://laundry-new-58c9d.firebaseio.com",
-    "project_id": "laundry-new-58c9d",
-    "storage_bucket": "laundry-new-58c9d.appspot.com"
+    "project_number": "174912023580",
+    "project_id": "win-laundry",
+    "storage_bucket": "win-laundry.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:234322083449:android:23184dccf4c8e5a7dbdea8",
+        "mobilesdk_app_id": "1:174912023580:android:76590419bb60253ed6c3d9",
         "android_client_info": {
-          "package_name": "com.samyotech.laundry"
+          "package_name": "com.windigitalkhatulistiwa.laundry"
         }
       },
       "oauth_client": [
         {
-          "client_id": "234322083449-0ma5fcmpoba0hmh4ggba9bkujv6irlhv.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.samyotech.laundry",
-            "certificate_hash": "f686d08e4b2d8fe8945949aa3a740ed96e51ec34"
-          }
-        },
-        {
-          "client_id": "234322083449-q6p51nmsvudredttg8aae7eav67vt6cf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.samyotech.laundry",
-            "certificate_hash": "52e0eb35bb196526f63b3d56aab4afe33842faec"
-          }
-        },
-        {
-          "client_id": "234322083449-8hlo1rjeoog7pu8p851kro7mie3ra19j.apps.googleusercontent.com",
+          "client_id": "174912023580-rp153v524b59q3pl2jrcka6l37i5g7up.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCtHPQjWAEqWzOpnU5EbeOpsQx-l3o404c"
+          "current_key": "AIzaSyCkU7XdG3u8CsZkoVEusFl916IZR3vpeio"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "234322083449-8hlo1rjeoog7pu8p851kro7mie3ra19j.apps.googleusercontent.com",
+              "client_id": "174912023580-rp153v524b59q3pl2jrcka6l37i5g7up.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

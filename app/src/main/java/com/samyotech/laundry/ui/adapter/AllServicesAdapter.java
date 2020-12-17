@@ -46,7 +46,7 @@ public class AllServicesAdapter extends RecyclerView.Adapter<AllServicesAdapter.
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
 
         Glide.with(kContext)
-                .load(Consts.DEV_URL + popLaundryDTOArrayList.get(position).getImage())
+                .load(Consts.BASE_URL + popLaundryDTOArrayList.get(position).getImage())
                 .placeholder(R.drawable.laundryshop)
                 .into(holder.binding.image);
 

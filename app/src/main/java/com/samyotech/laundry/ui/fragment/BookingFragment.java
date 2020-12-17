@@ -64,14 +64,14 @@ public class BookingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (i == 0) {
-                    binding.ctvHead.setVisibility(View.GONE);
+                    binding.headerTitle.setVisibility(View.GONE);
                     binding.cetSearch.setVisibility(View.VISIBLE);
                     binding.ivSearch.setImageResource(R.drawable.icon_close);
 
                     i = 1;
                 } else {
 
-                    binding.ctvHead.setVisibility(View.VISIBLE);
+                    binding.headerTitle.setVisibility(View.VISIBLE);
                     binding.cetSearch.setVisibility(View.GONE);
 
                     binding.ivSearch.setImageResource(R.drawable.icon_search);

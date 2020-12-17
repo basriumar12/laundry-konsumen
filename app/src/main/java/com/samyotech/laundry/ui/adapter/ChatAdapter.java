@@ -81,7 +81,7 @@ public class ChatAdapter extends BaseAdapter {
         }
         if (item.getType().equalsIgnoreCase("2")) {
             media.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(Consts.DEV_URL + item.getMedia()).into(media);
+            Glide.with(mContext).load(Consts.BASE_URL + item.getMedia()).into(media);
         } else {
             media.setVisibility(View.GONE);
         }

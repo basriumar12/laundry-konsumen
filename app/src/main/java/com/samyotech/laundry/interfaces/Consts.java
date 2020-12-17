@@ -4,9 +4,9 @@ public interface Consts {
 
     String APP_NAME = "laundry";
     String DEV_URL = "http://10.0.2.2:8000/";
-    String PROD_URL = "http://phpstack-390430-1228229.cloudwaysapps.com/admin/api/";
-    String API_URL = DEV_URL + "api/";
-    String BASE_URL = API_URL;
+    String PROD_URL = "http://laundryapp.windigitalkhatulistiwa.com/";
+    String BASE_URL = PROD_URL;
+    String API_URL = BASE_URL + "api/";
 
 
     /*-----Apis-----*/

@@ -70,13 +70,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private void setUIAction() {
 
-        Glide.with(getActivity())
-                .load(Consts.DEV_URL + userDTO.getImage())
+        Glide.with(requireActivity())
+                .load(Consts.BASE_URL + userDTO.getImage())
                 .error(R.drawable.ic_avatar)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.ivAvtaimg);
-        Glide.with(getActivity())
-                .load(Consts.DEV_URL + userDTO.getBackground())
+        Glide.with(requireActivity())
+                .load(Consts.BASE_URL + userDTO.getBackground())
                 .error(R.drawable.banner_img)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.ivBanner);
 
 //        camera();
@@ -319,16 +321,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
                             sharedPrefrence.setBooleanValue(Consts.IS_REGISTERED, true);
 
-                            Glide.with(getActivity()).load(Consts.DEV_URL + userDTO.getImage())
-                                    .thumbnail(0.5f)
-//                                    .placeholder(R.drawable.ic_avatar)
-//                                    .error(R.drawable.ic_avatar)
+                            Glide.with(requireActivity())
+                                    .load(Consts.BASE_URL + userDTO.getImage())
+                                    .error(R.drawable.ic_avatar)
                                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                                     .into(binding.ivAvtaimg);
-                            Glide.with(getActivity())
-                                    .load(Consts.DEV_URL + userDTO.getBackground())
-//                                    .placeholder(R.drawable.banner_img)
-//                                    .error(R.drawable.banner_img)
+                            Glide.with(requireActivity())
+                                    .load(Consts.BASE_URL + userDTO.getBackground())
+                                    .error(R.drawable.banner_img)
                                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                                     .into(binding.ivBanner);
 
