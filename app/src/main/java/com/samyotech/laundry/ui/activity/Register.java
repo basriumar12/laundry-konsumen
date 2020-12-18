@@ -274,8 +274,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         params.put(Consts.MOBILE, ProjectUtils.getEditTextValue(binding.cetNumber));
         params.put(Consts.ADDRESS, ProjectUtils.getEditTextValue(binding.alamat));
         params.put(Consts.COUNTRY_CODE, "62");
-        params.put(Consts.DEVICE_TYPE, "android");
-        params.put(Consts.DEVICE_TOKEN, "android");
+        params.put(Consts.DEVICE_TYPE, "ANDROID");
+        params.put(Consts.DEVICE_TOKEN, "ANDROID");
         return params;
     }
 

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -158,8 +157,8 @@ public class ManageProfile extends AppCompatActivity implements View.OnClickList
         params.put(Consts.NAME, ProjectUtils.getEditTextValue(binding.namaLengkap));
         params.put(Consts.MOBILE, ProjectUtils.getEditTextValue(binding.nomorHp));
         params.put(Consts.COUNTRY_CODE, "62");
-        params.put(Consts.DEVICE_TYPE, "Android");
-        params.put(Consts.DEVICE_TOKEN, Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID));
+        params.put(Consts.DEVICE_TYPE, "ANDROID");
+        params.put(Consts.DEVICE_TOKEN, "ANDROID");
 
         return params;
     }
