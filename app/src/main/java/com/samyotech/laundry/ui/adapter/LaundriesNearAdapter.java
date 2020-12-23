@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,6 +54,16 @@ public class LaundriesNearAdapter extends RecyclerView.Adapter<LaundriesNearAdap
 
         binding.namatoko.setText(item.getShop_name());
         binding.alamat.setText(item.getAddress());
+
+        String jenisMitra = "";
+        if (item.getStatus().equalsIgnoreCase("1")) {
+            jenisMitra = "Agen";
+            holder.binding.laundryTypeContainer.setBackgroundColor(ContextCompat.getColor(kContext, R.color.yellow_rating));
+        } else {
+            jenisMitra = "Mitra";
+            holder.binding.laundryTypeContainer.setBackgroundColor(ContextCompat.getColor(kContext, R.color.green));
+        }
+        holder.binding.laundryType.setText(jenisMitra);
 
         holder.binding.container.setOnClickListener(new View.OnClickListener() {
             @Override
