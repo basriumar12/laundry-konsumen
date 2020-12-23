@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,6 +53,16 @@ public class PopularFullLaundriesAdapter extends RecyclerView.Adapter<PopularFul
         holder.binding.alamat.setText(item.getAddress());
         holder.binding.rating.setText(item.getRating());
         holder.binding.arb.setRating(Float.parseFloat(item.getRating()));
+
+        String jenisMitra = "";
+        if (item.getStatus().equalsIgnoreCase("1")) {
+            jenisMitra = "Agen";
+            holder.binding.laundryTypeContainer.setBackgroundColor(ContextCompat.getColor(kContext, R.color.yellow_rating));
+        } else {
+            jenisMitra = "Mitra";
+            holder.binding.laundryTypeContainer.setBackgroundColor(ContextCompat.getColor(kContext, R.color.green));
+        }
+        holder.binding.laundryType.setText(jenisMitra);
 
         holder.binding.cardView1.setOnClickListener(new View.OnClickListener() {
             @Override
