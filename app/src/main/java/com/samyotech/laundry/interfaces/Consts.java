@@ -3,9 +3,9 @@ package com.samyotech.laundry.interfaces;
 public interface Consts {
 
     String APP_NAME = "laundry";
-    String DEV_URL = "http://10.0.2.2:8000/";
+    String DEV_URL = "http://192.168.1.5/web-app/";
     String PROD_URL = "http://laundryapp.windigitalkhatulistiwa.com/";
-    String BASE_URL = PROD_URL;
+    String BASE_URL = DEV_URL;
     String API_URL = BASE_URL + "api/";
 
 
