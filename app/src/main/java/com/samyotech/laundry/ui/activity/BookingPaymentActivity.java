@@ -23,6 +23,7 @@ import com.samyotech.laundry.model.ItemDTO;
 import com.samyotech.laundry.model.PopLaundryDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
+import com.samyotech.laundry.utils.AppFormat;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONArray;
@@ -70,8 +71,8 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
     }
 
     private void setUiAction() {
-        binding.total.setText(currencyDTO.getCurrency_symbol() + " " + globalState.getCost());
-        binding.subtotal.setText(currencyDTO.getCurrency_symbol() + " " + globalState.getCostbefo());
+        binding.total.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter(((int)Double.parseDouble(globalState.getCost())) + ""));
+        binding.subtotal.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter(((int)Double.parseDouble(globalState.getCostbefo())) + ""));
 
         totalPriceBef = globalState.getCostbefo();
         totalPrice = globalState.getCost();
