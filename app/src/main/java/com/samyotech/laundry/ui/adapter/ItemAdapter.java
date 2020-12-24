@@ -63,7 +63,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
                 .error(R.drawable.shirt)
                 .into(holder.binding.ivItem);
 
-        holder.binding.ctvPrice.setText(currencyDTO.getCurrency_code() + " " + AppFormat.addDelimiter(servicesDTOArrayList.get(position).getPrice()));
+        holder.binding.ctvPrice.setText(currencyDTO.getCurrency_code() + " " + AppFormat.addDelimiter(servicesDTOArrayList.get(position).getPrice()) + " / " + servicesDTOArrayList.get(position).getType());
 
         holder.binding.ivPLus.setOnClickListener(new View.OnClickListener() {
             @Override

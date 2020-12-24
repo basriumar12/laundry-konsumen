@@ -19,6 +19,8 @@ public class ItemServiceDTO implements Serializable {
 
     String status = "";
 
+    String type = "";
+
     String created_at = "";
 
     String updated_at = "";
@@ -122,6 +124,15 @@ public class ItemServiceDTO implements Serializable {
     public void setService_name(String service_name) {
         this.service_name = service_name;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setSatuan(String type) {
+        this.type = type;
+    }
+
 
     @Override
     public String toString() {
