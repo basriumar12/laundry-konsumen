@@ -136,4 +136,13 @@ public class SharedPrefrence {
         }
     }
 
+    public void setCurrency(String currency) {
+        prefsEditor.putString("TAG_CURRENCY", currency);
+        prefsEditor.commit();
+    }
+
+    public String getCurrency() {
+        return myPrefs.getString("TAG_CURRENCY", "Rp");
+    }
+
 }

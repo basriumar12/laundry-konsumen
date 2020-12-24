@@ -24,6 +24,7 @@ import com.samyotech.laundry.model.ItemServiceDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.PreviewAdapter;
+import com.samyotech.laundry.utils.AppFormat;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONException;
@@ -66,6 +67,7 @@ public class PreviewOrderActivity extends AppCompatActivity implements View.OnCl
         globalState = (GlobalState) getApplication();
         itemServiceDTO = GlobalState.getInstance().itemServiceDTO();
         Log.e(TAG, "onPostExecute: " + itemServiceDTO.getItem_list().get(0).getServices().get(0).getCount());
+        Log.e(TAG, currencyDTO.toString());
 
         for (int i = 0; i < itemServiceDTO.getItem_list().size(); i++) {
             for (int j = 0; j < itemServiceDTO.getItem_list().get(i).getServices().size(); j++) {
@@ -78,8 +80,8 @@ public class PreviewOrderActivity extends AppCompatActivity implements View.OnCl
         }
         if (getIntent().hasExtra(Consts.TOTAL_PRICE)) {
             totalPrice = getIntent().getStringExtra(Consts.TOTAL_PRICE);
-            binding.subtotal.setText(currencyDTO.getCurrency_symbol() + " " + totalPrice);
-            binding.total.setText(currencyDTO.getCurrency_symbol() + " " + totalPrice);
+            binding.subtotal.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter(((int)Double.parseDouble(totalPrice))+""));
+            binding.total.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter(((int)Double.parseDouble(totalPrice))+""));
         }
         parms.put(Consts.TOTAL_PRICE, totalPrice);
         parms.put(Consts.SHOP_ID, itemServiceDTO.getItem_list().get(0).getServices().get(0).getShop_id());

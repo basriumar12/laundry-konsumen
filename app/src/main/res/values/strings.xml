@@ -130,7 +130,7 @@
     <string name="cod">Cash On Delivery</string>
     <string name="apply">Apply</string>
     <string name="subtotal">Sub Total</string>
-    <string name="tax">Tax</string>
+    <string name="tax">Pajak</string>
     <string name="onlywash">Only Wash</string>
     <string name="shirt">x Shirt(Man) </string>
     <string name="payable">Payable Amount</string>
@@ -187,9 +187,9 @@
     <string name="Contactnum">Contact Number</string>
     <string name="Home">Home</string>
     <string name="areyou">Are You Sure Want To Cancel This Order?</string>
-    <string name="paidvia">Paid Via</string>
-    <string name="discount">Discount</string>
-    <string name="discount_amount">Discount Amount</string>
+    <string name="paidvia">Dibayar Melalui</string>
+    <string name="discount">Diskon</string>
+    <string name="discount_amount">Jumlah Diskon</string>
     <string name="Work">Work</string>
     <string name="rejected">Rejected</string>
     <string name="update">UPDATE</string>

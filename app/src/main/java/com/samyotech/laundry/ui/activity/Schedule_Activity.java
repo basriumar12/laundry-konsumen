@@ -193,7 +193,7 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
                     price = price + (Float.parseFloat(categoryArrayList.getPrice()));
                     Log.e(TAG, "addData:quantity " + quantity);
                     Log.e(TAG, "addData:price " + price);
-
+                    prefrence.setCurrency(itemDTOS.getCurrency_code());
                     binding.ctvTotalPrice.setText(getResources().getText(R.string.total) + " " + itemDTOS.getCurrency_code() + AppFormat.addDelimiter(((int)price) + ""));
                     binding.ctvAdded.setText(quantity + " " + getResources().getText(R.string.itemsadd));
                 }

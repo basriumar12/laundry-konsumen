@@ -13,6 +13,8 @@ import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterPreviewBinding;
 import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.model.ItemServiceDTO;
+import com.samyotech.laundry.preferences.SharedPrefrence;
+import com.samyotech.laundry.utils.AppFormat;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.MyViewHo
     Context kContext;
     ArrayList<ItemServiceDTO> servicesDTOArrayList;
     CurrencyDTO currencyDTO;
+    private SharedPrefrence prefrence;
 
     public PreviewAdapter(Context kContext, ArrayList<ItemServiceDTO> servicesDTOArrayList, CurrencyDTO currencyDTO) {
         this.kContext = kContext;
@@ -45,13 +48,14 @@ public class PreviewAdapter extends RecyclerView.Adapter<PreviewAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         int i = 0;
+        prefrence = SharedPrefrence.getInstance(kContext);
 
         i = Integer.parseInt(servicesDTOArrayList.get(position).getCount());
         if (i > 0) {
-            holder.binding.ctvName.setText("x" + " " + servicesDTOArrayList.get(position).getItem_name()/*+"("+servicesDTOArrayList.get(position).getService_name()+")"*/);
+            holder.binding.ctvName.setText(servicesDTOArrayList.get(position).getItem_name()/*+"("+servicesDTOArrayList.get(position).getService_name()+")"*/);
             holder.binding.ctvQuantity.setText(servicesDTOArrayList.get(position).getCount());
 //            holder.binding.ctvCategory.setText(servicesDTOArrayList.get(position).getService_name());
-            holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol() + " " + servicesDTOArrayList.get(position).getPrice());
+            holder.binding.ctvPrice.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter(servicesDTOArrayList.get(position).getPrice()) + " / " + servicesDTOArrayList.get(position).getType());
         } else holder.binding.clCard.setVisibility(View.GONE);
     }
 
