@@ -12,6 +12,8 @@ import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.AdapterPreviewBinding;
 import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.model.ItemDetailsDTO;
+import com.samyotech.laundry.preferences.SharedPrefrence;
+import com.samyotech.laundry.utils.AppFormat;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class PreviewBookingAdapter extends RecyclerView.Adapter<PreviewBookingAd
     Context kContext;
     ArrayList<ItemDetailsDTO> servicesDTOArrayList;
     CurrencyDTO currencyDTO;
+    SharedPrefrence sharedPrefrence;
 
     public PreviewBookingAdapter(Context kContext, ArrayList<ItemDetailsDTO> servicesDTOArrayList, CurrencyDTO currencyDTO) {
         this.kContext = kContext;
@@ -43,10 +46,10 @@ public class PreviewBookingAdapter extends RecyclerView.Adapter<PreviewBookingAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
+        sharedPrefrence = SharedPrefrence.getInstance(kContext);
         holder.binding.ctvName.setText(servicesDTOArrayList.get(position).getItem_name());
         holder.binding.ctvQuantity.setText(servicesDTOArrayList.get(position).getQuantity());
-        holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol() + " " + servicesDTOArrayList.get(position).getPrice());
+        holder.binding.ctvPrice.setText( sharedPrefrence.getCurrency() + " " + AppFormat.addDelimiter((int)Double.parseDouble(servicesDTOArrayList.get(position).getPrice()) + ""));
     }
 
     @Override

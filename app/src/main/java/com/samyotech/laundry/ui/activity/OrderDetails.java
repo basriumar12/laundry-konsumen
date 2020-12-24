@@ -22,6 +22,7 @@ import com.samyotech.laundry.model.OrderListDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.PreviewBookingAdapter;
+import com.samyotech.laundry.utils.AppFormat;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONException;
@@ -61,10 +62,11 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setUIAction() {
-        binding.total.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getFinal_price());
-        binding.subtotal.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getPrice());
-        binding.discount.setText(currencyDTO.getCurrency_symbol() + " " + bookingDTO.getDiscount());
-        binding.tax.setText(currencyDTO.getCurrency_symbol() + " 0");
+        sharedPrefrence.setCurrency(bookingDTO.getCurrency_code());
+        binding.total.setText(bookingDTO.getCurrency_code() + " " + AppFormat.addDelimiter((int)Double.parseDouble(bookingDTO.getFinal_price()) + ""));
+        binding.subtotal.setText(bookingDTO.getCurrency_code() + " " + AppFormat.addDelimiter((int)Double.parseDouble(bookingDTO.getPrice()) + ""));
+        binding.discount.setText(bookingDTO.getCurrency_code() + " " + AppFormat.addDelimiter((int)Double.parseDouble(bookingDTO.getDiscount()) + ""));
+        binding.tax.setText(bookingDTO.getCurrency_code() + " 0");
         binding.pickupAddress.setText(bookingDTO.getShipping_address());
         binding.deliveryAddress.setText(bookingDTO.getShipping_address());
         binding.pickupDay.setText(bookingDTO.getPickup_date());

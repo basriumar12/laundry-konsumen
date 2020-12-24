@@ -22,6 +22,7 @@ import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.model.OrderListDTO;
 import com.samyotech.laundry.ui.activity.OrderDetails;
 import com.samyotech.laundry.ui.fragment.BookingFragment;
+import com.samyotech.laundry.utils.AppFormat;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONException;
@@ -78,7 +79,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyViewHo
                     .into(holder.binding.status);
         }
         holder.binding.layanan.setText(item.getService_name());
-        holder.binding.harga.setText(currencyDTO.getCurrency_symbol() + " " + item.getPrice());
+        holder.binding.harga.setText(item.getCurrency_code() + " " + AppFormat.addDelimiter((int)Double.parseDouble(item.getPrice()) + ""));
 
         holder.binding.selengkapnya.setOnClickListener(new View.OnClickListener() {
             @Override
