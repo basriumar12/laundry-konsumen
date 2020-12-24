@@ -26,6 +26,7 @@ import com.samyotech.laundry.model.PopLaundryDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.TabsAdapter;
+import com.samyotech.laundry.utils.AppFormat;
 import com.samyotech.laundry.utils.ProjectUtils;
 
 import org.json.JSONException;
@@ -106,6 +107,8 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
         for (int k = 0; k < items.size(); k++) {
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(items.get(k).getService_name()));
         }
+
+        currencyDTO.setCurrency_code(itemDTOS.getCurrency_code());
 
         adapter = new TabsAdapter
                 (getSupportFragmentManager(), binding.tabLayout.getTabCount(), itemDTOS, currencyDTO);
@@ -191,7 +194,7 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
                     Log.e(TAG, "addData:quantity " + quantity);
                     Log.e(TAG, "addData:price " + price);
 
-                    binding.ctvTotalPrice.setText(getResources().getText(R.string.total) + " " + itemDTOS.getCurrency_code() + price);
+                    binding.ctvTotalPrice.setText(getResources().getText(R.string.total) + " " + itemDTOS.getCurrency_code() + AppFormat.addDelimiter(((int)price) + ""));
                     binding.ctvAdded.setText(quantity + " " + getResources().getText(R.string.itemsadd));
                 }
             }
@@ -216,7 +219,7 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
                     Log.e(TAG, "addData:quantity " + quantity);
                     Log.e(TAG, "addData:price " + price);
 
-                    binding.ctvTotalPrice.setText(getResources().getText(R.string.total) + " " + itemDTOS.getCurrency_code() + price);
+                    binding.ctvTotalPrice.setText(getResources().getText(R.string.total) + " " + itemDTOS.getCurrency_code() + AppFormat.addDelimiter(((int)price) + ""));
                     binding.ctvAdded.setText(quantity + " " + getResources().getText(R.string.itemsadd));
                 }
             }

@@ -1,6 +1,7 @@
 package com.samyotech.laundry.ui.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.model.ItemServiceDTO;
 import com.samyotech.laundry.ui.activity.Schedule_Activity;
+import com.samyotech.laundry.utils.AppFormat;
 
 import java.util.ArrayList;
 
@@ -61,7 +63,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
                 .error(R.drawable.shirt)
                 .into(holder.binding.ivItem);
 
-        holder.binding.ctvPrice.setText(currencyDTO.getCurrency_symbol() + " " + servicesDTOArrayList.get(position).getPrice());
+        holder.binding.ctvPrice.setText(currencyDTO.getCurrency_code() + " " + AppFormat.addDelimiter(servicesDTOArrayList.get(position).getPrice()));
 
         holder.binding.ivPLus.setOnClickListener(new View.OnClickListener() {
             @Override

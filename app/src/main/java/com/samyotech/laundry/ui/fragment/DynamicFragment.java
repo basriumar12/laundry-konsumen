@@ -2,6 +2,7 @@ package com.samyotech.laundry.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,13 +64,13 @@ public class DynamicFragment extends Fragment {
         itemListDTO = (ItemListDTO) getArguments().getSerializable("someInt");
         currencyDTO = (CurrencyDTO) getArguments().getSerializable("someCurency");
         val = getArguments().getInt("Int");
-        setData(itemListDTO);
+        setData(itemListDTO, currencyDTO);
         globalState = (GlobalState) getActivity().getApplication();
 
         return binding.getRoot();
     }
 
-    private void setData(ItemListDTO itemListDTO) {
+    private void setData(ItemListDTO itemListDTO, CurrencyDTO currencyDTO) {
 
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         binding.rvDetails.setLayoutManager(linearLayoutManager);

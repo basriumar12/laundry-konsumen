@@ -122,4 +122,22 @@ public class ItemServiceDTO implements Serializable {
     public void setService_name(String service_name) {
         this.service_name = service_name;
     }
+
+    @Override
+    public String toString() {
+        return "ItemServiceDTO{" +
+                "s_no='" + s_no + '\'' +
+                ", item_id='" + item_id + '\'' +
+                ", shop_id='" + shop_id + '\'' +
+                ", service_id='" + service_id + '\'' +
+                ", item_name='" + item_name + '\'' +
+                ", price='" + price + '\'' +
+                ", image='" + image + '\'' +
+                ", status='" + status + '\'' +
+                ", created_at='" + created_at + '\'' +
+                ", updated_at='" + updated_at + '\'' +
+                ", service_name='" + service_name + '\'' +
+                ", count='" + count + '\'' +
+                '}';
+    }
 }

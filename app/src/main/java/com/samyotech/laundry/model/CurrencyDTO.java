@@ -67,4 +67,17 @@ public class CurrencyDTO implements Serializable {
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
+
+    @Override
+    public String toString() {
+        return "CurrencyDTO{" +
+                "currency_id='" + currency_id + '\'' +
+                ", currency_code='" + currency_code + '\'' +
+                ", currency_name='" + currency_name + '\'' +
+                ", currency_symbol='" + currency_symbol + '\'' +
+                ", status='" + status + '\'' +
+                ", created_at='" + created_at + '\'' +
+                ", updated_at='" + updated_at + '\'' +
+                '}';
+    }
 }
