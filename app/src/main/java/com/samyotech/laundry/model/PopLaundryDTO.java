@@ -18,6 +18,8 @@ public class PopLaundryDTO implements Serializable {
     String description = "";
     String image = "";
     String status = "";
+    String type = "";
+
     String created_at = "";
     String updated_at = "";
     String rating = "";
@@ -183,5 +185,13 @@ public class PopLaundryDTO implements Serializable {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

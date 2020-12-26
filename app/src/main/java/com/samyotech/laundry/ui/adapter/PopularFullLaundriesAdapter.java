@@ -55,7 +55,7 @@ public class PopularFullLaundriesAdapter extends RecyclerView.Adapter<PopularFul
         holder.binding.arb.setRating(Float.parseFloat(item.getRating()));
 
         String jenisMitra = "";
-        if (item.getStatus().equalsIgnoreCase("1")) {
+        if (item.getType().equalsIgnoreCase("1")) {
             jenisMitra = "Agen";
             holder.binding.laundryTypeContainer.setBackgroundColor(ContextCompat.getColor(kContext, R.color.yellow_rating));
         } else {

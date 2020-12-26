@@ -18,6 +18,7 @@ public class NearBYDTO implements Serializable {
     String image = "";
     String shop_image = "";
     String status = "";
+    String type = "";
     String created_at = "";
     String updated_at = "";
     String distance = "";
@@ -191,5 +192,13 @@ public class NearBYDTO implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
