@@ -162,6 +162,21 @@
                         android:textColor="@color/black" />
                 </LinearLayout>
 
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/buy_now"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:paddingHorizontal="32dp"
+                    android:paddingVertical="8dp"
+                    app:fb_defaultColor="@color/colorPrimary"
+                    app:fb_focusColor="@color/colorPrimary"
+                    app:fb_iconPosition="left"
+                    app:fb_radius="30dp"
+                    app:fb_text="Lakukan Pembayaran"
+                    app:fb_textColor="@color/white" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="4dp"

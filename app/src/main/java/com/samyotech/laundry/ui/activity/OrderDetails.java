@@ -3,6 +3,7 @@ package com.samyotech.laundry.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -11,13 +12,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.gson.Gson;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityOrderDetailsBinding;
 import com.samyotech.laundry.databinding.DailogRatingBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.BookingDTO;
 import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.IpaymuDTO;
+import com.samyotech.laundry.model.IpaymuDataDTO;
+import com.samyotech.laundry.model.ItemDetailsDTO;
 import com.samyotech.laundry.model.OrderListDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
@@ -25,6 +31,7 @@ import com.samyotech.laundry.ui.adapter.PreviewBookingAdapter;
 import com.samyotech.laundry.utils.AppFormat;
 import com.samyotech.laundry.utils.ProjectUtils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -78,6 +85,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         binding.back.setOnClickListener(this);
         binding.kirimPesanBtn.setOnClickListener(this);
         binding.rateNowBtn.setOnClickListener(this);
+        binding.buyNow.setOnClickListener(this);
         setData();
     }
 
@@ -118,6 +126,9 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
             case R.id.back:
                 onBackPressed();
                 break;
+            case R.id.buy_now:
+                buyNow();
+                break;
         }
 
     }
@@ -141,7 +152,6 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     }
 
     private void submitRating() {
-
         HashMap<String, String> params = new HashMap<>();
         params.put(Consts.SHOP_ID, bookingDTO.getShop_id());
         params.put(Consts.USER_ID, userDTO.getUser_id());
@@ -156,6 +166,40 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                 } else {
                     ProjectUtils.showToast(mContext, msg);
                 }
+            }
+        });
+    }
+
+    private void buyNow() {
+        int k = 0;
+        JSONArray jsonArray = new JSONArray();
+        for (ItemDetailsDTO data : bookingDTO.getItem_details()) {
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.putOpt(Consts.ITEM_ID, data.getItem_id());
+                jsonObject.putOpt(Consts.ITEM_NAME, data.getItem_name());
+                jsonObject.putOpt(Consts.PRICE, data.getPrice());
+                jsonObject.putOpt(Consts.QUANTITY, data.getQuantity());
+
+                jsonArray.put(k, jsonObject);
+            } catch (Exception e) {
+                Log.e(TAG, "buyNow: " + e.getMessage());
+            }
+        }
+        Log.e(TAG, jsonArray.toString() );
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put(Consts.ITEM_DETAILS, String.valueOf(jsonArray));
+        new HttpsRequest(Consts.ORDERIPAYMU, params, mContext).stringPost(TAG, new Helper() {
+            @Override
+            public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
+                IpaymuDataDTO data = new Gson().fromJson(response.getJSONObject("data").toString(), IpaymuDataDTO.class);
+                Log.e(TAG, msg );
+                Log.e(TAG, response.toString() );
+                Log.e(TAG, data.toString() );
+                Intent in = new Intent(mContext, IpayMuPayment.class);
+                in.putExtra(Consts.ORDERLINK, data.Data.Url);
+                mContext.startActivity(in);
             }
         });
     }

@@ -3,10 +3,10 @@ package com.samyotech.laundry.interfaces;
 public interface Consts {
 
     String APP_NAME = "laundry";
-    String DEV_URL = "http://192.168.1.5/win-laundry/";
-//    String DEV_URL = "http://192.168.88.19/win-laundry/";
+//    String DEV_URL = "http://192.168.1.5/win-laundry/";
+    String DEV_URL = "http://192.168.83.159/win-laundry/";
     String PROD_URL = "http://laundryapp.windigitalkhatulistiwa.com/";
-    String BASE_URL = PROD_URL;
+    String BASE_URL = DEV_URL;
     String API_URL = BASE_URL + "api/";
 
 
@@ -45,6 +45,7 @@ public interface Consts {
     String GETTIKETCOMMENT = "getTiketComment";
     String ADDTIKETCOMMENT = "addTiketComment";
     String USERUPDATE = "userUpdate";
+    String ORDERIPAYMU = "orderipaymu";
 
 
     /*LOGINSIGNUPPARAMS*/
@@ -77,6 +78,7 @@ public interface Consts {
     String MESSAGE = "message";
     String MEDIA = "media";
     String DESCRIPTION = "description";
+    String ORDERLINK = "orderlink";
 
     String CAMERA_ACCEPTED = "camera_accepted";
     String STORAGE_ACCEPTED = "storage_accepted";
