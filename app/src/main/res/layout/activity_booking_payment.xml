@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -359,11 +359,12 @@
 
                 <TextView
                     android:id="@+id/titleenw"
+                    style="@style/TextAppearance.AppCompat.Caption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/TextAppearance.AppCompat.Caption"
-                    android:text="@string/paymath"
                     android:layout_margin="16dp"
+                    android:text="@string/paymath"
+                    android:visibility="gone"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cvHome" />
 
@@ -372,6 +373,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
+                    android:visibility="gone"
                     app:cardCornerRadius="@dimen/_5sdp"
                     app:cardElevation="@dimen/_5sdp"
                     app:layout_constraintTop_toBottomOf="@id/titleenw">

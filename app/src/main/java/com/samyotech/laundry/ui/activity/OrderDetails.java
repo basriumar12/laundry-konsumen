@@ -180,8 +180,8 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                 jsonObject.putOpt(Consts.ITEM_NAME, data.getItem_name());
                 jsonObject.putOpt(Consts.PRICE, data.getPrice());
                 jsonObject.putOpt(Consts.QUANTITY, data.getQuantity());
-
                 jsonArray.put(k, jsonObject);
+                k++;
             } catch (Exception e) {
                 Log.e(TAG, "buyNow: " + e.getMessage());
             }
@@ -189,6 +189,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         Log.e(TAG, jsonArray.toString() );
 
         HashMap<String, String> params = new HashMap<>();
+        params.put(Consts.ORDER_ID, String.valueOf(bookingDTO.getOrder_id()));
         params.put(Consts.ITEM_DETAILS, String.valueOf(jsonArray));
         new HttpsRequest(Consts.ORDERIPAYMU, params, mContext).stringPost(TAG, new Helper() {
             @Override

@@ -150,11 +150,7 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
 
                 break;
             case R.id.confirm_btn:
-                if (binding.rdbtn.isChecked()) {
-                    setData();
-                } else {
-                    Toast.makeText(mContext, R.string.val_payment, Toast.LENGTH_SHORT).show();
-                }
+                setData();
                 break;
         }
     }

@@ -4,9 +4,10 @@ public interface Consts {
 
     String APP_NAME = "laundry";
 //    String DEV_URL = "http://192.168.1.5/win-laundry/";
-    String DEV_URL = "http://192.168.83.159/win-laundry/";
+//    String DEV_URL = "http://192.168.83.159/win-laundry/";
+    String DEV_URL = "http://10.0.2.2/win-laundry/";
     String PROD_URL = "http://laundryapp.windigitalkhatulistiwa.com/";
-    String BASE_URL = DEV_URL;
+    String BASE_URL = PROD_URL;
     String API_URL = BASE_URL + "api/";
 
 
