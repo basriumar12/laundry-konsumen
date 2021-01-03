@@ -15,7 +15,7 @@ public interface Consts {
     String FORGOTPASSWORD = "forgotPassword";
     String SIGNUP = "signup";
     String LOGIN = "login";
-    String LOGIN_GOOGLE = "login_google";
+    String LOGIN_GOOGLE = "loginGoogle";
     String LOGOUT = "logOut";
     String DELETEACCOUNT = "deleteAccount";
     String CHANGEPASSWORD = "changePassword";

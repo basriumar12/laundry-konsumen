@@ -177,6 +177,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(this, "Gagal mendapatkan user detail", Toast.LENGTH_LONG).show();
             }
         } catch (ApiException e) {
+            e.printStackTrace();
+            Log.e(TAG, e.getMessage() );
             Log.w("GOOGLE_", "signInResult:failed code=" + e.getStatusCode());
             Toast.makeText(this, "Login gagal, Silahkan coba beberapa menit lagi.", Toast.LENGTH_LONG).show();
         }
