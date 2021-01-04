@@ -2,6 +2,7 @@ package com.samyotech.laundry.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class PopularFullLaundriesAdapter extends RecyclerView.Adapter<PopularFul
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-
+        Log.e("TESTING", popLaundryDTOArrayList.toString());
         final PopLaundryDTO item = popLaundryDTOArrayList.get(position);
         Glide.with(kContext).load(Consts.BASE_URL + item.getImage()).placeholder(R.drawable.laundryshop).into(holder.binding.ivImage);
 

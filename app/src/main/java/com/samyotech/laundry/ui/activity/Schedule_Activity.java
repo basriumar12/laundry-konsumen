@@ -74,12 +74,22 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
 
         }
 
+        if (getIntent().hasExtra(Consts.SHOPDTO)) {
+            popLaundryDTO = (PopLaundryDTO) getIntent().getSerializableExtra(Consts.SHOPDTO);
+            getItem();
+        }
+
     }
 
     private void getItem() {
 
 //        ProjectUtils.getProgressDialog(mContext);
-        params.put(Consts.SHOP_ID, shopid);
+        if (shopid.equals("")) {
+            params.put(Consts.SHOP_ID, popLaundryDTO.getShop_id());
+        } else {
+            params.put(Consts.SHOP_ID, shopid);
+        }
+
         new HttpsRequest(Consts.GETITEMBYSHOPID, params, mContext).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {

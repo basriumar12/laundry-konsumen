@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,6 +116,7 @@ public class AboutFragment extends Fragment {
         binding.bookingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("TESTONG", popLaundryDTO.toString());
                 Intent in = new Intent(requireContext(), Schedule_Activity.class);
                 in.putExtra(Consts.SHOPDTO, popLaundryDTO);
                 startActivity(in);
