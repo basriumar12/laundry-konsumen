@@ -71,12 +71,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private void setUIAction() {
 
         Glide.with(requireActivity())
-                .load(Consts.BASE_URL + userDTO.getImage())
+                .load(Consts.BASE_URL + "assets/images/user/" + userDTO.getImage())
                 .error(R.drawable.ic_avatar)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.ivAvtaimg);
         Glide.with(requireActivity())
-                .load(Consts.BASE_URL + userDTO.getBackground())
+                .load(Consts.BASE_URL + "assets/images/user/background/" + userDTO.getBackground())
                 .error(R.drawable.banner_img)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.ivBanner);
