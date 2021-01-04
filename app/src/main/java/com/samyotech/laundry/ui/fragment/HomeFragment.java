@@ -1,9 +1,12 @@
 package com.samyotech.laundry.ui.fragment;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +15,16 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.gson.Gson;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.HomeFragmentBinding;
@@ -83,6 +90,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     UserDTO userDTO;
     private ImageAdapter imageAdapter;
     private SharedPrefrence prefrence;
+    private FusedLocationProviderClient fusedLocationClient;
 
 
     @Nullable
@@ -93,7 +101,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         prefrence = SharedPrefrence.getInstance(getActivity());
         userDTO = prefrence.getParentUser(Consts.USER_DTO);
 
-        getData();
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        }
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+
+                            prefrence.setValue(Consts.LATITUDE, location.getLatitude()+"");
+                            prefrence.setValue(Consts.LONGITUDE, location.getLongitude()+"");
+                            getAddress(location.getLatitude(), location.getLongitude());
+                            getData();
+                        }
+                    }
+                });
+
+
 
         return view;
     }
@@ -178,6 +205,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             if (resultCode == RESULT_OK) {
                 try {
                     getAddress(data.getDoubleExtra(Consts.LATITUDE, 0.0), data.getDoubleExtra(Consts.LONGITUDE, 0.0));
+                    updateProfile();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -212,7 +241,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             prefrence.setValue(Consts.LATITUDE, String.valueOf(obj.getLatitude()));
             prefrence.setValue(Consts.LONGITUDE, String.valueOf(obj.getLongitude()));
 
-            updateProfile();
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
