@@ -115,9 +115,9 @@
     <string name="val_comment">Silakan masukkan komentar</string>
     <string name="ordernum">Nomor pesanan.</string>
     <string name="ordercanceled">Sudah Pesanan Dibatalkan</string>
-    <string name="final_amount">Jumlah akhir</string>
+    <string name="final_amount">Estimasi Harga</string>
     <string name="thankfor">Terima kasih telah memilih kami!</string>
-    <string name="your_pickup">Penjemputan Anda Telah Dikonfirmasi</string>
+    <string name="your_pickup">Pesanan Anda akan kami proses</string>
     <string name="inprocess">Dalam Proses</string>
     <string name="shipped">Dikirim</string>
     <string name="delivered">Terkirim</string>
@@ -127,7 +127,7 @@
     <string name="price10">$10</string>
     <string name="notification">Pemberitahuan</string>
     <string name="solve">memecahkan</string>
-    <string name="cod">Bayar di tempat</string>
+    <string name="cod">Lakukan pembayaran ketika pesanan anda telah kami konfirmasi. Cek status pembayaran di Menu Pesanan</string>
     <string name="apply">Menerapkan</string>
     <string name="subtotal">Sub Total</string>
     <string name="tax">Pajak</string>
@@ -187,7 +187,7 @@
     <string name="Contactnum">Nomor Kontak</string>
     <string name="Home">Beranda</string>
     <string name="areyou">Apakah anda yakin akan membatalkan order ini?</string>
-    <string name="paidvia">Dibayar Melalui</string>
+    <string name="paidvia">Total</string>
     <string name="discount">Diskon</string>
     <string name="discount_amount">Jumlah Diskon</string>
     <string name="Work">Bekerja</string>
