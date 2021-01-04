@@ -105,21 +105,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
         }
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
 
-                            prefrence.setValue(Consts.LATITUDE, location.getLatitude()+"");
-                            prefrence.setValue(Consts.LONGITUDE, location.getLongitude()+"");
-                            getAddress(location.getLatitude(), location.getLongitude());
-                            getData();
+        try {
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+
+                                prefrence.setValue(Consts.LATITUDE, location.getLatitude() + "");
+                                prefrence.setValue(Consts.LONGITUDE, location.getLongitude() + "");
+                                getAddress(location.getLatitude(), location.getLongitude());
+                                getData();
+                            }
                         }
-                    }
-                });
+                    });
+        } catch (Exception ex) {
 
+        }
 
 
         return view;
@@ -215,8 +219,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getAddress(double lat, double lng) {
-        Geocoder geocoder = new Geocoder(requireActivity(), Locale.getDefault());
+
         try {
+            Geocoder geocoder = new Geocoder(requireActivity(), Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
             Address obj = addresses.get(0);
             String add = obj.getAddressLine(0);

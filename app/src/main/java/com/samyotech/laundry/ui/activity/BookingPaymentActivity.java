@@ -86,7 +86,11 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
         totalPrice = globalState.getCost();
         promoCode = globalState.getPromoCode();
 
-        discountValue = Float.parseFloat(globalState.getDiscountcost());
+        if (globalState.getDiscountcost().equals("")) {
+            discountValue = 0F;
+        } else {
+            discountValue = Float.parseFloat(globalState.getDiscountcost());
+        }
         if (discountValue == 0) {
             binding.promoBtn.setOnClickListener(this);
         } else {
