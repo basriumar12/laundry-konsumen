@@ -159,7 +159,7 @@ public class ShopAcitivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(aboutFragment, "Tentang");
         adapter.addFragment(servicesFragment, "Layanan");
-        adapter.addFragment(offerShopFragment, "Penawaran");
+        adapter.addFragment(offerShopFragment, "Promo");
 
         binding.pager.setAdapter(adapter);
         binding.tabLayout.setupWithViewPager(binding.pager);
