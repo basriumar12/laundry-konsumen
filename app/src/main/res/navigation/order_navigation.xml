@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation.xml"
+    app:startDestination="@id/navigation_pesanan">
+
+    <fragment
+        android:id="@+id/navigation_beranda"
+        android:name="com.samyotech.laundry.ui.fragment.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/navigation_terdekat"
+        android:name="com.samyotech.laundry.ui.fragment.NearByFragment"
+        android:label="NearByFragment" />
+    <fragment
+        android:id="@+id/navigation_pesanan"
+        android:name="com.samyotech.laundry.ui.fragment.BookingFragment"
+        android:label="BookingFragment" />
+    <fragment
+        android:id="@+id/navigation_promo"
+        android:name="com.samyotech.laundry.ui.fragment.OffersFragment"
+        android:label="OffersFragment" />
+    <fragment
+        android:id="@+id/navigation_akunku"
+        android:name="com.samyotech.laundry.ui.fragment.ProfileFragment"
+        android:label="ProfileFragment" />
+</navigation>

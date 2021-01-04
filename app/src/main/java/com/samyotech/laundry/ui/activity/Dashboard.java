@@ -15,6 +15,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityDashboardBinding;
+import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.CurrencyDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.fragment.BookingFragment;
@@ -53,6 +54,11 @@ public class Dashboard extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        if (getIntent().hasExtra(Consts.SCREEN_TAG)) {
+            type = getIntent().getStringExtra(Consts.SCREEN_TAG);
+            navController.setGraph(R.navigation.order_navigation);
+        }
     }
 }
 //            }
