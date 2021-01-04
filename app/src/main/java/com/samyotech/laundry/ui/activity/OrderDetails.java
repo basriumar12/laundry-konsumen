@@ -82,6 +82,32 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         binding.deliveryDate.setText(bookingDTO.getDelivery_date());
         binding.hubungiTitle.setText(String.format("Hubungi %s", bookingDTO.getShop_name()));
 
+
+        Log.e(TAG, bookingDTO.getOrder_id());
+        Log.e(TAG, bookingDTO.getOrder_status());
+        Log.e(TAG, bookingDTO.getPayment_status());
+        /**
+         * 1.1 Jika status pesanan !== pending|cancel && status pembayaran === pending maka muncul tombol lakukan pembayaran
+         * 1.2 Jika status pesanan !== pending|cancel && status pembayaran === complete then "Pembayaran telah sukses dilakukan."
+         * 1.3 Jika status pesanan === pending && status pembayaran === pending then "Jumlah pembayaran yang harus dibayarkan sedang dalam konfirmasi"
+         */
+        if ((!bookingDTO.getOrder_status().equals("0") && !bookingDTO.getOrder_status().equals("6")) && bookingDTO.getPayment_status().equals("0")) {
+            binding.buyNow.setVisibility(View.VISIBLE);
+            binding.textStatus.setVisibility(View.GONE);
+        } else if ((!bookingDTO.getOrder_status().equals("0") && !bookingDTO.getOrder_status().equals("6")) && bookingDTO.getPayment_status().equals("1")) {
+            binding.buyNow.setVisibility(View.GONE);
+            binding.textStatus.setText("Pembayaran telah sukses dilakukan.");
+            binding.textStatus.setVisibility(View.VISIBLE);
+        } else if (bookingDTO.getOrder_status().equals("0") && bookingDTO.getPayment_status().equals("0")) {
+            binding.buyNow.setVisibility(View.GONE);
+            binding.textStatus.setText("Jumlah pembayaran yang harus dibayarkan sedang dalam konfirmasi");
+            binding.textStatus.setVisibility(View.VISIBLE);
+        } else {
+            binding.buyNow.setVisibility(View.GONE);
+            binding.textStatus.setVisibility(View.GONE);
+        }
+
+
         binding.back.setOnClickListener(this);
         binding.kirimPesanBtn.setOnClickListener(this);
         binding.rateNowBtn.setOnClickListener(this);
@@ -139,7 +165,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
 
         builder.setView(binding1.getRoot());
         alertDialog = builder.create();
-        alertDialog.setCancelable(false);
+        alertDialog.setCancelable(true);
         alertDialog.show();
 
         binding1.simpanBtn.setOnClickListener(new View.OnClickListener() {
@@ -195,9 +221,6 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
                 IpaymuDataDTO data = new Gson().fromJson(response.getJSONObject("data").toString(), IpaymuDataDTO.class);
-                Log.e(TAG, msg );
-                Log.e(TAG, response.toString() );
-                Log.e(TAG, data.toString() );
                 Intent in = new Intent(mContext, IpayMuPayment.class);
                 in.putExtra(Consts.ORDERLINK, data.Data.Url);
                 mContext.startActivity(in);

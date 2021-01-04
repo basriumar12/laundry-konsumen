@@ -231,4 +231,35 @@ public class OrderListDTO implements Serializable {
     public void setShop_image(String shop_image) {
         this.shop_image = shop_image;
     }
+
+    @Override
+    public String toString() {
+        return "OrderListDTO{" +
+                "s_no='" + s_no + '\'' +
+                ", order_id='" + order_id + '\'' +
+                ", user_id='" + user_id + '\'' +
+                ", shop_id='" + shop_id + '\'' +
+                ", price='" + price + '\'' +
+                ", discount='" + discount + '\'' +
+                ", final_price='" + final_price + '\'' +
+                ", currency_code='" + currency_code + '\'' +
+                ", payment_status='" + payment_status + '\'' +
+                ", order_status='" + order_status + '\'' +
+                ", item_details=" + item_details +
+                ", shipping_address='" + shipping_address + '\'' +
+                ", landmark='" + landmark + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", pickup_date='" + pickup_date + '\'' +
+                ", pickup_time='" + pickup_time + '\'' +
+                ", delivery_date='" + delivery_date + '\'' +
+                ", delivery_time='" + delivery_time + '\'' +
+                ", status='" + status + '\'' +
+                ", created_at='" + created_at + '\'' +
+                ", updated_at='" + updated_at + '\'' +
+                ", shop_name='" + shop_name + '\'' +
+                ", shop_image='" + shop_image + '\'' +
+                ", service_name='" + service_name + '\'' +
+                '}';
+    }
 }
