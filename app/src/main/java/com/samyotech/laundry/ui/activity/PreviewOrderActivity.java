@@ -66,8 +66,6 @@ public class PreviewOrderActivity extends AppCompatActivity implements View.OnCl
 
         globalState = (GlobalState) getApplication();
         itemServiceDTO = GlobalState.getInstance().itemServiceDTO();
-        Log.e(TAG, "onPostExecute: " + itemServiceDTO.getItem_list().get(0).getServices().get(0).getCount());
-        Log.e(TAG, currencyDTO.toString());
 
         for (int i = 0; i < itemServiceDTO.getItem_list().size(); i++) {
             for (int j = 0; j < itemServiceDTO.getItem_list().get(i).getServices().size(); j++) {

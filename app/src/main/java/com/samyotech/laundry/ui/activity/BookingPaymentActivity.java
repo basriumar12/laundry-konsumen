@@ -71,8 +71,16 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
     }
 
     private void setUiAction() {
-        binding.total.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter(((int)Double.parseDouble(globalState.getCost())) + ""));
-        binding.subtotal.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter(((int)Double.parseDouble(globalState.getCostbefo())) + ""));
+        if (!globalState.getCost().equals("") && !globalState.getCostbefo().equals("")) {
+            binding.total.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter(((int) Double.parseDouble(globalState.getCost())) + ""));
+            binding.subtotal.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter(((int) Double.parseDouble(globalState.getCostbefo())) + ""));
+        } else {
+            if (globalState.getCost().equals("")) {
+                binding.total.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter((0 + "")));
+            } else {
+                binding.subtotal.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter((0 + "")));
+            }
+        }
 
         totalPriceBef = globalState.getCostbefo();
         totalPrice = globalState.getCost();
@@ -86,13 +94,29 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
             discounted_value = globalState.getDiscountcost();
         }
         Log.e(TAG, "setUiAction: " + discountValue);
-        Glide.with(mContext)
-                .load(Consts.BASE_URL + popLaundryDTO.getImage())
-                .error(R.drawable.shop_image)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(binding.ivImage);
-        binding.ctvbShopName.setText(popLaundryDTO.getShop_name());
-        binding.ctvAddress.setText(popLaundryDTO.getAddress());
+        try {
+            binding.ctvbShopName.setText(popLaundryDTO.getShop_name());
+            binding.ctvAddress.setText(popLaundryDTO.getAddress());
+            if (popLaundryDTO.getImage() != null) {
+                Glide.with(mContext)
+                        .load(Consts.BASE_URL + popLaundryDTO.getImage())
+                        .error(R.drawable.shop_image)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(binding.ivImage);
+            } else {
+                Glide.with(mContext)
+                        .load(R.drawable.shop_image)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(binding.ivImage);
+            }
+        } catch (Exception ex) {
+            Glide.with(mContext)
+                    .load(R.drawable.shop_image)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.ivImage);
+            binding.ctvbShopName.setText("Tidak dapat mengambil info nama");
+            binding.ctvAddress.setText("Tidak dapat mengambil info alamat");
+        }
 
         binding.confirmBtn.setOnClickListener(this);
 
@@ -208,7 +232,12 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
     private void confirmorder() {
         parmsSubmit.put(Consts.ORDER_ID, otpGenrate);
         parmsSubmit.put(Consts.USER_ID, userDTO.getUser_id());
-        parmsSubmit.put(Consts.SHOP_ID, popLaundryDTO.getShop_id());
+        try {
+            parmsSubmit.put(Consts.SHOP_ID, popLaundryDTO.getShop_id());
+        } catch (Exception ex) {
+            parmsSubmit.put(Consts.SHOP_ID, "YZ65d0");
+        }
+
         parmsSubmit.put(Consts.PRICE, totalPriceBef);
         parmsSubmit.put(Consts.DISCOUNT, discounted_value);
         parmsSubmit.put(Consts.FINAL_PRICE, totalPrice);
