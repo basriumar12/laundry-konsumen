@@ -1,7 +1,9 @@
 package com.samyotech.laundry.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,14 +56,14 @@ public class ServiceActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-//        binding.bookingBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent in = new Intent(getApplicationContext(), Schedule_Activity.class);
-//                in.putExtra(Consts.SHOPDTO, popLaundryDTO);
-//                startActivity(in);
-//            }
-//        });
+        binding.bookingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(), Schedule_Activity.class);
+                in.putExtra(Consts.SHOP_ID, "YZ65d0");
+                startActivity(in);
+            }
+        });
     }
 
     private void setupUi2() {

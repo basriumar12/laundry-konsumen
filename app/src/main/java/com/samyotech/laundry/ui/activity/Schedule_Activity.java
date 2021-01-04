@@ -67,8 +67,9 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
         binding.ctvNext.setOnClickListener(this);
         binding.ivBack.setOnClickListener(this);
 
-        if (getIntent().hasExtra(Consts.SHOPDTO)) {
-            popLaundryDTO = (PopLaundryDTO) getIntent().getSerializableExtra(Consts.SHOPDTO);
+        if (getIntent().hasExtra(Consts.SHOP_ID)) {
+            // popLaundryDTO = (PopLaundryDTO) getIntent().getSerializableExtra(Consts.SHOPDTO);
+            shopid = getIntent().getStringExtra(Consts.SHOP_ID);
             getItem();
 
         }
@@ -78,7 +79,7 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
     private void getItem() {
 
 //        ProjectUtils.getProgressDialog(mContext);
-        params.put(Consts.SHOP_ID, popLaundryDTO.getShop_id());
+        params.put(Consts.SHOP_ID, shopid);
         new HttpsRequest(Consts.GETITEMBYSHOPID, params, mContext).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {

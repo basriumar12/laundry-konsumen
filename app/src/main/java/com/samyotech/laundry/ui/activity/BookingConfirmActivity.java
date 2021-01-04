@@ -57,6 +57,7 @@ public class BookingConfirmActivity extends AppCompatActivity {
                 Intent in = new Intent(mContext, Dashboard.class);
                 in.putExtra(Consts.SCREEN_TAG, Consts.BOOKINGFRAGMENT);
                 startActivity(in);
+                finish();
             }
         });
 

@@ -194,4 +194,31 @@ public class PopLaundryDTO implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "PopLaundryDTO{" +
+                "s_no='" + s_no + '\'' +
+                ", shop_id='" + shop_id + '\'' +
+                ", user_id='" + user_id + '\'' +
+                ", shop_name='" + shop_name + '\'' +
+                ", country_code='" + country_code + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", address='" + address + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", opening_time='" + opening_time + '\'' +
+                ", closing_time='" + closing_time + '\'' +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                ", status='" + status + '\'' +
+                ", type='" + type + '\'' +
+                ", created_at='" + created_at + '\'' +
+                ", updated_at='" + updated_at + '\'' +
+                ", rating='" + rating + '\'' +
+                ", shop_image='" + shop_image + '\'' +
+                ", mulai_hari='" + mulai_hari + '\'' +
+                ", sampai_hari='" + sampai_hari + '\'' +
+                '}';
+    }
 }
