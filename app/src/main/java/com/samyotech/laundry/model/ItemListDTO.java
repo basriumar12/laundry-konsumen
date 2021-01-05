@@ -33,4 +33,13 @@ public class ItemListDTO implements Serializable {
     public void setServices(ArrayList<ItemServiceDTO> services) {
         this.services = services;
     }
+
+    @Override
+    public String toString() {
+        return "ItemListDTO{" +
+                "service_id='" + service_id + '\'' +
+                ", service_name='" + service_name + '\'' +
+                ", services=" + services +
+                '}';
+    }
 }

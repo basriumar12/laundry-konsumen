@@ -139,6 +139,8 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
     private void setData() {
 
         ArrayList<ItemListDTO> items = itemDTOS.getItem_list();
+        Log.e(TAG, items.size() + "");
+        binding.tabLayout.removeAllTabs();
         for (int k = 0; k < items.size(); k++) {
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(items.get(k).getService_name()));
         }
