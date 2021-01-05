@@ -7,7 +7,7 @@ public interface Consts {
     String DEV_URL = "http://192.168.88.19/win-laundry/";
 //    String DEV_URL = "http://10.0.2.2/win-laundry/";
     String PROD_URL = "http://laundryapp.windigitalkhatulistiwa.com/";
-    String BASE_URL = PROD_URL;
+    String BASE_URL = DEV_URL;
     String API_URL = BASE_URL + "api/";
 
 
@@ -27,6 +27,7 @@ public interface Consts {
     String GETOFFERFORLAUNDRYSHOP = "getOfferForLaundryShop";
     String other = "getMenuByCategoryId";
     String GETALLLAUNDRYSHOP = "getAllLaundryShop";
+    String GETLAUNDRYSHOP = "getLaundryById";
     String GETBOOKINGLIST = "getBookingList";
     String ADDTIKET = "addTiket";
     String TIKETLIST = "tiketList";

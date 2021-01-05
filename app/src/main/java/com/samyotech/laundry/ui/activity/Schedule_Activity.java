@@ -19,6 +19,7 @@ import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
 import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.HomeDTO;
 import com.samyotech.laundry.model.ItemDTO;
 import com.samyotech.laundry.model.ItemListDTO;
 import com.samyotech.laundry.model.ItemServiceDTO;
@@ -70,6 +71,29 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
         if (getIntent().hasExtra(Consts.SHOP_ID)) {
             // popLaundryDTO = (PopLaundryDTO) getIntent().getSerializableExtra(Consts.SHOPDTO);
             shopid = getIntent().getStringExtra(Consts.SHOP_ID);
+            params = new HashMap<>();
+            params.put(Consts.SHOP_ID, shopid);
+            new HttpsRequest(Consts.GETLAUNDRYSHOP, params, getBaseContext()).stringPost(TAG, new Helper() {
+                @Override
+                public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
+                    if (flag) {
+
+                        try {
+                            popLaundryDTO = new Gson().fromJson(response.getJSONObject("data").toString(), PopLaundryDTO.class);
+                            Log.e(TAG, "Hasil" );
+                            Log.e(TAG, popLaundryDTO.toString() );
+                            getItem();
+
+                        } catch (Exception e) {
+                            e.getMessage();
+                        }
+
+
+                    } else {
+                        ProjectUtils.showToast(getBaseContext(), msg);
+                    }
+                }
+            });
             getItem();
 
         }
@@ -82,7 +106,7 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
     }
 
     private void getItem() {
-
+        params = new HashMap<>();
 //        ProjectUtils.getProgressDialog(mContext);
         if (shopid.equals("")) {
             params.put(Consts.SHOP_ID, popLaundryDTO.getShop_id());
