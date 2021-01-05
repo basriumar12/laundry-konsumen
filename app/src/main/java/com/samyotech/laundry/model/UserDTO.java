@@ -158,4 +158,27 @@ public class UserDTO implements Serializable {
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "user_id='" + user_id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", country_code='" + country_code + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", image='" + image + '\'' +
+                ", background='" + background + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", status='" + status + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", landmark='" + landmark + '\'' +
+                ", device_type='" + device_type + '\'' +
+                ", device_token='" + device_token + '\'' +
+                ", email_token='" + email_token + '\'' +
+                ", created_at='" + created_at + '\'' +
+                '}';
+    }
 }

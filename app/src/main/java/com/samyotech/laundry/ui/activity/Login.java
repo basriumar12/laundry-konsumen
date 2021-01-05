@@ -190,30 +190,26 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) {
                 ProjectUtils.pauseProgressDialog();
-                if (flag) {
                     try {
                         doubleClick = false;
                         ProjectUtils.showToast(mContext, msg);
+                        if (response.get("status").toString().equals("1")) {
+                            userDTO = new Gson().fromJson(response.getJSONObject("data").toString(), UserDTO.class);
+                            prefrence.setParentUser(userDTO, Consts.USER_DTO);
 
-                        userDTO = new Gson().fromJson(response.getJSONObject("data").toString(), UserDTO.class);
-                        prefrence.setParentUser(userDTO, Consts.USER_DTO);
+                            prefrence.setBooleanValue(Consts.IS_REGISTERED, true);
 
-                        prefrence.setBooleanValue(Consts.IS_REGISTERED, true);
-
-                        Intent in = new Intent(mContext, Dashboard.class);
-                        startActivity(in);
-                        finish();
-                        overridePendingTransition(R.anim.anim_slide_in_left,
-                                R.anim.anim_slide_out_left);
+                            Intent in = new Intent(mContext, Dashboard.class);
+                            startActivity(in);
+                            finish();
+                            overridePendingTransition(R.anim.anim_slide_in_left,
+                                    R.anim.anim_slide_out_left);
+                        }
                     } catch (Exception e) {
                         doubleClick = true;
                         e.printStackTrace();
                     }
 
-                } else {
-                    showDialog(msg);
-//                    ProjectUtils.showToast(mContext, msg);
-                }
             }
         });
     }
