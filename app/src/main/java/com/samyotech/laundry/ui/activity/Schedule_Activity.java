@@ -24,6 +24,7 @@ import com.samyotech.laundry.model.ItemDTO;
 import com.samyotech.laundry.model.ItemListDTO;
 import com.samyotech.laundry.model.ItemServiceDTO;
 import com.samyotech.laundry.model.PopLaundryDTO;
+import com.samyotech.laundry.model.ServicesDTO;
 import com.samyotech.laundry.model.UserDTO;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.adapter.TabsAdapter;
@@ -53,7 +54,10 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
     boolean doubleClick = true;
     PopLaundryDTO popLaundryDTO;
     CurrencyDTO currencyDTO;
+    ServicesDTO servicesDTO = new ServicesDTO();
     private SharedPrefrence prefrence;
+    int idx = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,7 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
 
                         try {
                             popLaundryDTO = new Gson().fromJson(response.getJSONObject("data").toString(), PopLaundryDTO.class);
+                            servicesDTO = (ServicesDTO) getIntent().getSerializableExtra(Consts.SERVICEDTO);
                             Log.e(TAG, "Hasil" );
                             Log.e(TAG, popLaundryDTO.toString() );
                             getItem();
@@ -143,7 +148,16 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
         binding.tabLayout.removeAllTabs();
         for (int k = 0; k < items.size(); k++) {
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(items.get(k).getService_name()));
+
+
+            if (servicesDTO.getService_name().equalsIgnoreCase(items.get(k).getService_name())) {
+                idx = k;
+                Log.e(TAG, "setData: " + servicesDTO.getService_name() );
+                Log.e(TAG, "setData: " + items.get(k).getService_name() );
+            }
         }
+
+        Log.e(TAG, "setData: " + idx );
 
         currencyDTO.setCurrency_code(itemDTOS.getCurrency_code());
 
@@ -152,6 +166,8 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
         binding.viewPager.setAdapter(adapter);
         binding.viewPager.setOffscreenPageLimit(1);
         binding.viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout));
+        binding.viewPager.setCurrentItem(idx);
+
 
         binding.tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

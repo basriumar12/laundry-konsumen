@@ -61,6 +61,7 @@ public class ServiceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent in = new Intent(getApplicationContext(), Schedule_Activity.class);
                 in.putExtra(Consts.SHOP_ID, "YZ65d0");
+                in.putExtra(Consts.SERVICEDTO, servicesDTO);
                 startActivity(in);
             }
         });
