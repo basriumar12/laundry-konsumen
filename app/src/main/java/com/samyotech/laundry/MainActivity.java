@@ -14,6 +14,8 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.ui.activity.Dashboard;

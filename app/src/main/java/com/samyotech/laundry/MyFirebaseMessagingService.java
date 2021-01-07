@@ -118,6 +118,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         editor.putString(Consts.DEVICE_TOKEN, token);
         editor.apply();
         SharedPreferences userDetails = MyFirebaseMessagingService.this.getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPrefrence prefrence = SharedPrefrence.getInstance(getApplicationContext());
+        prefrence.setValue(Consts.DEVICE_TOKEN, token);
         Log.d(TAG, "Refreshed token: " + token);
 
     }

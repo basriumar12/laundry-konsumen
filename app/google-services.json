@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "174912023580",
+    "firebase_url": "https://win-laundry-default-rtdb.firebaseio.com",
     "project_id": "win-laundry",
     "storage_bucket": "win-laundry.appspot.com"
   },
@@ -27,7 +28,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "174912023580-rp153v524b59q3pl2jrcka6l37i5g7up.apps.googleusercontent.com",
+              "client_id": "174912023580-hkp5rjpquemscdtp5thhb420uvu7nuqa.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
