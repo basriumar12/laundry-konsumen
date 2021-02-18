@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F5F5">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/auth_bg"
+            tools:context=".Activity.Login">
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/img_logo"
+                android:layout_width="200dp"
+                android:layout_height="250dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_logo_white"/>
+            <LinearLayout
+                android:layout_below="@+id/img_logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:padding="16dp">
+
+
+
+                <TextView
+                    android:textStyle="bold"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/verifikasi_akun"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+                <TextView
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Masukan kode verifkasi yang sudah di kirim ke nomor anda."
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+
+                <com.chaos.view.PinView
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:id="@+id/pinview"
+                    style="@style/PinWidget.PinView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="true"
+                    android:hint="otp.."
+                    android:textColorHint="@color/white"
+                    android:inputType="number"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:cursorWidth="2dp"
+                    android:itemBackground="#03A9F4"
+                    app:hideLineWhenFilled="true"
+                    app:itemCount="5"
+                    app:itemHeight="48dp"
+                    app:itemRadius="4dp"
+                    app:itemSpacing="5dp"
+                    app:itemWidth="48dp"
+                    app:lineWidth="2dp"
+                    app:viewType="rectangle" />
+                <View
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"/>
+
+                <TextView
+                    android:id="@+id/tv_kirim_ulang"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Kirim Ulang"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:id="@+id/btn_konfirmasi"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:padding="12dp"
+                    app:fb_defaultColor="@color/white"
+                    app:fb_focusColor="@color/white"
+                    app:fb_iconPosition="left"
+                    app:fb_radius="30dp"
+                    app:fb_text="@string/konfirmasi"
+                    app:fb_textColor="@color/colorPrimary" />
+                <ProgressBar
+                    android:visibility="gone"
+                    android:id="@+id/progress_circular"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+</layout>

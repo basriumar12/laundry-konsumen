@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.model.CurrencyDTO;
+import com.samyotech.laundry.model.RegisterNewDto;
 import com.samyotech.laundry.model.UserDTO;
 
 import java.lang.reflect.Type;
@@ -88,6 +89,29 @@ public class SharedPrefrence {
         prefsEditor.putBoolean(Tag, token);
         prefsEditor.commit();
     }
+
+    public void setParentUserRegister(RegisterNewDto userDTO, String tag) {
+
+        Gson gson = new Gson();
+        String hashMapString = gson.toJson(userDTO);
+
+        prefsEditor.putString(tag, hashMapString);
+        prefsEditor.apply();
+    }
+    public RegisterNewDto getParentUserRegister(String tag) {
+        String obj = myPrefs.getString(tag, "defValue");
+        if (obj.equals("defValue")) {
+            return new RegisterNewDto();
+        } else {
+            Gson gson = new Gson();
+            String storedHashMapString = myPrefs.getString(tag, "");
+            Type type = new TypeToken<RegisterNewDto>() {
+            }.getType();
+            RegisterNewDto testHashMap = gson.fromJson(storedHashMapString, type);
+            return testHashMap;
+        }
+    }
+
 
     public void setParentUser(UserDTO userDTO, String tag) {
 

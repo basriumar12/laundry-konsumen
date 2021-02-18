@@ -334,7 +334,7 @@ public class ProjectUtils {
      * Static method to cancel the Dialog.
      */
     public static void cancelDialog() {
-
+        Log.e("TAG","cancel");
         try {
             if (dialog != null) {
                 dialog.cancel();

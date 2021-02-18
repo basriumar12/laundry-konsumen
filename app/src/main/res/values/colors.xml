@@ -41,4 +41,5 @@
     <color name="status_bar_color">#FFFFFF</color>
     <color name="darkgray">#A8A6A6</color>
     <color name="editback">#f1f1f1</color>
+    <color name="pin_normal">#6B767E</color>
 </resources>

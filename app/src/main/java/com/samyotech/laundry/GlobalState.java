@@ -2,6 +2,7 @@ package com.samyotech.laundry;
 
 import android.app.Application;
 
+import com.samyotech.laundry.helper.AppSignatureHelper;
 import com.samyotech.laundry.model.ItemDTO;
 import com.samyotech.laundry.model.ItemServiceDTO;
 import com.samyotech.laundry.model.PopLaundryDTO;
@@ -27,6 +28,8 @@ public class GlobalState extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        AppSignatureHelper appSignatureHelper = new AppSignatureHelper(this);
+        appSignatureHelper.getAppSignatures();
 
     }
 

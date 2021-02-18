@@ -20,12 +20,16 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityRegisterBinding;
 import com.samyotech.laundry.https.HttpsRequest;
 import com.samyotech.laundry.interfaces.Consts;
 import com.samyotech.laundry.interfaces.Helper;
+import com.samyotech.laundry.model.PopLaundryDTO;
+import com.samyotech.laundry.model.RegisterNewDto;
 import com.samyotech.laundry.network.NetworkManager;
+import com.samyotech.laundry.preferences.SharedPrefrence;
 import com.samyotech.laundry.utils.ProjectUtils;
 import com.schibstedspain.leku.LocationPickerActivity;
 
@@ -41,7 +45,7 @@ import io.michaelrocks.libphonenumber.android.Phonenumber;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = Register.class.getSimpleName();
-
+    private SharedPrefrence prefrence;
     Context mContext;
     ActivityRegisterBinding binding;
     boolean doubleClick = true;
@@ -60,6 +64,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
         mContext = Register.this;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
+        prefrence = SharedPrefrence.getInstance(this);
 
         setUiAction();
 
@@ -246,9 +251,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 ProjectUtils.pauseProgressDialog();
                 if (flag) {
                     try {
+
+                        RegisterNewDto registerNewDto = new Gson().fromJson(response.getJSONObject("data").toString(), RegisterNewDto.class);
+                        prefrence.setParentUserRegister(registerNewDto, Consts.REGISTER_DTO);
+
                         doubleClick = false;
-                        ProjectUtils.showToast(mContext, msg);
-                        Intent in = new Intent(mContext, Login.class);
+                        ProjectUtils.showToast(mContext, "Berhasil register, otp akan dikirim ke nomor yang telah di daftarkan");
+                        Intent in = new Intent(mContext, OtpActivity.class);
                         startActivity(in);
                         finish();
                         overridePendingTransition(R.anim.anim_slide_in_left,

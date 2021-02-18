@@ -16,8 +16,8 @@ android {
         applicationId "com.windigitalkhatulistiwa.laundry"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 6
-        versionName "1.0.4"
+        versionCode 10
+        versionName "1.0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -129,4 +129,7 @@ dependencies {
     implementation 'androidx.emoji:emoji-appcompat:1.1.0'
 
     implementation 'com.google.firebase:firebase-auth:20.0.1'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.0'
+    implementation 'com.chaos.view:pinview:1.4.4'
 }

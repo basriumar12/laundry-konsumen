@@ -4,15 +4,17 @@ public interface Consts {
 
     String APP_NAME = "laundry";
 //    String DEV_URL = "http://192.168.1.5/win-laundry/";
-    String DEV_URL = "http://192.168.88.19/win-laundry/";
-//    String DEV_URL = "http://10.0.2.2/win-laundry/";
+   // String DEV_URL = "http://192.168.88.19/win-laundry/";
+    String DEV_URL = "http://windigitalkhatulistiwa.com/laundryapp_tes/";
     String PROD_URL = "http://laundryapp.windigitalkhatulistiwa.com/";
-    String BASE_URL = PROD_URL;
+    String BASE_URL =DEV_URL; //PROD_URL;
     String API_URL = BASE_URL + "api/";
 
 
     /*-----Apis-----*/
     String FORGOTPASSWORD = "forgotPassword";
+    String RESENDOTP = "resendOtpSms";
+    String OTPSMS = "otpSms";
     String SIGNUP = "signup";
     String LOGIN = "login";
     String LOGIN_GOOGLE = "loginGoogle";
@@ -62,6 +64,7 @@ public interface Consts {
 
     String FLAG = "flag";
     String USER_DTO = "userdto";
+    String REGISTER_DTO = "registerdto";
     String SHOPDTO = "shopdto";
     String NEARSHOPDTO = "nearshopdto";
     String CURRENCYDTO = "currencyDTO";

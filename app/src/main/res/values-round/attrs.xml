@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="InputEditText">
+        <attr name="android:inputType" />
+        <attr name="android:textAppearance" />
+        <attr name="android:drawableRight" />
+        <attr name="android:focusable" />
+        <attr name="ietErrorEnabled" format="boolean" />
+        <attr name="ietHintEnabled" format="boolean" />
+        <attr name="ietText" format="string" />
+        <attr name="ietHint" format="string" />
+        <attr name="ietError" format="string" />
+        <attr name="ietLines" format="integer" />
+        <attr name="ietMaxLines" format="integer" />
+        <attr name="android:imeOptions" />
+        <attr name="showBottomLine" format="boolean" />
+        <attr name="showPrefix" format="boolean" />
+        <attr name="ietPasswordToggleEnabled" format="boolean" />
+        <attr name="ietMinLength" format="integer" />
+        <attr name="ietMaxLength" format="integer" />
+        <attr name="ietDescription" format="boolean" />
+        <attr name="ietSubtitle" format="string" />
+        <attr name="ietSubStyle" format="enum">
+            <enum name="primary" value="1" />
+            <enum name="secondary" value="2" />
+            <enum name="ternary" value="3" />
+            <enum name="fourty" value="4" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="LabelInputEditText">
+        <attr name="android:inputType" />
+        <attr name="android:textAppearance" />
+        <attr name="android:focusable" />
+        <attr name="pieErrorEnabled" format="boolean" />
+        <attr name="pieHintEnabled" format="boolean" />
+        <attr name="pieText" format="string" />
+        <attr name="piePrefix" format="string" />
+        <attr name="pieHint" format="string" />
+        <attr name="pieError" format="string" />
+        <attr name="pieLines" format="integer" />
+        <attr name="pieMaxLines" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="SwitchText">
+        <attr name="android:inputType" />
+        <attr name="android:textAppearance" />
+        <attr name="android:hint" />
+        <attr name="stTextOn" format="string" />
+        <attr name="stTextOff" format="string" />
+        <attr name="stError" format="string" />
+        <attr name="stIsChecked" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ButtonLoading">
+        <attr name="android:text" />
+        <attr name="isLoading" format="boolean" />
+        <attr name="ietStyle" format="enum">
+            <enum name="primary" value="1" />
+            <enum name="secondary" value="2" />
+            <enum name="ternary" value="3" />
+            <enum name="fourty" value="4" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="IconTextMenuView">
+        <attr name="ictmStroom" format="string" />
+        <attr name="ictmKontak" format="string" />
+        <attr name="ictmText" format="string" />
+        <attr name="ictmIcon" format="reference" />
+        <attr name="ictmSubtitle" format="string" />
+        <attr name="ictmRightIcon" format="reference" />
+        <attr name="ictmIsLoading" format="boolean" />
+        <attr name="ictmIsIcon" format="boolean" />
+        <attr name="ietStyleList" format="enum">
+            <enum name="primary" value="1" />
+            <enum name="secondary" value="2" />
+            <enum name="ternary" value="3" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="PinEntryEditText">
+        <attr name="pinAnimationType" format="enum">
+            <enum name="popIn" value="0" />
+            <enum name="fromBottom" value="1" />
+            <enum name="none" value="-1" />
+        </attr>
+        <attr name="pinCharacterMask" format="string" />
+        <attr name="pinRepeatedHint" format="string" />
+        <attr name="pinLineStroke" format="dimension" />
+        <attr name="pinLineStrokeSelected" format="dimension" />
+        <attr name="pinCharacterSpacing" format="dimension" />
+        <attr name="pinTextBottomPadding" format="dimension" />
+        <attr name="pinLineColors" format="color" />
+        <attr name="pinBackgroundDrawable" format="reference" />
+        <attr name="pinBackgroundIsSquare" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ButtonImageLabel">
+        <attr name="bitLabel" format="string" />
+        <attr name="bitLeftIcon" format="reference" />
+        <attr name="bitRightIcon" format="reference" />
+        <attr name="bitRightIconVisible" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="MenuModuleView">
+        <attr name="menumoduleTitle" format="string" />
+        <attr name="menumoduleIconEnable" format="reference" />
+        <attr name="menumoduleIconDisable" format="reference" />
+        <attr name="menumoduleEnable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AutoFormatEditText">
+        <attr name="isDecimal" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_circle_background_color" format="color" />
+    </declare-styleable>
+
+    <!-- custom states -->
+    <declare-styleable name="ErrorState">
+        <attr name="state_error" format="boolean" />
+    </declare-styleable>
+
+    <attr name="refCustomPinEntrySelected" format="reference" />
+    <attr name="refCustomPinEntryFocus" format="reference" />
+    <attr name="refCustomPinEntryUnFocus" format="reference" />
+
+</resources>

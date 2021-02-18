@@ -223,4 +223,6 @@
     <string name="title_activity_about">Tentang</string>
 
     <string name="server_client_id">174912023580-v190ma0rd27ol3qeni8efa7h3usvae29.apps.googleusercontent.com</string>
+    <string name="verifikasi_akun">Verifikasi Akun</string>
+    <string name="konfirmasi">Konfirmasi</string>
 </resources>

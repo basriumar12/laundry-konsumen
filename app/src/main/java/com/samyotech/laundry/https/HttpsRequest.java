@@ -1,6 +1,7 @@
 package com.samyotech.laundry.https;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.ANRequest;
@@ -23,6 +24,8 @@ import java.util.Map;
 public class
 HttpsRequest {
     private final String match;
+    private  String otp;
+    private String user_id;
     private final Context ctx;
     private Map<String, String> params;
     private Map<String, File> fileparams;
@@ -53,6 +56,13 @@ HttpsRequest {
     public HttpsRequest(String match, Context ctx) {
         this.match = match;
         this.ctx = ctx;
+    }
+
+    public HttpsRequest(String match, Context ctx, String user_id, String otp) {
+        this.match = match;
+        this.ctx = ctx;
+        this.otp = otp;
+        this.user_id = user_id;
     }
 
     public HttpsRequest(String match, JSONObject jObject, Context ctx) {
@@ -146,6 +156,89 @@ HttpsRequest {
     public void stringGet(final String TAG, final Helper h) {
         ANRequest request = AndroidNetworking.get(Consts.API_URL + match)
                 .setTag("test")
+
+                .setPriority(Priority.HIGH)
+                .build();
+        ProjectUtils.showLog(TAG, " url --->" + request.getUrl());
+
+        request
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        ProjectUtils.showLog(TAG, " response body --->" + response.toString());
+                        JSONParser jsonParser = new JSONParser(ctx, response);
+                        if (jsonParser.RESULT) {
+
+                            try {
+                                h.backResponse(jsonParser.RESULT, jsonParser.MESSAGE, response);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+
+                            try {
+                                h.backResponse(jsonParser.RESULT, jsonParser.MESSAGE, null);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        ProjectUtils.pauseProgressDialog();
+                        ProjectUtils.showLog(TAG, " error body --->" + anError.getErrorBody() + " error msg --->" + anError.getMessage());
+                    }
+                });
+    }
+
+   public void stringOTP(final String TAG, final Helper h) {
+       ProjectUtils.showLog(TAG, " url --->" + match);
+        ANRequest request = AndroidNetworking.get(Consts.API_URL + match)
+                .setTag("test")
+                .addQueryParameter("user_id", user_id)
+                .addQueryParameter("otp", otp)
+                .setPriority(Priority.HIGH)
+                .build();
+        ProjectUtils.showLog(TAG, " url --->" + request.getUrl());
+
+        request
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        ProjectUtils.showLog(TAG, " response body --->" + response.toString());
+                        JSONParser jsonParser = new JSONParser(ctx, response);
+                        if (jsonParser.RESULT) {
+
+                            try {
+                                h.backResponse(jsonParser.RESULT, jsonParser.MESSAGE, response);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+
+                            try {
+                                h.backResponse(jsonParser.RESULT, jsonParser.MESSAGE, null);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        ProjectUtils.pauseProgressDialog();
+                        ProjectUtils.showLog(TAG, " error body --->" + anError.getErrorBody() + " error msg --->" + anError.getMessage());
+                    }
+                });
+    }
+
+
+     public void stringResendOTP(final String TAG, final Helper h) {
+       ProjectUtils.showLog(TAG, " url --->" + match);
+        ANRequest request = AndroidNetworking.get(Consts.API_URL + match)
+                .setTag("test")
+                .addQueryParameter("user_id", user_id)
 
                 .setPriority(Priority.HIGH)
                 .build();

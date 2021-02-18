@@ -147,13 +147,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         params.put(Consts.LATITUDE, prefrence.getValue(Consts.LATITUDE));
         params.put(Consts.LONGITUDE, prefrence.getValue(Consts.LONGITUDE));
         params.put(Consts.USER_ID, userDTO.getUser_id());
+        ProjectUtils.showProgressDialog(requireActivity(), true, getResources().getString(R.string.please_wait));
 
         new HttpsRequest(Consts.GETHOMEDATA, params, getActivity()).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
+
+                ProjectUtils.cancelDialog();
+                ProjectUtils.pauseProgressDialog();
                 if (flag) {
 
                     try {
+
                         homeDTO = new Gson().fromJson(response.getJSONObject("data").toString(), HomeDTO.class);
                         setupViewPager();
 
@@ -253,16 +258,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void updateProfile() {
-//        ProjectUtils.showProgressDialog(requireActivity(), true, getResources().getString(R.string.please_wait));
+        ProjectUtils.showProgressDialog(requireActivity(), true, getResources().getString(R.string.please_wait)).show();
 
         new HttpsRequest(Consts.USERUPDATE, params, requireActivity()).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) {
-//                ProjectUtils.pauseProgressDialog();
+               ProjectUtils.pauseProgressDialog();
                 if (flag) {
                     try {
+
+                        ProjectUtils.showProgressDialog(requireActivity(), true, getResources().getString(R.string.please_wait)).dismiss();
+
                         Log.e(TAG, "backResponse: " + response.toString());
-                        ProjectUtils.showToast(requireContext(), msg);
+                     //   ProjectUtils.showToast(requireContext(), msg);
                         userDTO = new Gson().fromJson(response.getJSONObject("data").toString(), UserDTO.class);
                         prefrence.setParentUser(userDTO, Consts.USER_DTO);
                         prefrence.setBooleanValue(Consts.IS_REGISTERED, true);
