@@ -7,7 +7,7 @@ public interface Consts {
    // String DEV_URL = "http://192.168.88.19/win-laundry/";
     String DEV_URL = "http://windigitalkhatulistiwa.com/laundryapp_tes/";
     String PROD_URL = "http://laundryapp.windigitalkhatulistiwa.com/";
-    String BASE_URL =DEV_URL; //PROD_URL;
+    String BASE_URL =PROD_URL;
     String API_URL = BASE_URL + "api/";
 
 

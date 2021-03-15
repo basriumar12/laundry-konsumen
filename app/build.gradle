@@ -16,8 +16,8 @@ android {
         applicationId "com.windigitalkhatulistiwa.laundry"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 10
-        versionName "1.0.5"
+        versionCode 11
+        versionName "1.0.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -38,10 +38,10 @@ android {
     signingConfigs {
 
         release {
-            storeFile file("../app/Laundry.jks")
+            storeFile file("../app/winlaundry.jks")
             storePassword "android"
             keyAlias "Laundry"
-            keyPassword "android"
+            keyPassword "winlaundry"
         }
     }
 
