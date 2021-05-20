@@ -12,9 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -59,6 +62,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -118,15 +123,45 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                 prefrence.setValue(Consts.LONGITUDE, location.getLongitude() + "");
                                 getAddress(location.getLatitude(), location.getLongitude());
                                 getData();
+                            }else {
+                                dialogLokasi();
+                                Toast.makeText(dashBoard, "Aktifkan Lokasi", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
         } catch (Exception ex) {
-
+            dialogLokasi();
+            Toast.makeText(dashBoard, "Aktifkan Lokasi", Toast.LENGTH_SHORT).show();
         }
 
 
         return view;
+    }
+
+    void dialogLokasi (){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity(), R.style.CustomAlertDialog);
+        ViewGroup viewGroup = requireView().findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_logout, viewGroup, false);
+        TextView tv = dialogView.findViewById(R.id.text);
+        tv.setText("Data lokasi tidak di dapatkan. \n Aktikan lokasi gps di handphone anda dan coba tutup aplikasi kemudian buka kembali dan akses menu ini.");
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+
+        FancyButton cancel = dialogView.findViewById(R.id.cancel);
+
+        cancel.setVisibility(View.GONE);
+
+        FancyButton ok = dialogView.findViewById(R.id.ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+
+
+            }
+        });
     }
 
     @Override
@@ -160,6 +195,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     try {
 
                         homeDTO = new Gson().fromJson(response.getJSONObject("data").toString(), HomeDTO.class);
+                        Log.e("TAG","data home "+homeDTO);
                         setupViewPager();
 
                     } catch (Exception e) {

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -70,9 +71,9 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
 
     private void setUIAction() {
         sharedPrefrence.setCurrency(bookingDTO.getCurrency_code());
-        binding.total.setText(bookingDTO.getCurrency_code() + " " + AppFormat.addDelimiter((int)Double.parseDouble(bookingDTO.getFinal_price()) + ""));
-        binding.subtotal.setText(bookingDTO.getCurrency_code() + " " + AppFormat.addDelimiter((int)Double.parseDouble(bookingDTO.getPrice()) + ""));
-        binding.discount.setText(bookingDTO.getCurrency_code() + " " + AppFormat.addDelimiter((int)Double.parseDouble(bookingDTO.getDiscount()) + ""));
+        binding.total.setText(bookingDTO.getCurrency_code() + " " + AppFormat.addDelimiter((int) Double.parseDouble(bookingDTO.getFinal_price()) + ""));
+        binding.subtotal.setText(bookingDTO.getCurrency_code() + " " + AppFormat.addDelimiter((int) Double.parseDouble(bookingDTO.getPrice()) + ""));
+        binding.discount.setText(bookingDTO.getCurrency_code() + " " + AppFormat.addDelimiter((int) Double.parseDouble(bookingDTO.getDiscount()) + ""));
         binding.tax.setText(bookingDTO.getCurrency_code() + " 0");
         binding.pickupAddress.setText(bookingDTO.getShipping_address());
         binding.deliveryAddress.setText(bookingDTO.getShipping_address());
@@ -212,7 +213,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                 Log.e(TAG, "buyNow: " + e.getMessage());
             }
         }
-        Log.e(TAG, jsonArray.toString() );
+        Log.e(TAG, jsonArray.toString());
 
         HashMap<String, String> params = new HashMap<>();
         params.put(Consts.ORDER_ID, String.valueOf(bookingDTO.getOrder_id()));
@@ -220,10 +221,16 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         new HttpsRequest(Consts.ORDERIPAYMU, params, mContext).stringPost(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
-                IpaymuDataDTO data = new Gson().fromJson(response.getJSONObject("data").toString(), IpaymuDataDTO.class);
-                Intent in = new Intent(mContext, IpayMuPayment.class);
-                in.putExtra(Consts.ORDERLINK, data.Data.Url);
-                mContext.startActivity(in);
+                try {
+                    IpaymuDataDTO data = new Gson().fromJson(response.getJSONObject("data").toString(), IpaymuDataDTO.class);
+                    Log.e("TAG","data "+ new Gson().toJson(response));
+                    Intent in = new Intent(mContext, IpayMuPayment.class);
+                    in.putExtra(Consts.ORDERLINK, data.Data.Url);
+                    mContext.startActivity(in);
+                }catch (NullPointerException a){
+                    Toast.makeText(mContext, "Gagal dapatkan pembayaran IPaymu, "+new Gson().toJson(response), Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

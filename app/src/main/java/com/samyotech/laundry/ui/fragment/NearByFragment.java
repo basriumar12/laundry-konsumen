@@ -16,9 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
@@ -63,6 +66,8 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.concurrent.Executor;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 public class NearByFragment extends Fragment {
     private final String TAG = NearByFragment.class.getSimpleName();
     private final ArrayList<MarkerOptions> optionsList = new ArrayList<>();
@@ -103,23 +108,59 @@ public class NearByFragment extends Fragment {
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
         }
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
 
-                            prefrence.setValue(Consts.LATITUDE, location.getLatitude()+"");
-                            prefrence.setValue(Consts.LONGITUDE, location.getLongitude()+"");
-                            getNearByLaundry();
+        try {
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                Log.e("TAG", "location " + location.getLatitude());
+                                prefrence.setValue(Consts.LATITUDE, location.getLatitude() + "");
+                                prefrence.setValue(Consts.LONGITUDE, location.getLongitude() + "");
+                                getNearByLaundry();
+                            } else {
+
+                              dialogLokasi();
+                               }
+
 
                         }
-                    }
-                });
+                    });
+
+        }catch (Exception ex) {
+
+         dialogLokasi();
+        }
 
 
         return binding.getRoot();
+    }
+
+    void dialogLokasi (){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity(), R.style.CustomAlertDialog);
+        ViewGroup viewGroup = requireView().findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_logout, viewGroup, false);
+        TextView tv = dialogView.findViewById(R.id.text);
+        tv.setText("Data lokasi tidak di dapatkan. \n Aktikan lokasi gps di handphone anda dan coba tutup aplikasi kemudian buka kembali dan akses menu ini.");
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        FancyButton cancel = dialogView.findViewById(R.id.cancel);
+
+        cancel.setVisibility(View.GONE);
+
+        FancyButton ok = dialogView.findViewById(R.id.ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+
+
+            }
+        });
     }
 
     @Override
@@ -235,7 +276,7 @@ public class NearByFragment extends Fragment {
 
 
     public void getNearByLaundry() {
-        parms.put(Consts.Count, "20");
+        parms.put(Consts.Count, "25");
         parms.put(Consts.LATITUDE, prefrence.getValue(Consts.LATITUDE));
         parms.put(Consts.LONGITUDE, prefrence.getValue(Consts.LONGITUDE));
 
@@ -254,6 +295,10 @@ public class NearByFragment extends Fragment {
                         Type popLaundryDTO = new TypeToken<List<PopLaundryDTO>>() {
                         }.getType();
                         laundryList = new Gson().fromJson(response.getJSONArray("data").toString(), popLaundryDTO);
+
+                        if (laundryList.isEmpty() || laundryList == null){
+                            Toast.makeText(dashboard, "Data laundry kosong", Toast.LENGTH_SHORT).show();
+                        }
 
                         for (int i = 0; i < laundryList.size(); i++) {
 
@@ -294,7 +339,7 @@ public class NearByFragment extends Fragment {
                                 //  googleMap.addMarker(new MarkerOptions().position(currentPos).title(userDTO.getName()).title("My Location").snippet(userDTO.getUser_id()));
 
                                 // For zooming automatically to the location of the marker
-                                CameraPosition cameraPosition = new CameraPosition.Builder().target(currentPos).zoom(14).build();
+                                CameraPosition cameraPosition = new CameraPosition.Builder().target(currentPos).zoom(11).build();
                                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
                                 googleMap.setMyLocationEnabled(true);
@@ -346,7 +391,7 @@ public class NearByFragment extends Fragment {
                                                 marker.showInfoWindow();
 
                                             }
-                                        }, 200);
+                                        }, 300);
 
                                         return false;
                                     }

@@ -198,7 +198,7 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
                 int count = Integer.parseInt(itemServiceDTO.getItem_list().get(i).getServices().get(j).getCount());
                 if (count > 0) {
                     try {
-                        jsonObject.putOpt(Consts.ITEM_ID, itemServiceDTO.getItem_list().get(i).getServices().get(j).getShop_id());
+                        jsonObject.putOpt(Consts.ITEM_ID, itemServiceDTO.getItem_list().get(i).getServices().get(j).getItem_id());
                         jsonObject.putOpt(Consts.ITEM_NAME, itemServiceDTO.getItem_list().get(i).getServices().get(j).getItem_name());
                         jsonObject.putOpt(Consts.PRICE, itemServiceDTO.getItem_list().get(i).getServices().get(j).getPrice());
                         jsonObject.putOpt(Consts.IMAGE, itemServiceDTO.getItem_list().get(i).getServices().get(j).getImage());
