@@ -215,6 +215,7 @@ public class Schedule_Activity extends AppCompatActivity implements View.OnClick
 
                         Intent in = new Intent(mContext, PreviewOrderActivity.class);
                         in.putExtra(Consts.TOTAL_PRICE, String.valueOf(price));
+                        in.putExtra(Consts.SHOP_ID, popLaundryDTO.getShop_id());
 
                         startActivity(in);
                         doubleClick = false;

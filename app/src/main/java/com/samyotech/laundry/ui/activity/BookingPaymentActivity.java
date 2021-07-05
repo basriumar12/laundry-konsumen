@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
 import com.samyotech.laundry.GlobalState;
 import com.samyotech.laundry.R;
 import com.samyotech.laundry.databinding.ActivityBookingPaymentBinding;
@@ -130,6 +131,7 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
 
     private void addPromocode() {
 
+        Log.e("TAG","shop id add"+itemServiceDTO.getItem_list().get(0).getServices().get(0).getShop_id());
         parms.put(Consts.TOTAL_PRICE, totalPrice);
         parms.put(Consts.SHOP_ID, itemServiceDTO.getItem_list().get(0).getServices().get(0).getShop_id());
         parms.put(Consts.PROMOCODE, ProjectUtils.getEditTextValue(binding.kodePromo));
@@ -239,9 +241,10 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
         try {
             parmsSubmit.put(Consts.SHOP_ID, popLaundryDTO.getShop_id());
         } catch (Exception ex) {
-            parmsSubmit.put(Consts.SHOP_ID, "YZ65d0");
+            parmsSubmit.put(Consts.SHOP_ID, popLaundryDTO.getShop_id());
         }
 
+        Log.e("TAG","data laudnry "+new Gson().toJson(popLaundryDTO));
         parmsSubmit.put(Consts.PRICE, totalPriceBef);
         parmsSubmit.put(Consts.DISCOUNT, discounted_value);
         parmsSubmit.put(Consts.FINAL_PRICE, totalPrice);

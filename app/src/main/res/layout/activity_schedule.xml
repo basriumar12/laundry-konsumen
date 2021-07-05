@@ -38,7 +38,7 @@
             android:layout_height="@dimen/_40sdp"
             app:layout_constraintTop_toBottomOf="@id/clHeader"
             app:tabGravity="fill"
-            app:tabMode="fixed" />
+            app:tabMode="scrollable" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"

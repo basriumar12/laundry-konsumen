@@ -82,7 +82,7 @@ public class PreviewOrderActivity extends AppCompatActivity implements View.OnCl
             binding.total.setText(prefrence.getCurrency() + " " + AppFormat.addDelimiter(((int)Double.parseDouble(totalPrice))+""));
         }
         parms.put(Consts.TOTAL_PRICE, totalPrice);
-        parms.put(Consts.SHOP_ID, itemServiceDTO.getItem_list().get(0).getServices().get(0).getShop_id());
+        parms.put(Consts.SHOP_ID, getIntent().getStringExtra(Consts.SHOP_ID));
 
         binding.promoBtn.setOnClickListener(this);
         binding.bookingBtn.setOnClickListener(this);
@@ -212,6 +212,8 @@ public class PreviewOrderActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void addPromocode() {
+        Log.e("TAG","shop id add"+itemServiceDTO.getItem_list().get(0).getServices().get(0).getShop_id());
+
         parms.put(Consts.PROMOCODE, ProjectUtils.getEditTextValue(binding.kodePromo));
         new HttpsRequest(Consts.APPLYPROMOCODE, parms, mContext).stringPost(TAG, new Helper() {
             @Override

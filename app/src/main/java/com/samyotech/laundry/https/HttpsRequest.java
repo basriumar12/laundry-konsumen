@@ -123,11 +123,12 @@ HttpsRequest {
                 .setPriority(Priority.HIGH)
                 .build();
         ProjectUtils.showLog(TAG, " url --->" + test.getUrl());
+        ProjectUtils.showLog(TAG, " param --->" + params.toString());
         test.getAsJSONObject(new JSONObjectRequestListener() {
             @Override
             public void onResponse(JSONObject response) {
                 ProjectUtils.showLog(TAG, " response body --->" + response.toString());
-                ProjectUtils.showLog(TAG, " param --->" + params.toString());
+
                 JSONParser jsonParser = new JSONParser(ctx, response);
                 if (jsonParser.RESULT) {
                     try {
@@ -149,6 +150,7 @@ HttpsRequest {
                     @Override
                     public void onError(ANError anError) {
                         ProjectUtils.pauseProgressDialog();
+                        ProjectUtils.showToast(ctx,"Gagal dari server "+anError.getMessage());
                         ProjectUtils.showLog(TAG, " error body --->" + anError.getErrorBody() + " error msg --->" + anError.getMessage());
                     }
                 });
