@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -182,7 +183,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         params.put(Consts.LATITUDE, prefrence.getValue(Consts.LATITUDE));
         params.put(Consts.LONGITUDE, prefrence.getValue(Consts.LONGITUDE));
         params.put(Consts.USER_ID, userDTO.getUser_id());
-        ProjectUtils.showProgressDialog(requireActivity(), true, getResources().getString(R.string.please_wait));
+        try {
+            ProjectUtils.showProgressDialog(getContext(), true, getResources().getString(R.string.please_wait));
+
+        }catch (IllegalStateException e){
+
+        }
 
         new HttpsRequest(Consts.GETHOMEDATA, params, getActivity()).stringPost(TAG, new Helper() {
             @Override
@@ -223,7 +229,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         topServiceAdapter = new TopServiceAdapter(getActivity(), homeDTO.getService());
         binding.layananKamiRecyclerview.setAdapter(topServiceAdapter);
 
-        layoutManagerNear = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        layoutManagerNear = new GridLayoutManager(getActivity(), 3);
         binding.laundryTerdekatRecyclerview.setLayoutManager(layoutManagerNear);
         laundriesNearAdapter = new LaundriesNearAdapter(getActivity(), homeDTO.getNear_by());
         binding.laundryTerdekatRecyclerview.setAdapter(laundriesNearAdapter);

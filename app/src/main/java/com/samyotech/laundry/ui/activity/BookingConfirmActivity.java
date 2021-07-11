@@ -47,7 +47,11 @@ public class BookingConfirmActivity extends AppCompatActivity {
 
     private void setData() {
         binding.ctvFinalAmountpaid.setText(globalState.getCost());
-        binding.ctvShop.setText(popLaundryDTO.getShop_name());
+      try {
+          binding.ctvShop.setText(popLaundryDTO.getShop_name());
+      }catch (NullPointerException e){
+          binding.ctvShop.setText("");
+      }
         binding.ctvbOrdernum.setText(parmsSubmit.get(Consts.ORDER_ID));
         binding.ctvbPickupDate.setText(parmsSubmit.get(Consts.PICKUP_DATE) + " " + parmsSubmit.get(Consts.PICKUP_TIME));
         binding.rlgotostatus.setOnClickListener(new View.OnClickListener() {

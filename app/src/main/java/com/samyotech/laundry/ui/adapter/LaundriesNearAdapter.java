@@ -78,7 +78,11 @@ public class LaundriesNearAdapter extends RecyclerView.Adapter<LaundriesNearAdap
 
     @Override
     public int getItemCount() {
-        return nearBYDTOArrayList.size();
+        int showItem;
+        int size = nearBYDTOArrayList.size();
+
+        showItem = Math.min(size, 12);
+        return showItem;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

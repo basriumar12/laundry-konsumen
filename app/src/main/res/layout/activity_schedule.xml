@@ -95,7 +95,8 @@
                     android:text="@string/next"
                     android:textAlignment="textEnd"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="@dimen/_12sdp"
+                    tools:ignore="RtlCompat" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

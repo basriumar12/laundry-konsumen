@@ -174,7 +174,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Laundry Terdekat"
+                            android:text="Layanan Kami"
                             android:textColor="@color/colorPrimary"
                             android:textStyle="bold" />
 
@@ -195,11 +195,13 @@
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:layout_margin="@dimen/_4sdp"
                         android:id="@+id/laundry_terdekat_recyclerview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -217,6 +219,7 @@
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:visibility="gone"
                         android:id="@+id/layanan_kami_recyclerview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

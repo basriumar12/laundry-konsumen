@@ -103,7 +103,7 @@ public class TopServices extends AppCompatActivity implements View.OnClickListen
 
 
     public void setdata() {
-        params.put(Consts.Count, "20");
+        params.put(Consts.Count, "70");
         params.put(Consts.LATITUDE, prefrence.getValue(Consts.LATITUDE));
         params.put(Consts.LONGITUDE, prefrence.getValue(Consts.LONGITUDE));
 

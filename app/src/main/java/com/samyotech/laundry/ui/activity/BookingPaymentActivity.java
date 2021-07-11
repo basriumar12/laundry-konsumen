@@ -252,7 +252,7 @@ public class BookingPaymentActivity extends AppCompatActivity implements View.On
         parmsSubmit.put(Consts.ITEM_DETAILS, String.valueOf(jsonArray));
         globalState.setCost(binding.total.getText().toString().trim());
 
-        new HttpsRequest(Consts.ORDERSUBMIT, parmsSubmit, mContext).stringPost(TAG, new Helper() {
+        new HttpsRequest(Consts.ORDERSUBMIT, parmsSubmit, mContext).stringPostOrder(TAG, new Helper() {
             @Override
             public void backResponse(boolean flag, String msg, JSONObject response) throws JSONException {
                 if (flag) {
