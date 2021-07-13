@@ -122,23 +122,23 @@ public class NearByFragment extends Fragment {
                                 getNearByLaundry();
                             } else {
 
-                              dialogLokasi();
-                               }
+                                dialogLokasi();
+                            }
 
 
                         }
                     });
 
-        }catch (Exception ex) {
+        } catch (Exception ex) {
 
-         dialogLokasi();
+            dialogLokasi();
         }
 
 
         return binding.getRoot();
     }
 
-    void dialogLokasi (){
+    void dialogLokasi() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity(), R.style.CustomAlertDialog);
         ViewGroup viewGroup = requireView().findViewById(android.R.id.content);
         View dialogView = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_logout, viewGroup, false);
@@ -274,11 +274,32 @@ public class NearByFragment extends Fragment {
         binding.mapView.onLowMemory();
     }
 
+    void validateLocation() {
+
+
+    }
 
     public void getNearByLaundry() {
-        parms.put(Consts.Count, "25");
+        parms.put(Consts.Count, "45");
         parms.put(Consts.LATITUDE, prefrence.getValue(Consts.LATITUDE));
         parms.put(Consts.LONGITUDE, prefrence.getValue(Consts.LONGITUDE));
+
+
+        String latitude = prefrence.getValue(Consts.LATITUDE);
+        String longitude = prefrence.getValue(Consts.LONGITUDE);
+
+        if (latitude == null || latitude.equals("")) {
+            parms.put(Consts.LATITUDE, "5.466498922066845");
+        } else {
+            parms.put(Consts.LATITUDE, prefrence.getValue(Consts.LATITUDE));
+        }
+
+        if (longitude == null || longitude.equals("")) {
+            parms.put(Consts.LONGITUDE, "105.01318450000002");
+        } else {
+            parms.put(Consts.LONGITUDE, prefrence.getValue(Consts.LONGITUDE));
+        }
+
 
 //        ProjectUtils.showProgressDialog(getActivity(), true, getResources().getString(R.string.please_wait));
         new HttpsRequest(Consts.GETALLLAUNDRYSHOP, parms, getActivity()).stringPost(TAG, new Helper() {
@@ -296,7 +317,7 @@ public class NearByFragment extends Fragment {
                         }.getType();
                         laundryList = new Gson().fromJson(response.getJSONArray("data").toString(), popLaundryDTO);
 
-                        if (laundryList.isEmpty() || laundryList == null){
+                        if (laundryList.isEmpty() || laundryList == null) {
                             Toast.makeText(dashboard, "Data laundry kosong", Toast.LENGTH_SHORT).show();
                         }
 
